@@ -1,0 +1,184 @@
+$(document).ready(function() {
+    $("#home-booking-form").on("submit", function() {
+        // $("#home-booking-btn").prop("disabled", true);
+        // $("#pay-btn").prop("disabled", true);
+    });
+    
+    $(".book-a-task").click(function(){
+        var loggedIn = $("#loggedIn").val();
+        if(loggedIn == ""){
+            $('#loginModal').modal('show');
+        }
+    });
+
+    $(".book-a-task").click(function(){
+        var loggedIn = $("#loggedIn").val();
+        if(loggedIn == ""){
+            $('#loginModal').modal('show');
+        }
+    });
+
+    if($("#filter_flag").val() != ""){
+        $('html, body').animate({
+            scrollTop: $('#search-filter').offset().top
+        }, 1000); 
+    }
+
+
+    $("#equipment_id").change(function () {
+        let url = $(this).attr('data-url');
+        var equipment_id = $('option:selected', this).val() ?? "";
+        $.ajax({
+            method: 'GET',
+            url: url,
+            data: { equipment_id: equipment_id }, 
+            success: function(res) {
+                let html = ''; 
+                $.each(res, function(key, row) {
+                    html += '<option value="' + row.id + '" data-price="'+ row.price +'">' + row.duration_minutes + ' minutes</option>';
+                });
+                $("#hours").html(html);
+            }
+        });
+    });
+
+    $("#hours").change(function () {
+        var price = $('option:selected', this).attr("data-price");
+        $('#total_cost').val(price);
+    });
+    
+});
+
+
+$(document).ready(function() {
+    $(document).on('click', '#task', function() {
+        let data = $(this).data('id');
+        let url = $(this).data('url');
+        try {
+            $.ajax({
+                method: 'GET',
+                url: url,
+                data: { data: data }, 
+                success: function(res) {
+                    if(res.status === 'success') {
+                        $('html, body').animate({
+                            scrollTop: $('#search-filter').offset().top
+                        }, 1000, function() {
+                            $('#gigs').html(res.data); 
+                        });
+                    }
+                }
+            });
+        } catch(xhr) {
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+
+jQuery(document).ready(function($) {
+    let owl = $('#owl-carousel-top')
+    owl.owlCarousel({
+        // loop: true,
+        nav: true,
+        margin: 10,
+        ltr: true,
+        autoplay: true,
+        autoplayTimeout: 1000,
+        autoplayHoverPause: true, 
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            960: {
+                items: 5
+            },
+            1200: {
+                items: 6
+            }
+        }
+    });
+
+    $('#next').click(function() {
+        owl.trigger('next.owl.carousel');
+    })
+    $('#prev').click(function() {
+        owl.trigger('prev.owl.carousel');
+    });
+
+    owl.on('mousewheel', '.owl-stage', function(e) {
+        if (e.deltaY > 0) {
+            owl.trigger('next.owl');
+        } else {
+            owl.trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
+
+    //optional because already defined autoplayHoverPause: true, 
+    $('#owl-carousel-top').hover(
+        function() {
+            owl.trigger('stop.owl.autoplay'); 
+        },
+        function() {
+            owl.trigger('play.owl.autoplay', [1000]); 
+        }
+    );
+});
+
+jQuery(document).ready(function($) {
+    "use strict";
+    $('#customers-testimonials').owlCarousel({
+        loop: true,
+        center: true,
+        items: 3,
+        margin: 0,
+        autoplay: true,
+        dots: true,
+        autoplayTimeout: 8500,
+        smartSpeed: 450,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1170: {
+                items: 3
+            }
+        }
+    });
+    "use strict";
+
+    $('#feedback-testimonials').owlCarousel({
+        loop: true,
+        center: true,
+        items: 3,
+        margin: 0,
+        autoplay: true,
+        dots: true,
+        autoplayTimeout: 8500,
+        smartSpeed: 450,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1170: {
+                items: 2
+            }
+        }
+    });
+});
+
+
+
+$(document).ready(function(){
+    $('#owl-carousel-top .owl-item').removeAttr('style');
+});

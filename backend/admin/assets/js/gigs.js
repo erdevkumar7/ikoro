@@ -1,0 +1,71 @@
+$(document).ready(function () {
+    let has_gig_id = $("#has_gig_id").val() ?? '';
+    if (has_gig_id != "") {
+        $('#gigFile' + has_gig_id).modal('show');
+    };
+
+    $("#equipment_price_id").change(function () {
+
+        var price = $('option:selected', this).attr('price');
+        var mins = $('option:selected', this).attr('minutes');
+        var equipment_name = $('option:selected', this).html();
+
+        $('#pricing').val(price + " per " + mins + " minutes");
+        $('#equipment_name').val(equipment_name.trim());
+        $('#price').val(price);
+        $('#minutes').val(mins);
+    });
+
+    // $(".add_more").click(function(){
+    //     $("#html_to").html($("#html_from").html());
+    // });
+
+    $(document).ready(function () {
+        function createRow() {
+            return `<div class="form-row row">
+                        <div class="form-group col-md-5">
+                            <label>Label</label>
+                            <input type="text" class="form-control" name="features[label][]" required />
+                            <x-input-error :messages="$errors->get('feat')" class="mt-2" />
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>Value</label>
+                            <input type="text" class="form-control" name="features[value][]" required />
+                            <x-input-error :messages="$errors->get('val')" class="mt-2" />
+                        </div>
+                        <div class="form-group col-md-2 mt-2">
+                            <br>
+                            <button type="button" class="remove btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>`;
+        }
+        $('.add_more').click(function () {
+            $('#html_to').append(createRow());
+        });
+
+        $('#html_to').on('click', '.remove', function () {
+            $(this).closest('.form-row').remove();
+        });
+
+        // for (let i = 0; i < 3; i++) {
+        //     $('#html_to').append(createRow());
+        // }
+    });
+
+    $(document).on('click', '.remove_gig_media', function(){
+        confirm('are you sure want to delete!');
+        let url = $(this).attr('route');
+        $.ajax({
+            method: 'GET',
+            url: url,
+            success: function(res){
+                if(res.status === 'success'){
+                    location.reload();
+                }
+            }
+        });
+    });
+
+});

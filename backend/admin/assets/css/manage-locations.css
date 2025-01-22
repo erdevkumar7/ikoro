@@ -1,0 +1,17 @@
+.col-sm-3{
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 10px;
+}
+.location-block {
+    min-height: 500px;
+}
+
+.location-block .datarecord {
+    height: 350px;
+    overflow: scroll;
+}
+
+.card-body {
+    margin-bottom: 100px;
+}
