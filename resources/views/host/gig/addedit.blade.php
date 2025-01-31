@@ -45,10 +45,13 @@
                             <select name="equipment_price_id" id="equipment_price_id" class="form-control">
                                 <option value="">Select Equipment Used</option>
                                 @foreach ($equipment_price_all as $row)
-                                    <option value="{{ $row->id }}" price="{{ $row->price }}"
-                                        minutes="{{ $row->minutes }}"
+                                    <option value="{{ $row->id }}" 
+                                        price="{{ $row->price }}"
+                                        minutes="{{ $row->duration_minutes }}"
+                                        equipment_id="{{$row->equipment_id}}"
+                                        equipment_name = "{{ $row->equipment->name }}"
                                         {{ ($gig['equipment_price_id'] ?? '') == $row->id ? 'selected' : '' }}>
-                                        {{ $row->equipment_name }}
+                                        {{ $row->equipment->name }} for {{ $row->duration_minutes }} minutes
                                     </option>
                                 @endforeach
                             </select>
@@ -68,6 +71,7 @@
                                         $gig['equipmentPrice']['minutes'] .
                                         ' minutes';
                                 }
+                                
                             @endphp
                             <input readonly type="text" class="form-control" id="pricing"
                                 value="{{ $price_str }}" />
@@ -75,6 +79,7 @@
                                 value="{{ $gig['equipment_name'] ?? '' }}" />
                             <input type="hidden" id="price" name="price" value="{{ $gig['price'] ?? '' }}" />
                             <input type="hidden" id="minutes" name="minutes" value="{{ $gig['minutes'] ?? '' }}" />
+                            <input type="hidden" id="eq_id" name="equipment_id" value="{{ $gig['equipment_id'] ?? '' }}" />
                         </div>
                     </div>
                     <div class="form-row">

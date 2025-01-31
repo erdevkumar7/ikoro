@@ -27,6 +27,13 @@ class Gig extends Model
     
     public function equipmentPrice() {
         return $this->belongsTo(EquipmentPrice::class);
+        // return $this->belongsTo(EquipmentPrice::class, 'equipment_price_id', 'id');
+    }
+
+    
+
+    public function equipment() {
+        return $this->belongsTo(Equipment::class);
     }
 
     public function country() {

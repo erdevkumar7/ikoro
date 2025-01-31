@@ -31,14 +31,17 @@ class GigController extends Controller
             'task_id' => ['required', 'string'],
             'description' => ['required', 'string'],
             'equipment_price_id' => ['required', 'integer'],
+            'equipment_name' => ['nullable', 'string'],
+            'equipment_id' => ['required', 'integer'],
             'price' => ['nullable', 'string'],
+            'minutes' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
             'country_id' => ['required', 'integer'],
             'state_id' => ['required', 'integer'],
             'city_id' => ['required', 'integer'],
             'zip_id' => ['nullable', 'integer'],
         ]);
-
+        // dd($validatedData);
         $validatedData['host_id'] = Auth::user()->id;
 
         $features = $request->input('features');

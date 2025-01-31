@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    const base_url = window.location.origin ;
+    // const base_url = window.location.origin ;
+    const base_url_old = window.location.origin ;
+    const base_url = base_url_old+'/ikoro';
+    console.log('base_url', base_url)
     var country_trigger_cnt = 1;
     var state_trigger_cnt = 1;
     var city_trigger_cnt = 1;

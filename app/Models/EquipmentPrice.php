@@ -17,4 +17,10 @@ class EquipmentPrice extends Model
         'price' => 'decimal:2',
     ];
 
+    public function equipment()
+    {
+        return $this->belongsTo(Equipment::class);
+        // return $this->belongsTo(Equipment::class, 'equipment_id', 'id');
+    }
+
 }

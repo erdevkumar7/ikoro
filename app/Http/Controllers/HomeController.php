@@ -30,20 +30,46 @@ class HomeController extends Controller
         ];
 
         $where = [];
-        if ($request->input('country_id') != '') {
-            $where['country_id'] = $request->input('country_id');
-            $where['state_id'] = $request->input('state_id');
+
+        // if ($request->input('country_id') != '') {
+        //     $where['country_id'] = $request->input('country_id');
+        //     $where['state_id'] = $request->input('state_id');
+        //     $where['city_id'] = $request->input('city_id');
+        //     $where['zip_id'] = $request->input('zip_id');
+        // }
+
+        if ($request->input('city_id') != '') {
+            // $where['country_id'] = $request->input('country_id');
+            // $where['state_id'] = $request->input('state_id');
+            // $where['zip_id'] = $request->input('zip_id');
             $where['city_id'] = $request->input('city_id');
-            $where['zip_id'] = $request->input('zip_id');
+            $where['task_id'] = $request->input('task_id');
+            $where['equipment_id'] = $request->input('equipment_id');            
         }
 
         $gigs = Gig::inRandomOrder();
+
+        // Filter by gender if provided
+        if ($request->input('gender')) {
+            $gender = $request->input('gender');
+            $gigs->whereHas('host', function ($query) use ($gender) {
+                $query->where('gender', $gender);
+            });
+        }
+
+        // if($request->input('equipment_id')){
+        //     $equipment_id = $request->input('equipment_id'); 
+        //     $gigs->whereHas('equipmentPrice', function($query) use ($equipment_id) {
+        //         $query->where('equipment_price_id', $equipment_id);
+        //     });
+        // }
+   
+
         if (count($where) > 0) {
-            $gigs->where($where);
+            $gigs->where($where);           
         }
         $data['gigs'] = $gigs->limit(10)->get();
         $data['where'] = $where;
-
         if ($client != "") {
             $data['loggedIn'] = $client;
             $data['tasks'] = Task::all();
@@ -54,14 +80,15 @@ class HomeController extends Controller
         $data['country'] = Country::where('name', 'Nigeria')->first();
         $data['state'] = State::where('name', 'Nigeria')->first();
         $data['cities'] = City::where('state_id', $data['state']->id)->get();
-
+        
         return $data;
     }
 
-    public function getEquipmentPrices(Request $request){
+    public function getEquipmentPrices(Request $request)
+    {
         $equipment_id = $request->input('equipment_id');
         $equipment_prices = EquipmentPrice::where('equipment_id', $equipment_id)->get();
-        
+
         return response()->json($equipment_prices);
     }
 
@@ -73,12 +100,12 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
-    public function gigSearchedOnTask(Request $request) 
-    {   
+    public function gigSearchedOnTask(Request $request)
+    {
         $data = [];
         if ($request->input('data') != '') {
             $id = $request->input('data');
-            $data= Gig::where('task_id', $id)->inRandomOrder()->get();
+            $data = Gig::where('task_id', $id)->inRandomOrder()->get();
         }
         if ($request->ajax()) {
             $html = view('pages.gig-search-task', compact('data'))->render();
@@ -100,7 +127,7 @@ class HomeController extends Controller
     {
         try {
             $data = $request->all();
-            $action = $request->input('action'); 
+            $action = $request->input('action');
             $id = $data['action'] ?? "";
             unset($data['action']);
             unset($data['id']);
@@ -110,7 +137,7 @@ class HomeController extends Controller
             if ($id == "") {
                 Booking::create($data);
             }
-            if($action == 'pay'){
+            if ($action == 'pay') {
                 return $this->redirectToGateway($data["total_cost"]);
                 exit;
             }
@@ -120,7 +147,7 @@ class HomeController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
-            Session::flash('message', 'Error while saving booking.' . $e->getMessage() );
+            Session::flash('message', 'Error while saving booking.' . $e->getMessage());
             Session::flash('alert-class', 'alert-warning');
 
             return redirect()->back();
@@ -136,11 +163,11 @@ class HomeController extends Controller
             "currency" => "ZAR",
             "callback_url" => route('callback'),
         );
-    
-        try{
+
+        try {
             return Paystack::getAuthorizationUrl($data)->redirectNow();
-        }catch(\Exception $e) {
-            Session::flash('message', 'The paystack token has expired. Please refresh the page and try again.' . $e->getMessage() );
+        } catch (\Exception $e) {
+            Session::flash('message', 'The paystack token has expired. Please refresh the page and try again.' . $e->getMessage());
             Session::flash('alert-class', 'alert-warning');
             return redirect()->back();
         }

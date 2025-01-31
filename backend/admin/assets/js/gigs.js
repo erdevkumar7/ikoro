@@ -8,12 +8,14 @@ $(document).ready(function () {
 
         var price = $('option:selected', this).attr('price');
         var mins = $('option:selected', this).attr('minutes');
-        var equipment_name = $('option:selected', this).html();
+        var equipment_name = $('option:selected', this).attr('equipment_name');
+        var equipment_id = $('option:selected', this).attr('equipment_id');
 
         $('#pricing').val(price + " per " + mins + " minutes");
-        $('#equipment_name').val(equipment_name.trim());
+        $('#equipment_name').val(equipment_name);
         $('#price').val(price);
         $('#minutes').val(mins);
+        $('#eq_id').val(equipment_id);
     });
 
     // $(".add_more").click(function(){
