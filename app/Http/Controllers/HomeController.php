@@ -30,46 +30,31 @@ class HomeController extends Controller
         ];
 
         $where = [];
-
-        // if ($request->input('country_id') != '') {
-        //     $where['country_id'] = $request->input('country_id');
-        //     $where['state_id'] = $request->input('state_id');
-        //     $where['city_id'] = $request->input('city_id');
-        //     $where['zip_id'] = $request->input('zip_id');
-        // }
-
-        if ($request->input('city_id') != '') {
-            // $where['country_id'] = $request->input('country_id');
-            // $where['state_id'] = $request->input('state_id');
-            // $where['zip_id'] = $request->input('zip_id');
+        if ($request->filled('city_id')) {
             $where['city_id'] = $request->input('city_id');
-            $where['task_id'] = $request->input('task_id');
-            $where['equipment_id'] = $request->input('equipment_id');            
         }
-
-        $gigs = Gig::inRandomOrder();
-
+        if ($request->filled('task_id')) {
+            $where['task_id'] = $request->input('task_id');
+        }
+        if ($request->filled('equipment_id')) {
+            $where['equipment_id'] = $request->input('equipment_id');
+        }    
+        $gigs = Gig::query(); // Only query if filters exist    
+        // Apply filters only if there is at least one filter
+        if (!empty($where)) {
+            $gigs->where($where);
+        }    
         // Filter by gender if provided
-        if ($request->input('gender')) {
+        if ($request->filled('gender')) {
             $gender = $request->input('gender');
             $gigs->whereHas('host', function ($query) use ($gender) {
                 $query->where('gender', $gender);
             });
-        }
-
-        // if($request->input('equipment_id')){
-        //     $equipment_id = $request->input('equipment_id'); 
-        //     $gigs->whereHas('equipmentPrice', function($query) use ($equipment_id) {
-        //         $query->where('equipment_price_id', $equipment_id);
-        //     });
-        // }
-   
-
-        if (count($where) > 0) {
-            $gigs->where($where);           
-        }
-        $data['gigs'] = $gigs->limit(10)->get();
+        }    
+        // Fetch gigs only if a filter was applied
+        $data['gigs'] = !empty($where) ? $gigs->limit(10)->get() : collect([]);    
         $data['where'] = $where;
+        
         if ($client != "") {
             $data['loggedIn'] = $client;
             $data['tasks'] = Task::all();
@@ -79,8 +64,7 @@ class HomeController extends Controller
         $data['equipment_price_all'] = Equipment::get();
         $data['country'] = Country::where('name', 'Nigeria')->first();
         $data['state'] = State::where('name', 'Nigeria')->first();
-        $data['cities'] = City::where('state_id', $data['state']->id)->get();
-        
+        $data['cities'] = City::all();        
         return $data;
     }
 

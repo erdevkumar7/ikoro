@@ -117,11 +117,15 @@
                     <div class="destination-section">
                         <label for="search-destination">Where</label>
                         <input type="text" name="city_id" class="search-destination"
-                            placeholder="Search destinations" />
-                        {{-- <select id="city_id" name="city_id"  required>
-                            <option value="" selected>Select City</option>
+                            placeholder="Search destinations" required />
+                        {{-- <select id="city_id" name="city_id">
+                            <option value="" {{ old('city_id', request('city_id')) == '' ? 'selected' : '' }}>
+                                --All Cities--</option>
                             @foreach ($cities as $city)
-                                <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
+                                <option value="{{ $city['id'] }}"
+                                    {{ old('city_id', request('city_id')) == $city['id'] ? 'selected' : '' }}>
+                                    {{ $city['name'] }}
+                                </option>
                             @endforeach
                         </select> --}}
                     </div>
@@ -129,15 +133,15 @@
                     <!-- Service Section -->
                     <div class="service-section">
                         <label for="choose-service">Choose a service</label>
-                        {{-- <select id="choose-service" class="choose-service">
-                            <option value="verify-place">Verify a place</option>
-                            <option value="other-service-1">Other Service 1</option>
-                        </select> --}}
-
-                        <select id="choose-service" name="task_id" class="choose-service" required>
-                            {{-- <option value="" disabled selected>Choose a service</option> --}}
+                        <select id="choose-service" name="task_id" class="choose-service">
+                            <option value="" {{ old('task_id', request('task_id')) == '' ? 'selected' : '' }}>
+                                -- All services --
+                            </option>
                             @foreach ($tasks as $task)
-                                <option value="{{ $task['id'] }}">{{ $task['title'] }}</option>
+                                <option value="{{ $task['id'] }}"
+                                    {{ old('task_id', request('task_id')) == $task['id'] ? 'selected' : '' }}>
+                                    {{ $task['title'] }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -145,13 +149,15 @@
                     <!-- Tool Section -->
                     <div class="tool-section">
                         <label for="choose-tool">Choose a tool</label>
-                        {{-- <select id="choose-tool" class="choose-tool">
-                            <option value="drone">Drone Only</option>
-                        </select> --}}
                         <select name="equipment_id" id="equipment_id" class="choose-tool">
-                            {{-- <option value="">Choose a tool</option> --}}
+                            <option value=""
+                                {{ old('equipment_id', request('equipment_id')) == '' ? 'selected' : '' }}>--All
+                                tools--</option>
                             @foreach ($equipment_price_all as $row)
-                                <option value="{{ $row->id }}">{{ $row->name }} </option>
+                                <option value="{{ $row->id }}"
+                                    {{ old('equipment_id', request('equipment_id')) == $row->id ? 'selected' : '' }}>
+                                    {{ $row->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -159,14 +165,17 @@
                     <!-- Gender Section -->
                     <div class="gender-section">
                         <label for="choose-gender">Host gender</label>
-                        {{-- <select id="choose-gender" class="choose-gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select> --}}
-                        <select id="gender" name="gender" class="choose-gender" required>
-                            {{-- <option value="" disabled selected>Host gender</option> --}}
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                        <select id="gender" name="gender" class="choose-gender">
+                            <option value="" {{ old('gender', request('gender')) == '' ? 'selected' : '' }}>
+                                --All gender--
+                            </option>
+                            <option value="male" {{ old('gender', request('gender')) == 'male' ? 'selected' : '' }}>
+                                Male
+                            </option>
+                            <option value="female"
+                                {{ old('gender', request('gender')) == 'female' ? 'selected' : '' }}>
+                                Female
+                            </option>
                         </select>
                     </div>
 
@@ -474,17 +483,17 @@
                             </div>
 
                             @php$price_str = '';
-                                                                                                                                                                                                                                                                                                                                                                                                                            if (
-                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['price']) &&
-                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['minutes'])
-                                                                                                                                                                                                                                                                                                                                                                                                                            ) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                $price_str =
-                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['price'] .
-                                                                                                                                                                                                                                                                                                                                                                                                                                    "$ per " .
-                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['minutes'] .
-                                                                                                                                                                                                                                                                                                                                                                                                                                    '
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['price']) &&
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['minutes'])
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $price_str =
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['price'] .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "$ per " .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['minutes'] .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    '
                         minutes';
-                                                                                                                                                                                                                                                                                                                                                                        } @endphp ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            } @endphp ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?>
 
 
                             <div class="row align-items-center mb-3">
@@ -647,7 +656,7 @@
 
     <!-- END OF TESTIMONIALS -->
 
-    <div class="container container-input-fields">
+    {{-- <div class="container container-input-fields">
         <h2 class="ml-5 nav-link">View and Hire Our Host By</h2>
 
         <input type="hidden" id="filter_flag" value="{{ $where['country_id'] ?? '' }}" />
@@ -717,16 +726,14 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div> --}}
 
     <!-- Bootstrap container for grid system -->
-
+    {{-- 
     <div class="container mt-4">
         <!-- Bootstrap row for creating a horizontal group of columns -->
-
         <div class="row g-4" id="gigs">
             <!-- Card 1 -->
-
             @foreach ($gigs as $gig)
                 <div class="col-md-4 mt-3">
                     <div class="card custom-card" style="background: rgb(173, 239, 41);">
@@ -764,7 +771,7 @@
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
     @push('scripts')
         <script>
