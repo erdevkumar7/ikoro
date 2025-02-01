@@ -84,6 +84,14 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
+    public function searchCity(Request $request)
+    {
+        $query = $request->input('query');
+        $cities = City::where('name', 'LIKE', "%{$query}%")->limit(10)->get();
+        return response()->json($cities);
+    }
+
+
     public function gigSearchedOnTask(Request $request)
     {
         $data = [];

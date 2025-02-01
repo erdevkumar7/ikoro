@@ -20,6 +20,7 @@ Route::get('/home-dashboard-details/{gig}', function (Gig $gig) {
 })->name('home.dashboard.details');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search-cities', [HomeController::class, 'searchCity'])->name('search.cities');
 Route::get('/search/gig/task', [HomeController::class, 'gigSearchedOnTask'])->name('home.task');
 Route::post('/store-booking', [HomeController::class, 'storeBooking'])->name('booking.store');
 Route::get('/get-states/{countryId}', [HomeController::class, 'getStates']);

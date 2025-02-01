@@ -1,27 +1,72 @@
-$(document).ready(function() {
-    $("#home-booking-form").on("submit", function() {
+$(document).ready(function () {
+    $('#citySearchByInput').on('keyup', function () {
+        let query = $(this).val();
+        let url = $(this).attr('data-url');
+        if (query.length > 1) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { query: query },
+                success: function (data) {
+                    let dropdown = $('#cityDropdown');
+                    dropdown.empty().show();
+
+                    if (data.length > 0) {
+                        $.each(data, function (index, city) {
+                            dropdown.append(`<div class="dropdown-item city-item" data-id="${city.id}">${city.name}</div>`);
+                        });
+                    } else {
+                        dropdown.append('<div class="dropdown-item">No results found</div>');
+                    }
+                }
+            });
+        } else {
+            $('#cityDropdown').hide();
+        }
+    });
+
+    // Handle city selection
+    $(document).on('click', '.city-item', function () {
+        let cityName = $(this).text();
+        let cityId = $(this).data('id');
+        // console.log('cityName',cityName)
+        $('#citySearchByInput').val(cityName);
+        $('input[name="city_id"]').val(cityId);
+        $('#cityDropdown').hide();
+    });
+
+    // Hide dropdown when clicking outside
+    $(document).click(function (event) {
+        if (!$(event.target).closest('#citySearchByInput, #cityDropdown').length) {
+            $('#cityDropdown').hide();
+        }
+    });
+
+
+
+    $("#home-booking-form").on("submit", function () {
         // $("#home-booking-btn").prop("disabled", true);
         // $("#pay-btn").prop("disabled", true);
     });
-    
-    $(".book-a-task").click(function(){
+
+    $(".book-a-task").click(function () {
         var loggedIn = $("#loggedIn").val();
-        if(loggedIn == ""){
+        if (loggedIn == "") {
             $('#loginModal').modal('show');
         }
     });
 
-    $(".book-a-task").click(function(){
+    $(".book-a-task").click(function () {
         var loggedIn = $("#loggedIn").val();
-        if(loggedIn == ""){
+        if (loggedIn == "") {
             $('#loginModal').modal('show');
         }
     });
 
-    if($("#filter_flag").val() != ""){
+    if ($("#filter_flag").val() != "") {
         $('html, body').animate({
             scrollTop: $('#search-filter').offset().top
-        }, 1000); 
+        }, 1000);
     }
 
 
@@ -31,11 +76,11 @@ $(document).ready(function() {
         $.ajax({
             method: 'GET',
             url: url,
-            data: { equipment_id: equipment_id }, 
-            success: function(res) {
-                let html = ''; 
-                $.each(res, function(key, row) {
-                    html += '<option value="' + row.id + '" data-price="'+ row.price +'">' + row.duration_minutes + ' minutes</option>';
+            data: { equipment_id: equipment_id },
+            success: function (res) {
+                let html = '';
+                $.each(res, function (key, row) {
+                    html += '<option value="' + row.id + '" data-price="' + row.price + '">' + row.duration_minutes + ' minutes</option>';
                 });
                 $("#hours").html(html);
             }
@@ -46,37 +91,37 @@ $(document).ready(function() {
         var price = $('option:selected', this).attr("data-price");
         $('#total_cost').val(price);
     });
-    
+
 });
 
 
-$(document).ready(function() {
-    $(document).on('click', '#task', function() {
+$(document).ready(function () {
+    $(document).on('click', '#task', function () {
         let data = $(this).data('id');
         let url = $(this).data('url');
         try {
             $.ajax({
                 method: 'GET',
                 url: url,
-                data: { data: data }, 
-                success: function(res) {
-                    if(res.status === 'success') {
+                data: { data: data },
+                success: function (res) {
+                    if (res.status === 'success') {
                         $('html, body').animate({
                             scrollTop: $('#search-filter').offset().top
-                        }, 1000, function() {
-                            $('#gigs').html(res.data); 
+                        }, 1000, function () {
+                            $('#gigs').html(res.data);
                         });
                     }
                 }
             });
-        } catch(xhr) {
+        } catch (xhr) {
             console.log(xhr.responseText);
         }
     });
 });
 
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     let owl = $('#owl-carousel-top')
     owl.owlCarousel({
         // loop: true,
@@ -85,7 +130,7 @@ jQuery(document).ready(function($) {
         ltr: true,
         autoplay: true,
         autoplayTimeout: 1000,
-        autoplayHoverPause: true, 
+        autoplayHoverPause: true,
         responsive: {
             0: {
                 items: 1
@@ -102,14 +147,14 @@ jQuery(document).ready(function($) {
         }
     });
 
-    $('#next').click(function() {
+    $('#next').click(function () {
         owl.trigger('next.owl.carousel');
     })
-    $('#prev').click(function() {
+    $('#prev').click(function () {
         owl.trigger('prev.owl.carousel');
     });
 
-    owl.on('mousewheel', '.owl-stage', function(e) {
+    owl.on('mousewheel', '.owl-stage', function (e) {
         if (e.deltaY > 0) {
             owl.trigger('next.owl');
         } else {
@@ -120,16 +165,16 @@ jQuery(document).ready(function($) {
 
     //optional because already defined autoplayHoverPause: true, 
     $('#owl-carousel-top').hover(
-        function() {
-            owl.trigger('stop.owl.autoplay'); 
+        function () {
+            owl.trigger('stop.owl.autoplay');
         },
-        function() {
-            owl.trigger('play.owl.autoplay', [1000]); 
+        function () {
+            owl.trigger('play.owl.autoplay', [1000]);
         }
     );
 });
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     "use strict";
     $('#customers-testimonials').owlCarousel({
         loop: true,
@@ -179,6 +224,6 @@ jQuery(document).ready(function($) {
 
 
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('#owl-carousel-top .owl-item').removeAttr('style');
 });

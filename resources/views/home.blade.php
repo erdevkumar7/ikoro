@@ -19,6 +19,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
         <style>
+            div#cityDropdown {
+                top: 34% !important;
+                left: 21%;
+            }
+
             .custom-card {
                 border: none;
                 border-radius: 15px;
@@ -116,9 +121,20 @@
                     <!-- Destination Section -->
                     <div class="destination-section">
                         <label for="search-destination">Where</label>
-                        <input type="text" name="city_id" class="search-destination"
-                            placeholder="Search destinations" required />
-                        {{-- <select id="city_id" name="city_id">
+                        {{-- <input type="text" name="city_id" value="{{old('city_id', request('city_id'))}}" id="citySearchByInput" class="search-destination"
+                            data-url="{{ route('search.cities') }}" placeholder="Search destinations" required
+                            autocomplete="off" />
+                        <div id="cityDropdown" class="dropdown-menu"></div> --}}
+
+
+
+
+
+
+
+
+
+                        <select id="city_id" name="city_id">
                             <option value="" {{ old('city_id', request('city_id')) == '' ? 'selected' : '' }}>
                                 --All Cities--</option>
                             @foreach ($cities as $city)
@@ -127,7 +143,7 @@
                                     {{ $city['name'] }}
                                 </option>
                             @endforeach
-                        </select> --}}
+                        </select>
                     </div>
 
                     <!-- Service Section -->
@@ -483,17 +499,17 @@
                             </div>
 
                             @php$price_str = '';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['price']) &&
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['minutes'])
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $price_str =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['price'] .
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "$ per " .
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['minutes'] .
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    '
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['price']) &&
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['minutes'])
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $price_str =
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['price'] .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "$ per " .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['minutes'] .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    '
                         minutes';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            } @endphp ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } @endphp ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?>
 
 
                             <div class="row align-items-center mb-3">
