@@ -68,7 +68,6 @@
             <div class="modal-content" style="background: rgb(0, 37, 2);">
                 <div class="modal-header">
                     <h5 class="host-modal-title nav-link" id="exampleModalLabel">Login Please</h5>
-
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-white">&times;</span>
                     </button>
@@ -84,7 +83,6 @@
                                 autocomplete="username" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
-
                         <div class="form-group">
                             <x-input-label class="text-white" for="password" :value="__('Password')" />
                             <x-text-input id="password" type="password" name="password" required
@@ -92,7 +90,6 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <x-primary-button class="ms-3">
                             {{ __('Log in') }}
@@ -116,34 +113,15 @@
             <span class="text-white"><b>Order, relax, and tour places with iKORO from the comfort of your home /
                     office.</b></span>
 
-            <form method="get" action="{{ route('home') }}">
-                <div class="search-destinations">
+            <form id="filter-form">
+                <div class="container search-destinations">
                     <!-- Destination Section -->
                     <div class="destination-section">
                         <label for="search-destination">Where</label>
-                        {{-- <input type="text" name="city_id" value="{{old('city_id', request('city_id'))}}" id="citySearchByInput" class="search-destination"
+                        <input type="text" name="city_id" id="citySearchByInput" class="search-destination"
                             data-url="{{ route('search.cities') }}" placeholder="Search destinations" required
                             autocomplete="off" />
-                        <div id="cityDropdown" class="dropdown-menu"></div> --}}
-
-
-
-
-
-
-
-
-
-                        <select id="city_id" name="city_id">
-                            <option value="" {{ old('city_id', request('city_id')) == '' ? 'selected' : '' }}>
-                                --All Cities--</option>
-                            @foreach ($cities as $city)
-                                <option value="{{ $city['id'] }}"
-                                    {{ old('city_id', request('city_id')) == $city['id'] ? 'selected' : '' }}>
-                                    {{ $city['name'] }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div id="cityDropdown" class="dropdown-menu"></div>
                     </div>
 
                     <!-- Service Section -->
@@ -204,21 +182,18 @@
                 </div>
             </form>
 
-
-
-
             @if (Session::has('message'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
             @endif
 
             <div class="container">
-                <div class="content flex-grow-1 mb-5 mt-3">
+                <div class="content flex-grow-1 mb-5 mt-3 meet-top-section-owl">
                     <div class="container-fluid bg-3 text-center">
                         <div class="owl-carousel menu" id="owl-carousel-top"
                             style="display: flex; justify-content: center;">
                             @foreach ($tasks as $task)
                                 <div class="owl-css" id="task" data-id="{{ $task->id }}"
-                                    data-url="{{ route('home.task') }}" style="cursor: pointer;">
+                                    data-url="{{ route('filter.gigs') }}" style="cursor: pointer;">
                                     <i class="{{ $task->icon }}"></i> <br />
                                     {{ $task->title }}
                                 </div>
@@ -227,46 +202,9 @@
                     </div>
                 </div>
 
-
-                <div class="row filter-host-user">
-                    @foreach ($gigs as $gig)
-                        <div class="row">
-                            <div class="card p-3 mb-5">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            @if ($gig->host->image)
-                                                <img class="d-block" width="100"
-                                                    src="{{ asset('public/' . $gig->host->image) }}" alt="">
-                                            @else
-                                                <img class="d-block" width="100"
-                                                    src="{{ asset('frontend/images/host.jpg') }}" alt="">
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6 mt-4">
-                                            <span class="nav-link-dash">Hosted by
-                                                {{ $gig->host->name }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="text nav-link-dash font-weight-bold mt-4">
-                                        {{ $gig->country->name ?? 'no-country' }} -
-                                        {{ $gig->state->name ?? 'no-state' }} -
-                                        {{ $gig->city->name ?? 'no-city' }} -
-                                        {{ $gig->zip->code ?? 'no-zipcode' }}</div>
-                                    <div class="text nav-link-dash">Gender : {{ $gig->host->gender }}</div>
-                                    <div class="text nav-link-dash">Phone : {{ $gig->host->phone }}</div>
-                                    <div class="text nav-link-dash">WhatsApp : {{ $gig->host->whatsapp_no }}
-                                        <div class="text nav-link-dash">Services : {{ $gig->task->title }}</div>
-                                        <div class="text nav-link-dash">Tool used :
-                                            {{ $gig->equipmentPrice->equipment->name }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+                <div id="gigs-container">
+                    @include('partials.gigs-list', ['gigs' => $gigs])
                 </div>
-
-
 
                 <div class="meet-our-top">
                     <h1 class="text-center mb-4">Meet Our Top Hosts</h1>
@@ -277,9 +215,7 @@
                                     @foreach ($hosts as $host)
                                         <div class="single-box">
                                             <div class="img-area">
-                                                {{-- <img alt="" class="img-fluid"
-                                                    src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
-
+                                                {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
                                                 @if ($host->image)
                                                     <img class="img-fluid"
                                                         src="{{ asset('public/' . $host->image) }}"
@@ -292,11 +228,6 @@
                                             </div>
                                             <div class="detils-inner">
                                                 <p>Name: {{ $host->name }}</p>
-                                                {{-- <p>City Country:
-                                                    @foreach ($host->gigs->unique('city_id') as $gig)
-                                                        {{ $gig->city->name }}<br />
-                                                    @endforeach
-                                                </p> --}}
                                                 <p>City Country:
                                                     @php
                                                         $uniqueCities = $host->gigs
@@ -318,11 +249,11 @@
                                                         {{ $gig->task->title }}<br />
                                                     @endforeach
                                                 </p>
-                                                <p>Rating: </p>
-                                                <p>Tool used: @foreach ($host->gigs->unique('equipment_price_id') as $gig)
+                                                <p>Rating</p>
+                                                <p>Tool used:
+                                                    @foreach ($host->gigs->unique('equipment_price_id') as $gig)
                                                         {{ $gig->equipmentPrice->equipment->name }}<br />
                                                     @endforeach
-                                                </p>
                                                 </p>
                                             </div>
                                         </div>
@@ -374,176 +305,276 @@
                             },
                         });
                     </script>
-
-
                 </div>
 
-                <div class="row mb-4 book-a-task-row">
-                    <div class="col-md-6 col-lg-6 col-sm-12 book-a-task">
-                        <form method="post" id="home-booking-form" action="{{ route('booking.store') }}"
-                            class="p-3 rounded task-form shadow-lg">
-                            <h4 class="font-weight-bold mb-4">Book a Task</h4>
+                <div class="host-main-profile">
+                    <h1>Host main profile/booking page</h1>
+                    <div class="booking-page">
+                        <div class="row booking-mark-sdv">
+                            <div class="col-md-3 select-service-left">
+                                <img alt="" class="img-fluid"
+                                    src="https://votivelaravel.in/ikoro/public/uploads/host/1737703609_profile3.jpg" />
+                            </div>
 
-                            @csrf
-                            <!-- Task Selection -->
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-tasks"></i></span>
-                                        <select id="task_id" name="task_id" class="form-control" required>
-                                            <option value="" disabled selected>Select a task</option>
-                                            @foreach ($tasks as $task)
-                                                <option value="{{ $task['id'] }}">{{ $task['title'] }}</option>
-                                            @endforeach
-                                        </select>
+                            <div class="col-md-7 select-service-right">
+                                <h1>Charlie Cook</h1>
+                                <div class="select-a-service">
+                                    <h3>Select a Service /</h3>
+                                    <div class="host-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <i class="fa-solid fa-city"></i>
+                                            <p>City tours</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+
+                                    <div class="host-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <i class="fa-solid fa-city"></i>
+                                            <p>Tourist Sites</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+
+                                    <div class="host-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <i class="fa-solid fa-city"></i>
+                                            <p>Learn a Culture</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+
+                                    <div class="host-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <i class="fa-solid fa-city"></i>
+                                            <p>Verity a place</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+                                </div>
+
+                                <div class="select-a-tool">
+                                    <h3>Select Tools /</h3>
+                                    <div class="select-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <p>Smart Phone & Gimbal</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+
+                                    <div class="select-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <p>Drone</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+
+                                    <div class="select-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <p>Professional Camera</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Location Selection -->
-                            <input type="hidden" name="country_id" value="{{ $country->id }}" />
-                            <input type="hidden" name="state_id" value="{{ $state->id }}" />
-
-                            <div class="row">
-                                <!-- City -->
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-city city-icon"></i></span>
-                                        <select id="city_id" name="city_id" class="form-control" required>
-                                            <option value="" selected>Select City</option>
-                                            @foreach ($cities as $city)
-                                                <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Zip -->
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i
-                                                class="fas fa-envelope envelope-icon"></i></span>
-                                        <select id="zip_id" name="zip_id" class="form-control" required>
-                                            <option value="" disabled selected>Select ZipCode</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="col-md-2 available-time">
+                                <p>Available Hours form 10.30am to 06.30pm</p>
                             </div>
 
-                            <!-- Equipment -->
-
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
-                                        <select name="equipment_id" data-url="{{ route('get_equipment_prices') }}"
-                                            id="equipment_id" class="form-control">
-                                            <option value="">Select Equipment</option>
-                                            @foreach ($equipment_price_all as $row)
-                                                <option value="{{ $row->id }}">{{ $row->name }} </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fa fa-calculator"></i></span>
-                                        <select name="hours" id="hours" class="form-control">
-                                            <option value="">Select Hours</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="biography-sec">
+                                <h4>Biography</h4>
+                                <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a
+                                    1st-century BC text by the Roman statesman and philosopher Cicero.</p>
+                                <h3>Languages</h3>
+                                <a href="#" class="eng-text">English</a>
+                                <h2>Location</h2>
+                                <h1>Onitsha. Nigeria</h1>
+                                <a href="#" class="book-now-btn">Book Now</a>
                             </div>
-
-                            <!-- Gender and Feedback -->
-
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i
-                                                class="fa-solid fa-venus-mars mars-icon"></i></span>
-                                        <select id="preferred_gender" name="preferred_gender" class="form-control"
-                                            required>
-                                            <option value="" disabled selected>Preferred Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Operation Time -->
-
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                                        <input type="datetime-local" name="operation_time" class="form-control"
-                                            required />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Briefing -->
-
-                            <div class="row align-items-center mb-3">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-info"></i></span>
-
-                                        <textarea name="briefing" class="form-control" style="height: 100px; margin-left: 10px;"
-                                            placeholder="Give us further instructions" required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @php$price_str = '';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['price']) &&
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                isset($gig['equipmentPrice']['minutes'])
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $price_str =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['price'] .
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "$ per " .
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $gig['equipmentPrice']['minutes'] .
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    '
-                        minutes';
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } @endphp ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?> ?>
-
-
-                            <div class="row align-items-center mb-3">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <img src="{{ asset('frontend/images/nigeria-currency-symbol.png') }}"
-                                                style="width: 15px; margin-top: 13px;" alt="" />
-                                        </span>
-
-                                        <input readonly type="text" class="form-control" id="total_cost"
-                                            name="total_cost" value="0.00" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Submit -->
-
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button type="submit" id="pay-btn" name="action" value="pay"
-                                        class="btn shadow">Pay Now</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-6 col-sm-12">
-                        <iframe id="map"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15944676.57257612!2d3.324235407115051!3d9.05785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bca3e74d50a1b%3A0xd7755f5954b9088d!2sNigeria!5e0!3m2!1sen!2sin!4v1611287579370!5m2!1sen!2sin"
-                            width="100%" height="100%" style="border: 0;" allowfullscreen="" loading="lazy">
-                        </iframe>
+                    <div class="lists-maximum-offers">
+                        <div class="container">
+                            <h1 class="text-white text-center">My Offers</h1>
+                            <div class="row maximum-offers-service">
+                                <div class="col-md-4">
+                                    <p>Hill View Mountains Has Monkeys</p>
+                                    <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Lakeside Forest With Lions</p>
+                                    <img
+                                        src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <p>Achia Forest Beautiful Sites</p>
+                                    <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="container select-duration">
+                    <div class="row select-duration-inner">
+                        <div class="col-md-8 select-duration-left">
+                            <button class="accordion">
+                                <div class="accordion-list">
+                                    <p class="number-list">1</p>
+                                    <span>Select Duration</span>
+                                </div>
+                                <div class="angle-icons">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </button>
+                            <div class="panel time-zone-sct">
+                                <ul>
+                                    <li class="time-zone-mark">30 Mins: <span>$40</span></li>
+                                    <li class="time-zone-mark">60 Mins: <span>$60</span></li>
+                                    <li>90 Minutes: <span>$90</span></li>
+                                    <li>120 Minutes: <span>$120</span></li>
+                                </ul>
+                            </div>
+
+                            <button class="accordion">
+                                <div class="accordion-list">
+                                    <p class="number-list">2</p>
+                                    <span>Select Date & Time*</span>
+                                </div>
+                                <div class="angle-icons">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </button>
+                            <div class="panel time-zone-sct">
+                                <ul>
+                                    <li class="time-zone-mark">30 Mins: <span>$40</span></li>
+                                    <li class="time-zone-mark">60 Mins: <span>$60</span></li>
+                                    <li>90 Minutes: <span>$90</span></li>
+                                    <li>120 Minutes: <span>$120</span></li>
+                                </ul>
+                            </div>
+
+                            <button class="accordion">
+                                <div class="accordion-list">
+                                    <p class="number-list">3</p>
+                                    <span>Notes for the Host</span>
+                                </div>
+                                <div class="angle-icons">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </button>
+                            <div class="panel time-zone-sct">
+                                <ul>
+                                    <li>30 Mins: <span>$40</span></li>
+                                    <li class="time-zone-mark">60 Mins: <span>$60</span></li>
+                                    <li>90 Minutes: <span>$90</span></li>
+                                    <li>120 Minutes: <span>$120</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 select-duration-right">
+                            <div class="music-audio">
+                                <img
+                                    src="https://votivelaravel.in/ikoro/public/uploads/host/1737703609_profile3.jpg" />
+                                <div class="music-list-text">
+                                    <h5>Charlie Cook</h5>
+                                    <p>Music & Audio</p>
+                                    <p>Production</p>
+                                </div>
+                                <div class="rating-review-point">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <p>(3)</p>
+                                </div>
+                            </div>
+                            <div class="duration-text">
+                                <div class="duration-first">
+                                    <p>Duration</p>
+                                    <p>Amount Payable</p>
+                                </div>
+                                <div class="duration-second">
+                                    <p>Not Selected</p>
+                                    <p>-</p>
+                                </div>
+
+                            </div>
+                            <div class="Proceed-to-checkout">
+                                <a href="#">PROCEED TO CHECKOUT<i class="fa fa-credit-card"
+                                        aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container how-it-work">
+                    <h1 class="text-center text-white">How It Work</h1>
+                    <div class="row work-destination">
+                        <div class="col-md-4 how-work-one">
+                            <p class="text-white">Book a Tour Guide in your Destination</p>
+                            <div class="column">
+                                <div class="card">
+                                    <img src="./frontend/images/find.png">
+                                    <h3>Find an expert</h3>
+                                    <p>Discover and choose form our list of the world's most in-demand exerts</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 how-work-two">
+                            <p class="text-white">Select Date & Time</p>
+                            <div class="column">
+                                <div class="card">
+                                    <img src="./frontend/images/e-book.png">
+                                    <h3>Book a video call</h3>
+                                    <p>Select a time works for both you and your expert's schedule</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 how-work-three">
+                            <p class="text-white">Enjoy an Interactive Live Video Session</p>
+                            <div class="column">
+                                <div class="card">
+                                    <img src="./frontend/images/virtual-assistant.png">
+                                    <h3>Virtual consultation</h3>
+                                    <p>Join the 1-on-1 video call, ask questions, and get expert advice</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <script>
+                    var acc = document.getElementsByClassName("accordion");
+                    var i;
+
+                    for (i = 0; i < acc.length; i++) {
+                        acc[i].addEventListener("click", function() {
+                            this.classList.toggle("active");
+                            var panel = this.nextElementSibling;
+                            if (panel.style.display === "block") {
+                                panel.style.display = "none";
+                            } else {
+                                panel.style.display = "block";
+                            }
+                        });
+                    }
+                </script>
             </div>
         </div>
     </div>
@@ -619,192 +650,19 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-
-    <section class="testimonials">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3 class="nav-link mt-5">Meet Our Star Hosts</h3>
-
-                    <div id="customers-testimonials" class="owl-carousel">
-                        <!--TESTIMONIAL 1 -->
-
-                        @foreach ($hosts as $host)
-                            <div class="item">
-                                <div class="shadow-effect">
-                                    @if ($host->image)
-                                        <img class="img-circle" src="{{ asset('public/' . $host->image) }}"
-                                            alt="{{ $host->name }}" />
-                                    @else
-                                        <img class="img-circle" src="{{ asset('frontend/images/host.jpg') }}"
-                                            alt="" />
-                                    @endif
-
-                                    <ul class="list-group">
-                                        <li class="list-group-item list-group-item-light">
-                                            Location: <br />
-
-                                            {{ optional($host->country)->name }} - {{ optional($host->state)->name }}
-                                            - {{ optional($host->city)->name }} - {{ optional($host->zip)->code }}
-                                        </li>
-
-                                        <li class="list-group-item list-group-item-light">
-                                            Services: <br />
-
-                                            @foreach ($host->gigs as $gig)
-                                                {{ $gig->title }}<br />
-                                            @endforeach
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="testimonial-name">{{ $host->name }}</div>
-                            </div>
-                        @endforeach
-
-                        <!--END OF TESTIMONIAL 1 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- END OF TESTIMONIALS -->
-
-    {{-- <div class="container container-input-fields">
-        <h2 class="ml-5 nav-link">View and Hire Our Host By</h2>
-
-        <input type="hidden" id="filter_flag" value="{{ $where['country_id'] ?? '' }}" />
-
-        <form method="get" action="{{ route('home') }}" id="search-form">
-            <div class="row" id="search-filter">
-                <!-- Country Input -->
-
-                <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3">
-                    <div class="form-group">
-                        <select name="country_id" class="country_id search-from" required>
-                            <option value="" disabled selected>Select Country</option>
-
-                            @foreach ($countries as $country)
-                                <option value="{{ $country['id'] }}">{{ $country['name'] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <!-- State Input -->
-
-                <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3">
-                    <div class="form-group">
-                        <select name="state_id" class="state_id search-from" required>
-                            <option value="" disabled selected>Select State</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- City Input -->
-
-                <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3">
-                    <div class="form-group">
-                        <select name="city_id" class="city_id search-from" required>
-                            <option value="" disabled selected>Select City</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Zip Code Search -->
-
-                <div class="col-12 col-sm-4 col-md-3 col-lg-2 mt-3">
-                    <div class="form-group">
-                        <select name="zip_id" class="zip_id search-from" required>
-                            <option value="" disabled selected>Select Zip</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Search Button -->
-
-                <div class="col-12 col-sm-2 col-md-1 col-lg-1 mt-3">
-                    <button class="btn btn-block" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-
-                <!-- Reset Button -->
-
-                <div class="col-12 col-sm-2 col-md-1 col-lg-1 mt-3">
-                    <a href="{{ route('home') }}">
-                        <button type="button" class="btn btn-block">
-                            <i class="fa fa-refresh"></i>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </form>
-    </div> --}}
-
-    <!-- Bootstrap container for grid system -->
-    {{-- 
-    <div class="container mt-4">
-        <!-- Bootstrap row for creating a horizontal group of columns -->
-        <div class="row g-4" id="gigs">
-            <!-- Card 1 -->
-            @foreach ($gigs as $gig)
-                <div class="col-md-4 mt-3">
-                    <div class="card custom-card" style="background: rgb(173, 239, 41);">
-                        <div class="card-content">
-                            <div>
-                                <h5 class="card-title">{{ $gig->title }}</h5>
-
-                                <p class="card-text">
-                                    <span class="short-description" id="short-desc-{{ $gig->id }}">
-                                        {{ Str::limit($gig->description, 70) }}
-                                    </span>
-
-                                    <span class="full-description" id="full-desc-{{ $gig->id }}">
-                                        {{ $gig->description }}
-                                    </span>
-
-                                    <a href="javascript:;" onclick="toggleDescription({{ $gig->id }})"
-                                        id="load-more-btn-{{ $gig->id }}">
-                                        Load More
-                                    </a>
-                                </p>
-
-                                <a href="{{ route('home.dashboard.details', $gig->id) }}"
-                                    class="btn btn-outline-secondary">Details</a>
-                            </div>
-
-                            @if ($gig->media && $gig->media->isNotEmpty())
-                                <img class="d-block w-30" src="{{ asset('storage/' . $gig->media->first()->path) }}"
-                                    alt="Image" />
-                            @else
-                                <img src="{{ asset('frontend/images/logo.jpg') }}" alt="Image" />
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div> --}}
+    <!-- TESTIMONIALS -->   
 
     @push('scripts')
         <script>
             function toggleDescription(gigId) {
                 var shortDesc = document.getElementById("short-desc-" + gigId);
-
                 var fullDesc = document.getElementById("full-desc-" + gigId);
-
                 var loadMoreBtn = document.getElementById("load-more-btn-" + gigId);
-
                 if (fullDesc.style.display === "none") {
                     fullDesc.style.display = "inline";
-
                     loadMoreBtn.innerText = "Show Less";
                 } else {
                     fullDesc.style.display = "none";
-
                     loadMoreBtn.innerText = "Load More";
                 }
             }
@@ -812,6 +670,23 @@
 
         <script>
             let host = @json($where ?? []);
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#filter-form').on('submit', function(e) {
+                    e.preventDefault(); // Prevent page reload
+
+                    $.ajax({
+                        url: "{{ route('filter.gigs') }}",
+                        type: "GET",
+                        data: $(this).serialize(), // Send form data
+                        success: function(response) {
+                            $('#gigs-container').html(response.html);
+                        }
+                    });
+                });
+            });
         </script>
     @endpush
 </x-guest-layout>

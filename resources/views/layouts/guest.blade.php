@@ -90,19 +90,10 @@
                     <h5 class="text-uppercase font-weight-bold"><x-application-logo /></h5>
                     <p class="small">We are the first interactive on-demand live video app on the internet. See it, Do it, and Be Sure. It is live and interactive to Your Cell Phone, Computer, or Smart Television.</p>
                     <div class="social-icon d-flex justify-content-center gap-3">
-                        <a href="#" target="_blank" class="text-white" aria-label="Film"><i
-                                class="fa-solid fa-photo-film"></i></a>
                         <a href="https://www.facebook.com/ikoroHQ" target="_blank" class="text-white" aria-label="Facebook"><i
                                 class="fa-brands fa-facebook fa-lg"></i></a>
                         <a href="https://x.com/ikoroHq" target="_blank" class="text-white" aria-label="Twitter"><i
                                 class="fa-brands fa-twitter fa-lg"></i></a>
-                        <a href="https://wa.me/2348120222922" target="_blank" class="text-white"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://instagram.com/ikoroHQ" target="_blank" class="text-white" aria-label="Instagram"><i
-                                class="fa-brands fa-instagram fa-lg"></i></a>
-                        <a href="https://youtube.com/ikoroHQ" target="_blank" class="text-white" aria-label="YouTube"><i
-                                class="fa-brands fa-youtube fa-lg"></i></a>
-                        <a href="https://tiktok.com/ikoroHQ" target="_blank" class="text-white" aria-label="TikTok"><i
-                                class="fa-brands fa-tiktok"></i></a>
                     </div>
                 </div>
 
@@ -133,9 +124,7 @@
                 <div class="col-12 col-md-4 mb-4">
                     <h5 class="text-uppercase font-weight-bold">Contact Us</h5>
                     <ul class="list-unstyled">
-                        <li><i class="fa-solid fa-location-dot"></i> 3 Dennis Ifezue Street, Oshimili LGA, Asaba, Delta State.</li>
-                        <li><i class="fa-solid fa-phone"></i> 08120222922</li>
-                        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:support@ikoro.ng" style="color: white;">support@ikoro.ng</a></li>
+                        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:support@ikoro.ng" style="color: white;">mail@ikoro.co</a></li>
                     </ul>
                 </div>
             </div>

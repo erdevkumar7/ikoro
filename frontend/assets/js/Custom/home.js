@@ -1,50 +1,5 @@
 $(document).ready(function () {
-    $('#citySearchByInput').on('keyup', function () {
-        let query = $(this).val();
-        let url = $(this).attr('data-url');
-        if (query.length > 1) {
-            $.ajax({
-                url: url,
-                type: "GET",
-                data: { query: query },
-                success: function (data) {
-                    let dropdown = $('#cityDropdown');
-                    dropdown.empty().show();
-
-                    if (data.length > 0) {
-                        $.each(data, function (index, city) {
-                            dropdown.append(`<div class="dropdown-item city-item" data-id="${city.id}">${city.name}</div>`);
-                        });
-                    } else {
-                        dropdown.append('<div class="dropdown-item">No results found</div>');
-                    }
-                }
-            });
-        } else {
-            $('#cityDropdown').hide();
-        }
-    });
-
-    // Handle city selection
-    $(document).on('click', '.city-item', function () {
-        let cityName = $(this).text();
-        let cityId = $(this).data('id');
-        // console.log('cityName',cityName)
-        $('#citySearchByInput').val(cityName);
-        $('input[name="city_id"]').val(cityId);
-        $('#cityDropdown').hide();
-    });
-
-    // Hide dropdown when clicking outside
-    $(document).click(function (event) {
-        if (!$(event.target).closest('#citySearchByInput, #cityDropdown').length) {
-            $('#cityDropdown').hide();
-        }
-    });
-
-
-
-    $("#home-booking-form").on("submit", function () {
+     $("#home-booking-form").on("submit", function () {
         // $("#home-booking-btn").prop("disabled", true);
         // $("#pay-btn").prop("disabled", true);
     });
@@ -97,21 +52,17 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(document).on('click', '#task', function () {
-        let data = $(this).data('id');
+        let taskId = $(this).data('id');
         let url = $(this).data('url');
         try {
             $.ajax({
-                method: 'GET',
                 url: url,
-                data: { data: data },
-                success: function (res) {
-                    if (res.status === 'success') {
-                        $('html, body').animate({
-                            scrollTop: $('#search-filter').offset().top
-                        }, 1000, function () {
-                            $('#gigs').html(res.data);
-                        });
-                    }
+                type: "GET",
+                data: {
+                    task_id : taskId
+                }, // Send form data
+                success: function(response) {
+                    $('#gigs-container').html(response.html);
                 }
             });
         } catch (xhr) {
@@ -227,3 +178,59 @@ jQuery(document).ready(function ($) {
 $(document).ready(function () {
     $('#owl-carousel-top .owl-item').removeAttr('style');
 });
+
+
+$(document).ready(function(){
+    $('#citySearchByInput').on('keyup', function () {
+        let query = $(this).val();
+        let url = $(this).attr('data-url');
+        if (query.length > 1) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: { query: query },
+                success: function (data) {
+                    let dropdown = $('#cityDropdown');
+                    dropdown.empty().show();
+
+                    if (data.length > 0) {
+                        $.each(data, function (index, city) {
+                            dropdown.append(`<div class="dropdown-item city-item" data-id="${city.id}">${city.name}</div>`);
+                        });
+                    } else {
+                        dropdown.append('<div class="dropdown-item">No city found</div>');
+                    }
+                }
+            });
+        } else {
+            $('#cityDropdown').hide();
+        }
+    });
+
+    // Handle city selection
+    $(document).on('click', '.city-item', function () {
+        let cityName = $(this).text();
+        let cityId = $(this).data('id');
+    
+        // Set the city name in the input field
+        $('#citySearchByInput').val(cityName);    
+        // Create a hidden input field to store the city ID
+        if ($('#selectedCityId').length === 0) {
+            $('#citySearchByInput').after(`<input type="hidden" name="city_id" id="selectedCityId" value="${cityId}">`);
+        } else {
+            $('#selectedCityId').val(cityId);
+        }
+    
+        $('#cityDropdown').hide();
+    });
+    
+
+    // Hide dropdown when clicking outside
+    $(document).click(function (event) {
+        if (!$(event.target).closest('#citySearchByInput, #cityDropdown').length) {
+            $('#cityDropdown').hide();
+        }
+    });
+});
+
+

@@ -29,32 +29,6 @@ class HomeController extends Controller
             'user' => []
         ];
 
-        $where = [];
-        if ($request->filled('city_id')) {
-            $where['city_id'] = $request->input('city_id');
-        }
-        if ($request->filled('task_id')) {
-            $where['task_id'] = $request->input('task_id');
-        }
-        if ($request->filled('equipment_id')) {
-            $where['equipment_id'] = $request->input('equipment_id');
-        }    
-        $gigs = Gig::query(); // Only query if filters exist    
-        // Apply filters only if there is at least one filter
-        if (!empty($where)) {
-            $gigs->where($where);
-        }    
-        // Filter by gender if provided
-        if ($request->filled('gender')) {
-            $gender = $request->input('gender');
-            $gigs->whereHas('host', function ($query) use ($gender) {
-                $query->where('gender', $gender);
-            });
-        }    
-        // Fetch gigs only if a filter was applied
-        $data['gigs'] = !empty($where) ? $gigs->limit(10)->get() : collect([]);    
-        $data['where'] = $where;
-        
         if ($client != "") {
             $data['loggedIn'] = $client;
             $data['tasks'] = Task::all();
@@ -64,7 +38,8 @@ class HomeController extends Controller
         $data['equipment_price_all'] = Equipment::get();
         $data['country'] = Country::where('name', 'Nigeria')->first();
         $data['state'] = State::where('name', 'Nigeria')->first();
-        $data['cities'] = City::all();        
+        $data['cities'] = City::all();
+        $data['gigs'] = collect([]);
         return $data;
     }
 
@@ -89,6 +64,38 @@ class HomeController extends Controller
         $query = $request->input('query');
         $cities = City::where('name', 'LIKE', "%{$query}%")->limit(10)->get();
         return response()->json($cities);
+    }
+
+    public function filterGigs(Request $request)
+    {
+        $where = [];
+
+        if ($request->filled('city_id')) {
+            $where['city_id'] = $request->input('city_id');
+        }
+        if ($request->filled('task_id')) {
+            $where['task_id'] = $request->input('task_id');
+        }
+        if ($request->filled('equipment_id')) {
+            $where['equipment_id'] = $request->input('equipment_id');
+        }
+
+        $gigs = Gig::where($where);
+        if ($request->filled('gender')) {
+            $gender = $request->input('gender');
+            $gigs->whereHas('host', function ($query) use ($gender) {
+                $query->where('gender', $gender);
+            });
+        }
+
+        $gigs = $gigs->get();
+        if ($gigs->isEmpty()) {
+            return response()->json([
+                'html' => '<span class="text-white"><b>No host found for the selected fields!</b></span>'
+            ]);
+        }
+        $html = view('partials.gigs-list', compact('gigs'))->render();
+        return response()->json(['html' => $html]);
     }
 
 
