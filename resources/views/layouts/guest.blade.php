@@ -13,6 +13,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     @stack('styles')
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- ::::::::: select2 CSS :::::::::: -->
@@ -131,10 +132,10 @@
         </div>
 
         <!-- Middle Section: Newsletter Subscription -->
-        <div class="py-3">
+        <div class="py-3 subscribe-news">
             <div class="container text-center">
                 <h5 class="mb-3">Subscribe to Our Newsletter</h5>
-                <form class="d-flex justify-content-center align-items-center gap-2">
+                <form class="d-flex justify-content-center align-items-center gap-2 subscribe-news-input">
                     <input type="email" class="form-control w-50" placeholder="Enter your email" required>
                     <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>

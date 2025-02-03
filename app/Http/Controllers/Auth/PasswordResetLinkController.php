@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class PasswordResetLinkController extends Controller
 {
@@ -50,19 +52,20 @@ class PasswordResetLinkController extends Controller
         }
 
         $token = app('auth.password.broker')->createToken($user);
-
         $resetUrl = url('reset-password/' . $token);
-        
-        $subject = "Password Reset Request";
-        $message = "Click the link to reset your password: " . $resetUrl;
 
-        $result = $this->sendmailmail($user->email, $subject, $message);
+        Mail::to($user->email)->send(new ResetPasswordMail($resetUrl));
+        return back()->with('status', 'We have emailed your password reset link!');
+        // $subject = "Password Reset Request";
+        // $message = "Click the link to reset your password: " . $resetUrl;
 
-        if ($result == 'sent') {
-            return back()->with('status', 'We have emailed your password reset link!');
-        } else {
-            return back()->withErrors(['email' => 'Failed to send reset link.']);
-        }
+        // $result = $this->sendmailmail($user->email, $subject, $message);
+
+        // if ($result == 'sent') {
+        //     return back()->with('status', 'We have emailed your password reset link!');
+        // } else {
+        //     return back()->withErrors(['email' => 'Failed to send reset link.']);
+        // }
     }
 
     public function sendmailmail($email, $subject, $message)

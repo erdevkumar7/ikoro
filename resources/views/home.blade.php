@@ -1,7 +1,7 @@
 <x-guest-layout>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/select-a-task.css') }}" />
-        <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
+        {{-- <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" /> --}}
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
         <link rel="stylesheet" href="{{ asset('frontend/assets/owlcarousel/owl.carousel.min.css') }}" />
