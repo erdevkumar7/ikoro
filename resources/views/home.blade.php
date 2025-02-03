@@ -219,7 +219,7 @@
                                                 @if ($host->image)
                                                     <img class="img-fluid"
                                                         src="{{ asset('public/' . $host->image) }}"
-                                                        alt="{{ $host->name }}" />
+                                                        alt="{{ $host->name }}"/>
                                                 @else
                                                     <img class="img-fluid"
                                                         src="{{ asset('frontend/images/host.jpg') }}"
@@ -233,28 +233,28 @@
                                                         $uniqueCities = $host->gigs
                                                             ->unique('city_id')
                                                             ->pluck('city.name')
-                                                            ->filter();
+                                                            ->filter()
+                                                            ->first();
                                                     @endphp
 
-                                                    @if ($uniqueCities->isNotEmpty())
-                                                        @foreach ($uniqueCities as $city)
-                                                            {{ $city }}<br />
-                                                        @endforeach
+                                                    {{$uniqueCities ?? 'N/A'}}
+                                                </p>
+                                                <p>Services offered:
+                                                    @if ($host->gigs->isNotEmpty())
+                                                        {{ $host->gigs->unique('task_id')->first()->task->title }}
                                                     @else
                                                         N/A
                                                     @endif
                                                 </p>
-                                                <p>Services offered:
-                                                    @foreach ($host->gigs->unique('task_id') as $gig)
-                                                        {{ $gig->task->title }}<br />
-                                                    @endforeach
-                                                </p>
-                                                <p>Rating</p>
+                                                <p>Rating : ****</p>
                                                 <p>Tool used:
-                                                    @foreach ($host->gigs->unique('equipment_price_id') as $gig)
-                                                        {{ $gig->equipmentPrice->equipment->name }}<br />
-                                                    @endforeach
+                                                    @if ($host->gigs->isNotEmpty())
+                                                        {{ $host->gigs->unique('equipment_price_id')->first()->equipmentPrice->equipment->name }}
+                                                    @else
+                                                    N/A 
+                                                    @endif   
                                                 </p>
+
                                             </div>
                                         </div>
                                     @endforeach
@@ -650,7 +650,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->   
+    <!-- TESTIMONIALS -->
 
     @push('scripts')
         <script>
