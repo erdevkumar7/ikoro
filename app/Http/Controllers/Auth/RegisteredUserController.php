@@ -52,11 +52,8 @@ class RegisteredUserController extends Controller
         $role = $request->role ?? 'user';
 
         if ($role === 'host') {
-
             $otp = rand(00000, 9999);
-
             $userData = [];
-
             if ($request->email) {
                 $request->validate([
                     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
@@ -78,7 +75,8 @@ class RegisteredUserController extends Controller
                 $message = "Hello " . $user->name . ",\n\nThank you for registering with us. Your account is now active.\n\nBest regards,\nIkoro Team";
                 $headers = "From: support@ikoro.ng";
     
-                mail($user->email, $subject, $message, $headers);
+                // mail($user->email, $subject, $message, $headers);
+                $user->sendEmailVerificationNotification();
             }
 
             if ($request->phone) {

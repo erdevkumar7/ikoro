@@ -34,8 +34,8 @@ class EmailVerificationNotificationController extends Controller
         $subject = "Email Verification";
         $message = "Please click the following link to verify your email: " . $verificationUrl;
 
-        mail($user->email, $subject, $message);
-        // $user->sendEmailVerificationNotification();
+        // mail($user->email, $subject, $message);
+        $user->sendEmailVerificationNotification();
         
         return back()->with('status', 'verification-link-sent');
     }
