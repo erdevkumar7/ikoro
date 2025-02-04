@@ -19,6 +19,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
         <style>
+            .select-host-click {
+                cursor: pointer;
+            }
+
             div#cityDropdown {
                 top: 34% !important;
                 left: 21%;
@@ -213,13 +217,14 @@
                             <div class="row">
                                 <div class="clients-carousel owl-carousel">
                                     @foreach ($hosts as $host)
-                                        <div class="single-box">
+                                        <div class="single-box select-host-click" data-id="{{ $host->id }}"
+                                            data-url="{{ route('get.selectedhost') }}">
                                             <div class="img-area">
                                                 {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
                                                 @if ($host->image)
                                                     <img class="img-fluid"
                                                         src="{{ asset('public/' . $host->image) }}"
-                                                        alt="{{ $host->name }}"/>
+                                                        alt="{{ $host->name }}" />
                                                 @else
                                                     <img class="img-fluid"
                                                         src="{{ asset('frontend/images/host.jpg') }}"
@@ -228,7 +233,7 @@
                                             </div>
                                             <div class="detils-inner">
                                                 <p>Name: {{ $host->name }}</p>
-                                                <p>City Country:
+                                                <p>City:
                                                     @php
                                                         $uniqueCities = $host->gigs
                                                             ->unique('city_id')
@@ -237,7 +242,7 @@
                                                             ->first();
                                                     @endphp
 
-                                                    {{$uniqueCities ?? 'N/A'}}
+                                                    {{ $uniqueCities ?? 'N/A' }}
                                                 </p>
                                                 <p>Services offered:
                                                     @if ($host->gigs->isNotEmpty())
@@ -246,13 +251,19 @@
                                                         N/A
                                                     @endif
                                                 </p>
-                                                <p>Rating : ****</p>
+
+                                                <p class="rating-review-point">Rating :
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </p>
                                                 <p>Tool used:
                                                     @if ($host->gigs->isNotEmpty())
                                                         {{ $host->gigs->unique('equipment_price_id')->first()->equipmentPrice->equipment->name }}
                                                     @else
-                                                    N/A 
-                                                    @endif   
+                                                        N/A
+                                                    @endif
                                                 </p>
 
                                             </div>
@@ -307,214 +318,8 @@
                     </script>
                 </div>
 
-                <div class="host-main-profile">
-                    <h1>Host main profile/booking page</h1>
-                    <div class="booking-page">
-                        <div class="row booking-mark-sdv">
-                            <div class="col-md-3 select-service-left">
-                                <img alt="" class="img-fluid"
-                                    src="https://votivelaravel.in/ikoro/public/uploads/host/1737703609_profile3.jpg" />
-                            </div>
-
-                            <div class="col-md-7 select-service-right">
-                                <h1>Charlie Cook</h1>
-                                <div class="select-a-service">
-                                    <h3>Select a Service /</h3>
-                                    <div class="host-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <i class="fa-solid fa-city"></i>
-                                            <p>City tours</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-
-                                    <div class="host-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <i class="fa-solid fa-city"></i>
-                                            <p>Tourist Sites</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-
-                                    <div class="host-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <i class="fa-solid fa-city"></i>
-                                            <p>Learn a Culture</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-
-                                    <div class="host-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <i class="fa-solid fa-city"></i>
-                                            <p>Verity a place</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-                                </div>
-
-                                <div class="select-a-tool">
-                                    <h3>Select Tools /</h3>
-                                    <div class="select-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <p>Smart Phone & Gimbal</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-
-                                    <div class="select-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <p>Drone</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-
-                                    <div class="select-booking-inner">
-                                        <label for="city-tours-checkbox">
-                                            <p>Professional Camera</p>
-                                        </label>
-                                        <input type="checkbox" id="city-tours-checkbox" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 available-time">
-                                <p>Available Hours form 10.30am to 06.30pm</p>
-                            </div>
-
-                            <div class="biography-sec">
-                                <h4>Biography</h4>
-                                <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a
-                                    1st-century BC text by the Roman statesman and philosopher Cicero.</p>
-                                <h3>Languages</h3>
-                                <a href="#" class="eng-text">English</a>
-                                <h2>Location</h2>
-                                <h1>Onitsha. Nigeria</h1>
-                                <a href="#" class="book-now-btn">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lists-maximum-offers">
-                        <div class="container">
-                            <h1 class="text-white text-center">My Offers</h1>
-                            <div class="row maximum-offers-service">
-                                <div class="col-md-4">
-                                    <p>Hill View Mountains Has Monkeys</p>
-                                    <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-                                <div class="col-md-4">
-                                    <p>Lakeside Forest With Lions</p>
-                                    <img
-                                        src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <p>Achia Forest Beautiful Sites</p>
-                                    <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container select-duration">
-                    <div class="row select-duration-inner">
-                        <div class="col-md-8 select-duration-left">
-                            <button class="accordion">
-                                <div class="accordion-list">
-                                    <p class="number-list">1</p>
-                                    <span>Select Duration</span>
-                                </div>
-                                <div class="angle-icons">
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                            </button>
-                            <div class="panel time-zone-sct">
-                                <ul>
-                                    <li class="time-zone-mark">30 Mins: <span>$40</span></li>
-                                    <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                    <li>90 Minutes: <span>$90</span></li>
-                                    <li>120 Minutes: <span>$120</span></li>
-                                </ul>
-                            </div>
-
-                            <button class="accordion">
-                                <div class="accordion-list">
-                                    <p class="number-list">2</p>
-                                    <span>Select Date & Time*</span>
-                                </div>
-                                <div class="angle-icons">
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                            </button>
-                            <div class="panel time-zone-sct">
-                                <ul>
-                                    <li class="time-zone-mark">30 Mins: <span>$40</span></li>
-                                    <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                    <li>90 Minutes: <span>$90</span></li>
-                                    <li>120 Minutes: <span>$120</span></li>
-                                </ul>
-                            </div>
-
-                            <button class="accordion">
-                                <div class="accordion-list">
-                                    <p class="number-list">3</p>
-                                    <span>Notes for the Host</span>
-                                </div>
-                                <div class="angle-icons">
-                                    <i class="fas fa-angle-down"></i>
-                                </div>
-                            </button>
-                            <div class="panel time-zone-sct">
-                                <ul>
-                                    <li>30 Mins: <span>$40</span></li>
-                                    <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                    <li>90 Minutes: <span>$90</span></li>
-                                    <li>120 Minutes: <span>$120</span></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 select-duration-right">
-                            <div class="music-audio">
-                                <img
-                                    src="https://votivelaravel.in/ikoro/public/uploads/host/1737703609_profile3.jpg" />
-                                <div class="music-list-text">
-                                    <h5>Charlie Cook</h5>
-                                    <p>Music & Audio</p>
-                                    <p>Production</p>
-                                </div>
-                                <div class="rating-review-point">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <p>(3)</p>
-                                </div>
-                            </div>
-                            <div class="duration-text">
-                                <div class="duration-first">
-                                    <p>Duration</p>
-                                    <p>Amount Payable</p>
-                                </div>
-                                <div class="duration-second">
-                                    <p>Not Selected</p>
-                                    <p>-</p>
-                                </div>
-
-                            </div>
-                            <div class="Proceed-to-checkout">
-                                <a href="#">PROCEED TO CHECKOUT<i class="fa fa-credit-card"
-                                        aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div id="selected-host-profile">
+                    @include('partials.selected-host', ['host_profile' => $host_profile])
                 </div>
 
 
@@ -687,6 +492,6 @@
                     });
                 });
             });
-        </script>
+        </script>        
     @endpush
 </x-guest-layout>

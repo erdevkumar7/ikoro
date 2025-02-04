@@ -55,6 +55,7 @@ class HomeController extends Controller
     {
         $data = $this->prepareData($request);
         $data['hosts'] = Host::with('gigs')->where('recommended_sequence', '>', 0)->get();
+        $data['host_profile'] = Host::with('gigs')->where('recommended_sequence', '=', 2)->first();
         $data['tasks'] = Task::all();
         return view('home', $data);
     }
@@ -95,6 +96,18 @@ class HomeController extends Controller
             ]);
         }
         $html = view('partials.gigs-list', compact('gigs'))->render();
+        return response()->json(['html' => $html]);
+    }
+
+    public function getSelectedHost(Request $request)
+    {
+        $host_id = $request->input('host_id');
+        $host_profile = Host::with('gigs')->where('id', $host_id)->first();  
+        
+        if (!$host_profile) {
+            return response()->json(['error' => 'Host not found'], 404);
+        }      
+        $html = view('partials.selected-host', compact('host_profile'))->render();    
         return response()->json(['html' => $html]);
     }
 

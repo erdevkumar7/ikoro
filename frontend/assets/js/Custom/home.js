@@ -1,5 +1,5 @@
 $(document).ready(function () {
-     $("#home-booking-form").on("submit", function () {
+    $("#home-booking-form").on("submit", function () {
         // $("#home-booking-btn").prop("disabled", true);
         // $("#pay-btn").prop("disabled", true);
     });
@@ -59,9 +59,9 @@ $(document).ready(function () {
                 url: url,
                 type: "GET",
                 data: {
-                    task_id : taskId
+                    task_id: taskId
                 }, // Send form data
-                success: function(response) {
+                success: function (response) {
                     $('#gigs-container').html(response.html);
                 }
             });
@@ -180,7 +180,7 @@ $(document).ready(function () {
 });
 
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('#citySearchByInput').on('keyup', function () {
         let query = $(this).val();
         let url = $(this).attr('data-url');
@@ -211,19 +211,19 @@ $(document).ready(function(){
     $(document).on('click', '.city-item', function () {
         let cityName = $(this).text();
         let cityId = $(this).data('id');
-    
+
         // Set the city name in the input field
-        $('#citySearchByInput').val(cityName);    
+        $('#citySearchByInput').val(cityName);
         // Create a hidden input field to store the city ID
         if ($('#selectedCityId').length === 0) {
             $('#citySearchByInput').after(`<input type="hidden" name="city_id" id="selectedCityId" value="${cityId}">`);
         } else {
             $('#selectedCityId').val(cityId);
         }
-    
+
         $('#cityDropdown').hide();
     });
-    
+
 
     // Hide dropdown when clicking outside
     $(document).click(function (event) {
@@ -234,3 +234,28 @@ $(document).ready(function(){
 });
 
 
+
+$(document).ready(function () {
+    $('.select-host-click').on('click', function () {
+        let hostId = $(this).data('id');
+        let url = $(this).data('url');
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {
+                host_id: hostId
+            },
+            success: function (response) {
+                $("#selected-host-profile").html(response.html);
+
+                // Scroll to the updated section smoothly
+                $("html, body").animate({
+                    scrollTop: $("#selected-host-profile").offset().top
+                }, 800); // 800ms animation
+            },
+            error: function () {
+                alert("Failed to load host profile.");
+            }
+        });
+    });
+});
