@@ -40,7 +40,7 @@
                         <div class="select-a-tool">
                             <h3>Select Tools /</h3>
                             @if ($host_profile->gigs->isNotEmpty())
-                                @foreach ($host_profile->gigs->unique('equipment_price_id') as $gig)
+                                @foreach ($host_profile->gigs->unique('equipment_id') as $gig)
                                     <div class="select-booking-inner">
                                         <label for="city-tours-checkbox">
                                             <p>{{ $gig->equipmentPrice->equipment->name }}</p>

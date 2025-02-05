@@ -349,7 +349,6 @@ div#feedback-testimonials .testimonial-name {
     padding-top: 18px;
 }
 
-
 .biography-sec h1 {
     color: #fff;
     font-size: 20px;
@@ -364,16 +363,11 @@ div#feedback-testimonials .testimonial-name {
     text-decoration: none;
 }
 
-.biography-sec a.eng-text:hover {
-    background: #fff;
-    color: black;
-}
-
 a.book-now-btn {
     color: black;
     background: rgb(169 240 5);
     padding: 9px 50px;
-    border-radius: 15px;
+    border-radius: 50px;
     text-decoration: none !important;
 }
 
@@ -713,8 +707,66 @@ p.rating-review-point {
     justify-content: center;
 }
 
+/*host-profile-page-start*/
+.host-profile-by-id .host-main-profile h1 {
+    text-align: center;
+}
+
+.host-profile-by-id .row.booking-mark-sdv {
+    width: 85%;
+    margin: auto;
+    padding-left: 40px;
+}
+
+ .host-profile-by-id .select-service-right h1 {
+    text-align: left;
+}
+ .host-profile-by-id .biography-sec h4 {
+    text-align: center;
+}
+
+ .host-profile-by-id .biography-sec {
+    color: #fff;
+    text-align: center;
+}
+
+ .host-profile-by-id .select-service-left {
+    flex: 0 0 23%;
+}
+
+ .host-profile-by-id .select-a-service {
+    text-align: center;
+}
+
+ .host-profile-by-id .select-a-tool {
+    gap: 12px;
+}
+
+ .host-profile-by-id .host-booking-inner {
+    margin-top: -15px;
+}
+
+ .host-profile-by-id .row.maximum-offers-service p {
+    text-align: center;
+}
+  .host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
+    top: 58px;
+}
+
+.host-profile-by-id .host-main-profile {
+    padding-top: 40px;
+}
+
+a.book-now-btn:hover {
+    background: #fff;
+}
+
 @media only screen and (max-width: 767px) {
 
+.meet-our-top .detils-inner {
+    padding: 10px 0;
+    height: 180px;
+}
 .subscribe-news-input input.form-control {
     display: flex !important;
     width: 100% !important;

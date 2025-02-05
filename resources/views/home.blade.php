@@ -260,7 +260,7 @@
                                                 </p>
                                                 <p>Tool used:
                                                     @if ($host->gigs->isNotEmpty())
-                                                        {{ $host->gigs->unique('equipment_price_id')->first()->equipmentPrice->equipment->name }}
+                                                        {{ $host->gigs->unique('equipment_id')->first()->equipmentPrice->equipment->name }}
                                                     @else
                                                         N/A
                                                     @endif

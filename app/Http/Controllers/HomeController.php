@@ -111,6 +111,12 @@ class HomeController extends Controller
         return response()->json(['html' => $html]);
     }
 
+    public function hostProfileById($host_id)
+    {
+        $data['host_profile']  = Host::with('gigs')->findOrFail($host_id);
+        return view('pages.host-profile', $data);
+    }
+
 
     public function gigSearchedOnTask(Request $request)
     {
