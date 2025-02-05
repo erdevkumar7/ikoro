@@ -236,7 +236,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $('.select-host-click').on('click', function () {
+    $(document).on('click', '.select-host-click', function () {
         let hostId = $(this).data('id');
         let url = $(this).data('url');
         $.ajax({

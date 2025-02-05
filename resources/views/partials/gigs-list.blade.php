@@ -1,6 +1,6 @@
 <div class="row filter-host-user">
     @foreach ($gigs as $gig)
-        <div class="row">
+        <div class="row select-host-click" data-id="{{ $gig->host->id }}" data-url="{{ route('get.selectedhost') }}">
             <div class="card p-3 mb-5">
                 <div class="card-body">
                     <div class="row">

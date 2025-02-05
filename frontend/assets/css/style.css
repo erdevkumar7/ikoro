@@ -238,8 +238,8 @@ select:focus-visible {
 }
 
 .select-service-left img {
-    width: 80%;
-    height: 100%;
+    width: 200px;
+    height: 200px;
     border-radius: 100%;
 }
 
@@ -253,16 +253,17 @@ select:focus-visible {
 
 .select-service-left {
     padding-right: 0px !important;
+    padding-left: 0px;
 }
-
 div#feedback-testimonials .testimonial-name {
     margin: 5px auto 0;
 }
 
 .select-a-service h3 {
     text-align: left;
-    font-size: 20px;
+    font-size: 17px;
     color: #fff;
+    margin-bottom: 0px;
 }
 
 .host-booking-inner p {
@@ -285,7 +286,7 @@ div#feedback-testimonials .testimonial-name {
 
 .select-a-tool h3 {
     text-align: left;
-    font-size: 20px;
+    font-size: 17px;
     color: #fff;
 }
 
@@ -368,7 +369,6 @@ div#feedback-testimonials .testimonial-name {
     color: black;
 }
 
-
 a.book-now-btn {
     color: black;
     background: rgb(169 240 5);
@@ -412,8 +412,6 @@ a.book-now-btn:hover {
 .row.maximum-offers-service i.fa-solid.fa-heart:hover {
     color: #a9f005 !important;
 }
-
-
 
 .select-duration .accordion {
   background-color: #eee;
@@ -475,12 +473,11 @@ a.book-now-btn:hover {
     font-size: 18px;
 }
 
-
 li.time-zone-mark {
     border: solid 1px darkgray;
     padding: 5px 15px;
     border-radius: 3px;
-}`
+}
 .panel.time-zone-sct ul {
     display: flex;
     gap: 34px;
@@ -515,7 +512,8 @@ li.time-zone-mark {
 }
 
 .music-audio img {
-    width: 13%;
+    width: 45px;
+    height: 45px;
     border-radius: 50px;
     display: flex;
 }
@@ -709,6 +707,12 @@ section.testimonials h3.nav-link {
     color: black;
 }
 
+p.rating-review-point {
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 767px) {
 
 .subscribe-news-input input.form-control {
@@ -755,7 +759,7 @@ select#choose-service {
     height: 40px;
 }
 
-.meet-our-top section.testimonial {
+.meet-our-top section {
     margin-top: 50px;
 }
 .meet-our-top .owl-nav {
@@ -768,15 +772,23 @@ select#choose-service {
 
 .meet-our-top h1 {
     text-align: center !important;
+    padding-top: 0;
+}
+.meet-our-top .owl-carousel .owl-item img {
+    display: block;
+    height: 320px;
+}
+.host-main-profile h1 {
+    padding-top: 0px;
 }
 
 .search-destinations {
     border-radius: 10px;
 }
 .select-service-left img {
-    width: 40%;
+    width: 150px;
+    height: 150px;
 }
-
 .host-booking-inner {
     margin-top: 0px;
 }
@@ -787,6 +799,8 @@ select#choose-service {
 
 .select-service-right h1 {
     text-align: center;
+    font-size: 25px;
+    padding-top: 5px;
 }
 
 .select-a-service h3 {
@@ -830,7 +844,7 @@ select#choose-service {
 .biography-sec p {
     width: 100%;
     margin: auto;
-    padding-top: 8px;
+    padding: 8px;
 }
 .row.maximum-offers-service {
     padding-top: 0;
@@ -958,7 +972,8 @@ p.small {
 }
 
 .select-service-left img {
-    width: 69%;
+    width: 150px;
+    height: 150px;
 }
 .available-time p {
     font-size: 16px;
