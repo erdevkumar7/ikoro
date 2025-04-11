@@ -217,56 +217,59 @@
                             <div class="row">
                                 <div class="clients-carousel owl-carousel">
                                     @foreach ($hosts as $host)
-                                        <div class="single-box select-host-click" data-id="{{ $host->id }}"
-                                            data-url="{{ route('get.selectedhost') }}">
-                                            <div class="img-area">
-                                                {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
-                                                @if ($host->image)
-                                                    <img class="img-fluid"
-                                                        src="{{ asset('public/' . $host->image) }}"
-                                                        alt="{{ $host->name }}" />
-                                                @else
-                                                    <img class="img-fluid"
-                                                        src="{{ asset('frontend/images/host.jpg') }}"
-                                                        alt="" />
-                                                @endif
-                                            </div>
-                                            <div class="detils-inner">
-                                                <p>Name: {{ $host->name }}</p>
-                                                <p>City:
-                                                    @php
-                                                        $uniqueCities = $host->gigs
-                                                            ->unique('city_id')
-                                                            ->pluck('city.name')
-                                                            ->filter()
-                                                            ->first();
-                                                    @endphp
-
-                                                    {{ $uniqueCities ?? 'N/A' }}
-                                                </p>
-                                                <p>Services offered:
-                                                    @if ($host->gigs->isNotEmpty())
-                                                        {{ $host->gigs->unique('task_id')->first()->task->title }}
+                                        {{-- <div class="single-box select-host-click" data-id="{{ $host->id }}"
+                                            data-url="{{ route('get.selectedhost') }}"> --}}
+                                        <div class="single-box">
+                                            <a href="{{ route('get.host.profile', $host->id) }}">
+                                                <div class="img-area">
+                                                    {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
+                                                    @if ($host->image)
+                                                        <img class="img-fluid"
+                                                            src="{{ asset('public/' . $host->image) }}"
+                                                            alt="{{ $host->name }}" />
                                                     @else
-                                                        N/A
+                                                        <img class="img-fluid"
+                                                            src="{{ asset('frontend/images/host.jpg') }}"
+                                                            alt="" />
                                                     @endif
-                                                </p>
+                                                </div>
+                                                <div class="detils-inner">
+                                                    <p>Name: {{ $host->name }}</p>
+                                                    <p>City:
+                                                        @php
+                                                            $uniqueCities = $host->gigs
+                                                                ->unique('city_id')
+                                                                ->pluck('city.name')
+                                                                ->filter()
+                                                                ->first();
+                                                        @endphp
 
-                                                <p class="rating-review-point">Rating :
-                                                    <span class="fa fa-star"></span>
-                                                    <span class="fa fa-star"></span>
-                                                    <span class="fa fa-star"></span>
-                                                    <span class="fa fa-star"></span>
-                                                </p>
-                                                <p>Tool used:
-                                                    @if ($host->gigs->isNotEmpty())
-                                                        {{ $host->gigs->unique('equipment_id')->first()->equipmentPrice->equipment->name }}
-                                                    @else
-                                                        N/A
-                                                    @endif
-                                                </p>
+                                                        {{ $uniqueCities ?? 'N/A' }}
+                                                    </p>
+                                                    <p>Services offered:
+                                                        @if ($host->gigs->isNotEmpty())
+                                                            {{ $host->gigs->unique('task_id')->first()->task->title }}
+                                                        @else
+                                                            N/A
+                                                        @endif
+                                                    </p>
 
-                                            </div>
+                                                    <p class="rating-review-point">Rating :
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </p>
+                                                    <p>Tool used:
+                                                        @if ($host->gigs->isNotEmpty())
+                                                            {{ $host->gigs->unique('equipment_id')->first()->equipmentPrice->equipment->name }}
+                                                        @else
+                                                            N/A
+                                                        @endif
+                                                    </p>
+
+                                                </div>
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -492,6 +495,6 @@
                     });
                 });
             });
-        </script>        
+        </script>
     @endpush
 </x-guest-layout>

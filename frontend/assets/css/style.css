@@ -12,6 +12,14 @@
     padding-right: 10px;
 }
 
+.partial-host-list a {
+    color: #212529;
+}
+
+.partial-host-list a:hover {
+    text-decoration: none;
+}
+
 .container.search-destinations {
     width: 65%;
     padding-left: 30px;
@@ -21,6 +29,7 @@
 .search-destinations p {
     margin-bottom: 0px;
 }
+
 .search-button button {
     background: #FF3C64;
     border: none;
@@ -67,7 +76,7 @@ h6 {
 .destination-section h6.search-destination {
     color: dimgray;
     font-weight: 400;
-     color: #3c3838;
+    color: #3c3838;
 }
 
 p.choose-service {
@@ -75,19 +84,20 @@ p.choose-service {
     font-weight: 500;
     text-align: center;
     font-family: auto;
-     color: #3c3838;
+    color: #3c3838;
 }
 
 h6.choose-tool {
     font-family: auto;
     text-align: center;
-     color: #3c3838;
+    color: #3c3838;
 }
 
 h6.choose-gender {
     font-family: auto;
     color: #3c3838;
 }
+
 .service-section {
     display: flex;
     flex-direction: column;
@@ -146,15 +156,19 @@ select:focus-visible {
     transform: translateY(-50%);
     gap: 9px;
 }
+
 .meet-our-top .owl-nav button {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
 }
+
 .meet-our-top .owl-nav button:hover {
-    color: #007bff; /* Change hover color */
+    color: #007bff;
+    /* Change hover color */
 }
+
 .meet-our-top i.fa.fa-chevron-left {
     font-size: 20px;
     background: rgb(169 240 5);
@@ -185,6 +199,7 @@ select:focus-visible {
 .meet-our-top i.fa.fa-chevron-right:hover {
     background: #ff3c64;
 }
+
 .detils-inner p {
     color: black;
     text-align: center;
@@ -205,6 +220,10 @@ select:focus-visible {
     border-radius: 20px;
 }
 
+.meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .single-box a:hover {
+    text-decoration: none;
+}
+
 .meet-our-top .detils-inner {
     padding: 10px 0;
     height: 200px;
@@ -213,11 +232,13 @@ select:focus-visible {
 .interactive-first .social-icon {
     display: block !important;
 }
+
 .interactive-four input.form-control {
     margin: auto;
     margin-bottom: 15px;
     height: 45px;
 }
+
 .interactive-four form.d-flex.justify-content-center {
     display: block !important;
 }
@@ -256,6 +277,7 @@ select:focus-visible {
     padding-right: 0px !important;
     padding-left: 0px;
 }
+
 div#feedback-testimonials .testimonial-name {
     margin: 5px auto 0;
 }
@@ -272,6 +294,7 @@ div#feedback-testimonials .testimonial-name {
     font-size: 14px;
     margin-bottom: 0px;
 }
+
 .select-a-service {
     display: flex;
     gap: 15px;
@@ -313,6 +336,7 @@ div#feedback-testimonials .testimonial-name {
     font-size: 20px;
     text-align: left;
 }
+
 .row.booking-mark-sdv {
     align-items: center;
     border: solid 1px #fff;
@@ -381,10 +405,12 @@ a.book-now-btn:hover {
     border-radius: 20px;
     height: 320px;
 }
+
 .row.maximum-offers-service {
     padding-top: 40px;
-    position: relative; 
+    position: relative;
 }
+
 .row.maximum-offers-service p {
     font-size: 20px;
     color: #fff;
@@ -409,22 +435,23 @@ a.book-now-btn:hover {
 }
 
 .select-duration .accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  transition: 0.4s;
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
 }
 
-.select-duration .active, .accordion:hover {
-  background-color: #ccc; 
+.select-duration .active,
+.accordion:hover {
+    background-color: #ccc;
 }
- 
+
 .select-duration .panel {
     padding: 0 18px;
     display: none;
@@ -464,6 +491,7 @@ a.book-now-btn:hover {
     margin-top: 20px;
     align-items: center;
 }
+
 .panel.time-zone-sct ul li {
     font-size: 18px;
 }
@@ -473,6 +501,7 @@ li.time-zone-mark {
     padding: 5px 15px;
     border-radius: 3px;
 }
+
 .panel.time-zone-sct ul {
     display: flex;
     gap: 34px;
@@ -519,6 +548,7 @@ li.time-zone-mark {
     font-size: 13px;
     color: #808080ab;
 }
+
 .music-list-text h5 {
     margin-bottom: 0;
     font-size: 16px;
@@ -529,6 +559,7 @@ li.time-zone-mark {
     padding-left: 15px;
     width: 100%;
 }
+
 .music-audio {
     margin: 8px;
     padding: 8px 11px;
@@ -538,11 +569,13 @@ li.time-zone-mark {
     border-radius: 5px;
     box-shadow: 1px 3px 30px 2px #e0d2d2;
 }
+
 .rating-review-point {
     display: flex;
     align-items: baseline;
     gap: 2px;
 }
+
 .rating-review-point span.fa.fa-star {
     color: #ffae1a;
 }
@@ -608,6 +641,10 @@ li.time-zone-mark {
     font-size: 30px;
 }
 
+/* .how-it-work {
+    padding-top: 96px;
+} */
+
 .work-destination {
     margin-top: 40px;
 }
@@ -650,12 +687,15 @@ section.testimonials h3.nav-link {
     gap: 50px;
     row-gap: 25px;
 }
+
 .meet-our-top {
     margin-top: 40px;
 }
+
 .host-user-filter-left img {
     border-radius: 5px;
-}   
+}
+
 .host-user-filter-left {
     width: 100%;
     max-width: 100%;
@@ -663,6 +703,7 @@ section.testimonials h3.nav-link {
     display: flex;
     justify-content: center;
 }
+
 .row.host-user-filter {
     display: block;
 }
@@ -672,12 +713,15 @@ section.testimonials h3.nav-link {
     max-width: 100%;
     margin-top: 8px !important;
 }
+
 .row.filter-host-user .text.nav-link-dash.font-weight-bold.mt-4 {
     margin-top: 10px !important;
 }
+
 .subscribe-news .subscribe-news-input {
     display: block !important;
 }
+
 .subscribe-news-input input.form-control {
     display: flex !important;
     justify-content: center !important;
@@ -690,6 +734,7 @@ section.testimonials h3.nav-link {
 .social-icon {
     gap: 10px;
 }
+
 .social-icon i {
     background: #000;
     padding: 10px;
@@ -697,6 +742,7 @@ section.testimonials h3.nav-link {
     margin-top: 0;
     border-radius: 5px;
 }
+
 .social-icon i:hover {
     background: #a9f005;
     color: black;
@@ -719,38 +765,40 @@ p.rating-review-point {
     padding-left: 40px;
 }
 
- .host-profile-by-id .select-service-right h1 {
+.host-profile-by-id .select-service-right h1 {
     text-align: left;
 }
- .host-profile-by-id .biography-sec h4 {
+
+.host-profile-by-id .biography-sec h4 {
     text-align: center;
 }
 
- .host-profile-by-id .biography-sec {
+.host-profile-by-id .biography-sec {
     color: #fff;
     text-align: center;
 }
 
- .host-profile-by-id .select-service-left {
+.host-profile-by-id .select-service-left {
     flex: 0 0 23%;
 }
 
- .host-profile-by-id .select-a-service {
+.host-profile-by-id .select-a-service {
     text-align: center;
 }
 
- .host-profile-by-id .select-a-tool {
+.host-profile-by-id .select-a-tool {
     gap: 12px;
 }
 
- .host-profile-by-id .host-booking-inner {
+.host-profile-by-id .host-booking-inner {
     margin-top: -15px;
 }
 
- .host-profile-by-id .row.maximum-offers-service p {
+.host-profile-by-id .row.maximum-offers-service p {
     text-align: center;
 }
-  .host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
+
+.host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
     top: 58px;
 }
 
@@ -765,510 +813,558 @@ a.book-now-btn:hover {
 @media only screen and (max-width: 767px) {
 
 
-.host-profile-by-id .row.maximum-offers-service {
-    width: 95%;
-    margin: auto;
-}
-.host-profile-by-id .row.select-duration-inner {
-    width: 93%;
-    margin: auto;
-}
-.host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
-    top: 75px;
-}
-.host-profile-by-id .container.select-duration {
-    padding: 50px 0;
-    padding-bottom: 0;
-}
-.host-profile-by-id .row.booking-mark-sdv {
-    width: 85%;
-    margin: auto;
-    padding-left: 0;
-    display: block;
-    text-align: center;
-}
-
-.host-profile-by-id .select-service-right h1 {
-    text-align: center;
-}
-.host-profile-by-id .host-booking-inner {
-    margin-top: 5px;
-}
-.host-profile-by-id .host-main-profile {
-    padding-top: 0px;
-}
-.host-profile-by-id .host-main-profile h1 {
-    text-align: center;
-    font-size: 30px;
-    width: 88%;
-    margin: auto;
-    margin-top: 25px;
-}
-
-.host-profile-by-id .biography-sec h1 {
-    margin-top: 0px;
-}
-
-.meet-our-top .detils-inner {
-    padding: 10px 0;
-    height: 180px;
-}
-.subscribe-news-input input.form-control {
-    display: flex !important;
-    width: 100% !important;
-}
-.container.search-destinations {
-    width: 100%;
-    display: block;
-    margin-bottom: 25px;
-    padding-left: 14px;
-}
-
-select#choose-service {
-    margin-top: 2px;
-}
-.destination-section {
-    margin-bottom: 8px;
-}
-
-.service-section {
-    margin-bottom: 8px;
-}
-.gender-section {
-    margin-bottom: 8px;
-}
-.tool-section {
-   margin-bottom: 8px;
-}
-.meet-top-section-owl {
-    display: none;
-}
-.meet-our-top {
-    margin-top: 25px;
-}
-
-.meet-our-top i.fa.fa-chevron-left {
-    width: 40px;
-    height: 40px;
-}
-
-.meet-our-top i.fa.fa-chevron-right {
-    width: 40px;
-    height: 40px;
-}
-
-.meet-our-top section {
-    margin-top: 50px;
-}
-.meet-our-top .owl-nav {
-    top: -9%;
-}
-
-.host-main-profile {
-    padding-top: 40px;
-}
-
-.meet-our-top h1 {
-    text-align: center !important;
-    padding-top: 0;
-}
-.meet-our-top .owl-carousel .owl-item img {
-    display: block;
-    height: 320px;
-}
-.host-main-profile h1 {
-    padding-top: 0px;
-}
-
-.search-destinations {
-    border-radius: 10px;
-}
-.select-service-left img {
-    width: 150px;
-    height: 150px;
-}
-.host-booking-inner {
-    margin-top: 0px;
-}
-
-.select-a-service {
-    display: block;
-}
-
-.select-service-right h1 {
-    text-align: center;
-    font-size: 25px;
-    padding-top: 5px;
-}
-
-.select-a-service h3 {
-    text-align: center;
-}
-
-.select-service-left {
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-}
-.select-service-right {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-}
-.select-a-tool {
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-}
-
-.select-a-tool h3 {
-    text-align: center;
-}
-
-.available-time p {
-    text-align: center;
-}
-
-.row.maximum-offers-service p {
-    margin-top: 20px;
-}
-
-.container.select-duration {
-    padding: 50px 0;
-}
-.select-duration-left {
-    padding: 0px !important;
-    margin-bottom: 20px;
-}
-
-.biography-sec p {
-    width: 100%;
-    margin: auto;
-    padding: 8px;
-}
-.row.maximum-offers-service {
-    padding-top: 0;
-    position: relative;
-}
-
-.panel.time-zone-sct ul {
-    display: block;
-    padding-left: 0;
-}
-
-.panel.time-zone-sct ul li {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.work-destination {
-    margin-top: 20px;
-}
-.how-work-two {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.row.work-destination .col-md-4 {
-    padding: 0;
-}
-
-form#home-booking-form {
-    margin-bottom: 30px;
-}
-
-section.testimonials h3.nav-link {
-    text-align: center;
-    margin-top: 0px !important;
-}
-
-#feedback-testimonials .item {
-    text-align: center;
-    padding: 10px !important;
-}
-
-#customers-testimonials .item {
-    text-align: center;
-    padding: 10px !important;
-}
-
-.container-input-fields h2.nav-link {
-    margin-left: 0px !important;
-    text-align: center;
-}
-.interactive-four input.form-control {
-    width: 100% !important;
-}
-.book-a-task-row {
-    margin-top: 50px;
-}
-
-.interactive-footer {
-    padding-top: 20px !important;
-}
-
-.col-12.col-md-4.mb-4.interactive-third {
-    margin-bottom: 0px !important;
-}
-p.small {
-    font-size: 18px;
-}
-.interactive-second ul.list-unstyled li {
-    line-height: 1.9;
-}
-.book-a-task-row .input-group-text {
-    padding-left: 0px;
-}
-
-}
-
-
-@media (min-width:768px) and (max-width:1024px){
-
-
-.meet-our-top .detils-inner {
-    padding: 10px 0;
-    height: 180px;
-}
-
-.meet-our-top {
-    margin-top: 30px;
-}
-
-.host-profile-by-id .panel.time-zone-sct ul li {
-    margin-bottom: 0px;
-    width: 100%;
-    font-size: 13px;
-    padding: 0 6px;
-}
-
-.host-profile-by-id .select-duration .panel {
-    padding: 0 8px;
-    margin-top: -2px;
-}
-
-.host-profile-by-id .panel.time-zone-sct ul {
-    display: flex !important;
-    gap: 10px;
-}
-
-.host-profile-by-id .music-list-text {
-    padding-left: 0;
-    width: 100%;
-}
-.host-profile-by-id .host-main-profile {
-    padding-top: 20px;
-}
-
-.host-profile-by-id .music-audio img {
-    display: flex;
-    margin: auto;
-}
-.host-profile-by-id .container.select-duration {
-    padding: 40px 0;
-    padding-bottom: 0px;
-}
-.host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
-    top: 80px;
-}
-.host-profile-by-id .row.booking-mark-sdv {
-    width: 94%;
-    margin: auto;
-    padding-left: 15px;
-}
-.host-profile-by-id .select-a-service {
-    text-align: center;
-    gap: 5px;
-}
-
-.container.search-destinations {
-    width: 100%;
-    padding-left: 33px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-}
-
-.meet-our-top i.fa.fa-chevron-left {
-    width: 40px;
-    height: 40px;
-}
-
-.meet-our-top i.fa.fa-chevron-right {
-    width: 40px;
-    height: 40px;
-}
-.search-destinations {
-    display: block;
-}
-
-.search-destinations .destination-section {
-    margin-bottom: 8px;
-}
-
-.search-destinations .service-section {
-    margin-bottom: 8px;
-}
-
-.search-destinations .tool-section {
-    margin-bottom: 5px;
-}
-
-.search-destinations .gender-section {
-    margin-bottom: 8px;
-}
-
-.search-destinations select#choose-service {
-    margin-top: 2px;
-}
-.meet-our-top .owl-nav {
-    top: -12%;
-}
-.meet-top-section-owl {
-    margin-bottom: 0px !important;
-}
-
-.select-service-left img {
-    width: 150px;
-    height: 150px;
-}
-.available-time p {
-    font-size: 16px;
-}
-
-.host-main-profile h1 {
-    padding-top: 0px;
-}
-
-.maximum-offers-service img {
-    width: 100%;
-    border-radius: 20px;
-    height: auto;
-}
-.row.maximum-offers-service {
-    padding-top: 30px;
-    position: relative;
-}
-
-.row.maximum-offers-service p {
-    font-size: 18px;
-    color: #fff;
-}
-
-.select-duration-right {
-    height: 295px;
-    padding-top: 8px;
-}
-
-.music-audio img {
-    width: 25%;
-    border-radius: 50px;
-    display: inline;
-}
-
-.music-list-text h5 {
-    text-align: center;
-}
-
-.music-list-text p {
-    text-align: center;
-}
-
-.rating-review-point {
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
-    justify-content: center;
-}
-
-.music-audio {
-    margin: 8px;
-    padding: 11px 11px;
-    display: block;
-    padding-bottom: 0px;
-}
-.duration-text p {
-    margin-bottom: 0px;
-    font-size: 13px;
-    padding: 0px 9px;
-}
-
-.Proceed-to-checkout {
-    padding: 10px 0;
-    margin: 8px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.panel.time-zone-sct ul li {
-    margin-bottom: 15px;
-}
-.panel.time-zone-sct ul {
-    display: block;
-    text-align: left;
-    padding-left: 0;
-}
-
-.container.select-duration {
-    padding: 40px 0;
-}
-.row.work-destination p.text-white {
-    height: 40px;
-}
-.work-destination .card p {
-    width: 94%;
-    margin: auto;
-    font-size: 14px;
-}
-.book-a-task-row {
-    margin-top: 50px;
-}
-
-section.testimonials h3.nav-link {
-    margin-top: 15px !important;
-}
-
-#feedback-testimonials .item {
-    padding: 0px !important;
-    padding-top: 40px !important;
-}
-#customers-testimonials .item {
-    padding: 0 !important;
-    padding-top: 40px !important;
-}
-
-.book-a-task-row .input-group-text {
-    padding-left: 0;
-}
-div#gigs .card-content {
-    display: block;
-    align-items: center;
-}
-
-img.ikoro-images {
-    margin-top: 10px;
-    border-radius: 5px;
-}
-.view-hire-btn-one {
-    padding: 0 0 !important;
-    margin-right: 10px !important;
-}
-
-.view-hire-btn-two {
-    padding: 0 0 !important;
-}
-
-.view-hire-btn-one i.fas.fa-search {
-    margin-top: 0px;
-}
-
-.view-hire-btn-two i.fa.fa-refresh {
-    margin-top: 0px;
-}
-
-.biography-sec p {
-    width: 90%;
-    margin: auto;
-}
-.biography-sec {
-    padding-top: 20px;
-}
+    .host-profile-by-id .row.maximum-offers-service {
+        width: 95%;
+        margin: auto;
+    }
+
+    .host-profile-by-id .row.select-duration-inner {
+        width: 93%;
+        margin: auto;
+    }
+
+    .host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
+        top: 75px;
+    }
+
+    .host-profile-by-id .container.select-duration {
+        padding: 50px 0;
+        padding-bottom: 0;
+    }
+
+    .host-profile-by-id .row.booking-mark-sdv {
+        width: 85%;
+        margin: auto;
+        padding-left: 0;
+        display: block;
+        text-align: center;
+    }
+
+    .host-profile-by-id .select-service-right h1 {
+        text-align: center;
+    }
+
+    .host-profile-by-id .host-booking-inner {
+        margin-top: 5px;
+    }
+
+    .host-profile-by-id .host-main-profile {
+        padding-top: 0px;
+    }
+
+    .host-profile-by-id .host-main-profile h1 {
+        text-align: center;
+        font-size: 30px;
+        width: 88%;
+        margin: auto;
+        margin-top: 25px;
+    }
+
+    .host-profile-by-id .biography-sec h1 {
+        margin-top: 0px;
+    }
+
+    .meet-our-top .detils-inner {
+        padding: 10px 0;
+        height: 180px;
+    }
+
+    .subscribe-news-input input.form-control {
+        display: flex !important;
+        width: 100% !important;
+    }
+
+    .container.search-destinations {
+        width: 100%;
+        display: block;
+        margin-bottom: 25px;
+        padding-left: 14px;
+    }
+
+    select#choose-service {
+        margin-top: 2px;
+    }
+
+    .destination-section {
+        margin-bottom: 8px;
+    }
+
+    .service-section {
+        margin-bottom: 8px;
+    }
+
+    .gender-section {
+        margin-bottom: 8px;
+    }
+
+    .tool-section {
+        margin-bottom: 8px;
+    }
+
+    .meet-top-section-owl {
+        display: none;
+    }
+
+    .meet-our-top {
+        margin-top: 25px;
+    }
+
+    .meet-our-top i.fa.fa-chevron-left {
+        width: 40px;
+        height: 40px;
+    }
+
+    .meet-our-top i.fa.fa-chevron-right {
+        width: 40px;
+        height: 40px;
+    }
+
+    .meet-our-top section {
+        margin-top: 50px;
+    }
+
+    .meet-our-top .owl-nav {
+        top: -9%;
+    }
+
+    .host-main-profile {
+        padding-top: 40px;
+    }
+
+    .meet-our-top h1 {
+        text-align: center !important;
+        padding-top: 0;
+    }
+
+    .meet-our-top .owl-carousel .owl-item img {
+        display: block;
+        height: 320px;
+    }
+
+    .host-main-profile h1 {
+        padding-top: 0px;
+    }
+
+    .search-destinations {
+        border-radius: 10px;
+    }
+
+    .select-service-left img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .host-booking-inner {
+        margin-top: 0px;
+    }
+
+    .select-a-service {
+        display: block;
+    }
+
+    .select-service-right h1 {
+        text-align: center;
+        font-size: 25px;
+        padding-top: 5px;
+    }
+
+    .select-a-service h3 {
+        text-align: center;
+    }
+
+    .select-service-left {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+
+    .select-service-right {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .select-a-tool {
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+
+    .select-a-tool h3 {
+        text-align: center;
+    }
+
+    .available-time p {
+        text-align: center;
+    }
+
+    .row.maximum-offers-service p {
+        margin-top: 20px;
+    }
+
+    .container.select-duration {
+        padding: 50px 0;
+    }
+
+    .select-duration-left {
+        padding: 0px !important;
+        margin-bottom: 20px;
+    }
+
+    .biography-sec p {
+        width: 100%;
+        margin: auto;
+        padding: 8px;
+    }
+
+    .row.maximum-offers-service {
+        padding-top: 0;
+        position: relative;
+    }
+
+    .panel.time-zone-sct ul {
+        display: block;
+        padding-left: 0;
+    }
+
+    .panel.time-zone-sct ul li {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .work-destination {
+        margin-top: 20px;
+    }
+
+    .how-work-two {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .row.work-destination .col-md-4 {
+        padding: 0;
+    }
+
+    form#home-booking-form {
+        margin-bottom: 30px;
+    }
+
+    section.testimonials h3.nav-link {
+        text-align: center;
+        margin-top: 0px !important;
+    }
+
+    #feedback-testimonials .item {
+        text-align: center;
+        padding: 10px !important;
+    }
+
+    #customers-testimonials .item {
+        text-align: center;
+        padding: 10px !important;
+    }
+
+    .container-input-fields h2.nav-link {
+        margin-left: 0px !important;
+        text-align: center;
+    }
+
+    .interactive-four input.form-control {
+        width: 100% !important;
+    }
+
+    .book-a-task-row {
+        margin-top: 50px;
+    }
+
+    .interactive-footer {
+        padding-top: 20px !important;
+    }
+
+    .col-12.col-md-4.mb-4.interactive-third {
+        margin-bottom: 0px !important;
+    }
+
+    p.small {
+        font-size: 18px;
+    }
+
+    .interactive-second ul.list-unstyled li {
+        line-height: 1.9;
+    }
+
+    .book-a-task-row .input-group-text {
+        padding-left: 0px;
+    }
+
+}
+
+
+@media (min-width:768px) and (max-width:1024px) {
+
+
+    .meet-our-top .detils-inner {
+        padding: 10px 0;
+        height: 180px;
+    }
+
+    .meet-our-top {
+        margin-top: 30px;
+    }
+
+    .host-profile-by-id .panel.time-zone-sct ul li {
+        margin-bottom: 0px;
+        width: 100%;
+        font-size: 13px;
+        padding: 0 6px;
+    }
+
+    .host-profile-by-id .select-duration .panel {
+        padding: 0 8px;
+        margin-top: -2px;
+    }
+
+    .host-profile-by-id .panel.time-zone-sct ul {
+        display: flex !important;
+        gap: 10px;
+    }
+
+    .host-profile-by-id .music-list-text {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .host-profile-by-id .host-main-profile {
+        padding-top: 20px;
+    }
+
+    .host-profile-by-id .music-audio img {
+        display: flex;
+        margin: auto;
+    }
+
+    .host-profile-by-id .container.select-duration {
+        padding: 40px 0;
+        padding-bottom: 0px;
+    }
+
+    .host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
+        top: 80px;
+    }
+
+    .host-profile-by-id .row.booking-mark-sdv {
+        width: 94%;
+        margin: auto;
+        padding-left: 15px;
+    }
+
+    .host-profile-by-id .select-a-service {
+        text-align: center;
+        gap: 5px;
+    }
+
+    .container.search-destinations {
+        width: 100%;
+        padding-left: 33px;
+        padding-bottom: 10px;
+        padding-right: 20px;
+    }
+
+    .meet-our-top i.fa.fa-chevron-left {
+        width: 40px;
+        height: 40px;
+    }
+
+    .meet-our-top i.fa.fa-chevron-right {
+        width: 40px;
+        height: 40px;
+    }
+
+    .search-destinations {
+        display: block;
+    }
+
+    .search-destinations .destination-section {
+        margin-bottom: 8px;
+    }
+
+    .search-destinations .service-section {
+        margin-bottom: 8px;
+    }
+
+    .search-destinations .tool-section {
+        margin-bottom: 5px;
+    }
+
+    .search-destinations .gender-section {
+        margin-bottom: 8px;
+    }
+
+    .search-destinations select#choose-service {
+        margin-top: 2px;
+    }
+
+    .meet-our-top .owl-nav {
+        top: -12%;
+    }
+
+    .meet-top-section-owl {
+        margin-bottom: 0px !important;
+    }
+
+    .select-service-left img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .available-time p {
+        font-size: 16px;
+    }
+
+    .host-main-profile h1 {
+        padding-top: 0px;
+    }
+
+    .maximum-offers-service img {
+        width: 100%;
+        border-radius: 20px;
+        height: auto;
+    }
+
+    .row.maximum-offers-service {
+        padding-top: 30px;
+        position: relative;
+    }
+
+    .row.maximum-offers-service p {
+        font-size: 18px;
+        color: #fff;
+    }
+
+    .select-duration-right {
+        height: 295px;
+        padding-top: 8px;
+    }
+
+    .music-audio img {
+        width: 25%;
+        border-radius: 50px;
+        display: inline;
+    }
+
+    .music-list-text h5 {
+        text-align: center;
+    }
+
+    .music-list-text p {
+        text-align: center;
+    }
+
+    .rating-review-point {
+        display: flex;
+        align-items: baseline;
+        gap: 2px;
+        justify-content: center;
+    }
+
+    .music-audio {
+        margin: 8px;
+        padding: 11px 11px;
+        display: block;
+        padding-bottom: 0px;
+    }
+
+    .duration-text p {
+        margin-bottom: 0px;
+        font-size: 13px;
+        padding: 0px 9px;
+    }
+
+    .Proceed-to-checkout {
+        padding: 10px 0;
+        margin: 8px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .panel.time-zone-sct ul li {
+        margin-bottom: 15px;
+    }
+
+    .panel.time-zone-sct ul {
+        display: block;
+        text-align: left;
+        padding-left: 0;
+    }
+
+    .container.select-duration {
+        padding: 40px 0;
+    }
+
+    .row.work-destination p.text-white {
+        height: 40px;
+    }
+
+    .work-destination .card p {
+        width: 94%;
+        margin: auto;
+        font-size: 14px;
+    }
+
+    .book-a-task-row {
+        margin-top: 50px;
+    }
+
+    section.testimonials h3.nav-link {
+        margin-top: 15px !important;
+    }
+
+    #feedback-testimonials .item {
+        padding: 0px !important;
+        padding-top: 40px !important;
+    }
+
+    #customers-testimonials .item {
+        padding: 0 !important;
+        padding-top: 40px !important;
+    }
+
+    .book-a-task-row .input-group-text {
+        padding-left: 0;
+    }
+
+    div#gigs .card-content {
+        display: block;
+        align-items: center;
+    }
+
+    img.ikoro-images {
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+
+    .view-hire-btn-one {
+        padding: 0 0 !important;
+        margin-right: 10px !important;
+    }
+
+    .view-hire-btn-two {
+        padding: 0 0 !important;
+    }
+
+    .view-hire-btn-one i.fas.fa-search {
+        margin-top: 0px;
+    }
+
+    .view-hire-btn-two i.fa.fa-refresh {
+        margin-top: 0px;
+    }
+
+    .biography-sec p {
+        width: 90%;
+        margin: auto;
+    }
+
+    .biography-sec {
+        padding-top: 20px;
+    }
 
 }
