@@ -21,12 +21,12 @@
                         <div class="col-md-7 select-service-right">
                             <h1>{{ $host_profile->name }}</h1>
                             <div class="select-a-service">
-                                <h3>Select a Service /</h3>
+                                <h3>Select a Service </h3>
                                 @if ($host_profile->gigs->isNotEmpty())
                                     @foreach ($host_profile->gigs->unique('task_id') as $gig)
                                         <div class="host-booking-inner">
                                             <label for="city-tours-checkbox">
-                                                <i class="fa-solid fa-city"></i>
+                                                <i class="{{ $gig->task->icon }}"></i>
                                                 <p>{{ $gig->task->title }}</p>
                                             </label>
                                             <input type="checkbox" id="city-tours-checkbox" />
@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="select-a-tool">
-                                <h3>Select Tools /</h3>
+                                <h3>Select Tools </h3>
                                 @if ($host_profile->gigs->isNotEmpty())
                                     @foreach ($host_profile->gigs->unique('equipment_id') as $gig)
                                         <div class="select-booking-inner">

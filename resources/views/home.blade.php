@@ -321,9 +321,9 @@
                     </script>
                 </div>
 
-                <div id="selected-host-profile">
+                {{-- <div id="selected-host-profile">
                     @include('partials.selected-host', ['host_profile' => $host_profile])
-                </div>
+                </div> --}}
 
 
                 <div class="container how-it-work">
