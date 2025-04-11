@@ -48,6 +48,18 @@ class PaymentController extends Controller
         }
     }
 
+    public function bookingCheckOutPage()
+    {
+        $client = Auth::user()->id ?? "";
+      
+        if ($client == "") {          
+            return redirect()->back();
+        }else{           
+            return view('user.payment.check-out');
+        }
+
+    }
+
     /**
      * Obtain Paystack payment information
      * @return void

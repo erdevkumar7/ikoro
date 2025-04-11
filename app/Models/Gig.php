@@ -30,7 +30,10 @@ class Gig extends Model
         // return $this->belongsTo(EquipmentPrice::class, 'equipment_price_id', 'id');
     }
 
-    
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'gig_id');
+    }
 
     public function equipment() {
         return $this->belongsTo(Equipment::class);

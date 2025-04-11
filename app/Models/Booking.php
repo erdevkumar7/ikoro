@@ -25,4 +25,9 @@ class Booking extends Model
         return $this->belongsTo(User::class, 'admin_id', 'id');
     }
 
+    public function gig()
+    {
+        return $this->belongsTo(Gig::class, 'gig_id');
+    }
+
 }

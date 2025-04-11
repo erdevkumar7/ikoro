@@ -113,6 +113,14 @@ class HomeController extends Controller
 
     public function hostProfileById($host_id)
     {
+        $client = Auth::user()->id ?? "";
+        $data = [
+            'loggedIn' => "",
+        ];
+        if ($client != "") {
+            $data['loggedIn'] = $client;
+        }
+        
         $data['host_profile']  = Host::with('gigs')->findOrFail($host_id);
         return view('pages.host-profile', $data);
     }

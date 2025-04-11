@@ -197,7 +197,7 @@
                         </div>
 
                     </div>
-                    <div class="Proceed-to-checkout">
+                    <div class="Proceed-to-checkout go-to-checkout">
                         <a href="#">PROCEED TO CHECKOUT<i class="fa fa-credit-card" aria-hidden="true"></i>
                         </a>
                     </div>
