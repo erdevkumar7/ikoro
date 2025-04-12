@@ -38,8 +38,7 @@
     width: 50px;
     height: 50px;
     padding-bottom: 10px;
-    margin-top: 3px;
-    margin-right: -6px;
+    margin-top: 8px;
 }
 
 h6 {
@@ -133,7 +132,6 @@ select:focus-visible {
     text-align: left !important;
     font-size: 30px;
     color: #fff;
-    padding: 20px 0;
 }
 
 .book-a-task-row {
@@ -207,14 +205,16 @@ select:focus-visible {
     margin-bottom: 0px;
 }
 
+
 .meet-our-top .owl-carousel .owl-item img {
     display: block;
     width: 100%;
     margin-bottom: 0px;
     border-radius: 20px 20px 0px 0px;
     height: 240px;
+    object-fit: cover;
+    object-position: top;
 }
-
 .meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .single-box {
     background: #fff;
     border-radius: 20px;
@@ -253,8 +253,8 @@ select:focus-visible {
     font-size: 30px;
     color: #fff;
     padding: 20px 0;
+    padding-top: 0px;
 }
-
 .host-main-profile {
     padding-top: 65px;
 }
@@ -285,7 +285,7 @@ div#feedback-testimonials .testimonial-name {
 .select-a-service h3 {
     text-align: left;
     font-size: 17px;
-    color: #fff;
+    color: #a9f005;
     margin-bottom: 0px;
 }
 
@@ -298,6 +298,7 @@ div#feedback-testimonials .testimonial-name {
 .select-a-service {
     display: flex;
     gap: 15px;
+    align-items: center;
 }
 
 .host-booking-inner {
@@ -311,7 +312,7 @@ div#feedback-testimonials .testimonial-name {
 .select-a-tool h3 {
     text-align: left;
     font-size: 17px;
-    color: #fff;
+    color: #a9f005;
 }
 
 .select-a-tool {
@@ -324,17 +325,19 @@ div#feedback-testimonials .testimonial-name {
 .select-booking-inner {
     color: #fff;
 }
-
 .select-booking-inner p {
     margin-bottom: 0px;
-    font-size: 17px;
+    font-size: 15px;
 }
-
+.lists-maximum-offers h1.text-white.text-center {
+    font-size: 23px;
+}
 .available-time p {
     color: #fff;
     margin-bottom: 0;
-    font-size: 20px;
+    font-size: 17px;
     text-align: left;
+    padding-top: 65px;
 }
 
 .row.booking-mark-sdv {
@@ -350,8 +353,9 @@ div#feedback-testimonials .testimonial-name {
 }
 
 .biography-sec p {
-    width: 80%;
+    width: 100%;
     margin: auto;
+    font-size: 14px;
 }
 
 .biography-sec h3 {
@@ -382,16 +386,18 @@ div#feedback-testimonials .testimonial-name {
 
 .biography-sec a.eng-text {
     color: black;
-    background: #a9f005;
-    padding: 8px 20px;
+    background: #fff;
+    padding: 5px 15px;
     border-radius: 35px;
     text-decoration: none;
 }
-
+h1.first-top-text {
+    text-align: center !important;
+}
 a.book-now-btn {
     color: black;
     background: rgb(169 240 5);
-    padding: 9px 50px;
+    padding: 9px 25px;
     border-radius: 50px;
     text-decoration: none !important;
 }
@@ -403,11 +409,15 @@ a.book-now-btn:hover {
 .maximum-offers-service img {
     width: 100%;
     border-radius: 20px;
-    height: 320px;
+    height: 280px;
+    object-fit: cover;
+}
+.host-profile-by-id .host-main-profile h1 {
+    text-align: left;
 }
 
 .row.maximum-offers-service {
-    padding-top: 40px;
+    padding-top: 20px;
     position: relative;
 }
 
@@ -451,17 +461,18 @@ a.book-now-btn:hover {
 .accordion:hover {
     background-color: #ccc;
 }
-
 .select-duration .panel {
     padding: 0 18px;
     display: none;
     background-color: white;
     overflow: hidden;
-    margin-top: -2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .container.select-duration {
     padding: 68px 0;
+    padding-bottom: 0;
 }
 
 .select-duration button.accordion {
@@ -470,6 +481,7 @@ a.book-now-btn:hover {
     border: solid 1px !important;
     padding-bottom: 14px;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 
 .select-duration p.number-list {
@@ -633,7 +645,7 @@ li.time-zone-mark {
 }
 
 .select-duration-right {
-    height: 238px;
+    height: 249px;
     padding-top: 8px;
 }
 
@@ -642,7 +654,39 @@ li.time-zone-mark {
 }
 
 .how-it-work {
-    padding-top: 96px;
+    padding-top: 60px;
+}
+#feedback-testimonials .item {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+}
+.py-3.subscribe-news {
+    padding-top: 0px !important;
+}
+.search-destinations input#citySearchByInput {
+    margin-top: 5px;
+    border-radius: 3px;
+    padding: 4px 5px;
+    border: solid 1px #767676,;
+}
+.biography-sec h1 {
+    padding-bottom: 10px;
+}
+.biography-sec h4 {
+    text-align: center !important;
+    width: 85%;
+}
+.search-destinations select#choose-service {
+    border-radius: 3px;
+    padding: 5px 0;
+}
+.search-destinations select#equipment_id {
+    border-radius: 3px;
+    padding: 5px 0;
+}
+.search-destinations select#gender {
+    border-radius: 3px;
+    padding: 5px 0px;
 }
 
 .work-destination {
@@ -689,7 +733,7 @@ section.testimonials h3.nav-link {
 }
 
 .meet-our-top {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .host-user-filter-left img {
@@ -756,13 +800,16 @@ p.rating-review-point {
 
 /*host-profile-page-start*/
 .host-profile-by-id .host-main-profile h1 {
-    text-align: center;
+    text-align: left;
 }
 
 .host-profile-by-id .row.booking-mark-sdv {
-    width: 85%;
+    width: 100%;
     margin: auto;
     padding-left: 40px;
+}
+.col-md-3.biography-left-content {
+    padding-left: 0;
 }
 
 .host-profile-by-id .select-service-right h1 {
@@ -770,14 +817,14 @@ p.rating-review-point {
 }
 
 .host-profile-by-id .biography-sec h4 {
-    text-align: center;
+    text-align: left;
 }
 
 .host-profile-by-id .biography-sec {
     color: #fff;
-    text-align: center;
+    text-align: left;
+    padding-top: 15px;
 }
-
 .host-profile-by-id .select-service-left {
     flex: 0 0 23%;
 }
@@ -796,6 +843,7 @@ p.rating-review-point {
 
 .host-profile-by-id .row.maximum-offers-service p {
     text-align: center;
+    font-size: 14px;
 }
 
 .host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
@@ -803,11 +851,34 @@ p.rating-review-point {
 }
 
 .host-profile-by-id .host-main-profile {
-    padding-top: 40px;
+    padding-top: 0px;
+    padding-bottom: 40px;
 }
 
 a.book-now-btn:hover {
     background: #fff;
+}
+footer.mt-5.text-white.pt-5 {
+    margin-top: 15px !important;
+}
+.select-duration-inner {
+    justify-content: flex-end;
+    width: 100%;
+}
+.select-duration-left {
+    padding-left: 0;
+}
+
+h6.guest-fav-text {
+    background-color: #fff;
+    width: 44%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 50px;
+    font-size: 14px;
+    position: absolute;
+    top: 55px;
+    margin-left: 8px;
 }
 
 @media only screen and (max-width: 767px) {
