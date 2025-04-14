@@ -123,7 +123,7 @@ class HomeController extends Controller
             });
         }
 
-        $data['gigs'] = $gigs->paginate(5);
+        $data['gigs'] = $gigs->paginate(6);
         // dd($data);
         return view('pages.gig-filter-host', $data);
       

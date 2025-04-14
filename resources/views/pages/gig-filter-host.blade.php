@@ -2,45 +2,51 @@
 @section('page_conent')
     <div>
         @if ($gigs->isNotEmpty())
-            <div class="row filter-host-user">
-                @foreach ($gigs as $gig)
-                    {{-- <div class="row select-host-click" data-id="{{ $gig->host->id }}" data-url="{{ route('get.selectedhost') }}"> --}}
-                    <div class="row partial-host-list">
-                        <a href="{{ route('get.host.profile', $gig->host->id) }}">
-                            <div class="card p-3 mb-5">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            @if ($gig->host->image)
-                                                <img class="d-block" width="100"
-                                                    src="{{ asset('public/' . $gig->host->image) }}" alt="">
-                                            @else
-                                                <img class="d-block" width="100"
-                                                    src="{{ asset('frontend/images/host.jpg') }}" alt="">
-                                            @endif
+            <div class="filter-host-user">
+                {{-- <div class="row select-host-click" data-id="{{ $gig->host->id }}" data-url="{{ route('get.selectedhost') }}"> --}}
+
+                <div class="row partial-host-list">
+                    @foreach ($gigs as $gig)
+                        <div class="col-md-4 mb-4">
+                            <a href="{{ route('get.host.profile', $gig->host->id) }}">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6 host-image">
+                                                @if ($gig->host->image)
+                                                    <img class="d-block" src="{{ asset('public/' . $gig->host->image) }}"
+                                                        alt="">
+                                                @else
+                                                    <img class="d-block w-100" src="{{ asset('frontend/images/host.jpg') }}"
+                                                        alt="">
+                                                @endif
+                                            </div>
+                                            <div class="col-6 mt-4 host-by-name">
+                                                <span class="nav-link-dash host-name-text">Host :
+                                                    {{ $gig->host->name }}</span>
+                                                <span class="nav-link-dash gender-host-text">Gender :
+                                                    {{ $gig->host->gender }}</span>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 mt-4">
-                                            <span class="nav-link-dash">Hosted by
-                                                {{ $gig->host->name }}</span>
+                                        <div class="text nav-link-dash font-weight-bold mt-3">
+                                            {{ $gig->country->name ?? 'no-country' }} -
+                                            {{ $gig->state->name ?? 'no-state' }} -
+                                            {{ $gig->city->name ?? 'no-city' }} -
+                                            {{ $gig->zip->code ?? 'no-zipcode' }}
                                         </div>
-                                    </div>
-                                    <div class="text nav-link-dash font-weight-bold mt-4">
-                                        {{ $gig->country->name ?? 'no-country' }} -
-                                        {{ $gig->state->name ?? 'no-state' }} -
-                                        {{ $gig->city->name ?? 'no-city' }} -
-                                        {{ $gig->zip->code ?? 'no-zipcode' }}</div>
-                                    <div class="text nav-link-dash">Gender : {{ $gig->host->gender }}</div>
-                                    <div class="text nav-link-dash">Phone : {{ $gig->host->phone }}</div>
-                                    <div class="text nav-link-dash">WhatsApp : {{ $gig->host->whatsapp_no }}
+
+                                        <div class="text nav-link-dash">Phone : {{ $gig->host->phone }}</div>
+                                        <div class="text nav-link-dash">WhatsApp : {{ $gig->host->whatsapp_no }}</div>
                                         <div class="text nav-link-dash">Services : {{ $gig->task->title }}</div>
                                         <div class="text nav-link-dash">Tool used :
                                             {{ $gig->equipmentPrice->equipment->name }}</div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
             <div class="d-flex justify-content-center gig-filter-paginate">
                 {{ $gigs->links() }}

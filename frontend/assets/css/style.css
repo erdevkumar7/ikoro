@@ -397,7 +397,7 @@ h1.first-top-text {
 a.book-now-btn {
     color: black;
     background: rgb(169 240 5);
-    padding: 9px 25px;
+    padding: 8px 25px;
     border-radius: 50px;
     text-decoration: none !important;
 }
@@ -757,7 +757,11 @@ section.testimonials h3.nav-link {
     max-width: 100%;
     margin-top: 8px !important;
 }
-
+.filter-host-user .partial-host-list .text.nav-link-dash {
+    text-align: left;
+    padding: 2px 8px;
+    font-size: 15px;
+}
 .row.filter-host-user .text.nav-link-dash.font-weight-bold.mt-4 {
     margin-top: 10px !important;
 }
@@ -871,15 +875,78 @@ footer.mt-5.text-white.pt-5 {
 
 h6.guest-fav-text {
     background-color: #fff;
-    width: 44%;
+    width: 38%;
     text-align: center;
     padding: 6px 0;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 13px;
     position: absolute;
     top: 55px;
     margin-left: 8px;
 }
+
+
+.meet-top-section-owl button.filter-submit {
+    background: none;
+    border: none;
+}
+
+.row.partial-host-list .card-body img {
+    width: 120px !important;
+    border-radius: 2px;
+    height: 120px !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: auto;
+}
+
+.host-by-name {
+    padding: 0;
+    text-align: left;
+    padding-left: 0;
+}
+.host-image {
+    padding: 0;
+}
+.host-by-name span.nav-link-dash {
+    font-size: 15px;
+}
+.row.partial-host-list .card-body {
+    padding-bottom: 0px;
+    height: 310px;
+}
+span.nav-link-dash.host-name-text {
+    font-size: 18px;
+    font-weight: 500;
+}
+.row.partial-host-list .card.p-3.mb-5 {
+    padding-bottom: 0px !important;
+}
+.gig-filter-paginate ul.pagination {
+    margin-top: 30px;
+}
+
+.gig-filter-paginate ul.pagination .page-item.active .page-link {
+    z-index: 3;
+    color: black;
+    background-color: #b3fa00;
+    border-color: #b3fa00;
+}
+.gig-filter-paginate ul.pagination .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: black;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.filter-host-user .partial-host-list {
+    justify-content: left;
+}
+
 
 @media only screen and (max-width: 767px) {
 
