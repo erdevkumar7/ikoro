@@ -13,6 +13,7 @@ use App\Models\EquipmentPrice;
 use App\Models\Gig;
 use App\Models\Host;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Unicodeveloper\Paystack\Facades\Paystack;
@@ -63,9 +64,55 @@ class HomeController extends Controller
     public function searchCity(Request $request)
     {
         $query = $request->input('query');
-        $cities = City::where('name', 'LIKE', "%{$query}%")->limit(10)->get();
-        return response()->json($cities);
+        // $cities = City::where('name', 'LIKE', "%{$query}%")->limit(10)->get();
+        // return response()->json($cities);
+        $cities = DB::table('cities')
+            ->where('name', 'like', "%{$query}%")
+            ->select('id', 'name', DB::raw("'City' as type"))
+            ->get();
+
+        $states = DB::table('states')
+            ->where('name', 'like', "%{$query}%")
+            ->select('id', 'name', DB::raw("'State' as type"))
+            ->get();
+
+        $countries = DB::table('countries')
+            ->where('name', 'like', "%{$query}%")
+            ->select('id', 'name', DB::raw("'Country' as type"))
+            ->get();
+
+        $results = $cities->merge($states)->merge($countries);
+
+        return response()->json($results);
     }
+
+    // public function searchLocations(Request $request)
+    // {
+    //     $query = $request->get('q');
+
+    //     if (!$query) {
+    //         return response()->json([]);
+    //     }
+
+    //     $cities = DB::table('cities')
+    //         ->where('name', 'like', "%{$query}%")
+    //         ->select('id', 'name', DB::raw("'City' as type"))
+    //         ->get();
+
+    //     $states = DB::table('states')
+    //         ->where('name', 'like', "%{$query}%")
+    //         ->select('id', 'name', DB::raw("'State' as type"))
+    //         ->get();
+
+    //     $countries = DB::table('countries')
+    //         ->where('name', 'like', "%{$query}%")
+    //         ->select('id', 'name', DB::raw("'Country' as type"))
+    //         ->get();
+
+    //     $results = $cities->merge($states)->merge($countries);
+
+    //     return response()->json($results);
+    // }
 
     public function filterGigs(Request $request)
     {
@@ -74,6 +121,7 @@ class HomeController extends Controller
         if ($request->filled('city_id')) {
             $where['city_id'] = $request->input('city_id');
         }
+
         if ($request->filled('task_id')) {
             $where['task_id'] = $request->input('task_id');
         }
@@ -105,9 +153,22 @@ class HomeController extends Controller
         $data['tasks'] = Task::all();
         $where = [];
 
-        if ($request->filled('city_id')) {
-            $where['city_id'] = $request->input('city_id');
+        // if ($request->filled('city_id')) {
+        //     $where['city_id'] = $request->input('city_id');
+        // }
+        if ($request->filled('location_id') && $request->filled('location_type')) {
+            $locationId = $request->input('location_id');
+            $locationType = $request->input('location_type');
+
+            if ($locationType === 'City') {
+                $where['city_id'] = $locationId;
+            } elseif ($locationType === 'State') {
+                $where['state_id'] = $locationId;
+            } elseif ($locationType === 'Country') {
+                $where['country_id'] = $locationId;
+            }
         }
+
         if ($request->filled('task_id')) {
             $where['task_id'] = $request->input('task_id');
         }
@@ -123,21 +184,20 @@ class HomeController extends Controller
             });
         }
 
-        $data['gigs'] = $gigs->paginate(6);
+        $data['gigs'] = $gigs->paginate(6)->appends($request->all());
         // dd($data);
         return view('pages.gig-filter-host', $data);
-      
     }
 
     public function getSelectedHost(Request $request)
     {
         $host_id = $request->input('host_id');
-        $host_profile = Host::with('gigs')->where('id', $host_id)->first();  
-        
+        $host_profile = Host::with('gigs')->where('id', $host_id)->first();
+
         if (!$host_profile) {
             return response()->json(['error' => 'Host not found'], 404);
-        }      
-        $html = view('partials.selected-host', compact('host_profile'))->render();    
+        }
+        $html = view('partials.selected-host', compact('host_profile'))->render();
         return response()->json(['html' => $html]);
     }
 
@@ -150,7 +210,7 @@ class HomeController extends Controller
         if ($client != "") {
             $data['loggedIn'] = $client;
         }
-        
+
         $data['host_profile']  = Host::with('gigs')->findOrFail($host_id);
         return view('pages.host-profile', $data);
     }

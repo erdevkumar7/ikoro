@@ -121,11 +121,39 @@
                 @csrf
                 <div class="container search-destinations">
                     <!-- Destination Section -->
+                    @php
+                        $locationName = '';
+
+                        if (old('location_id') || request('location_id')) {
+                            $id = old('location_id', request('location_id'));
+                            $type = old('location_type', request('location_type'));
+
+                            if ($type === 'City') {
+                                $location = \App\Models\City::find($id);
+                            } elseif ($type === 'State') {
+                                $location = \App\Models\State::find($id);
+                            } elseif ($type === 'Country') {
+                                $location = \App\Models\Country::find($id);
+                            }
+
+                            if (isset($location)) {
+                                $locationName = $location->name . '-' . $type;
+                            }
+                        }
+                    @endphp
                     <div class="destination-section">
                         <label for="search-destination">Where</label>
-                        <input type="text" name="city_id" id="citySearchByInput" class="search-destination"
+                        <input type="text" name="location_name" id="citySearchByInput" class="search-destination"
                             data-url="{{ route('search.cities') }}" placeholder="Search destinations" required
-                            autocomplete="off" />
+                            autocomplete="off" value="{{ $locationName }}" />
+
+                        <input type="hidden" name="location_id" id="selectedCityId"
+                            value="{{ old('location_id', request('location_id')) }}">
+                        <input type="hidden" name="location_type" id="locationType"
+                            value="{{ old('location_type', request('location_type')) }}">
+                        {{-- <input type="text" name="location" id="locationSearchInput" class="search-destination"
+                            data-url="{{ route('search.locations') }}" placeholder="Search destinations" required
+                            autocomplete="off" /> --}}
                         <div id="cityDropdown" class="dropdown-menu"></div>
                     </div>
 

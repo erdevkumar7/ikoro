@@ -194,8 +194,8 @@ $(document).ready(function () {
                     dropdown.empty().show();
 
                     if (data.length > 0) {
-                        $.each(data, function (index, city) {
-                            dropdown.append(`<div class="dropdown-item city-item" data-id="${city.id}">${city.name}</div>`);
+                        $.each(data, function (index, results) {
+                            dropdown.append(`<div class="dropdown-item city-item" data-id="${results.id}" data-type="${results.type}">${results.name}-${results.type}</div>`);
                         });
                     } else {
                         dropdown.append('<div class="dropdown-item">No city found</div>');
@@ -209,16 +209,21 @@ $(document).ready(function () {
 
     // Handle city selection
     $(document).on('click', '.city-item', function () {
-        let cityName = $(this).text();
-        let cityId = $(this).data('id');
+        let locationNameText = $(this).text();
+        let locationId = $(this).data('id');
+        let locationType = $(this).data('type');
 
         // Set the city name in the input field
-        $('#citySearchByInput').val(cityName);
+        $('#citySearchByInput').val(locationNameText);
         // Create a hidden input field to store the city ID
         if ($('#selectedCityId').length === 0) {
-            $('#citySearchByInput').after(`<input type="hidden" name="city_id" id="selectedCityId" value="${cityId}">`);
+            $('#citySearchByInput').after(`
+                <input type="hidden" name="location_id" id="selectedCityId" value="${locationId}">
+                <input type="hidden" name="location_type" id="locationType" value="${locationType}">
+            `);            
         } else {
-            $('#selectedCityId').val(cityId);
+            $('#selectedCityId').val(locationId);
+            $('#locationType').val(locationType);
         }
 
         $('#cityDropdown').hide();
