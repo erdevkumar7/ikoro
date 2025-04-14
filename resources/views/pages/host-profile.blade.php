@@ -116,25 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!--   <div class="biography-sec">
-                            <h4>Biography</h4>
-                            <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
-                                malorum, a
-                                1st-century BC text by the Roman statesman and philosopher Cicero.</p>
-                            <h3>Languages</h3>
-                            <a href="#" class="eng-text">English</a>
-                            <h2>Location</h2>
-                            @if ($host_profile->gigs->isNotEmpty())
-                                @foreach ($host_profile->gigs->unique('city_id') as $gig)
-<h1>{{ $gig->city->name }}</h1>
-@endforeach
-@else
-<h1>N/A</h1>
-                            @endif
-                            <a href="#" class="book-now-btn">Book Now</a>
-                        </div> -->
+                        </div>                    
 
                         <div class="container select-duration">
                             <div class="row select-duration-inner">
@@ -234,37 +216,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-                <!--     <div class="lists-maximum-offers">
-                    <div class="container">
-                        <h1 class="text-white text-center">My Offers</h1>
-                        <div class="row maximum-offers-service">
-                            <div class="col-md-4">
-                                <p>Hill View Mountains Has Monkeys</p>
-                                <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Lakeside Forest With Lions</p>
-                                <img
-                                    src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-
-                            <div class="col-md-4">
-                                <p>Achia Forest Beautiful Sites</p>
-                                <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
-
 
             </div>
         @else

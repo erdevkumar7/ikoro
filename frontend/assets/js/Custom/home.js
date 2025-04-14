@@ -51,7 +51,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $(document).on('click', '#task', function () {
+    $(document).on('click', '#task1', function () {
         let taskId = $(this).data('id');
         let url = $(this).data('url');
         try {
@@ -184,7 +184,7 @@ $(document).ready(function () {
     $('#citySearchByInput').on('keyup', function () {
         let query = $(this).val();
         let url = $(this).attr('data-url');
-        if (query.length > 1) {
+        if (query.length > 0) {
             $.ajax({
                 url: url,
                 type: "GET",

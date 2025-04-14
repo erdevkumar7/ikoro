@@ -22,6 +22,7 @@ Route::get('/home-dashboard-details/{gig}', function (Gig $gig) {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search-cities', [HomeController::class, 'searchCity'])->name('search.cities');
 Route::get('/filter-gigs', [HomeController::class, 'filterGigs'])->name('filter.gigs');
+Route::any('/filter-host', [HomeController::class, 'filterHost'])->name('filter.host');
 Route::get('/get-selected-host', [HomeController::class, 'getSelectedHost'])->name('get.selectedhost');
 Route::get('/get-host-{host_id}/profile', [HomeController::class, 'hostProfileById'])->name('get.host.profile');
 Route::get('/search/gig/task', [HomeController::class, 'gigSearchedOnTask'])->name('home.task');

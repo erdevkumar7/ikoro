@@ -99,6 +99,36 @@ class HomeController extends Controller
         return response()->json(['html' => $html]);
     }
 
+    public function filterHost(Request $request)
+    {
+        $data = $this->prepareData($request);
+        $data['tasks'] = Task::all();
+        $where = [];
+
+        if ($request->filled('city_id')) {
+            $where['city_id'] = $request->input('city_id');
+        }
+        if ($request->filled('task_id')) {
+            $where['task_id'] = $request->input('task_id');
+        }
+        if ($request->filled('equipment_id')) {
+            $where['equipment_id'] = $request->input('equipment_id');
+        }
+
+        $gigs = Gig::where($where);
+        if ($request->filled('gender')) {
+            $gender = $request->input('gender');
+            $gigs->whereHas('host', function ($query) use ($gender) {
+                $query->where('gender', $gender);
+            });
+        }
+
+        $data['gigs'] = $gigs->paginate(5);
+        // dd($data);
+        return view('pages.gig-filter-host', $data);
+      
+    }
+
     public function getSelectedHost(Request $request)
     {
         $host_id = $request->input('host_id');
