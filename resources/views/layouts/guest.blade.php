@@ -24,7 +24,6 @@
             font-size: 40px;
             margin-top: 0px;
         }
-        
     </style>
 </head>
 
@@ -33,12 +32,12 @@
         <div class="container">
             <!-- Left Side (Logo) -->
             <x-application-logo />
-            <button style="margin-right: 15px;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button style="margin-right: 15px;" class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 {{-- <span class="navbar-toggler-icon"></span> --}}
                 <i class="fa-solid fa-ellipsis dot"></i>
             </button>
-            
+
 
             <!-- Collapse section -->
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -89,10 +88,13 @@
                 <!-- Column 1: Company Information -->
                 <div class="col-12 col-md-4 mb-4">
                     <h5 class="text-uppercase font-weight-bold"><x-application-logo /></h5>
-                    <p class="small">We are the first interactive on-demand live video app on the internet. See it, Do it, and Be Sure. It is live and interactive to Your Cell Phone, Computer, or Smart Television.</p>
+                    <p class="small">iKORO is one-on-one interactive on-demand live video hailing application.
+                        Enjoy culture, people, see places, and make that long trip from the
+                        comfort of your home or office.
+                    </p>
                     <div class="social-icon d-flex justify-content-center gap-3">
-                        <a href="https://www.facebook.com/ikoroHQ" target="_blank" class="text-white" aria-label="Facebook"><i
-                                class="fa-brands fa-facebook fa-lg"></i></a>
+                        <a href="https://www.facebook.com/ikoroHQ" target="_blank" class="text-white"
+                            aria-label="Facebook"><i class="fa-brands fa-facebook fa-lg"></i></a>
                         <a href="https://x.com/ikoroHq" target="_blank" class="text-white" aria-label="Twitter"><i
                                 class="fa-brands fa-twitter fa-lg"></i></a>
                     </div>
@@ -104,20 +106,26 @@
                     <ul class="list-unstyled">
                         <li>
                             @if (Auth::check())
-                                <a href="{{ route('ikoro.support') }}" class="text-white text-decoration-none">Support</a>
+                                <a href="{{ route('ikoro.support') }}"
+                                    class="text-white text-decoration-none">Support</a>
                             @else
                                 <a href="{{ route('login') }}" class="text-white text-decoration-none">Support</a>
                             @endif
                         </li>
                         <li><a href="{{ route('aboutUs') }}" class="text-white text-decoration-none">About Us</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Blog <br> <small></small></a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Announcements <br> <small></small> </a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Announcements <br> <small></small>
+                            </a></li>
                         <li><a href="{{ route('FAQ') }}" class="text-white text-decoration-none">FAQs</a></li>
-                        <li><a href="{{ route('termAndCondition') }}" class="text-white text-decoration-none">Terms & Conditions</a></li>
-                        <li><a href="{{ route('privacyPolicy') }}" class="text-white text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="{{ route('cookiePolicy') }}" class="text-white text-decoration-none">Cookie Policy</a></li>
+                        <li><a href="{{ route('termAndCondition') }}" class="text-white text-decoration-none">Terms &
+                                Conditions</a></li>
+                        <li><a href="{{ route('privacyPolicy') }}" class="text-white text-decoration-none">Privacy
+                                Policy</a></li>
+                        <li><a href="{{ route('cookiePolicy') }}" class="text-white text-decoration-none">Cookie
+                                Policy</a></li>
                         <li><a href="#" class="text-white text-decoration-none d-none">Complaints Policy</a></li>
-                        <li><a href="#" class="text-white text-decoration-none d-none">Safeguarding Policy</a></li>
+                        <li><a href="#" class="text-white text-decoration-none d-none">Safeguarding Policy</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -125,7 +133,8 @@
                 <div class="col-12 col-md-4 mb-4">
                     <h5 class="text-uppercase font-weight-bold">Contact Us</h5>
                     <ul class="list-unstyled">
-                        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:support@ikoro.ng" style="color: white;">mail@ikoro.co</a></li>
+                        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:support@ikoro.ng"
+                                style="color: white;">mail@ikoro.co</a></li>
                     </ul>
                 </div>
             </div>
@@ -145,7 +154,8 @@
         <!-- Bottom Section: Copyright -->
         <div class="py-2">
             <div class="container text-center">
-                <p class="mb-0 small">© <?= date('Y') ?> ikoro is Powered by Tradesisi Ventures BN REGISTRATION NO. 3391073 (Nigeria). All rights reserved.</p>
+                <p class="mb-0 small">©<?= date('Y') ?> iKORO INC. (iKORO.co). Business office; 30 N Gould St Ste 100
+                    Sheridan, WY 82801 U.S.A.</p>
                 <p class="mb-0 small">
                     <a href="{{ route('termAndCondition') }}" class="text-white text-decoration-none">Terms</a> |
                     <a href="{{ route('FAQ') }}" class="text-white text-decoration-none">Sitemap</a> |

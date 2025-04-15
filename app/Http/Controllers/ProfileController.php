@@ -33,6 +33,7 @@ class ProfileController extends Controller
             'enrolement_datetime' => ['nullable', 'date'],
             // 'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'image' => ['nullable', 'max:2048'],
+            'biography' => ['nullable', 'max:255'],
         ]);
 
         $data = [
@@ -44,25 +45,26 @@ class ProfileController extends Controller
             $data['password'] = Hash::make($request->password);
         }
         User::where('id', Auth::id())->update($data);
-
         $user = User::where('id', Auth::id())->first();
-
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-
-            $uploadDirectory = public_path('uploads/host');
-            $existingImagePath = $uploadDirectory . '/' . $imagePath;
-            if (!is_null($imagePath) && file_exists($existingImagePath)) {
-                unlink($existingImagePath);
+            $host = Host::where("user_id", Auth::id())->first();            
+            if ($host->image) {
+                $oldImagePath = public_path() . '/' . $host->image;               
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
             }
+            // $uploadDirectory = public_path('uploads/host');
+            // $existingImagePath = $uploadDirectory . '/' . $imagePath;
+            // if (!is_null($imagePath) && file_exists($existingImagePath)) {
+            //     unlink($existingImagePath);
+            // }
 
             $image = $request->file('image');
-
             $imageName = time() . '_' . $image->getClientOriginalName();
-
             $imagePath = $image->move(public_path('uploads/host'), $imageName);
-
             $imagePath = 'uploads/host/' . $imageName;
         }
 
@@ -76,6 +78,7 @@ class ProfileController extends Controller
             'skype_id' => $request->skype_id,
             'enrolement_datetime' => $request->enrolement_datetime,
             'image' => $imagePath,
+            'biography' => $request->biography,
         ]);
 
         return redirect()->route('host.profile')->with('message', 'Your Profile Updated Successfully');

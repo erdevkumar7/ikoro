@@ -142,7 +142,7 @@
                         }
                     @endphp
                     <div class="destination-section">
-                        <label for="search-destination">Where</label>
+                        {{-- <label for="search-destination">Where</label> --}}
                         <input type="text" name="location_name" id="citySearchByInput" class="search-destination"
                             data-url="{{ route('search.cities') }}" placeholder="Search destinations" required
                             autocomplete="off" value="{{ $locationName }}" />
@@ -159,10 +159,10 @@
 
                     <!-- Service Section -->
                     <div class="service-section">
-                        <label for="choose-service">Choose a service</label>
+                        {{-- <label for="choose-service">Choose a service</label> --}}
                         <select id="choose-service" name="task_id" class="choose-service">
                             <option value="" {{ old('task_id', request('task_id')) == '' ? 'selected' : '' }}>
-                                -- All services --
+                                Choose a service
                             </option>
                             @foreach ($tasks as $task)
                                 <option value="{{ $task['id'] }}"
@@ -175,11 +175,10 @@
 
                     <!-- Tool Section -->
                     <div class="tool-section">
-                        <label for="choose-tool">Choose a tool</label>
+                        {{-- <label for="choose-tool">Choose a tool</label> --}}
                         <select name="equipment_id" id="equipment_id" class="choose-tool">
                             <option value=""
-                                {{ old('equipment_id', request('equipment_id')) == '' ? 'selected' : '' }}>--All
-                                tools--</option>
+                                {{ old('equipment_id', request('equipment_id')) == '' ? 'selected' : '' }}>Choose a tool</option>
                             @foreach ($equipment_price_all as $row)
                                 <option value="{{ $row->id }}"
                                     {{ old('equipment_id', request('equipment_id')) == $row->id ? 'selected' : '' }}>
@@ -191,10 +190,10 @@
 
                     <!-- Gender Section -->
                     <div class="gender-section">
-                        <label for="choose-gender">Host gender</label>
+                        {{-- <label for="choose-gender">Host gender</label> --}}
                         <select id="gender" name="gender" class="choose-gender">
                             <option value="" {{ old('gender', request('gender')) == '' ? 'selected' : '' }}>
-                                --All gender--
+                                Host gender
                             </option>
                             <option value="male" {{ old('gender', request('gender')) == 'male' ? 'selected' : '' }}>
                                 Male

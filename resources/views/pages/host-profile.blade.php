@@ -70,9 +70,13 @@
                         <div class="col-md-3 biography-left-content">
                             <div class="biography-sec">
                                 <h4>Biography</h4>
-                                <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
-                                    malorum, a
-                                    1st-century BC text by the Roman statesman and philosopher Cicero.</p>
+                                @if ($host_profile->biography)
+                                    <p>{{ $host_profile->biography }}</p>
+                                @else
+                                    <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
+                                        malorum, a
+                                        1st-century BC text by the Roman statesman and philosopher Cicero.</p>
+                                @endif
                                 <h3>Languages</h3>
                                 <a href="#" class="eng-text">English</a>
                                 <h2>Location</h2>
@@ -116,7 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                    
+                        </div>
 
                         <div class="container select-duration">
                             <div class="row select-duration-inner">

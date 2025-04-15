@@ -119,9 +119,10 @@
                             <div class="form-group" style="padding-bottom: 30px;">
                                 <label for="image">Upload Image</label>
                                 <x-text-input type="file" class="form-control" id="image" name="image"
-                                    :value="isset($data) ? $data->image : old('image')" required />
+                                    :value="isset($data) ? $data->image : old('image')"  />
                                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                                <img src="{{ asset(isset($data) ? $data->image : '') }}" class="img-fluid" width="40" alt="no-image">
+                                <img src="{{ asset(isset($data) ? $data->image : '') }}" class="img-fluid" width="40"
+                                    alt="no-image">
                             </div>
 
                             <!-- Enrollment Briefing Date/Time -->
@@ -131,6 +132,13 @@
                                     name="enrolement_datetime" :value="isset($data) ? $data->enrolement_datetime : old('enrolement_datetime')" required />
                                 <x-input-error :messages="$errors->get('enrolement_datetime')" class="mt-2" />
                             </div>
+
+                            <div class="form-group" style="padding-bottom: 30px;">
+                                <label for="biography">Biography</label>
+                                <textarea name="biography" id="biography" rows="3" class="form-control" required>{{ isset($data) ? $data->biography : old('biography') }}</textarea>
+                                <x-input-error :messages="$errors->get('biography')" class="mt-2" />
+                            </div>
+
 
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary float-right">Update</button>
