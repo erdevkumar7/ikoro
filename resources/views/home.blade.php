@@ -15,54 +15,57 @@
                                 {{-- <div class="single-box select-host-click" data-id="{{ $host->id }}"
                                 data-url="{{ route('get.selectedhost') }}"> --}}
                                 <div class="single-box">
-                                    <a href="{{ route('get.host.profile', $host->id) }}">
-                                        <div class="img-area">
-                                            {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
-                                            @if ($host->image)
-                                                <img class="img-fluid" src="{{ asset('public/' . $host->image) }}"
-                                                    alt="{{ $host->name }}" />
+                                    <div class="img-area">
+                                        {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
+                                        @if ($host->image)
+                                            <img class="img-fluid" src="{{ asset('public/' . $host->image) }}"
+                                                alt="{{ $host->name }}" />
+                                        @else
+                                            <img class="img-fluid" src="{{ asset('frontend/images/host.jpg') }}"
+                                                alt="" />
+                                        @endif
+                                        <div class="star-count">
+                                            <a href="{{ route('get.host.profile', $host->id) }}">View More</a>
+                                        </div>
+                                    </div>
+                                    <div class="detils-inner">
+                                        <p><i class="fa fa-user" aria-hidden="true"></i>{{ $host->name }}</p>
+                                        <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            @php
+                                                $uniqueCities = $host->gigs
+                                                    ->unique('city_id')
+                                                    ->pluck('city.name')
+                                                    ->filter()
+                                                    ->first();
+                                            @endphp
+
+                                            {{ $uniqueCities ?? 'N/A' }}
+                                        </p>
+                                        <p><i class="fa fa-cogs" aria-hidden="true"></i>
+                                            @if ($host->gigs->isNotEmpty())
+                                                {{ $host->gigs->unique('task_id')->first()->task->title }}
                                             @else
-                                                <img class="img-fluid" src="{{ asset('frontend/images/host.jpg') }}"
-                                                    alt="" />
+                                                N/A
                                             @endif
-                                        </div>
-                                        <div class="detils-inner">
-                                            <p>Name: {{ $host->name }}</p>
-                                            <p>City:
-                                                @php
-                                                    $uniqueCities = $host->gigs
-                                                        ->unique('city_id')
-                                                        ->pluck('city.name')
-                                                        ->filter()
-                                                        ->first();
-                                                @endphp
+                                        </p>
 
-                                                {{ $uniqueCities ?? 'N/A' }}
-                                            </p>
-                                            <p>Services offered:
-                                                @if ($host->gigs->isNotEmpty())
-                                                    {{ $host->gigs->unique('task_id')->first()->task->title }}
-                                                @else
-                                                    N/A
-                                                @endif
-                                            </p>
+                                        <p> <i class="fa fa-camera-retro" aria-hidden="true"></i>
+                                            @if ($host->gigs->isNotEmpty())
+                                                {{ $host->gigs->unique('equipment_id')->first()->equipmentPrice->equipment->name }}
+                                            @else
+                                                N/A
+                                            @endif
+                                        </p>
 
-                                            <p class="rating-review-point">Rating :
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </p>
-                                            <p>Tool used:
-                                                @if ($host->gigs->isNotEmpty())
-                                                    {{ $host->gigs->unique('equipment_id')->first()->equipmentPrice->equipment->name }}
-                                                @else
-                                                    N/A
-                                                @endif
-                                            </p>
+                                        <p class="rating-review-point">
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </p>
 
-                                        </div>
-                                    </a>
+                                    </div>
+
                                 </div>
                             @endforeach
                         </div>
@@ -99,10 +102,10 @@
                             items: 3,
                         },
                         1200: {
-                            items: 4,
+                            items: 3,
                         },
                         1920: {
-                            items: 4,
+                            items: 3,
                         },
                     },
                     onInitialized: function() {

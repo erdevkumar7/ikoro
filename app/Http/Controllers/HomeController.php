@@ -61,58 +61,48 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
-    public function searchCity(Request $request)
+    // public function searchCity(Request $request)
+    // {
+    //     $query = $request->input('query');
+    //     $cities = City::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
+    //         return ['id' => $item->id, 'name' => $item->name, 'type' => 'City'];
+    //     });
+
+    //     $states = State::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
+    //         return ['id' => $item->id, 'name' => $item->name, 'type' => 'State'];
+    //     });
+
+    //     $countries = Country::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
+    //         return ['id' => $item->id, 'name' => $item->name, 'type' => 'Country'];
+    //     });
+
+    //     $results = $cities->merge($states)->merge($countries)->take(10);
+
+    //     return response()->json($results);
+    // }
+
+    public function searchLocations(Request $request)
     {
         $query = $request->input('query');
         // $cities = City::where('name', 'LIKE', "%{$query}%")->limit(10)->get();
         // return response()->json($cities);
-        $cities = DB::table('cities')
-            ->where('name', 'like', "%{$query}%")
-            ->select('id', 'name', DB::raw("'City' as type"))
-            ->get();
 
-        $states = DB::table('states')
-            ->where('name', 'like', "%{$query}%")
-            ->select('id', 'name', DB::raw("'State' as type"))
-            ->get();
+        $cities = City::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
+            return ['id' => $item->id, 'name' => $item->name, 'type' => 'City'];
+        });
 
-        $countries = DB::table('countries')
-            ->where('name', 'like', "%{$query}%")
-            ->select('id', 'name', DB::raw("'Country' as type"))
-            ->get();
+        $states = State::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
+            return ['id' => $item->id, 'name' => $item->name, 'type' => 'State'];
+        });
 
-        $results = $cities->merge($states)->merge($countries);
+        $countries = Country::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
+            return ['id' => $item->id, 'name' => $item->name, 'type' => 'Country'];
+        });
+
+        $results = $cities->merge($states)->merge($countries)->take(10);
 
         return response()->json($results);
     }
-
-    // public function searchLocations(Request $request)
-    // {
-    //     $query = $request->get('q');
-
-    //     if (!$query) {
-    //         return response()->json([]);
-    //     }
-
-    //     $cities = DB::table('cities')
-    //         ->where('name', 'like', "%{$query}%")
-    //         ->select('id', 'name', DB::raw("'City' as type"))
-    //         ->get();
-
-    //     $states = DB::table('states')
-    //         ->where('name', 'like', "%{$query}%")
-    //         ->select('id', 'name', DB::raw("'State' as type"))
-    //         ->get();
-
-    //     $countries = DB::table('countries')
-    //         ->where('name', 'like', "%{$query}%")
-    //         ->select('id', 'name', DB::raw("'Country' as type"))
-    //         ->get();
-
-    //     $results = $cities->merge($states)->merge($countries);
-
-    //     return response()->json($results);
-    // }
 
     public function filterGigs(Request $request)
     {
