@@ -8,41 +8,41 @@
                 <div class="row partial-host-list">
                     @foreach ($gigs as $gig)
                         <div class="col-md-4 mb-4">
-                            <a href="{{ route('get.host.profile', $gig->host->id) }}">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-6 host-image">
-                                                @if ($gig->host->image)
-                                                    <img class="d-block" src="{{ asset('public/' . $gig->host->image) }}"
-                                                        alt="">
-                                                @else
-                                                    <img class="d-block w-100" src="{{ asset('frontend/images/host.jpg') }}"
-                                                        alt="">
-                                                @endif
-                                            </div>
-                                            <div class="col-6 mt-4 host-by-name">
-                                                <span class="nav-link-dash host-name-text">Host :
-                                                    {{ $gig->host->name }}</span>
-                                                <span class="nav-link-dash gender-host-text">Gender :
-                                                    {{ $gig->host->gender }}</span>
-                                            </div>
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 host-image">
+                                            @if ($gig->host->image)
+                                                <img class="d-block" src="{{ asset('public/' . $gig->host->image) }}"
+                                                    alt="">
+                                            @else
+                                                <img class="d-block w-100" src="{{ asset('frontend/images/host.jpg') }}"
+                                                    alt="">
+                                            @endif
                                         </div>
-                                        <div class="text nav-link-dash font-weight-bold mt-3">
-                                            {{ $gig->country->name ?? 'no-country' }} -
-                                            {{ $gig->state->name ?? 'no-state' }} -
-                                            {{ $gig->city->name ?? 'no-city' }} -
-                                            {{ $gig->zip->code ?? 'no-zipcode' }}
-                                        </div>
+                                        <div class="col-8 mt-4 host-by-name">
+                                            <span class="nav-link-dash host-name-text">
+                                                <i class="fa fa-user" aria-hidden="true"></i> {{ $gig->host->name }}</span>
 
-                                        <div class="text nav-link-dash">Phone : {{ $gig->host->phone }}</div>
-                                        <div class="text nav-link-dash">WhatsApp : {{ $gig->host->whatsapp_no }}</div>
-                                        <div class="text nav-link-dash">Services : {{ $gig->task->title }}</div>
-                                        <div class="text nav-link-dash">Tool used :
-                                            {{ $gig->equipmentPrice->equipment->name }}</div>
+                                                <div class="text nav-link-dash font-weight-bold mt-3">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>   
+                                                    {{ $gig->city->name ?? 'no-city' }},                                                 
+                                                    {{ $gig->state->name ?? 'no-state' }}                                                    
+                                                </div>
+            
+                                                <div class="text nav-link-dash"><i class="fa fa-cogs" aria-hidden="true"></i> {{ $gig->task->title }}</div>
+                                                <div class="text nav-link-dash">
+                                                    <i class="fa fa-camera-retro" aria-hidden="true"></i>
+                                                    {{ $gig->equipmentPrice->equipment->name }}</div>
+                                        </div>
                                     </div>
+                                 
                                 </div>
-                            </a>
+                                <div class="filter-view-more">
+                                    <a href="{{ route('get.host.profile', $gig->host->id) }}">View More</a>
+                                </div>
+                            </div>
+                          
                         </div>
                     @endforeach
                 </div>
