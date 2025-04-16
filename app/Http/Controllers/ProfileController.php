@@ -55,20 +55,14 @@ class ProfileController extends Controller
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
-            }
-            // $uploadDirectory = public_path('uploads/host');
-            // $existingImagePath = $uploadDirectory . '/' . $imagePath;
-            // if (!is_null($imagePath) && file_exists($existingImagePath)) {
-            //     unlink($existingImagePath);
-            // }
-
+            }        
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath = $image->move(public_path('uploads/host'), $imageName);
             $imagePath = 'uploads/host/' . $imageName;
         }
 
-        Host::where('user_id', $user->id)->update([
+        $hostUpdateData = [
             'name' => $user->name,
             'dob' => $request->dob,
             'gender' => $request->gender,
@@ -77,9 +71,14 @@ class ProfileController extends Controller
             'available_hours' => $request->available_hours,
             'skype_id' => $request->skype_id,
             'enrolement_datetime' => $request->enrolement_datetime,
-            'image' => $imagePath,
             'biography' => $request->biography,
-        ]);
+        ];
+
+        if ($imagePath !== null) {
+            $hostUpdateData['image'] = $imagePath;
+        }
+
+        Host::where('user_id', $user->id)->update($hostUpdateData);
 
         return redirect()->route('host.profile')->with('message', 'Your Profile Updated Successfully');
     }

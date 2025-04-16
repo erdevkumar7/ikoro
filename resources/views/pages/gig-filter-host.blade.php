@@ -21,28 +21,50 @@
                                             @endif
                                         </div>
                                         <div class="col-8 mt-4 host-by-name">
-                                            <span class="nav-link-dash host-name-text">
-                                                <i class="fa fa-user" aria-hidden="true"></i> {{ $gig->host->name }}</span>
+                                            <p><i class="fa fa-user" aria-hidden="true"></i> {{ $gig->host->name }}</p>
+                                            
+                                            <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                {{ $gig->city->name ?? 'no-city' }},
+                                                {{ $gig->state->name ?? 'no-state' }}</p>
 
-                                                <div class="text nav-link-dash font-weight-bold mt-3">
-                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>   
-                                                    {{ $gig->city->name ?? 'no-city' }},                                                 
-                                                    {{ $gig->state->name ?? 'no-state' }}                                                    
-                                                </div>
-            
-                                                <div class="text nav-link-dash"><i class="fa fa-cogs" aria-hidden="true"></i> {{ $gig->task->title }}</div>
-                                                <div class="text nav-link-dash">
-                                                    <i class="fa fa-camera-retro" aria-hidden="true"></i>
-                                                    {{ $gig->equipmentPrice->equipment->name }}</div>
+                                            <p><i class="fa fa-cogs" aria-hidden="true"></i>
+                                                {{ $gig->task->title }}</p>
+
+                                            <p><i class="fa fa-camera-retro" aria-hidden="true"></i>
+                                                {{ $gig->equipmentPrice->equipment->name }}</p>
                                         </div>
+
+                                        {{-- <div class="detils-inner">
+                                            <p><i class="fa fa-user" aria-hidden="true"></i>{{ $gig->host->name }}</p>
+                                            <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                {{ $gig->city->name ?? 'no-city' }},
+                                                {{ $gig->state->name ?? 'no-state' }}
+                                            </p>
+                                            <p><i class="fa fa-cogs" aria-hidden="true"></i>
+                                                {{ $gig->task->title }}
+                                            </p>
+    
+                                            <p> <i class="fa fa-camera-retro" aria-hidden="true"></i>
+                                                {{ $gig->equipmentPrice->equipment->name }}
+                                            </p>
+    
+                                            <p class="rating-review-point">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </p>    
+                                        </div> --}}
+
+
                                     </div>
-                                 
+
                                 </div>
                                 <div class="filter-view-more">
                                     <a href="{{ route('get.host.profile', $gig->host->id) }}">View More</a>
                                 </div>
                             </div>
-                          
+
                         </div>
                     @endforeach
                 </div>
