@@ -337,9 +337,9 @@ select:focus-visible {
 .select-service-right h1 {
     text-align: left;
 }
-
 .select-service-right {
     padding-left: 0px !important;
+    padding-right: 0;
 }
 
 .select-service-left {
@@ -353,11 +353,13 @@ div#feedback-testimonials .testimonial-name {
 
 .select-a-service h3 {
     text-align: left;
-    font-size: 17px;
+    font-size: 18px;
     color: #a9f005;
     margin-bottom: 0px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    width: 150px;
 }
-
 .host-booking-inner p {
     color: #fff;
     font-size: 14px;
@@ -377,13 +379,24 @@ div#feedback-testimonials .testimonial-name {
 .host-booking-inner i {
     color: #fff;
 }
-
+.lists-maximum-offers {
+    padding-top: 15px;
+}
 .select-a-tool h3 {
     text-align: left;
-    font-size: 17px;
+    font-size: 18px;
     color: #a9f005;
+    width: 120px;
 }
-
+.booking-select-add {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 0px;
+}
+.booking-select-add .select-booking-inner label {
+    margin-bottom: 0;
+}
 .select-a-tool {
     margin-top: 10px;
     text-align: left;
@@ -396,7 +409,7 @@ div#feedback-testimonials .testimonial-name {
 }
 .select-booking-inner p {
     margin-bottom: 0px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .available-time p {
@@ -919,9 +932,18 @@ p.rating-review-point {
 .col-md-3.biography-left-content {
     padding-left: 0;
 }
-
 .host-profile-by-id .select-service-right h1 {
     text-align: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.host-name-text-add p {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 0;
+}
+.host-booking-inner label {
+    margin-bottom: 0;
 }
 
 .host-profile-by-id .biography-sec h4 {
@@ -936,19 +958,64 @@ p.rating-review-point {
 .host-profile-by-id .select-service-left {
     flex: 0 0 23%;
 }
-
 .host-profile-by-id .select-a-service {
     text-align: center;
+    gap: 0px;
+    padding-bottom: 15px;
+    display: flex;
 }
+.biography-right-content a.carousel-control-next {
+    display: none;
+}
+.biography-right-content span.carousel-control-prev-icon {
+    display: none;
+}
+
+.biography-right-content .carousel-indicators li {
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 5px;
+    height: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: .5;
+    transition: opacity .6s ease;
+    border-radius: 100% !important;
+}
+
+.biography-right-content .carousel-indicators li.active {
+    color: #fff !important;
+    opacity: 3 !important;
+}
+ 
+.biography-right-content .carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+}
+
 
 .host-profile-by-id .select-a-tool {
-    gap: 12px;
+    gap: 0;
+    display: flex;
 }
-
 .host-profile-by-id .host-booking-inner {
-    margin-top: -15px;
+    margin-top: 0;
 }
-
+.host-select-add {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
 .host-profile-by-id .row.maximum-offers-service p {
     width: 100%;
     text-align: center;
@@ -1082,6 +1149,15 @@ span.nav-link-dash.host-name-text {
     border-color: #000 !important;
     box-shadow: none;
 }
+
+.host-name-text-add {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
 
 @media only screen and (max-width: 767px) {
 
