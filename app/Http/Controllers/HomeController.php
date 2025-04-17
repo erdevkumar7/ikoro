@@ -202,6 +202,8 @@ class HomeController extends Controller
         }
 
         $data['host_profile']  = Host::with('gigs.media')->findOrFail($host_id);
+        $data['tasks'] = Task::all();
+        $data['equipments'] = Equipment::all();
         // dd($data);
         return view('pages.host-profile', $data);
     }

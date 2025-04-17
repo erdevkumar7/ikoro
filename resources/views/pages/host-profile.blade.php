@@ -22,7 +22,19 @@
                             <h1>{{ $host_profile->name }}</h1>
                             <div class="select-a-service">
                                 <h3>Select a Service </h3>
-                                @if ($host_profile->gigs->isNotEmpty())
+                                @foreach ($tasks as $task)
+                                    <div class="host-booking-inner">
+                                        <label for="task-checkbox-{{ $task->id }}">
+                                            <i class="{{ $task->icon }}"></i>
+                                            <p>{{ $task->title }}</p>
+                                        </label>
+                                        <input type="checkbox" class="task-checkbox"
+                                            id="task-checkbox-{{ $task->id }}" value="{{ $task->id }}" />
+                                    </div>
+                                @endforeach
+
+
+                                {{-- @if ($host_profile->gigs->isNotEmpty())
                                     @foreach ($host_profile->gigs->unique('task_id') as $gig)
                                         <div class="host-booking-inner">
                                             <label for="city-tours-checkbox">
@@ -39,12 +51,20 @@
                                             <p>No gigs available.</p>
                                         </label>
                                     </div>
-                                @endif
+                                @endif --}}
                             </div>
 
                             <div class="select-a-tool">
                                 <h3>Select Tools </h3>
-                                @if ($host_profile->gigs->isNotEmpty())
+                                @foreach ($equipments as $equipment)
+                                    <div class="select-booking-inner">
+                                        <label for="city-tours-checkbox">
+                                            <p>{{ $equipment->name }}</p>
+                                        </label>
+                                        <input type="checkbox" id="city-tours-checkbox" />
+                                    </div>
+                                @endforeach
+                                {{-- @if ($host_profile->gigs->isNotEmpty())
                                     @foreach ($host_profile->gigs->unique('equipment_id') as $gig)
                                         <div class="select-booking-inner">
                                             <label for="city-tours-checkbox">
@@ -59,7 +79,7 @@
                                             <p>No tools available</p>
                                         </label>
                                     </div>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
 
@@ -69,78 +89,106 @@
                             </p>
                         </div>
 
-                        <div class="col-md-3 biography-left-content">
-                            <div class="biography-sec">
-                                <h4>Biography</h4>
-                                @if ($host_profile->biography)
-                                    <p>{{ $host_profile->biography }}</p>
-                                @else
-                                    <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
-                                        malorum, a
-                                        1st-century BC text by the Roman statesman and philosopher Cicero.</p>
-                                @endif
-                                <h3>Languages</h3>
-                                <a href="#" class="eng-text">English</a>
-                                <h2>Location</h2>
-                                @if ($host_profile->gigs->isNotEmpty())
-                                    @foreach ($host_profile->gigs->unique('city_id') as $gig)
-                                        <h1>{{ $gig->city->name }}</h1>
-                                    @endforeach
-                                @else
-                                    <h1>N/A</h1>
-                                @endif
-                                <a href="#" class="book-now-btn">Book Now</a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-9 biography-right-content">
-                            <div class="lists-maximum-offers">
-                                <div class="container">
-                                    <h1 class="text-white text-center">My Offers</h1>
-                                    @if ($host_profile->gigs->isNotEmpty())
-                                        <div class="row maximum-offers-service">
-                                            @foreach ($host_profile->gigs as $gig)
-                                                <div class="col-md-4">
-                                                    <p>{{ $gig->title }}</p>
-                                                    @if ($gig->media->count())
-                                                        @foreach ($gig->media as $media)
-                                                            <img
-                                                                src="{{ asset('storage/app/public') . '/' . $media->path }}" />
-                                                        @endforeach
-                                                        <i class="fa-solid fa-heart"></i>
-                                                        {{-- <h6 class="guest-fav-text">Guest favorite</h6> --}}
-                                                    @endif
-                                                </div>
-                                            @endforeach
-                                        </div>
+                        <div class="row biography-finibus">
+                            <div class="col-md-3 biography-left-content">
+                                <div class="biography-sec">
+                                    <h4>Biography</h4>
+                                    @if ($host_profile->biography)
+                                        <p>{{ $host_profile->biography }}</p>
                                     @else
-                                        <div class="row maximum-offers-service">
-                                            <div class="col-md-4">
-                                                <p>Hill View Mountains Has Monkeys</p>
-                                                <img
-                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                <i class="fa-solid fa-heart"></i>
-                                                <h6 class="guest-fav-text">Guest favorite</h6>
-
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p>Lakeside Forest With Lions</p>
-                                                <img
-                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-                                                <i class="fa-solid fa-heart"></i>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <p>Achia Forest Beautiful Sites</p>
-                                                <img
-                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                <i class="fa-solid fa-heart"></i>
-                                            </div>
-                                        </div>
+                                        <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
+                                            malorum, a
+                                            1st-century BC text by the Roman statesman and philosopher Cicero.</p>
                                     @endif
+                                    <div class="english-tad-add">
+                                        <h3>Languages</h3>
+                                        <a href="#" class="eng-text">English</a>
+                                    </div>
+
+
+                                    <h2>Location</h2>
+
+                                    <div class="location-tab-add">
+                                        @if ($host_profile->gigs->isNotEmpty())
+                                            @foreach ($host_profile->gigs->unique('city_id') as $gig)
+                                                <h1>{{ $gig->city->name }}</h1>
+                                            @endforeach
+                                        @else
+                                            <h1>N/A</h1>
+                                        @endif
+                                        <a href="#" class="book-now-btn">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 biography-right-content">
+                                <div class="lists-maximum-offers">
+                                    <div class="container">
+                                        <h1 class="text-white text-center">My Offers</h1>
+                                        @if ($host_profile->gigs->isNotEmpty())                                           
+
+                                            {{-- <div class="row maximum-offers-service">
+                                                @foreach ($host_profile->gigs as $gig)
+                                                    <div class="col-md-4">
+                                                        <p>{{ $gig->title }}</p>
+                                                        @if ($gig->media->count())
+                                                            @foreach ($gig->media as $media)
+                                                                <img
+                                                                    src="{{ asset('storage/app/public') . '/' . $media->path }}" />
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div> --}}
+
+                                            <div class="row maximum-offers-service all-media">
+                                                @foreach ($host_profile->gigs as $gig)
+                                                    <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}">
+                                                        <p>{{ $gig->title }}</p>
+                                                        @if ($gig->media->count())
+                                                            @foreach ($gig->media as $media)
+                                                                <img src="{{ asset('storage/app/public/' . $media->path) }}" />
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
+                                            <div class="row maximum-offers-service filtered-media filter-task-gig" style="display: none;">
+                                                {{-- JS will inject gigs related to selected task here --}}
+                                            </div>
+                                            
+                                            
+                                        @else
+                                            <div class="row maximum-offers-service">
+                                                <div class="col-md-4">
+                                                    <p>Hill View Mountains Has Monkeys</p>
+                                                    <img
+                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <h6 class="guest-fav-text">Guest favorite</h6>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p>Lakeside Forest With Lions</p>
+                                                    <img
+                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <p>Achia Forest Beautiful Sites</p>
+                                                    <img
+                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="container select-duration">
                             <div class="row select-duration-inner">
@@ -317,4 +365,53 @@
             });
         });
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const allMediaDiv = document.querySelector('.all-media');
+        const filteredMediaDiv = document.querySelector('.filtered-media');
+        const allGigs = @json($host_profile->gigs);
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                // Uncheck all others to allow only one checked
+                checkboxes.forEach(cb => {
+                    if (cb !== this) cb.checked = false;
+                });
+
+                if (this.checked) {
+                    const selectedTaskId = this.value;
+                    const filtered = allGigs.filter(gig => gig.task_id == selectedTaskId);
+
+                    // Clear and build HTML
+                    filteredMediaDiv.innerHTML = '';
+                    filtered.forEach(gig => {
+                        let mediaHTML = '';
+                        if (gig.media && gig.media.length) {
+                            gig.media.forEach(media => {
+                                mediaHTML += `<img src="{{ asset('storage/app/public') }}/${media.path}" />`;
+                            });
+                        }
+                        filteredMediaDiv.innerHTML += `
+                            <div class="col-md-4">
+                                <p>${gig.title}</p>
+                                ${mediaHTML}
+                            </div>
+                        `;
+                    });
+
+                    allMediaDiv.style.display = 'none';
+                    filteredMediaDiv.style.display = 'flex';
+                } else {
+                    allMediaDiv.style.display = 'flex';
+                    filteredMediaDiv.style.display = 'none';
+                    filteredMediaDiv.innerHTML = '';
+                }
+            });
+        });
+    });
+</script>
+
+
 </x-guest-layout>
