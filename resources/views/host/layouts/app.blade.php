@@ -44,7 +44,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="bookingDropdown">
                         <a class="dropdown-item" href="{{ route('host.gig.index') }}">My Gigs</a>
-                        <a class="dropdown-item" href="{{ route('host.offer.addedit') }}">My Offers</a>
                         <a class="dropdown-item" href="{{ route('host.gig.addedit') }}">Add New</a>
                     </div>
                 </li>

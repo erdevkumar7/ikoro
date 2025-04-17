@@ -64,7 +64,9 @@
                         </div>
 
                         <div class="col-md-2 available-time">
-                            <p>Available Hours form 10.30am to 06.30pm</p>
+                            <p>Available Hours
+                                {{ $host_profile->available_hours ? $host_profile->available_hours . ' hr' : 'N/a' }}
+                            </p>
                         </div>
 
                         <div class="col-md-3 biography-left-content">
@@ -95,29 +97,47 @@
                             <div class="lists-maximum-offers">
                                 <div class="container">
                                     <h1 class="text-white text-center">My Offers</h1>
-                                    <div class="row maximum-offers-service">
-                                        <div class="col-md-4">
-                                            <p>Hill View Mountains Has Monkeys</p>
-                                            <img
-                                                src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                            <i class="fa-solid fa-heart"></i>
-                                            <h6 class="guest-fav-text">Guest favorite</h6>
+                                    @if ($host_profile->gigs->isNotEmpty())
+                                        <div class="row maximum-offers-service">
+                                            @foreach ($host_profile->gigs as $gig)
+                                                <div class="col-md-4">
+                                                    <p>{{ $gig->title }}</p>
+                                                    @if ($gig->media->count())
+                                                        @foreach ($gig->media as $media)
+                                                            <img
+                                                                src="{{ asset('storage/app/public') . '/' . $media->path }}" />
+                                                        @endforeach
+                                                        <i class="fa-solid fa-heart"></i>
+                                                        {{-- <h6 class="guest-fav-text">Guest favorite</h6> --}}
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="row maximum-offers-service">
+                                            <div class="col-md-4">
+                                                <p>Hill View Mountains Has Monkeys</p>
+                                                <img
+                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                <i class="fa-solid fa-heart"></i>
+                                                <h6 class="guest-fav-text">Guest favorite</h6>
 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Lakeside Forest With Lions</p>
-                                            <img
-                                                src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-                                            <i class="fa-solid fa-heart"></i>
-                                        </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>Lakeside Forest With Lions</p>
+                                                <img
+                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
+                                                <i class="fa-solid fa-heart"></i>
+                                            </div>
 
-                                        <div class="col-md-4">
-                                            <p>Achia Forest Beautiful Sites</p>
-                                            <img
-                                                src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                            <i class="fa-solid fa-heart"></i>
+                                            <div class="col-md-4">
+                                                <p>Achia Forest Beautiful Sites</p>
+                                                <img
+                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                <i class="fa-solid fa-heart"></i>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

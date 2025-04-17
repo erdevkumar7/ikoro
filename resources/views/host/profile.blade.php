@@ -121,8 +121,11 @@
                                 <x-text-input type="file" class="form-control" id="image" name="image"
                                     :value="isset($data) ? $data->image : old('image')"  />
                                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                                <img src="{{ asset(isset($data) ? $data->image : '') }}" class="img-fluid" width="40"
-                                    alt="no-image">
+                                <!-- <img src="{{ asset(isset($data) ? $data->image : '') }}" class="img-fluid" width="40"
+                                    alt="no-image"> -->
+
+                                <img src="{{ url('public/' . (isset($data) ? $data->image : '')) }}" class="img-fluid" width="40"  alt="no-image">
+
                             </div>
 
                             <!-- Enrollment Briefing Date/Time -->

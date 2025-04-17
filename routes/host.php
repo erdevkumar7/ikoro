@@ -26,9 +26,7 @@ Route::middleware(['auth', 'verified', 'host'])->prefix('host')->group(function 
 
     Route::get('gigs/index/{status?}', [GigController::class, 'index'])->name('host.gig.index');
     Route::get('gig/addedit/{gig_id?}', [GigController::class, 'addedit'])->name('host.gig.addedit');
-    Route::post('gig/store', [GigController::class, 'store'])->name('host.gig.store');
-
-    Route::get('offer/addedit/{offer_id?}', [OfferController::class, 'offerAddEdit'])->name('host.offer.addedit');
+    Route::post('gig/store', [GigController::class, 'store'])->name('host.gig.store');   
 
     Route::post('gig/storeMedia/{gig_id?}', [GigController::class, 'storeMedia'])->name('host.gig.storeMedia');
     Route::GET('gig/deleteMedia/{gig_id}', [GigController::class, 'deleteMedia'])->name('host.gig.deleteMedia');

@@ -201,7 +201,8 @@ class HomeController extends Controller
             $data['loggedIn'] = $client;
         }
 
-        $data['host_profile']  = Host::with('gigs')->findOrFail($host_id);
+        $data['host_profile']  = Host::with('gigs.media')->findOrFail($host_id);
+        // dd($data);
         return view('pages.host-profile', $data);
     }
 
