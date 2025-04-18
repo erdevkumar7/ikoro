@@ -7,7 +7,7 @@
     <div class="host-profile-by-id">
         @if ($host_profile)
             <div class="container host-main-profile">
-                <h1 class="first-top-text">Host main profile/booking page</h1>
+                {{-- <h1 class="first-top-text">Host main profile/booking page</h1> --}}
                 <div class="booking-page">
                     <div class="row booking-mark-sdv">
                         <div class="col-md-3 select-service-left">
@@ -52,7 +52,7 @@
                                                 <p>{{ $equipment->name }}</p>
                                                 <input type="checkbox" class="equipment-checkbox"
                                                     id="equipment-checkbox-{{ $equipment->id }}"
-                                                    value="{{ $equipment->id }}" />
+                                                    value="{{ $equipment->id }}" disabled />
                                             </label>
                                         </div>
                                     @endforeach
@@ -425,6 +425,11 @@
 
             function filterGigs() {
                 const selectedTask = Array.from(taskCheckboxes).find(cb => cb.checked);
+                //enable Tools(equipment) checkbox
+                equipmentCheckboxes.forEach(eq => {
+                    eq.disabled = !selectedTask;
+                });
+
                 const selectedEquipments = Array.from(equipmentCheckboxes)
                     .filter(cb => cb.checked)
                     .map(cb => cb.value);
@@ -465,5 +470,6 @@
             });
         });
     </script>
+
 
 </x-guest-layout>
