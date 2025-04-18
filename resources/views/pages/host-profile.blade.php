@@ -51,8 +51,8 @@
                                         <div class="select-booking-inner">
                                             <label for="city-tours-checkbox">
                                                 <p>{{ $equipment->name }}</p>
-                                            </label>
-                                            <input type="checkbox" id="city-tours-checkbox" />
+                                                <input type="checkbox" id="city-tours-checkbox" />
+                                            </label>                                          
                                         </div>
                                     @endforeach
 
@@ -135,52 +135,6 @@
                                                                 @endif
                                                             </div>
                                                         @endif
-
-
-                                                        {{-- <div class="carousel slide carouselExampleIndicators"
-                                                            data-ride="carousel">
-                                                            <ol class="carousel-indicators">
-                                                                <li data-target=".carouselExampleIndicators"
-                                                                    data-slide-to="0" class="active"></li>
-                                                                <li data-target=".carouselExampleIndicators"
-                                                                    data-slide-to="1"></li>
-                                                                <li data-target=".carouselExampleIndicators"
-                                                                    data-slide-to="2"></li>
-                                                            </ol>
-                                                            <div class="carousel-inner">
-                                                                <div class="carousel-item active">
-                                                                    <img class="d-block w-100"
-                                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg"
-                                                                        alt="First slide">
-                                                                </div>
-                                                                <div class="carousel-item">
-                                                                    <img class="d-block w-100"
-                                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg"
-                                                                        alt="Second slide">
-                                                                </div>
-                                                                <div class="carousel-item">
-                                                                    <img class="d-block w-100"
-                                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg"
-                                                                        alt="Third slide">
-                                                                </div>
-                                                            </div>
-                                                            <a class="carousel-control-prev"
-                                                                href=".carouselExampleIndicators" role="button"
-                                                                data-slide="prev">
-                                                                <span class="carousel-control-prev-icon"
-                                                                    aria-hidden="true"></span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                            <a class="carousel-control-next"
-                                                                href=".carouselExampleIndicators" role="button"
-                                                                data-slide="next">
-                                                                <span class="carousel-control-next-icon"
-                                                                    aria-hidden="true"></span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </div> --}}
-
-
                                                     </div>
                                                 @endforeach
                                             </div>

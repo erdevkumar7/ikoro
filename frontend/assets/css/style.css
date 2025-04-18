@@ -437,6 +437,7 @@ div#feedback-testimonials .testimonial-name {
     margin: auto;
     font-size: 14px;
     text-align: center;
+    padding: 0 8px;
 }
 
 .biography-sec h3 {
@@ -1157,6 +1158,19 @@ span.nav-link-dash.host-name-text {
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+.maximum-offers-service.all-media span.carousel-control-prev-icon {
+    display: block;
+}
+.maximum-offers-service.all-media button.carousel-control-prev {
+    background: none;
+    border: none;
+}
+.maximum-offers-service.all-media button.carousel-control-next {
+    background: none;
+    border: none;
+}
+
 
 
 @media only screen and (max-width: 767px) {
