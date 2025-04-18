@@ -138,11 +138,6 @@
                                                     </div>
                                                 @endforeach
                                             </div>
-
-                                            <div class="row maximum-offers-service filtered-media filter-task-gig"
-                                                style="display: none;">
-                                                {{-- JS will inject gigs related to selected task here --}}
-                                            </div>
                                         @else
                                             <div class="row maximum-offers-service">
                                                 <div class="col-md-4">
@@ -351,53 +346,39 @@
         });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.task-checkbox');
-            const allMediaDiv = document.querySelector('.all-media');
-            const filteredMediaDiv = document.querySelector('.filtered-media');
-            const allGigs = @json($host_profile->gigs);
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const gigs = document.querySelectorAll('.gig-box');
+    
             checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    // Uncheck all others to allow only one checked
+                checkbox.addEventListener('change', function () {
+                    // Uncheck all other checkboxes so only one is selected
                     checkboxes.forEach(cb => {
                         if (cb !== this) cb.checked = false;
                     });
-
-                    if (this.checked) {
-                        const selectedTaskId = this.value;
-                        const filtered = allGigs.filter(gig => gig.task_id == selectedTaskId);
-
-                        // Clear and build HTML
-                        filteredMediaDiv.innerHTML = '';
-                        filtered.forEach(gig => {
-                            let mediaHTML = '';
-                            if (gig.media && gig.media.length) {
-                                gig.media.forEach(media => {
-                                    mediaHTML +=
-                                        `<img src="{{ asset('storage/app/public') }}/${media.path}" />`;
-                                });
-                            }
-                            filteredMediaDiv.innerHTML += `
-                            <div class="col-md-4">
-                                <p>${gig.title}</p>
-                                ${mediaHTML}
-                            </div>
-                        `;
-                        });
-
-                        allMediaDiv.style.display = 'none';
-                        filteredMediaDiv.style.display = 'flex';
+    
+                    const selectedCheckbox = Array.from(checkboxes).find(cb => cb.checked);
+    
+                    if (!selectedCheckbox) {
+                        // No checkbox selected, show all gigs
+                        gigs.forEach(g => g.style.display = 'block');
                     } else {
-                        allMediaDiv.style.display = 'flex';
-                        filteredMediaDiv.style.display = 'none';
-                        filteredMediaDiv.innerHTML = '';
+                        const selectedTaskId = selectedCheckbox.value;
+    
+                        // Show only gigs matching selected task_id
+                        gigs.forEach(gig => {
+                            const taskId = gig.getAttribute('data-task-id');
+                            gig.style.display = (taskId === selectedTaskId) ? 'block' : 'none';
+                        });
                     }
                 });
             });
         });
     </script>
+    
+    
 
 
 </x-guest-layout>
