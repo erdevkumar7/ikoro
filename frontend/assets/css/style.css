@@ -194,7 +194,7 @@ select:focus-visible {
 .meet-our-top .star-count {
     padding: 10px 0;
     position: relative;
-    left: 118px;
+    left: 228px;
 }
 
 .meet-our-top .star-count a {
@@ -479,6 +479,7 @@ div#feedback-testimonials .testimonial-name {
 }
 nav.navbar.navbar-expand-lg.navbar-light img.logout {
     margin-top: 0px !important;
+    margin-bottom: 0px !important;
 }
 .biography-sec h2 {
     color: rgb(255, 255, 255);
@@ -530,20 +531,27 @@ a.book-now-btn {
 a.book-now-btn:hover {
     color: black;
 }
-
+i.fa-regular.fa-circle {
+    display: none;
+}
 .maximum-offers-service img {
     width: 240px !important;
     border-radius: 10px;
     height: 280px;
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
-
 .row.maximum-offers-service {
     padding-top: 20px;
     position: relative;
     row-gap: 10px;
-    width: 810px;
+    width: 100% !important;
+}
+.row.maximum-offers-service {
+    padding-top: 20px;
+    position: relative;
+    row-gap: 10px;
+/*    width: 810px;*/
 }
 
 .row.maximum-offers-service p {
@@ -1259,6 +1267,13 @@ span.nav-link-dash.host-name-text {
 }
 .logo-img img {
     margin-top: -30px;
+    margin-bottom: -25px;
+}
+p.small {
+    font-size: 16px;
+}
+footer.mt-5.text-white.pt-5 h5.text-uppercase.font-weight-bold {
+    padding-bottom: 10px;
 }
 
 @media only screen and (max-width: 767px) {

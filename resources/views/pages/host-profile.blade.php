@@ -4,10 +4,191 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @endpush
 
+    <style>
+        .booking-select-add {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background-color: #d2ff9991;
+        }
+
+        .host-booking-inner label {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .select-booking-inner {
+            flex: 1 1 calc(50% - 1rem);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 13px 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .select-booking-inner:hover {
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+        }
+
+        .select-booking-inner label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 0.75rem;
+        }
+
+        .host-profile-by-id .biography-sec {
+            color: #fff;
+            text-align: left;
+            padding-top: 10px;
+        }
+
+        .select-booking-inner input[type="checkbox"] {
+            width: 13px;
+            height: 13px;
+            accent-color: #007bff;
+        }
+
+        .select-booking-inner p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #000;
+        }
+
+        .booking-select-add .select-booking-inner label {
+            margin-bottom: 0;
+            display: flex;
+            gap: 3px;
+            justify-content: space-between;
+        }
+
+        .host-select-add {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: #d2ff9991;
+            border-radius: 10px;
+            justify-content: space-between;
+        }
+
+        .host-booking-inner {
+            flex: 1 1 calc(50% - 1rem);
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 5px 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+        }
+
+        .host-booking-inner:hover {
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.1);
+        }
+
+        .host-booking-inner label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .host-booking-inner i {
+            font-size: 1.5rem;
+            color: #002502;
+            flex-shrink: 0;
+            padding-right: 0;
+            margin: initial;
+            background-color: #77a158;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .host-booking-inner p {
+            margin: 0;
+            color: #000;
+        }
+
+        .host-booking-inner input[type="checkbox"] {
+            position: absolute;
+            top: 20px;
+            right: 1rem;
+            width: 13px;
+            height: 13px;
+            accent-color: #007bff;
+            cursor: pointer;
+        }
+
+        .maximum-offers-service img {
+            width: 100% !important;
+            border-radius: 10px;
+            height: 280px;
+            object-fit: cover;
+            margin-bottom: 0;
+        }
+
+        .col-md-9.biography-right-content {
+            padding: 0;
+        }
+
+        .lists-maximum-offers .container {
+            padding-right: 0;
+        }
+
+        .host-profile-by-id .row.booking-mark-sdv {
+            width: 100%;
+            margin: auto;
+            padding-left: 0px;
+            align-items: flex-start;
+        }
+
+        .row.booking-mark-sdv {
+            align-items: center;
+            padding-top: 0px !important;
+            padding-bottom: 30px;
+            border-radius: 20px;
+        }
+
+        .row.maximum-offers-service {
+            padding-top: 20px;
+            position: relative;
+            row-gap: 25px;
+        }
+
+        .select-service-left img {
+            width: 220px;
+            height: 220px;
+            border-radius: 100%;
+            border: solid 2px #fff;
+            object-fit: cover;
+            margin-top: 0px !important;
+        }
+
+        p.my-offer-text {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+
     <div class="host-profile-by-id">
         @if ($host_profile)
             <div class="container host-main-profile">
-                {{-- <h1 class="first-top-text">Host main profile/booking page</h1> --}}
                 <div class="booking-page">
                     <div class="row booking-mark-sdv">
                         <div class="col-md-3 select-service-left">
@@ -17,6 +198,38 @@
                             @else
                                 <img class="img-fluid" src="{{ asset('frontend/images/host.jpg') }}" alt="" />
                             @endif
+
+                            
+                            
+                            <div class="biography-sec">
+                                <h4>Biography</h4>
+                                @if ($host_profile->biography)
+                                    <p>{{ $host_profile->biography }}</p>
+                                @else
+                                    <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
+                                        malorum, a
+                                        1st-century BC text by the Roman statesman and philosopher Cicero.</p>
+                                @endif
+                                <div class="english-tad-add">
+                                    <h3>Languages</h3>
+                                    <a href="#" class="eng-text">English</a>
+                                </div>
+
+
+                                <h2>Location</h2>
+
+                                <div class="location-tab-add">
+                                    @if ($host_profile->gigs->isNotEmpty())
+                                        @foreach ($host_profile->gigs->unique('city_id') as $gig)
+                                            <h1>{{ $gig->city->name }}</h1>
+                                        @endforeach
+                                    @else
+                                        <h1>N/A</h1>
+                                    @endif
+                                </div>
+                                <a href="#" class="book-now-btn">Book Now</a>
+
+                            </div>
                         </div>
 
                         <div class="col-md-9 select-service-right">
@@ -87,8 +300,8 @@
                                         @else
                                             <h1>N/A</h1>
                                         @endif
-                                        <a href="#" class="book-now-btn">Book Now</a>
                                     </div>
+                                    <a href="#" class="book-now-btn">Book Now</a>
                                 </div>
                             </div>
 
@@ -382,39 +595,6 @@
             });
         });
     </script>
-
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.task-checkbox');
-            const gigs = document.querySelectorAll('.gig-box');
-
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    // Uncheck all other checkboxes so only one is selected
-                    checkboxes.forEach(cb => {
-                        if (cb !== this) cb.checked = false;
-                    });
-
-                    const selectedCheckbox = Array.from(checkboxes).find(cb => cb.checked);
-
-                    if (!selectedCheckbox) {
-                        // No checkbox selected, show all gigs
-                        gigs.forEach(g => g.style.display = 'block');
-                    } else {
-                        const selectedTaskId = selectedCheckbox.value;
-
-                        // Show only gigs matching selected task_id
-                        gigs.forEach(gig => {
-                            const taskId = gig.getAttribute('data-task-id');
-                            gig.style.display = (taskId === selectedTaskId) ? 'block' :
-                                'none';
-                        });
-                    }
-                });
-            });
-        });
-    </script> --}}
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
