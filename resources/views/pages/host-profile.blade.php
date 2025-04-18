@@ -30,7 +30,6 @@
                             <div class="select-a-service">
                                 <h3>Select a Service </h3>
                                 <div class="host-select-add">
-
                                     @foreach ($tasks as $task)
                                         <div class="host-booking-inner">
                                             <label for="task-checkbox-{{ $task->id }}">
@@ -49,13 +48,14 @@
                                 <div class="booking-select-add">
                                     @foreach ($equipments as $equipment)
                                         <div class="select-booking-inner">
-                                            <label for="city-tours-checkbox">
+                                            <label for="equipment-checkbox-{{ $equipment->id }}">
                                                 <p>{{ $equipment->name }}</p>
-                                                <input type="checkbox" id="city-tours-checkbox" />
-                                            </label>                                          
+                                                <input type="checkbox" class="equipment-checkbox"
+                                                    id="equipment-checkbox-{{ $equipment->id }}"
+                                                    value="{{ $equipment->id }}" />
+                                            </label>
                                         </div>
                                     @endforeach
-
                                 </div>
                             </div>
                         </div>
@@ -97,17 +97,10 @@
                                     <div class="container">
                                         <h1 class="text-white text-center">My Offers</h1>
                                         @if ($host_profile->gigs->isNotEmpty())
-
                                             <div class="row maximum-offers-service all-media">
-                                                @foreach ($host_profile->gigs as $gig)
+                                                {{-- @foreach ($host_profile->gigs as $gig)
                                                     <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}">
                                                         <p>{{ $gig->title }}</p>
-                                                        {{-- @if ($gig->media->count())
-                                                            @foreach ($gig->media as $media)
-                                                                <img
-                                                                    src="{{ asset('storage/app/public/' . $media->path) }}" />
-                                                            @endforeach
-                                                        @endif --}}
                                                         @if ($gig->media->count())
                                                             <div id="gigCarousel-{{ $gig->id }}"
                                                                 class="carousel slide" data-bs-ride="carousel">
@@ -136,7 +129,51 @@
                                                             </div>
                                                         @endif
                                                     </div>
+                                                @endforeach --}}
+                                                @foreach ($host_profile->gigs as $gig)
+                                                    <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}"
+                                                        data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
+
+                                                        <p>{{ $gig->title }}</p>
+
+                                                        @if ($gig->media->count())
+                                                            <div id="gigCarousel-{{ $gig->id }}"
+                                                                class="carousel slide" data-bs-ride="carousel">
+                                                                <div class="carousel-inner">
+                                                                    @foreach ($gig->media as $index => $media)
+                                                                        <div
+                                                                            class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                            <img src="{{ asset('storage/app/public/' . $media->path) }}"
+                                                                                class="d-block w-100" alt="Gig Image">
+                                                                            <i class="fa-regular fa-circle"></i>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                                @if ($gig->media->count() > 1)
+                                                                    <button class="carousel-control-prev" type="button"
+                                                                        data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                        data-bs-slide="prev">
+                                                                        <span class="carousel-control-prev-icon"></span>
+                                                                    </button>
+                                                                    <button class="carousel-control-next" type="button"
+                                                                        data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                        data-bs-slide="next">
+                                                                        <span class="carousel-control-next-icon"></span>
+                                                                    </button>
+                                                                @endif
+                                                            </div>
+                                                        @else
+                                                            <img
+                                                                src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                            {{-- <i class="fa-solid fa-heart"></i> --}}
+                                                            <i class="fa-regular fa-circle"></i>
+                                                        @endif
+                                                    </div>
                                                 @endforeach
+                                                <div id="no-gigs-message" style="display: none;"
+                                                    class="text-center w-100">
+                                                    <p>No offer available for the selected field.</p>
+                                                </div>
                                             </div>
                                         @else
                                             <div class="row maximum-offers-service">
@@ -347,38 +384,86 @@
     </script>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.task-checkbox');
             const gigs = document.querySelectorAll('.gig-box');
-    
+
             checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function () {
+                checkbox.addEventListener('change', function() {
                     // Uncheck all other checkboxes so only one is selected
                     checkboxes.forEach(cb => {
                         if (cb !== this) cb.checked = false;
                     });
-    
+
                     const selectedCheckbox = Array.from(checkboxes).find(cb => cb.checked);
-    
+
                     if (!selectedCheckbox) {
                         // No checkbox selected, show all gigs
                         gigs.forEach(g => g.style.display = 'block');
                     } else {
                         const selectedTaskId = selectedCheckbox.value;
-    
+
                         // Show only gigs matching selected task_id
                         gigs.forEach(gig => {
                             const taskId = gig.getAttribute('data-task-id');
-                            gig.style.display = (taskId === selectedTaskId) ? 'block' : 'none';
+                            gig.style.display = (taskId === selectedTaskId) ? 'block' :
+                                'none';
                         });
                     }
                 });
             });
         });
-    </script>
-    
-    
+    </script> --}}
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+            const equipmentCheckboxes = document.querySelectorAll('.equipment-checkbox');
+            const gigs = document.querySelectorAll('.gig-box');
+            const noGigsMessage = document.getElementById('no-gigs-message');
+
+            function filterGigs() {
+                const selectedTask = Array.from(taskCheckboxes).find(cb => cb.checked);
+                const selectedEquipments = Array.from(equipmentCheckboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value);
+
+                gigs.forEach(gig => {
+                    const gigTaskId = gig.getAttribute('data-task-id');
+                    const gigEquipments = gig.getAttribute('data-equipments');
+                    console.log(gigEquipments)
+
+                    const matchTask = selectedTask ? gigTaskId === selectedTask.value : true;
+                    const matchEquipment = selectedEquipments.length === 0 || selectedEquipments.some(eq =>
+                        gigEquipments.includes(eq));
+
+                    if (matchTask && matchEquipment) {
+                        gig.style.display = 'block';
+                    } else {
+                        gig.style.display = 'none';
+                    }
+                });
+
+                // 🔍 Check if any gigs are visible
+                const anyVisible = Array.from(gigs).some(gig => gig.style.display === 'block');
+                noGigsMessage.style.display = anyVisible ? 'none' : 'block';
+            }
+
+            taskCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Only allow one task checkbox
+                    taskCheckboxes.forEach(cb => {
+                        if (cb !== this) cb.checked = false;
+                    });
+                    filterGigs();
+                });
+            });
+
+            equipmentCheckboxes.forEach(cb => {
+                cb.addEventListener('change', filterGigs);
+            });
+        });
+    </script>
 
 </x-guest-layout>

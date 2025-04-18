@@ -207,6 +207,23 @@ class HomeController extends Controller
         // dd($data);
         return view('pages.host-profile', $data);
     }
+    
+
+    public function hostProfileDummy($host_id)
+    {   
+        $client = Auth::user()->id ?? "";
+        $data = [
+            'loggedIn' => "",
+        ];
+        if ($client != "") {
+            $data['loggedIn'] = $client;
+        }
+
+        $data['host_profile']  = Host::with('gigs.media')->findOrFail($host_id);
+        $data['tasks'] = Task::all();
+        $data['equipments'] = Equipment::all();    
+        return view('pages.host-dummy',$data);
+    }
 
 
     public function gigSearchedOnTask(Request $request)
