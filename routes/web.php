@@ -26,7 +26,6 @@ Route::get('/filter-gigs', [HomeController::class, 'filterGigs'])->name('filter.
 Route::any('/filter-host', [HomeController::class, 'filterHost'])->name('filter.host');
 Route::get('/get-selected-host', [HomeController::class, 'getSelectedHost'])->name('get.selectedhost');
 Route::get('/get-host-{host_id}/profile', [HomeController::class, 'hostProfileById'])->name('get.host.profile');
-Route::get('/host-dummy/{host_id}/profile', [HomeController::class, 'hostProfileDummy'])->name('host.domy.profile');
 Route::get('/search/gig/task', [HomeController::class, 'gigSearchedOnTask'])->name('home.task');
 Route::post('/store-booking', [HomeController::class, 'storeBooking'])->name('booking.store');
 

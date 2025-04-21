@@ -194,10 +194,31 @@
 
 
         @media only screen and (max-width: 767px) {
+            .host-select-add {
+                display: block;
+                align-items: center;
+                gap: 20px;
+                margin: 15px;
+                margin-top: 5px;
+                padding-top: 5px;
+            }
 
             .booking-select-add {
                 display: block;
+                width: 92%;
+                margin: auto;
+                margin-top: 15px;
+                padding-bottom: 8px;
+            }
+
+            .host-name-text-add p {
+                margin-bottom: 0;
+                padding-top: 10px;
+            }
+
+            .host-profile-by-id .row.booking-mark-sdv {
                 width: 100%;
+                padding-bottom: 0px;
             }
 
             .select-booking-inner {
@@ -240,6 +261,7 @@
                             @endif
 
                             <div class="biography-sec">
+                                <h1 class="mobile-view-host-name">{{ $host_profile->name }}</h1>
                                 <h4>Biography</h4>
                                 @if ($host_profile->biography)
                                     <p>{{ $host_profile->biography }}</p>
@@ -262,14 +284,16 @@
                                         <h1>N/A</h1>
                                     @endif
                                 </div>
-                                <a href="#" class="book-now-btn">Book Now</a>
+                                {{-- <a href="#" class="book-now-btn">Book Now</a> --}}
+                                <button id="booking-button" disabled class="book-now-btn continue-booking">Book
+                                    Now</button>
                             </div>
 
                         </div>
 
                         <div class="col-md-9 select-service-right">
                             <div class="host-name-text-add">
-                                <h1>{{ $host_profile->name }}</h1>
+                                <h1 class="web-view-host-name">{{ $host_profile->name }}</h1>
                                 <p>Available Hours
                                     {{ $host_profile->available_hours ? $host_profile->available_hours . ' hr' : 'N/a' }}
                                 </p>
@@ -324,9 +348,11 @@
                                                             data-task-id="{{ $gig->task_id }}"
                                                             data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
 
-
-                                                            <p class="my-offer-text"> <input
-                                                                    type="checkbox">{{ $gig->title }}</p>
+                                                            <p class="my-offer-text">
+                                                                <input type="checkbox" class="gig-select-checkbox"
+                                                                    data-gig-id="{{ $gig->id }}" disabled>
+                                                                {{ Str::limit($gig->title, 25) }}
+                                                            </p>
 
                                                             @if ($gig->media->count())
                                                                 <div id="gigCarousel-{{ $gig->id }}"
@@ -338,7 +364,6 @@
                                                                                 <img src="{{ asset('storage/app/public/' . $media->path) }}"
                                                                                     class="d-block w-100"
                                                                                     alt="Gig Image">
-                                                                                <i class="fa-regular fa-circle"></i>
                                                                             </div>
                                                                         @endforeach
                                                                     </div>
@@ -362,8 +387,6 @@
                                                             @else
                                                                 <img
                                                                     src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                                {{-- <i class="fa-solid fa-heart"></i> --}}
-                                                                <i class="fa-regular fa-circle"></i>
                                                             @endif
                                                         </div>
                                                     @endforeach
@@ -402,106 +425,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="container select-duration">
-                            <div class="row select-duration-inner">
-                                <div class="col-md-8 select-duration-left">
-                                    <button class="accordion">
-                                        <div class="accordion-list">
-                                            <p class="number-list">1</p>
-                                            <span>Select Duration</span>
-                                        </div>
-                                        <div class="angle-icons">
-                                            <i class="fas fa-angle-down"></i>
-                                        </div>
-                                    </button>
-                                    <div class="panel time-zone-sct">
-                                        <ul>
-                                            <li class="time-zone-mark">30 Mins: <span>$40</span></li>
-                                            <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                            <li>90 Minutes: <span>$90</span></li>
-                                            <li>120 Minutes: <span>$120</span></li>
-                                        </ul>
-                                    </div>
-
-                                    <button class="accordion">
-                                        <div class="accordion-list">
-                                            <p class="number-list">2</p>
-                                            <span>Select Date & Time*</span>
-                                        </div>
-                                        <div class="angle-icons">
-                                            <i class="fas fa-angle-down"></i>
-                                        </div>
-                                    </button>
-                                    <div class="panel time-zone-sct">
-                                        <ul>
-                                            <li class="time-zone-mark">30 Mins: <span>$40</span></li>
-                                            <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                            <li>90 Minutes: <span>$90</span></li>
-                                            <li>120 Minutes: <span>$120</span></li>
-                                        </ul>
-                                    </div>
-
-                                    <button class="accordion">
-                                        <div class="accordion-list">
-                                            <p class="number-list">3</p>
-                                            <span>Notes for the Host</span>
-                                        </div>
-                                        <div class="angle-icons">
-                                            <i class="fas fa-angle-down"></i>
-                                        </div>
-                                    </button>
-                                    <div class="panel time-zone-sct">
-                                        <ul>
-                                            <li>30 Mins: <span>$40</span></li>
-                                            <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                            <li>90 Minutes: <span>$90</span></li>
-                                            <li>120 Minutes: <span>$120</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 select-duration-right">
-                                    <div class="music-audio">
-                                        @if ($host_profile->image)
-                                            <img src="{{ asset('public/' . $host_profile->image) }}"
-                                                alt="" />
-                                        @else
-                                            <img src="{{ asset('frontend/images/host.jpg') }}" alt="" />
-                                        @endif
-                                        <div class="music-list-text">
-                                            <h5>{{ $host_profile->name }}</h5>
-                                            <p>Music & Audio</p>
-                                            <p>Production</p>
-                                        </div>
-                                        <div class="rating-review-point">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <p>(3)</p>
-                                        </div>
-                                    </div>
-                                    <div class="duration-text">
-                                        <div class="duration-first">
-                                            <p>Duration</p>
-                                            <p>Amount Payable</p>
-                                        </div>
-                                        <div class="duration-second">
-                                            <p>Not Selected</p>
-                                            <p>-</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="Proceed-to-checkout book-a-task">
-                                        <a href="#">PROCEED TO CHECKOUT<i class="fa fa-credit-card"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
 
@@ -581,11 +504,11 @@
     </script>
 
 
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const taskCheckboxes = document.querySelectorAll('.task-checkbox');
             const equipmentCheckboxes = document.querySelectorAll('.equipment-checkbox');
+            const gigCheckboxes = document.querySelectorAll('.gig-select-checkbox');
             const gigs = document.querySelectorAll('.gig-box');
             const noGigsMessage = document.getElementById('no-gigs-message');
 
@@ -599,6 +522,15 @@
                 const selectedEquipments = Array.from(equipmentCheckboxes)
                     .filter(cb => cb.checked)
                     .map(cb => cb.value);
+
+                // Enable or disable gig checkboxes based on equipment selection
+                const anyEquipmentSelected = selectedEquipments.length > 0;
+                gigCheckboxes.forEach(cb => {
+                    cb.disabled = !anyEquipmentSelected;
+                    if (!anyEquipmentSelected) {
+                        cb.checked = false;
+                    }
+                });
 
                 gigs.forEach(gig => {
                     const gigTaskId = gig.getAttribute('data-task-id');
@@ -627,6 +559,12 @@
                     taskCheckboxes.forEach(cb => {
                         if (cb !== this) cb.checked = false;
                     });
+
+                    // Reset all equipment checkboxes to unchecked and disabled
+                    equipmentCheckboxes.forEach(eq => {
+                        eq.checked = false;
+                        eq.disabled = !this.checked;
+                    });
                     filterGigs();
                 });
             });
@@ -636,4 +574,40 @@
             });
         });
     </script>
+
+    <!-- script for book now button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.gig-select-checkbox');
+            const bookingButton = document.getElementById('booking-button');
+            let selectedGigId = null;
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', function() {
+                    // Only allow one gig to be selected
+                    checkboxes.forEach(other => {
+                        if (other !== this) other.checked = false;
+                    });
+
+                    if (this.checked) {
+                        selectedGigId = this.dataset.gigId;
+                        bookingButton.disabled = false;
+                        bookingButton.classList.add('active-booking-btn');
+                    } else {
+                        selectedGigId = null;
+                        bookingButton.disabled = true;
+                        bookingButton.classList.remove('active-booking-btn');
+                    }
+                });
+            });
+
+            bookingButton.addEventListener('click', function() {
+                if (selectedGigId) {
+                    // Redirect to booking page (adjust route as needed)
+                    window.location.href = `/ikoro/booking/${selectedGigId}`;
+                }
+            });
+        });
+    </script>
+
 </x-guest-layout>

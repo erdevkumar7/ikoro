@@ -115,6 +115,113 @@
                                     <x-input-error :messages="$errors->get('skype_id')" class="mt-2" />
                                 </div>
                             </div>
+
+
+
+                            <!-- work hour -->                            
+                            <h4>Working Hours</h4>                                                            
+                            <!-- FILED START -->
+                            @php
+                                $days = [
+                                    'mon' => 'Monday',
+                                    'tue' => 'Tuesday',
+                                    'wed' => 'Wednesday',
+                                    'thu' => 'Thursday',
+                                    'fri' => 'Friday',
+                                    'sat' => 'Saturday',
+                                    'sun' => 'Sunday',
+                                ];
+                            @endphp
+
+                            @foreach ($days as $key => $label)
+                                <div class="bor-box">
+                                    <div class="row add-work-hrs">
+
+                                        {{-- Day Label --}}
+                                        <div class="form-group col-md-6">
+                                            <label for="{{ $key }}_is_open">{{ $label }}</label>
+
+                                            <input type="hidden" name="{{ $key }}_check" value="0">
+                                            <input type="checkbox" id="{{ $key }}_check" name="{{ $key }}_check" value="1" {{ isset($data) && $data->{$key . '_check'} == 1 ? 'checked' : '' }}>
+
+                                        </div>
+
+                                        {{-- Open/Close Dropdown --}}
+                                        <div class="form-group col-md-6">
+                                            <label for="{{ $key }}_is_open">Status</label>
+                                            <select name="{{ $key }}_is_open" id="{{ $key }}_is_open" class="chosen-select form-control">
+                                                <option value="1" {{ isset($data) && $data->{$key . '_is_open'} == 1 ? 'selected' : '' }}>Online</option>
+                                                <option value="0" {{ isset($data) && $data->{$key . '_is_open'} == 0 ? 'selected' : '' }}>Offline</option>
+                                            </select>
+                                            <x-input-error :messages="$errors->get($key . '_is_open')" class="mt-2" />
+                                        </div>
+
+                                        {{-- Open Time --}}
+                                        <div class="form-group col-md-3">
+                                            <!--
+                                            <label for="{{ $key }}_open_time">Open Time</label>
+                                            <select name="{{ $key }}_open_time" id="{{ $key }}_open_time" class="chosen-select form-control">
+                                                <option>Open time</option>
+                                                @for ($i = 6; $i <= 11; $i++)
+                                                    <option value="{{ $i }}:00 am" {{ isset($data) && $data->{$key . '_open_time'} == "$i:00 am" ? 'selected' : '' }}>
+                                                        {{ $i }}:00 am
+                                                    </option>
+                                                @endfor
+                                                <option value="12:00 pm" {{ isset($data) && $data->{$key . '_open_time'} == "12:00 pm" ? 'selected' : '' }}>
+                                                    12:00 pm
+                                                </option>
+                                                @for ($i = 1; $i <= 11; $i++)
+                                                    <option value="{{ $i }}:00 pm" {{ isset($data) && $data->{$key . '_open_time'} == "$i:00 pm" ? 'selected' : '' }}>
+                                                        {{ $i }}:00 pm
+                                                    </option>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <option value="{{ $i }}:00 am" {{ isset($data) && $data->{$key . '_open_time'} == "$i:00 am" ? 'selected' : '' }}>
+                                                        {{ $i }}:00 am
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                            <x-input-error :messages="$errors->get($key . '_open_time')" class="mt-2" />
+                                            -->
+                                        </div>
+
+                                        {{-- Close Time --}}
+                                        <div class="form-group col-md-3">
+                                            <!--
+                                            <label for="{{ $key }}_close_time">Close Time</label>
+                                            <select name="{{ $key }}_close_time" id="{{ $key }}_close_time" class="chosen-select form-control">
+                                                <option>Close time</option>
+                                                @for ($i = 6; $i <= 11; $i++)
+                                                    <option value="{{ $i }}:00 am" {{ isset($data) && $data->{$key . '_close_time'} == "$i:00 am" ? 'selected' : '' }}>
+                                                        {{ $i }}:00 am
+                                                    </option>
+                                                @endfor
+                                                <option value="12:00 pm" {{ isset($data) && $data->{$key . '_close_time'} == "12:00 pm" ? 'selected' : '' }}>
+                                                    12:00 pm
+                                                </option>
+                                                @for ($i = 1; $i <= 11; $i++)
+                                                    <option value="{{ $i }}:00 pm" {{ isset($data) && $data->{$key . '_close_time'} == "$i:00 pm" ? 'selected' : '' }}>
+                                                        {{ $i }}:00 pm
+                                                    </option>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <option value="{{ $i }}:00 am" {{ isset($data) && $data->{$key . '_close_time'} == "$i:00 am" ? 'selected' : '' }}>
+                                                        {{ $i }}:00 am
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                            <x-input-error :messages="$errors->get($key . '_close_time')" class="mt-2" />
+                                            -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @endforeach                                
+                                
+                            <!--FILED END-->
+
+
+
                             <!-- image -->
                             <div class="form-group" style="padding-bottom: 30px;">
                                 <label for="image">Upload Image</label>

@@ -15,6 +15,9 @@
 .host-by-name i.fa.fa-user {
     width: 20px !important;
 }
+div#no-gigs-message p {
+    font-size: 18px;
+}
 .host-by-name i {
     width: 24px;
     font-size: 20px;
@@ -408,7 +411,6 @@ div#feedback-testimonials .testimonial-name {
     justify-content: space-between;
     text-align: center;
     gap: 0px;
-    width: 860px;
     padding-top: 5px;
 }
 .booking-select-add .select-booking-inner label {
@@ -526,6 +528,19 @@ a.book-now-btn {
     align-items: center;
     justify-content: center;
     width: 46%;
+}
+.continue-booking {
+    color: black;
+    background: rgb(118 159 87);
+    padding: 7px 15px;
+    border-radius: 50px;
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    border: none;
+    color: #fff;
 }
 
 a.book-now-btn:hover {
@@ -1276,8 +1291,43 @@ footer.mt-5.text-white.pt-5 h5.text-uppercase.font-weight-bold {
     padding-bottom: 10px;
 }
 
+h1.mobile-view-host-name {
+    display: none;
+}
+.active-booking-btn {
+    background-color: #a9f005;
+    color: #000;
+}
+
 @media only screen and (max-width: 767px) {
 
+.host-profile-by-id .host-main-profile {
+    padding-top: 0px !important; 
+}
+.logo-img img {
+    margin-top: 0;
+    margin-bottom: -25px;
+}
+h1.mobile-view-host-name {
+    display: block;
+}
+h1.web-view-host-name {
+    display: none;
+}
+
+.biography-sec a.eng-text {
+    width: 30%;
+    justify-content: center;
+    margin: auto;
+}
+
+.biography-sec h2 {
+    padding-top: 18px;
+    text-align: center;
+}
+.row.maximum-offers-service.all-media .col-md-4.gig-box {
+    padding-right: 15px !important;
+}
 button.navbar-toggler:focus-visible {
     outline: none;
 }
@@ -1313,8 +1363,9 @@ button.navbar-toggler:focus-visible {
     gap: 20px;
 }
 .host-name-text-add {
-    display: block;
     padding-top: 10px;
+    display: block !important;
+    flex-wrap: nowrap !important;
 }
 .select-a-service h3 {
     text-align: center;
@@ -1433,6 +1484,7 @@ footer.mt-5.text-white.pt-5 {
     width: 97%;
     height: auto;
     overflow-y: auto;
+    padding-top: 10px;
 }
 
 .host-profile-by-id .row.select-duration-inner {
@@ -1656,6 +1708,18 @@ footer.mt-5.text-white.pt-5 {
 .location-tab-add {
     text-align: center;
     line-height: 3.5;
+    display: block !important;
+}
+.location-tab-add h1 {
+    font-size: 19px !important;
+}
+.continue-booking {
+    width: 45%;
+    border: none;
+    justify-content: center;
+    margin: auto;
+    margin-top: 8px;
+    padding: 10px 15px;
 }
     .row.maximum-offers-service {
         padding-top: 0;
