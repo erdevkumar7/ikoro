@@ -61,26 +61,6 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
-    // public function searchCity(Request $request)
-    // {
-    //     $query = $request->input('query');
-    //     $cities = City::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
-    //         return ['id' => $item->id, 'name' => $item->name, 'type' => 'City'];
-    //     });
-
-    //     $states = State::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
-    //         return ['id' => $item->id, 'name' => $item->name, 'type' => 'State'];
-    //     });
-
-    //     $countries = Country::select('id', 'name')->where('name', 'LIKE', "%{$query}%")->get()->map(function ($item) {
-    //         return ['id' => $item->id, 'name' => $item->name, 'type' => 'Country'];
-    //     });
-
-    //     $results = $cities->merge($states)->merge($countries)->take(10);
-
-    //     return response()->json($results);
-    // }
-
     public function searchLocations(Request $request)
     {
         $query = $request->input('query');
@@ -206,7 +186,20 @@ class HomeController extends Controller
         $data['equipments'] = Equipment::all();
         // dd($data);
         return view('pages.host-profile', $data);
-    }    
+    }
+
+    public function bookingDetailByGigId($gig_id)
+    {
+        $client = Auth::user()->id ?? "";
+        $data = [
+            'loggedIn' => "",
+        ];
+        if ($client != "") {
+            $data['loggedIn'] = $client;
+        }
+
+        return view('pages.booking-details');
+    }
 
 
 

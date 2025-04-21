@@ -297,6 +297,21 @@
                                 <p>Available Hours
                                     {{ $host_profile->available_hours ? $host_profile->available_hours . ' hr' : 'N/a' }}
                                 </p>
+                                
+                                @php
+                                    $today_is_open = strtolower(date('D')) . '_is_open';
+                                    $today_is_chk_open = strtolower(date('D')) . '_check';
+                                @endphp
+
+                                <p>
+                                    Today  
+                                    {{ isset($host_profile->$today_is_chk_open) && $host_profile->$today_is_chk_open == 1 ? 'Open' : 'Close' }}
+
+                                    {!! isset($host_profile->$today_is_open) && $host_profile->$today_is_open == 1 
+                                        ? 'Online <i class="fas fa-circle" style="color: green;"></i>' 
+                                        : 'Offline <i class="fas fa-circle" style="color: red;"></i>' 
+                                    !!}
+                                </p>
                             </div>
 
                             <div class="select-a-service">
@@ -604,7 +619,7 @@
             bookingButton.addEventListener('click', function() {
                 if (selectedGigId) {
                     // Redirect to booking page (adjust route as needed)
-                    window.location.href = `/ikoro/booking/${selectedGigId}`;
+                    window.location.href = `/ikoro/booking/${selectedGigId}/detail`;
                 }
             });
         });
