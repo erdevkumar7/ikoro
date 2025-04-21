@@ -4,228 +4,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @endpush
 
-    <style>
-        .host-profile-by-id .host-main-profile {
-            padding-top: 15px;
-            padding-bottom: 40px;
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-
-        .booking-select-add {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            background-color: #d2ff9991;
-        }
-
-        .host-booking-inner label {
-            display: flex;
-            align-items: center;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .select-booking-inner {
-            flex: 1 1 calc(50% - 1rem);
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 13px 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .select-booking-inner:hover {
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
-        }
-
-        .select-booking-inner label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            gap: 0.75rem;
-        }
-
-        .host-profile-by-id .biography-sec {
-            color: #fff;
-            text-align: left;
-            padding-top: 10px;
-        }
-
-        .select-booking-inner input[type="checkbox"] {
-            width: 13px;
-            height: 13px;
-            accent-color: #007bff;
-        }
-
-        .select-booking-inner p {
-            margin: 0;
-            font-weight: 500;
-            font-size: 1rem;
-            color: #000;
-        }
-
-        .booking-select-add .select-booking-inner label {
-            margin-bottom: 0;
-            display: flex;
-            gap: 3px;
-            justify-content: space-between;
-        }
-
-        .host-select-add {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 1.5rem;
-            background-color: #d2ff9991;
-            border-radius: 10px;
-            justify-content: space-between;
-        }
-
-        .host-booking-inner {
-            flex: 1 1 calc(50% - 1rem);
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            padding: 5px 15px;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            cursor: pointer;
-        }
-
-        .host-booking-inner:hover {
-            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.1);
-        }
-
-        .host-booking-inner label {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .host-booking-inner i {
-            font-size: 1.5rem;
-            color: #002502;
-            flex-shrink: 0;
-            padding-right: 0;
-            margin: initial;
-            background-color: #77a158;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .host-booking-inner p {
-            margin: 0;
-            color: #000;
-        }
-
-        .host-booking-inner input[type="checkbox"] {
-            position: absolute;
-            top: 20px;
-            right: 1rem;
-            width: 13px;
-            height: 13px;
-            accent-color: #007bff;
-            cursor: pointer;
-        }
-
-        .maximum-offers-service img {
-            width: 100% !important;
-            border-radius: 10px;
-            height: 280px;
-            object-fit: cover;
-            margin-bottom: 0;
-        }
-
-        .col-md-9.biography-right-content {
-            padding: 0;
-        }
-
-        .lists-maximum-offers .container {
-            padding-right: 0;
-        }
-
-        .host-profile-by-id .row.booking-mark-sdv {
-            width: 100%;
-            margin: auto;
-            padding-left: 0px;
-            align-items: flex-start;
-        }
-
-        .row.booking-mark-sdv {
-            align-items: center;
-            padding-top: 0px !important;
-            padding-bottom: 30px;
-            border-radius: 20px;
-        }
-
-        .row.maximum-offers-service {
-            padding-top: 20px;
-            position: relative;
-            row-gap: 25px;
-        }
-
-        .select-service-left img {
-            width: 220px;
-            height: 220px;
-            border-radius: 100%;
-            border: solid 2px #fff;
-            object-fit: cover;
-            margin-top: 0px !important;
-        }
-
-        p.my-offer-text {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-        }
-
-
-        @media only screen and (max-width: 767px) {
-
-            .booking-select-add {
-                display: block;
-                width: 100%;
-            }
-
-            .select-booking-inner {
-                margin-bottom: 10px;
-            }
-
-            .biography-sec h4 {
-                text-align: center !important;
-                width: 100%;
-            }
-
-            .biography-sec p {
-                width: 89%;
-                margin: auto;
-                padding: 0;
-                padding-right: 0;
-                text-align: center;
-            }
-
-            .biography-sec h3 {
-                padding-top: 15px;
-                padding-bottom: 15px;
-                text-align: center;
-            }
-
-        }
-    </style>
-
     <div class="host-profile-by-id">
         @if ($host_profile)
             <div class="container host-main-profile">
@@ -238,33 +16,6 @@
                             @else
                                 <img class="img-fluid" src="{{ asset('frontend/images/host.jpg') }}" alt="" />
                             @endif
-
-                            <div class="biography-sec">
-                                <h4>Biography</h4>
-                                @if ($host_profile->biography)
-                                    <p>{{ $host_profile->biography }}</p>
-                                @else
-                                    <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
-                                        malorum, a
-                                        1st-century BC text by the Roman statesman and philosopher Cicero.</p>
-                                @endif
-                                <div class="english-tad-add">
-                                    <h3>Languages</h3>
-                                    <a href="#" class="eng-text">English</a>
-                                </div>
-                                <h2>Location</h2>
-                                <div class="location-tab-add">
-                                    @if ($host_profile->gigs->isNotEmpty())
-                                        @foreach ($host_profile->gigs->unique('city_id') as $gig)
-                                            <h1>{{ $gig->city->name }}</h1>
-                                        @endforeach
-                                    @else
-                                        <h1>N/A</h1>
-                                    @endif
-                                </div>
-                                <a href="#" class="book-now-btn">Book Now</a>
-                            </div>
-
                         </div>
 
                         <div class="col-md-9 select-service-right">
@@ -300,108 +51,159 @@
                                                 <p>{{ $equipment->name }}</p>
                                                 <input type="checkbox" class="equipment-checkbox"
                                                     id="equipment-checkbox-{{ $equipment->id }}"
-                                                    value="{{ $equipment->id }}" />
+                                                    value="{{ $equipment->id }}" disabled />
                                             </label>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row biography-finibus">
+                            <div class="col-md-3 biography-left-content">
+                                <div class="biography-sec">
+                                    <h4>Biography</h4>
+                                    @if ($host_profile->biography)
+                                        <p>{{ $host_profile->biography }}</p>
+                                    @else
+                                        <p>Lorem ipsum is typically a corrupted version of De finibus bonorum et
+                                            malorum, a
+                                            1st-century BC text by the Roman statesman and philosopher Cicero.</p>
+                                    @endif
+                                    <div class="english-tad-add">
+                                        <h3>Languages</h3>
+                                        <a href="#" class="eng-text">English</a>
+                                    </div>
 
 
-                            <div class="biography-finibus">
-                                <div class="biography-left-content">
+                                    <h2>Location</h2>
 
+                                    <div class="location-tab-add">
+                                        @if ($host_profile->gigs->isNotEmpty())
+                                            @foreach ($host_profile->gigs->unique('city_id') as $gig)
+                                                <h1>{{ $gig->city->name }}</h1>
+                                            @endforeach
+                                        @else
+                                            <h1>N/A</h1>
+                                        @endif
+                                    </div>
+                                    <a href="#" class="book-now-btn">Book Now</a>
                                 </div>
+                            </div>
 
-                                <div class="biography-right-content">
-                                    <div class="lists-maximum-offers">
-                                        <div class="container">
-                                            <h1 class="text-white text-center">My Offers</h1>
-                                            @if ($host_profile->gigs->isNotEmpty())
-                                                <div class="row maximum-offers-service all-media">
-                                                    @foreach ($host_profile->gigs as $gig)
-                                                        <div class="col-md-4 gig-box"
-                                                            data-task-id="{{ $gig->task_id }}"
-                                                            data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
-
-
-                                                            <p class="my-offer-text"> <input
-                                                                    type="checkbox">{{ $gig->title }}</p>
-
-                                                            @if ($gig->media->count())
-                                                                <div id="gigCarousel-{{ $gig->id }}"
-                                                                    class="carousel slide" data-bs-ride="carousel">
-                                                                    <div class="carousel-inner">
-                                                                        @foreach ($gig->media as $index => $media)
-                                                                            <div
-                                                                                class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                                                <img src="{{ asset('storage/app/public/' . $media->path) }}"
-                                                                                    class="d-block w-100"
-                                                                                    alt="Gig Image">
-                                                                                <i class="fa-regular fa-circle"></i>
-                                                                            </div>
-                                                                        @endforeach
-                                                                    </div>
-                                                                    @if ($gig->media->count() > 1)
-                                                                        <button class="carousel-control-prev"
-                                                                            type="button"
-                                                                            data-bs-target="#gigCarousel-{{ $gig->id }}"
-                                                                            data-bs-slide="prev">
-                                                                            <span
-                                                                                class="carousel-control-prev-icon"></span>
-                                                                        </button>
-                                                                        <button class="carousel-control-next"
-                                                                            type="button"
-                                                                            data-bs-target="#gigCarousel-{{ $gig->id }}"
-                                                                            data-bs-slide="next">
-                                                                            <span
-                                                                                class="carousel-control-next-icon"></span>
-                                                                        </button>
-                                                                    @endif
+                            <div class="col-md-9 biography-right-content">
+                                <div class="lists-maximum-offers">
+                                    <div class="container">
+                                        <h1 class="text-white text-center">My Offers</h1>
+                                        @if ($host_profile->gigs->isNotEmpty())
+                                            <div class="row maximum-offers-service all-media">
+                                                {{-- @foreach ($host_profile->gigs as $gig)
+                                                    <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}">
+                                                        <p>{{ $gig->title }}</p>
+                                                        @if ($gig->media->count())
+                                                            <div id="gigCarousel-{{ $gig->id }}"
+                                                                class="carousel slide" data-bs-ride="carousel">
+                                                                <div class="carousel-inner">
+                                                                    @foreach ($gig->media as $index => $media)
+                                                                        <div
+                                                                            class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                            <img src="{{ asset('storage/app/public/' . $media->path) }}"
+                                                                                class="d-block w-100" alt="Gig Image">
+                                                                        </div>
+                                                                    @endforeach
                                                                 </div>
-                                                            @else
-                                                                <img
-                                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                                {{-- <i class="fa-solid fa-heart"></i> --}}
-                                                                <i class="fa-regular fa-circle"></i>
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
-                                                    <div id="no-gigs-message" style="display: none;"
-                                                        class="text-center w-100">
-                                                        <p>No offer available for the selected field.</p>
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <div class="row maximum-offers-service">
-                                                    <div class="col-md-4">
-                                                        <p>Hill View Mountains Has Monkeys</p>
-                                                        <img
-                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                        <i class="fa-solid fa-heart"></i>
-                                                        <h6 class="guest-fav-text">Guest favorite</h6>
 
+                                                                @if ($gig->media->count() > 1)
+                                                                    <button class="carousel-control-prev" type="button"
+                                                                        data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                        data-bs-slide="prev">
+                                                                        <span class="carousel-control-prev-icon"></span>
+                                                                    </button>
+                                                                    <button class="carousel-control-next" type="button"
+                                                                        data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                        data-bs-slide="next">
+                                                                        <span class="carousel-control-next-icon"></span>
+                                                                    </button>
+                                                                @endif
+                                                            </div>
+                                                        @endif
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <p>Lakeside Forest With Lions</p>
-                                                        <img
-                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-                                                        <i class="fa-solid fa-heart"></i>
-                                                    </div>
+                                                @endforeach --}}
+                                                @foreach ($host_profile->gigs as $gig)
+                                                    <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}"
+                                                        data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
 
-                                                    <div class="col-md-4">
-                                                        <p>Achia Forest Beautiful Sites</p>
-                                                        <img
-                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                        <i class="fa-solid fa-heart"></i>
+                                                        <p>{{ $gig->title }}</p>
+
+                                                        @if ($gig->media->count())
+                                                            <div id="gigCarousel-{{ $gig->id }}"
+                                                                class="carousel slide" data-bs-ride="carousel">
+                                                                <div class="carousel-inner">
+                                                                    @foreach ($gig->media as $index => $media)
+                                                                        <div
+                                                                            class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                            <img src="{{ asset('storage/app/public/' . $media->path) }}"
+                                                                                class="d-block w-100" alt="Gig Image">
+                                                                            <i class="fa-regular fa-circle"></i>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                                @if ($gig->media->count() > 1)
+                                                                    <button class="carousel-control-prev" type="button"
+                                                                        data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                        data-bs-slide="prev">
+                                                                        <span class="carousel-control-prev-icon"></span>
+                                                                    </button>
+                                                                    <button class="carousel-control-next" type="button"
+                                                                        data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                        data-bs-slide="next">
+                                                                        <span class="carousel-control-next-icon"></span>
+                                                                    </button>
+                                                                @endif
+                                                            </div>
+                                                        @else
+                                                            <img
+                                                                src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                            {{-- <i class="fa-solid fa-heart"></i> --}}
+                                                            <i class="fa-regular fa-circle"></i>
+                                                        @endif
                                                     </div>
+                                                @endforeach
+                                                <div id="no-gigs-message" style="display: none;"
+                                                    class="text-center w-100">
+                                                    <p>No offer available for the selected field.</p>
                                                 </div>
-                                            @endif
-                                        </div>
+                                            </div>
+                                        @else
+                                            <div class="row maximum-offers-service">
+                                                <div class="col-md-4">
+                                                    <p>Hill View Mountains Has Monkeys</p>
+                                                    <img
+                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <h6 class="guest-fav-text">Guest favorite</h6>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p>Lakeside Forest With Lions</p>
+                                                    <img
+                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <p>Achia Forest Beautiful Sites</p>
+                                                    <img
+                                                        src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="container select-duration">
                             <div class="row select-duration-inner">
@@ -580,9 +382,6 @@
         });
     </script>
 
-
-  
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const taskCheckboxes = document.querySelectorAll('.task-checkbox');
@@ -592,6 +391,11 @@
 
             function filterGigs() {
                 const selectedTask = Array.from(taskCheckboxes).find(cb => cb.checked);
+                //enable Tools(equipment) checkbox
+                equipmentCheckboxes.forEach(eq => {
+                    eq.disabled = !selectedTask;
+                });
+
                 const selectedEquipments = Array.from(equipmentCheckboxes)
                     .filter(cb => cb.checked)
                     .map(cb => cb.value);
@@ -632,5 +436,6 @@
             });
         });
     </script>
+
 
 </x-guest-layout>
