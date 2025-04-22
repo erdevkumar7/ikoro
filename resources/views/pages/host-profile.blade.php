@@ -304,8 +304,8 @@
                                 @endphp
 
                                 <p>
-                                    Today  
-                                    {{ isset($host_profile->$today_is_chk_open) && $host_profile->$today_is_chk_open == 1 ? 'Open' : 'Close' }}
+                                      
+                                    {{ isset($host_profile->$today_is_chk_open) && $host_profile->$today_is_chk_open == 1 ? '' : '' }}
 
                                     {!! isset($host_profile->$today_is_open) && $host_profile->$today_is_open == 1 
                                         ? 'Online <i class="fas fa-circle" style="color: green;"></i>' 
@@ -619,7 +619,7 @@
             bookingButton.addEventListener('click', function() {
                 if (selectedGigId) {
                     // Redirect to booking page (adjust route as needed)
-                    window.location.href = `/ikoro/booking/${selectedGigId}/detail`;
+                    window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
                 }
             });
         });

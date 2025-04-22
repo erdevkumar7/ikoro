@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class="container d-flex justify-content-center align-items-center vh-100 login-container">
-        <div class="card login-card" style="width: 100%; max-width: 400px;">
+    <div class="container d-flex justify-content-center align-items-center login-container">
+        <div class="card login-card" style="width: 100%;">
             <div class="card-body">
                 <h5 class="card-title text-center">Login</h5>
                 @if ($errors->has('status'))
@@ -28,13 +28,15 @@
                         {{ __('Log in') }}
                     </x-primary-button>
                     @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="login-a">
+                        <a href="{{ route('password.request') }}" class="login-a forgot-user-pass">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
                     <p class="already-account "> Don't have an account?</p>
+                   <div class="sign-up-user">
                     <a href="{{ route('user.register') }}" class="login-a">SignUp as User</a> | <a
                         href="{{ route('host.register') }}" class="login-a">SignUp as Host</a>
+                    </div>
                 </form>
             </div>
         </div>

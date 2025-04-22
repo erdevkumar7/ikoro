@@ -45,11 +45,11 @@
                     <!-- Middle (Login and Sign Up) -->
                     @if (!Auth::id())
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="{{ route('login') }}">Signin</a>
+                            <a class="nav-link" href="{{ route('host.register') }}">BECOME A HOST</a>                          
                         </li>
-                        <li class="nav-item mx-2">
+                        {{-- <li class="nav-item mx-2">
                             <a class="nav-link" href="{{ route('user.register') }}">Sign Up</a>
-                        </li>
+                        </li> --}}
                     @endif
                 </ul>
                 <!-- Right Side (Become a Host) -->
@@ -68,7 +68,7 @@
                         </li>
                     @else
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="{{ route('host.register') }}">BECOME A HOST</a>
+                            <a class="nav-link" href="{{ route('login') }}">Account</a>
                         </li>
                     @endif
 

@@ -11,6 +11,7 @@ use App\Models\Booking;
 use App\Models\Equipment;
 use App\Models\EquipmentPrice;
 use App\Models\Gig;
+use App\Models\GigFeature;
 use App\Models\Host;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -187,19 +188,35 @@ class HomeController extends Controller
         // dd($data);
         return view('pages.host-profile', $data);
     }
+ 
 
     public function bookingDetailByGigId($gig_id)
     {
-        $client = Auth::user()->id ?? "";
+        $clientId = Auth::id(); // cleaner way
         $data = [
-            'loggedIn' => "",
+            'loggedIn' => $clientId ?? '',
         ];
-        if ($client != "") {
-            $data['loggedIn'] = $client;
-        }
 
-        return view('pages.booking-details');
+        // Get the gig with all the required relationships
+        $gig = Gig::with(['host','task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
+        $data['gig'] = $gig;
+
+        // Get the selected gig features
+        $data['selectedGig'] = GigFeature::where('gig_id', $gig_id)
+            ->pluck('gig_id')
+            ->toArray();
+
+        // Ensure equipmentPrice exists before accessing equipment_id
+        $equipmentId = $gig->equipmentPrice->equipment_id ?? null;
+
+        // Get selected equipment prices if available
+        $data['selectedEquipmentPrices'] = $equipmentId
+            ? EquipmentPrice::where('equipment_id', $equipmentId)->get()
+            : collect(); // return empty collection if null
+        // dd($data);
+        return view('pages.booking-details', $data);
     }
+
 
 
 

@@ -14,18 +14,21 @@
                 display: none;
                 /* Hide the default radio buttons */
             }
-
             .toggle {
-                width: 60px;
+                width: 20%;
                 height: 30px;
-                background-color: rgb(0, 37, 2);
                 border-radius: 30px;
                 position: relative;
                 cursor: pointer;
                 transition: background-color 0.3s;
-                margin-left: 10px;
-                /* Space between label and toggle */
+                padding-left: 15px;
             }
+            .signup-for-host a.login-a {
+                display: flex;
+                justify-content: center;
+                padding-top: 5px;
+            }
+
 
             .toggle-inner {
                 display: flex;
@@ -77,12 +80,42 @@
                 position: relative;
                 transition: background-color 0.3s;
             }
+
+        .card.login-card.signup-for-host {
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+@media (min-width:768px) and (max-width:1024px){
+
+.card.login-card.signup-for-host {
+    margin: auto;
+    margin-bottom: 0;
+}
+
+
+
+}
+
+@media screen and (max-width:767px) {
+
+.card.login-card.signup-for-host {
+    margin: auto;
+    margin-bottom: 0;
+}
+.toggle {
+    width: 26%;
+}
+
+}
+
+
         </style>
     @endpush
     <div class="container mt-2 mb-5">
         <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card login-card">
+            <div class="col-md-12">
+                <div class="card login-card signup-for-host">
                     <div class="card-body">
                         @if ($errors->has('sms_error'))
                             <div class="alert alert-danger">
