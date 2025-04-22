@@ -35,6 +35,19 @@
                                 <button class="accordion">
                                     <div class="accordion-list">
                                         <p class="number-list">2</p>
+                                        <span>Select Date & Time</span>
+                                    </div>
+                                    <div class="angle-icons">
+                                        <i class="fas fa-angle-down"></i>
+                                    </div>
+                                </button>
+                                <div class="panel time-zone-sct">
+                                   {{-- <h3>Calender</h3> --}}
+                                </div>
+
+                                <button class="accordion">
+                                    <div class="accordion-list">
+                                        <p class="number-list">3</p>
                                         <span>Notes for the Host</span>
                                     </div>
                                     <div class="angle-icons">
@@ -42,12 +55,7 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
-                                    <ul>
-                                        <li>30 Mins: <span>$40</span></li>
-                                        <li class="time-zone-mark">60 Mins: <span>$60</span></li>
-                                        <li>90 Minutes: <span>$90</span></li>
-                                        <li>120 Minutes: <span>$120</span></li>
-                                    </ul>
+                                   <textarea class="form-control booking-host-expert-note" placeholder="Write your message here."></textarea>
                                 </div>
                             </div>
 

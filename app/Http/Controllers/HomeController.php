@@ -192,7 +192,7 @@ class HomeController extends Controller
 
     public function bookingDetailByGigId($gig_id)
     {
-        $clientId = Auth::id(); // cleaner way
+        $clientId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
         $data = [
             'loggedIn' => $clientId ?? '',
         ];
@@ -213,7 +213,7 @@ class HomeController extends Controller
         $data['selectedEquipmentPrices'] = $equipmentId
             ? EquipmentPrice::where('equipment_id', $equipmentId)->get()
             : collect(); // return empty collection if null
-        // dd($data);
+        // dd($data['loggedIn']);
         return view('pages.booking-details', $data);
     }
 
