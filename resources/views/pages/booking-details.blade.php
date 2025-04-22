@@ -1,7 +1,6 @@
 <x-guest-layout>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @endpush
 
     <div class="host-profile-by-id">
@@ -62,7 +61,7 @@
                                     <div class="music-list-text">
                                         <h5>{{ $gig->host->name }}</h5>
                                         <p>{{ $gig->task->title }}</p>
-                                        <p>Tool: {{ $gig->equipment_name}}</p>
+                                        <p>Tool: {{ $gig->equipment_name }}</p>
                                     </div>
                                     <div class="rating-review-point">
                                         <span class="fa fa-star"></span>
@@ -84,8 +83,8 @@
                                     </div>
 
                                 </div>
-                                <div class="Proceed-to-checkout book-a-task">
-                                    <button id="checkout-btn" disabled>PROCEED TO CHECKOUT <i class="fa fa-credit-card"
+                                <div class="Proceed-to-checkout">
+                                    <button class="go-to-checkout" id="checkout-btn" disabled>PROCEED TO CHECKOUT <i class="fa fa-credit-card"
                                             aria-hidden="true"></i></button>
                                 </div>
                             </div>
@@ -96,6 +95,51 @@
         </div>
     </div>
 
+    <!--Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog col-md-4">
+            <div class="modal-content" style="background: rgb(0, 37, 2);">
+                <div class="modal-header">
+                    <h5 class="host-modal-title nav-link" id="exampleModalLabel">Login Please</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-white">&times;</span>
+                    </button>
+                </div>
+
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id="loggedIn" value="{{ $loggedIn }}" />
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <x-input-label class="text-white" for="username" :value="__('Email')" />
+                            <x-text-input type="email" name="email" :value="old('email')" required autofocus
+                                autocomplete="username" />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        </div>
+                        <div class="form-group">
+                            <x-input-label class="text-white" for="password" :value="__('Password')" />
+                            <x-text-input id="password" type="password" name="password" required
+                                autocomplete="current-password" />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <x-primary-button class="ms-3">
+                            {{ __('Log in') }}
+                        </x-primary-button>
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="login-a">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        @endif
+                        <br />
+                        <p class="nav-link">Don't have an account?</p>
+                        <a href="{{ route('user.register') }}" class="login-a">SignUp</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

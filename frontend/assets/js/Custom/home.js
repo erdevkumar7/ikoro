@@ -10,13 +10,7 @@ $(document).ready(function () {
             $('#loginModal').modal('show');
         }
     });
-
-    $(".book-a-task").click(function () {
-        var loggedIn = $("#loggedIn").val();
-        if (loggedIn == "") {
-            $('#loginModal').modal('show');
-        }
-    });
+  
 
     if ($("#filter_flag").val() != "") {
         $('html, body').animate({
