@@ -10,7 +10,7 @@
                     <div class="container select-duration">
                         <div class="row select-duration-inner">
                             <div class="col-md-8 select-duration-left">
-                                <button class="accordion">
+                                <button class="accordion active">
                                     <div class="accordion-list">
                                         <p class="number-list">1</p>
                                         <span>Select Duration</span>
@@ -19,7 +19,7 @@
                                         <i class="fas fa-angle-down"></i>
                                     </div>
                                 </button>
-                                <div class="panel time-zone-sct">
+                                <div class="panel time-zone-sct" style="display: block;"> <!-- open by default -->
                                     <ul>
                                         @foreach ($selectedEquipmentPrices as $price)
                                             <li class="time-zone-mark price-option"
@@ -32,7 +32,7 @@
                                     </ul>
                                 </div>
 
-                                <button class="accordion">
+                                <button class="accordion disabled">
                                     <div class="accordion-list">
                                         <p class="number-list">2</p>
                                         <span>Select Date & Time</span>
@@ -42,10 +42,12 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
-                                   {{-- <h3>Calender</h3> --}}
+                                    {{-- <input type="date" id="booking-date" min="{{ now()->toDateString() }}">
+                                    <div id="time-slots-wrapper" style="margin-top: 10px;"></div> --}}
+                                    <button class="slot-btn">Add Slot</button>
                                 </div>
 
-                                <button class="accordion">
+                                <button class="accordion disabled">
                                     <div class="accordion-list">
                                         <p class="number-list">3</p>
                                         <span>Notes for the Host</span>
@@ -55,7 +57,7 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
-                                   <textarea class="form-control booking-host-expert-note" placeholder="Write your message here."></textarea>
+                                    <textarea class="form-control booking-host-expert-note" placeholder="Write your message here."></textarea>
                                 </div>
                             </div>
 
@@ -92,8 +94,8 @@
 
                                 </div>
                                 <div class="Proceed-to-checkout">
-                                    <button class="go-to-checkout" id="checkout-btn" disabled>PROCEED TO CHECKOUT <i class="fa fa-credit-card"
-                                            aria-hidden="true"></i></button>
+                                    <button class="go-to-checkout" id="checkout-btn" disabled>PROCEED TO CHECKOUT <i
+                                            class="fa fa-credit-card" aria-hidden="true"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -153,28 +155,57 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Accordion click behavior
             $(".accordion").click(function() {
-                // Toggle active class
-                $(this).toggleClass("active");
+                if ($(this).hasClass("disabled")) return; // Prevent click if disabled
 
-                // Open/close the panel
-                var panel = $(this).next(".panel");
-                if (panel.css("display") === "block") {
-                    panel.slideUp();
-                } else {
-                    $(".panel").slideUp(); // Close other panels
-                    panel.slideDown(); // Open clicked panel
-                }
+                $(".accordion").removeClass("active");
+                $(".panel").slideUp();
+
+                $(this).addClass("active");
+                $(this).next(".panel").slideDown();
+            });
+
+            let selectedDuration = null;
+
+            // Step 1: Duration selection
+            $(".price-option").click(function() {
+                selectedDuration = $(this).data("duration");
+
+                // Enable and open second accordion
+                const secondAccordion = $(".accordion").eq(1);
+                const secondPanel = secondAccordion.next(".panel");
+                secondAccordion.removeClass("disabled").addClass("active");
+                secondPanel.slideDown();
+
+                // Close others
+                $(".accordion").not(secondAccordion).removeClass("active");
+                $(".panel").not(secondPanel).slideUp();
+            });
+
+            // Step 2: Time slot generation (assumes slot buttons already handled)
+            $(document).on("click", ".slot-btn", function() {
+                const thirdAccordion = $(".accordion").eq(2);
+                const checkoutBtn = $("#checkout-btn");
+                checkoutBtn.removeAttr("disabled").addClass("active-checkout");
+                
+                const thirdPanel = thirdAccordion.next(".panel");
+                thirdAccordion.removeClass("disabled").addClass("active");
+                thirdPanel.slideDown();
+
+                $(".accordion").not(thirdAccordion).removeClass("active");
+                $(".panel").not(thirdPanel).slideUp();
             });
         });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const priceOptions = document.querySelectorAll('.price-option');
             const durationDisplay = document.getElementById('selected-duration');
             const priceDisplay = document.getElementById('selected-price');
-            const checkoutBtn = document.getElementById('checkout-btn');
+            // const checkoutBtn = document.getElementById('checkout-btn');
 
             priceOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -192,8 +223,8 @@
                     priceDisplay.textContent = `$${price}`;
 
                     // Enable checkout button
-                    checkoutBtn.disabled = false;
-                    checkoutBtn.classList.add('active-checkout'); // optional class to style it
+                    // checkoutBtn.disabled = false;
+                    // checkoutBtn.classList.add('active-checkout');
                 });
             });
         });
