@@ -3,6 +3,53 @@
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
     @endpush
 
+    <style>
+        .booking-login-add .modal-dialog {
+            margin-top: 94px;
+        }
+
+        .booking-login-add .modal-content {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 100%;
+            pointer-events: auto;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: .3rem;
+            outline: 0;
+            background: #2a7d76 !important;
+            border: 2px solid #2a7d76;
+            color: rgb(255, 255, 255);
+            border-radius: 10px;
+        }
+
+        .booking-login-add button.btn.btn-block.login-button.ms-3 {
+            height: 48px;
+            background-color: #000;
+            margin-top: 10px;
+            box-shadow: none;
+            border-radius: 100px;
+            color: #fff;
+        }
+
+        .booking-login-add button.btn.btn-block.login-button.ms-3:hover {
+            background: #fff;
+            color: #000;
+            border: #dee2e6 !important;
+        }
+
+        .booking-login-add input.search-from {
+            height: 40px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 50px;
+        }
+    </style>
+
     <div class="host-profile-by-id">
         <div class="container host-main-profile">
             <div class="booking-page">
@@ -94,8 +141,15 @@
 
                                 </div>
                                 <div class="Proceed-to-checkout">
-                                    <button class="go-to-checkout" id="checkout-btn" disabled>PROCEED TO CHECKOUT <i
-                                            class="fa fa-credit-card" aria-hidden="true"></i></button>
+                                    <form action="{{ route('user.strip.payment') }}" method="GET">
+                                        <input type="hidden" name="gig_id" id="gig-id"
+                                            value="{{ $gig->id }}">
+                                        <input type="hidden" name="price" id="selected-gig-price" value="">
+                                        <input type="hidden" name="duration" id="selected-gig-duration" value="">
+
+                                        <button type="submit" class="go-to-checkout" id="checkout-btn" disabled>PROCEED
+                                            TO CHECKOUT <i class="fa fa-credit-card" aria-hidden="true"></i></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -167,10 +221,18 @@
             });
 
             let selectedDuration = null;
+            let selectedPrice = null;
 
             // Step 1: Duration selection
             $(".price-option").click(function() {
                 selectedDuration = $(this).data("duration");
+                selectedPrice = $(this).data("price");
+                const gigId = "{{ $gig->id }}";
+           
+
+                $('#selected-gig-price').val(selectedPrice);
+                $('#selected-gig-duration').val(selectedDuration);
+                $('#gig-id').val(gigId);
 
                 // Enable and open second accordion
                 const secondAccordion = $(".accordion").eq(1);
@@ -188,7 +250,7 @@
                 const thirdAccordion = $(".accordion").eq(2);
                 const checkoutBtn = $("#checkout-btn");
                 checkoutBtn.removeAttr("disabled").addClass("active-checkout");
-                
+
                 const thirdPanel = thirdAccordion.next(".panel");
                 thirdAccordion.removeClass("disabled").addClass("active");
                 thirdPanel.slideDown();

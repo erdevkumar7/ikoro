@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StripPaymentController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,10 @@ Route::middleware(['auth', 'verified', 'user'])->prefix('user')->group(function 
         return view('user.job.completed');
     })->name('user.job.completed');
 
+});
+
+
+Route::middleware(['auth', 'verified', 'user'])->group(function(){
+    Route::get('/strip/payment', [StripPaymentController::class, 'stripPaymentForm'])->name('user.strip.payment');
+    Route::post('/strip/payment', [StripPaymentController::class, 'stripPaymentSubmit'])->name('user.strip.paymentSubmit');
 });

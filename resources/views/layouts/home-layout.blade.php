@@ -117,7 +117,8 @@
         <div class="container">
             <div class="row attend-event-inner">
                 <div class="col-md-7 attend-event-left">
-                <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home or office. it is 1:1, live, and interactive. IKORO.co is a 1:1 live Video hailing App.</h3>
+                    <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home
+                        or office. it is 1:1, live, and interactive. IKORO.co is a 1:1 live Video hailing App.</h3>
                 </div>
 
                 <div class="col-md-5 attend-event-right">
@@ -131,30 +132,90 @@
 
     <div class="content flex-grow-1 comfort-your-home">
         <div class="container-fluid bg-3 text-center">
-        <!--     <span class="text-white order-text"><b>Order, relax, and tour places with iKORO from the comfort of your home /
+            <!--     <span class="text-white order-text"><b>Order, relax, and tour places with iKORO from the comfort of your home /
                     office.</b></span>
  -->
 
-    <div class="content flex-grow-1 mb-5 mt-3 meet-top-section-owl">
-                    <div class="container bg-3 text-center">
-                        <div class="owl-carousel menu" id="owl-carousel-top"
-                            style="display: flex; justify-content: center;">
-                            @foreach ($tasks as $task)
-                                <form class="host-new-filter" action="{{ route('filter.host') }}" method="GET">
-                                    @csrf
-                                    <button class="filter-submit" type="submit">
-                                        <div class="owl-css" id="task" data-id="{{ $task->id }}"
-                                            data-url="{{ route('filter.gigs') }}" style="cursor: pointer;">
-                                            <input type="hidden" name="task_id" value="{{ $task->id }}">
-                                            <i class="{{ $task->icon }}"></i>
-                                            {{ $task->title }}
-                                        </div>
-                                    </button>
-                                </form>
-                            @endforeach
-                        </div>
+            {{-- <div class="content flex-grow-1 mb-5 mt-3 meet-top-section-owl">
+                <div class="container bg-3 text-center">
+                    <div class="owl-carousel menu" id="owl-carousel-top"
+                        style="display: flex; justify-content: center;">
+                        @foreach ($tasks as $task)
+                            <form class="host-new-filter" action="{{ route('filter.host') }}" method="GET">
+                                @csrf
+                                <button class="filter-submit" type="submit">
+                                    <div class="owl-css" id="task" data-id="{{ $task->id }}"
+                                        data-url="{{ route('filter.gigs') }}" style="cursor: pointer;">
+                                        <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                        <i class="{{ $task->icon }}"></i>
+                                        {{ $task->title }}
+                                    </div>
+                                </button>
+                            </form>
+                        @endforeach
                     </div>
-    </div>
+                </div>
+            </div> --}}
+
+
+            <div class="meet-top-section-owl">
+                <div class="container">
+                    <div class="row meet-top-section-inner">
+                        @foreach ($tasks as $task)
+                            <div class="col-sm-2">
+                                <div class="card">
+                                    <form class="host-new-filter" action="{{ route('filter.host') }}" method="GET">
+                                        @csrf
+                                        <button class="filter-submit" type="submit">
+                                            <div class="card-block" id="task" data-id="{{ $task->id }}"
+                                                data-url="{{ route('filter.gigs') }}" style="cursor: pointer;">
+                                                <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                                <i class="{{ $task->icon }}"></i>
+                                                <p class="card-title">{{ $task->title }}</p>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- <div class="col-sm-2">
+                            <div class="card">
+                                <div class="card-block">
+                                    <i class="fa-solid fa-city"></i>
+                                    <p class="card-title">City Tours</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="card">
+                                <div class="card-block">
+                                    <i class="fa-solid fa-handshake"></i>
+                                    <p class="card-title">Meeting/Event</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="card">
+                                <div class="card-block">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <p class="card-title">Verify Places</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="card">
+                                <div class="card-block">
+                                    <i class="fa-solid fa-face-surprise"></i>
+                                    <p class="card-title">Surprise Someone</p>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -219,7 +280,8 @@
                         {{-- <label for="choose-tool">Choose a tool</label> --}}
                         <select name="equipment_id" id="equipment_id" class="choose-tool">
                             <option value=""
-                                {{ old('equipment_id', request('equipment_id')) == '' ? 'selected' : '' }}>Choose a tool</option>
+                                {{ old('equipment_id', request('equipment_id')) == '' ? 'selected' : '' }}>Choose a
+                                tool</option>
                             @foreach ($equipment_price_all as $row)
                                 <option value="{{ $row->id }}"
                                     {{ old('equipment_id', request('equipment_id')) == $row->id ? 'selected' : '' }}>
@@ -255,17 +317,17 @@
                 </div>
             </form>
 
-       <!--      @if (Session::has('message'))
-                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-            @endif -->
+            <!--      @if (Session::has('message'))
+<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+@endif -->
 
             <div class="container">
-             <!--    <div class="content flex-grow-1 mb-5 mt-3 meet-top-section-owl">
+                <!--    <div class="content flex-grow-1 mb-5 mt-3 meet-top-section-owl">
                     <div class="container-fluid bg-3 text-center">
                         <div class="owl-carousel menu" id="owl-carousel-top"
                             style="display: flex; justify-content: center;">
                             @foreach ($tasks as $task)
-                                <form class="host-new-filter" action="{{ route('filter.host') }}" method="GET">
+<form class="host-new-filter" action="{{ route('filter.host') }}" method="GET">
                                     @csrf
                                     <button class="filter-submit" type="submit">
                                         <div class="owl-css" id="task" data-id="{{ $task->id }}"
@@ -276,7 +338,7 @@
                                         </div>
                                     </button>
                                 </form>
-                            @endforeach
+@endforeach
                         </div>
                     </div>
                 </div> -->
