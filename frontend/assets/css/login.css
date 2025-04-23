@@ -24,9 +24,37 @@ body {
   padding-bottom: 30px;
   box-shadow: rgb(0 0 0 / 8%) 0 1px 0;
 }
-
+h5.card-title.text-center {
+    font-size: 25px;
+}
 .logout-img:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card.login-card input {
+    height: 40px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50px;
+}
+.card.login-card button.btn.btn-block.login-button.ms-3 {
+    height: 45px;
+    background-color: #fff;
+    margin-top: 25px;
+    box-shadow: none;
+}
+.card.login-card button.btn.btn-block.login-button.ms-3:focus {
+    box-shadow: none;
+}
+.card.login-card button.btn.btn-block.login-button.ms-3:hover {
+    background: #e8f0fe !important;
+    color: #000;
+    border: #e8f0fe!important;
+}
+.card.login-card {
+    width: 43% !important;
+    background: #2a7d76;
+    border: 2px solid #2a7d76;
+    color: rgb(255, 255, 255);
 }
 
 .logout-img {
@@ -37,6 +65,13 @@ body {
   border-radius: 32px;
   border: 1px solid #cecece;
 }
+.sign-up-user {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
 
 .logo {
   max-height: 30px;
@@ -144,6 +179,32 @@ footer {
   height: 150px;
 }
 
+
+@media (min-width:768px) and (max-width:1024px){
+  .card.login-card {
+    width: 68% !important;
+}
+.login-container {
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+
+}
+
+
+@media screen and (max-width:767px) {
+.card.login-card {
+    width: 100% !important;
+}
+.login-container {
+    padding-top: 15px !important;
+    padding-bottom: 40px !important;
+}
+
+
+}
+
 @media screen and (max-width:600px) {
   .experienced {
     
@@ -230,16 +291,23 @@ footer {
 .btn:hover {
   background-color: rgb(139, 208, 0);
 }
-
 .already-account {
-  padding-top: 20px;
+    padding-top: 15px;
+    text-align: center;
+    margin-bottom: 3px;
 }
 
 .login-container {
-  align-items: flex-start !important;
-  padding-top: 80px;
+    align-items: flex-start !important;
+    padding-top: 30px;
+    padding-bottom: 60px;
 }
-
+a.login-a.forgot-user-pass {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
 .task-form {
   border: 2px solid rgb(169, 240, 5);
   background: rgb(169 240 5);
@@ -292,11 +360,10 @@ i {
 }
 
 .login-a {
-  color: rgb(139, 208, 0);
+    color: #fff;
 }
-
 .login-a:hover {
-  color: rgb(173, 239, 41);
+    color: #f7f8fc;
 }
 
 .btn-login{

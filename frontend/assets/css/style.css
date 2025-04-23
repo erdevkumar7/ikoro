@@ -1,3 +1,7 @@
+
+body {
+    background: none !important;
+}
 .search-destinations {
     display: flex;
     color: black;
@@ -9,7 +13,7 @@
     border-radius: 50px;
     padding: 10px 35px;
     margin-top: 30px;
-    border: 7px solid #93e33091;
+    border: 7px solid #2a7d76;
     padding-right: 10px;
 }
 .host-by-name i.fa.fa-user {
@@ -33,7 +37,10 @@ div#no-gigs-message p {
     border-radius: 10px;
 }
 .work-destination .card:hover {
-    background: #a9f005;
+    background: #1d5853;
+}
+.work-destination .card:hover h3 {
+    color: #fff;
 }
 .work-destination .card:hover p {
     color: #000000;
@@ -42,28 +49,28 @@ div#no-gigs-message p {
     color: #212529;
 }
 .search-button button:hover {
-    background: #a9f005;
+    background: #1d5853;
 }
 .search-button button:hover i.fa {
-    color: #000000;
+    color: #fff;
 }
 .partial-host-list a:hover {
     text-decoration: none;
 }
 
 .container.search-destinations {
-    width: 65%;
+    width: 80%;
     padding-left: 30px;
     padding-bottom: 10px;
-	    align-items: center;
+    align-items: center;
+    margin-bottom: 50px;
 }
-
 .search-destinations p {
     margin-bottom: 0px;
 }
 
 .search-button button {
-    background: #FF3C64;
+    background: #2a7d76;
     border: none;
     color: #fff;
     border-radius: 50px;
@@ -168,9 +175,10 @@ select:focus-visible {
 .meet-our-top h1 {
     text-align: left !important;
     font-size: 30px;
-    color: #fff;
+    color: #000;
+    margin-bottom: 0px !important;
+    font-weight: 700;
 }
-
 .book-a-task-row {
     margin-top: 90px;
 }
@@ -183,7 +191,7 @@ select:focus-visible {
 
 .meet-our-top .owl-nav {
     position: absolute;
-    top: -29%;
+    top: -11%;
     width: 50%;
     left: 50%;
     display: flex;
@@ -197,13 +205,17 @@ select:focus-visible {
 .meet-our-top .star-count {
     padding: 10px 0;
     position: relative;
-    left: 228px;
+    left: 120px;
+    top: 90px;
 }
 
 .meet-our-top .star-count a {
     color: #000;
     font-weight: 500;
     text-decoration: underline;
+}
+.meet-our-top .star-count a:hover {
+    color: #002502;
 }
 
 .meet-our-top .owl-nav button {
@@ -220,7 +232,7 @@ select:focus-visible {
 
 .meet-our-top i.fa.fa-chevron-left {
     font-size: 20px;
-    background: rgb(169 240 5);
+    background: #2a7d76;
     width: 50px;
     height: 50px;
     border-radius: 50px;
@@ -231,8 +243,7 @@ select:focus-visible {
 
 .meet-our-top i.fa.fa-chevron-right {
     font-size: 20px;
-    background: rgb(169 240 5);
-
+    background: #2a7d76;
     width: 50px;
     height: 50px;
     border-radius: 50px;
@@ -240,13 +251,12 @@ select:focus-visible {
     align-items: center;
     justify-content: center;
 }
-
 .meet-our-top i.fa.fa-chevron-left:hover {
-    background: #ff3c64;
+    background: #1d5853;
 }
 
 .meet-our-top i.fa.fa-chevron-right:hover {
-    background: #ff3c64;
+    background: #1d5853;    
 }
 
 .detils-inner p {
@@ -257,39 +267,69 @@ select:focus-visible {
     margin: -4px;
     font-size: 15px;
 }
-
 .meet-our-top .owl-carousel .owl-item img {
     display: block;
-    width: 120px;
+    width: 100%;
     margin-bottom: 0px;
     border-radius: 0;
-    height: 169px;
+    height: 265px;
     object-fit: cover;
     object-position: top;
-    /* margin-left: 10px; */
     margin-top: 10px;
-    padding-left: 10px;
 }
-
 .meet-our-top .detils-inner i {
     padding-right: 10px;
     width: 24px;
     font-size: 20px;
     height: 24px;
 }
-
-
+.subscribe-our {
+    padding: 24px;
+    margin-top: 10px;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.subscribe-our h5.new-letters-add {
+    font-size: 35px;
+    color: #000;
+    font-weight: 700;
+    padding-bottom: 0;
+    text-align: left;
+}
+p.mb-3.new-letters-add {
+    color: #000;
+    text-align: left;
+}
+.news-subscribe-right {
+    padding-right: 40px;
+    padding-left: 0;
+}
 .meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .single-box {
     background: #fff;
     border-radius: 10px;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    padding: 10px;
+    margin-top: 0px !important;
+    padding-top: 1px;
 }
 /*.meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .single-box a:hover {
     text-decoration: none;
 }
 */
 .meet-our-top .detils-inner {
-    padding: 10px 0;
-    height: 200px;
+    padding: 10px 10px;
+    height: 140px;
+}
+.meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .owl-item {
+    padding: 2px;
+}
+.meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .single-box .img-area {
+    height: 260px;
 }
 
 .interactive-first .social-icon {
@@ -307,7 +347,7 @@ select:focus-visible {
 }
 
 .meet-our-top section.testimonial .single-box {
-    display: flex;
+    display: block !important;
     gap: 15px;
 }
 
@@ -328,8 +368,19 @@ select:focus-visible {
 }
 .subscribe-news button.btn.btn-primary {
     border: none;
-    padding: 8px 25px;
-    border-radius: 100px;
+    padding: 11px 25px;
+    border-radius: 5px;
+    background: #2a7d76;
+    border: 2px solid #fff;
+    margin-top: 0;
+    box-shadow: none;
+}
+form.d-flex.justify-content-center.align-items-center.gap-2.subscribe-news-input {
+    display: flex !important;
+    gap: 6px;
+}
+.subscribe-news button.btn.btn-primary:hover {
+    background: #1d5853;
 }
 .select-service-left img {
     width: 220px;
@@ -355,14 +406,17 @@ select:focus-visible {
 div#feedback-testimonials .testimonial-name {
     margin: 5px auto 0;
 }
-
+.host-profile-by-id {
+    background-color: #fff;
+    margin-top: 25px;
+}
 .select-a-service h3 {
     text-align: left;
     font-size: 20px;
-    color: #a9f005;
+    color: #000;
     margin-bottom: 0px;
     padding-bottom: 10px;
-    padding-top: 10px;
+    padding-top: 0px;
     width: 150px;
 }
 .host-booking-inner p {
@@ -395,12 +449,12 @@ div#feedback-testimonials .testimonial-name {
     margin-bottom: 3px;
 }
 .lists-maximum-offers {
-    padding-top: 35px;
+    padding-top: 10px;
 }
 .select-a-tool h3 {
     text-align: left;
     font-size: 20px;
-    color: #a9f005;
+    color: #000;
     width: 120px;
 }
 .select-duration button.accordion:hover {
@@ -419,7 +473,7 @@ div#feedback-testimonials .testimonial-name {
     gap: 3px;
 }
 .select-a-tool {
-    margin-top: 15px;
+    margin-top: 0px;
     text-align: left;
     display: flex;
     gap: 18px;
@@ -459,13 +513,13 @@ div#feedback-testimonials .testimonial-name {
     text-align: left;
     padding: 0 0px;
     padding-right: 35px;
+    color: #000;
 }
-
 .biography-sec h3 {
-    color: #fff;
+    color: #000;
     font-size: 20px;
-    padding-top: 18px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 0px;
     text-align: left;
 }
 
@@ -474,7 +528,7 @@ div#feedback-testimonials .testimonial-name {
     padding-left: 8px;
 }*/
 .biography-sec h4 {
-    color: #fff;
+    color: #000;
     font-size: 20px;
     padding-top: 0;
     margin-top: 0;
@@ -484,9 +538,9 @@ nav.navbar.navbar-expand-lg.navbar-light img.logout {
     margin-bottom: 0px !important;
 }
 .biography-sec h2 {
-    color: rgb(255, 255, 255);
+    color: #000;
     font-size: 20px;
-    padding-top: 18px;
+    padding-top: 0;
     text-align: left;
     padding-left: 0px;
 }
@@ -498,7 +552,7 @@ nav.navbar.navbar-expand-lg.navbar-light img.logout {
 }
 
 .biography-sec h1 {
-    color: #fff;
+    color: #000;
     font-size: 16px;
     padding-top: 0px;
 }
@@ -506,12 +560,12 @@ nav.navbar.navbar-expand-lg.navbar-light img.logout {
 .biography-sec a.eng-text {
     color: black;
     background: #fff;
-    padding: 5px 15px;
+    padding: 5px 0px;
     border-radius: 35px;
     text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     width: 30%;
 }
 
@@ -531,7 +585,7 @@ a.book-now-btn {
 }
 .continue-booking {
     color: black;
-    background: rgb(118 159 87);
+    background: #2a7d76;
     padding: 7px 15px;
     border-radius: 50px;
     text-decoration: none !important;
@@ -541,6 +595,10 @@ a.book-now-btn {
     width: 45%;
     border: none;
     color: #fff;
+    cursor: pointer;
+}
+.continue-booking:hover {
+    background: #1d5853;
 }
 
 a.book-now-btn:hover {
@@ -802,17 +860,37 @@ li.time-zone-mark {
 
 .how-it-work h1 {
     font-size: 30px;
+    color: #000 !important;
+    font-weight: 700;
 }
 
 .how-it-work {
-    padding-top: 60px;
+    padding-top: 40px;
 }
 #feedback-testimonials .item {
     padding-top: 30px !important;
     padding-bottom: 30px !important;
 }
 .py-3.subscribe-news {
-    padding-top: 0px !important;
+    background: #fff;
+    border-radius: 15px;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    margin-bottom: 50px;
+    width: 100% !important;
+    margin: auto;
+    box-shadow: 0 5px 40px rgba(29, 27, 76, .21);
+}
+.news-subscribe-inner {
+    align-items: center;
+}
+.news-subscribe-left {
+    padding-left: 40px;
+}
+
+
+.become-host-footer a.nav-link:hover {
+    color: #fff;
 }
 .search-destinations input#citySearchByInput {
     border-radius: 0px;
@@ -820,6 +898,10 @@ li.time-zone-mark {
     font-size: 16px;
     border: none;
     border-right: 1px solid #c7c7c7;
+}
+
+.search-destinations input#citySearchByInput::placeholder{
+    color: #000;
 }
 .biography-sec h1 {
     padding-bottom: 10px;
@@ -854,6 +936,7 @@ li.time-zone-mark {
     background: url("data:image/svg+xml,%3Csvg%20fill%3D'black'%20height%3D'14'%20viewBox%3D'0%200%2024%2024'%20width%3D'14'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M7%2010l5%205%205-5z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
     background-size: 1rem;
     padding-left: 5px !important;
+    color: #000 !important;
 }
 .gender-section select#gender {
     border-right: 0px;
@@ -873,16 +956,30 @@ li.time-zone-mark {
     margin-top: 40px;
 }
 
-.work-destination .card img {
-    width: 50px;
-    margin: auto;
-    padding: 15px 0;
+.work-destination .card i {
+    width: 70px;
+    border-radius: 100%;
+    height: 70px;
+    padding: 8px 10px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px;
+    background-color: #2a7d76;
 }
 
 .work-destination .card h3 {
-    font-size: 18px;
+    font-size: 17px;
     color: black;
     margin-bottom: 0;
+    height: 110px;
+    padding: 5px;
+    line-height: 1.5;
+    padding-top: 15px;
 }
 
 .work-destination .card p {
@@ -890,13 +987,83 @@ li.time-zone-mark {
     width: 85%;
     margin: auto;
 }
-
 .work-destination .card {
-    padding-bottom: 15px;
+    padding-bottom: 18px;
+    /* box-shadow: 0 16px 16px 4px rgba(0, 0, 0, .09); */
+    text-align: center;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #f7f7f7;
+    border-radius: 7px;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 16px 16px 32px 16px;
+    position: relative;
+    z-index: 1;
+    transition: all .25s cubic-bezier(.645,.045,.355,1);
+}
+.popular-location h1 {
+    font-size: 30px;
+    color: #000 !important;
+    font-weight: 700;
+}
+.popular-location {
+    padding-top: 60px;
+}
+.row.popular-location-inner img {
+    width: 100%;
+    margin-top: 30px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
 }
 
+
+.popular-location-inner .image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+
+.popular-location-inner .image-text {
+    position: absolute;
+    top: 59%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.popular-location-inner .image-text:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+
+
 .work-destination .column {
-    height: 211px;
+    height: 300px;
+}
+
+.work-destination .card:before {
+    content: '';
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    transition: all .25s cubic-bezier(.645,.045,.355,1) !important;
+    background-color: #007e76 !important;
 }
 
 section.testimonials h3.nav-link {
@@ -957,24 +1124,32 @@ section.testimonials h3.nav-link {
     margin-bottom: 15px !important;
     margin: auto;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 50px;
+    border: 2px solid #2a7d76;
+    color: #000;
+    margin-bottom: 0px !important;
+    margin-left: 0px;
+    width: 100% !important;
+    border-radius: 5px;
+    background-color: #ebeff3;
+    border: navajowhite;
 }
-
 .social-icon {
     gap: 10px;
 }
 
 .social-icon i {
-    background: #000;
+    background: #2a7d76;
     padding: 10px;
     font-size: 25px;
     margin-top: 0;
     border-radius: 5px;
+    border: 1px solid;
 }
 
 .social-icon i:hover {
-    background: #a9f005;
-    color: black;
+    background: #1d5853;
+    color: #fff;
 }
 p.rating-review-point {
     text-align: center !important;
@@ -995,13 +1170,14 @@ p.rating-review-point {
     margin-top: -35px;
 }
 .host-profile-by-id .select-service-right h1 {
-    text-align: left;
     margin-bottom: 0;
     padding-bottom: 0;
+    color: #000 !important;
+    font-weight: 700;
 }
 .host-name-text-add p {
     font-size: 20px;
-    color: #fff;
+    color: #000;
     margin-bottom: 0;
 }
 .host-booking-inner label {
@@ -1084,6 +1260,7 @@ p.rating-review-point {
     text-align: center;
     font-size: 15px;
     margin-bottom: 10px;
+    color: #000;
 }
 
 .host-profile-by-id .row.maximum-offers-service i.fa-solid.fa-heart {
@@ -1098,6 +1275,11 @@ p.rating-review-point {
 
 a.book-now-btn:hover {
     background: #fff;
+}
+footer.mt-5.text-white.pt-5.footer-add-content {
+    background-color: #2a7d76;
+    margin-top: -5px !important;
+    padding-left: 5px;
 }
 footer.mt-5.text-white.pt-5 {
     margin-top: 15px !important;
@@ -1209,17 +1391,16 @@ span.nav-link-dash.host-name-text {
 }
 .subscribe-news .btn-primary.focus, .btn-primary:focus {
     color: #fff;
-    background-color: #000 !important;
-    border-color: #000 !important;
+    background-color: #1d5853 !important;
+    border: none !important;
     box-shadow: none;
 }
-
 .host-name-text-add {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 10px;
-    padding-top: 20px;
+    padding-top: 0px;
 }
 
 .maximum-offers-service.all-media span.carousel-control-prev-icon {
@@ -1287,9 +1468,6 @@ span.nav-link-dash.host-name-text {
 p.small {
     font-size: 16px;
 }
-footer.mt-5.text-white.pt-5 h5.text-uppercase.font-weight-bold {
-    padding-bottom: 10px;
-}
 
 h1.mobile-view-host-name {
     display: none;
@@ -1299,7 +1477,368 @@ h1.mobile-view-host-name {
     color: #000;
 }
 
+.footer-add-content ul.list-unstyled {
+    line-height: 1.8;
+}
+.footer-add-content .container {
+    padding-left: 30px;
+}
+/*21-4-25 new-css-add*/
+.top-nav-header {
+    background-color: #fff;
+    padding: 0px !important;
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    box-shadow: 0 8px 8px -10px rgba(0, 0, 0, 0.2);
+}
+.top-nav-header.navbar-light .navbar-nav .nav-link {
+    color: #000 !important;
+    font-weight: 600 !important;
+    font-size: 18px;
+}
+.top-nav-header.navbar-light .navbar-nav .nav-link:hover {
+    color: #1d5853 !important;
+}
+
+.content.flex-grow-1.comfort-your-home {
+    background-color: #fff;
+    padding-top: 10px;
+}
+
+.comfort-your-home span.text-white.order-text {
+    color: #000 !important;
+}
+
+.meet-top-section-owl #owl-carousel-top .owl-item {
+    width: 220px;
+    margin-right: 0px;
+    margin-top: 10px;
+}
+
+
+form.host-new-filter div#task {
+    color: #000;
+    width: 180px;
+    font-size: 15px;
+}
+form.host-new-filter div#task:hover {
+    color: #2a7d76;
+    background: #1d5853;
+    color: #fff !important;
+}
+.attend-event-add {
+    background: url('/ikoro/frontend/images/bg-section-03.jpg') !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.attend-event-left h3 {
+    color: #000;
+    line-height: 1.3;
+    font-size: 35px;
+    font-weight: 700;
+    padding-right: 35px;
+}
+.attend-event-right img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.row.attend-event-inner {
+    align-items: center;
+}
+.card.login-card.signup-for-host {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+.login-container {
+    align-items: flex-start !important;
+    padding-top: 30px;
+    padding-bottom: 60px;
+    padding-top: 50px;
+}
+
+.meet-top-section-owl {
+    padding: 20px 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 35px !important;
+}
+.destination-section div#cityDropdown {
+    top: 744px !important;
+    left: 13% !important;
+}
+
+#owl-carousel-top {
+    gap: 20px;
+    align-items: center;
+}
+
+.host-new-filter {
+    margin: 0 10px;
+}
+
+/* Style for each task card */
+.meet-top-section-owl .owl-css {
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+    border-radius: 16px;
+    padding: 15px 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.meet-top-section-owl .owl-css i {
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    background-color: #2a7d76;
+    width: 45px;
+    height: 45px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-top: 0;
+}
+.meet-top-section-owl .owl-css:hover {
+    background: linear-gradient(135deg, #e0e7ff, #ffffff);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.footer-add-content .logo-img img {
+    margin-top: -30px;
+    margin-bottom: -25px;
+    margin-left: -35px;
+}
+.footer-add-content p.small {
+    font-size: 16px;
+    text-align: left;
+    padding-right: 30%;
+}
+.footer-add-content .become-host-footer .nav-link {
+    color: white;
+    padding-left: 0;
+    text-align: left;
+    font-size: 19px;
+    padding-top: 0px;
+    width: 150px;
+}
+
+footer.mt-5.text-white.pt-5 h5.text-uppercase.font-weight-bold {
+    padding-bottom: 10px;
+    text-align: left;
+}
+.footer-add-content ul.list-unstyled li {
+    text-align: left;
+}
+.footer-add-content .social-icon {
+    gap: 10px;
+    justify-content: left !important;
+}
+
+.footer-add-content .container.text-center p {
+    text-align: center;
+    width: 69% !important;
+    padding-right: 0px !important;
+    font-size: 14px;
+    margin: auto;
+    margin-top: 5px;
+}
+.footer-add-content .terms-policy a:hover {
+    color: #e0e4c2 !important;
+}
+nav.navbar.navbar-expand-lg.navbar-light.top-nav-header .container {
+    padding-left: 0px;
+    padding-right: 0;
+}
+
+/*21-4-25 new-css-add*/
+
+
+
 @media only screen and (max-width: 767px) {
+
+.content.flex-grow-1.comfort-your-home .container-fluid.bg-3.text-center {
+    padding-left: 0;
+    padding-right: 0px !important;
+}
+.work-destination .card {
+    padding-bottom: 18px;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 30px 16px 32px 16px;
+    position: relative;
+}
+.row.maximum-offers-service {
+    padding-top: 15px;
+    position: relative;
+    row-gap: 10px;
+}
+.meet-our-top .star-count {
+    padding: 10px 0;
+    position: relative;
+    left: 100px;
+    top: 90px;
+}
+.popular-location-col {
+    padding: 0;
+}
+
+.how-work-one {
+    padding: 0;
+}
+.how-work-two {
+    padding: 0;
+    margin-bottom: 0;
+}
+.popular-location-inner .image-text {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    padding: 8px 20px;
+}
+.how-work-three {
+    padding: 0;
+}
+.row.attend-event-inner {
+    align-items: center;
+    padding: 10px;
+}
+.content.flex-grow-1.comfort-your-home {
+    background-color: #fff;
+    padding: 10px;
+}
+.footer-add-content .container.text-center p {
+    text-align: left;
+    width: 100% !important;
+    padding-right: 0px !important;
+    margin-top: 5px;
+    margin-bottom: 10px !important;
+}
+.footer-add-content .container {
+    padding-left: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.footer-add-content .logo-img img {
+    margin-top: 0;
+    margin-bottom: -25px;
+    margin-left: -35px;
+}
+.meet-our-top h1 {
+    text-align: left !important;
+    font-size: 25px;
+}
+.how-it-work h1 {
+    font-size: 25px;
+}
+.popular-location h1 {
+    font-size: 25px;
+}
+.subscribe-news button.btn.btn-primary {
+    box-shadow: none;
+    margin-top: 15px;
+    width: 100%;
+}
+
+p.mb-3.new-letters-add {
+    color: #000;
+    text-align: left;
+    font-size: 14px;
+}
+.subscribe-our {
+    padding: 10px;
+    margin-bottom: 10px;
+    padding-top: 30px;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.footer-add-content .col-12.col-md-3.mb-4 {
+    margin-bottom: 10px !important;
+}
+footer.mt-5.text-white.pt-5 h5.text-uppercase.font-weight-bold {
+    padding-bottom: 0;
+    text-align: left;
+}
+.subscribe-our h5.new-letters-add {
+    font-size: 22px;
+    text-align: left;
+}
+.news-subscribe-left {
+    padding-left: 15px;
+}
+form.d-flex.justify-content-center.align-items-center.gap-2.subscribe-news-input {
+    display: block !important;
+    gap: 6px;
+}
+.news-subscribe-right {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.py-3.subscribe-news {
+    background: #fff;
+    border-radius: 15px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+    width: 100% !important;
+}
+
+.row.popular-location-inner img {
+    width: 100%;
+    margin-top: 20px;
+    height: 230px;
+}
+.top-nav-header.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.popular-location {
+    padding-top: 20px;
+}
+.work-destination .column {
+    height: auto;
+    margin-bottom: 15px;
+}
+button.navbar-toggler i.fa-solid.fa-bars {
+    color: #000;
+    font-size: 26px;
+    margin-top: 0;
+}
+
+.navbar-light .navbar-toggler {
+    color: rgba(0,0,0,.5);
+    border-color: #2a7d76;
+    padding: 8px;
+    margin-right: 20px;
+}
+
+.attend-event-add {
+    background: url('/ikoro/frontend/images/bg-section-03.jpg') !important;
+    padding-top: 20px;
+    padding-bottom: 35px;
+}
+.attend-event-left h3 {
+    font-size: 24px;
+    padding-right: 0;
+    margin-bottom: 15px;
+}
+
 
 .host-profile-by-id .host-main-profile {
     padding-top: 0px !important; 
@@ -1430,13 +1969,13 @@ button.navbar-toggler:focus-visible {
 }
 
 .navbar-collapse {
-    background-color: #d6ffa491;
+    background-color: #2a7d76;
 }
 .search-destinations .search-button {
     text-align: right;
 }
 .how-it-work {
-    padding-top: 50px;
+    padding-top: 10px;
 }
 .host-by-name {
     padding: 0;
@@ -1444,11 +1983,10 @@ button.navbar-toggler:focus-visible {
 }
 
 .destination-section div#cityDropdown {
-    top: 26% !important;
-    left: 30px;
+    top: 78% !important;
+    left: 30px !important;
     width: 86%;
 }
-
 .search-destinations input {
     width: 100%;
 }
@@ -1514,10 +2052,11 @@ footer.mt-5.text-white.pt-5 {
         text-align: center;
     }
 .host-profile-by-id .host-booking-inner {
-    margin-top: 13px;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
     padding-bottom: 8px;
+    margin-bottom: 5px;
 }
 .host-booking-inner p {
     margin-bottom: 5px;
@@ -1544,7 +2083,7 @@ footer.mt-5.text-white.pt-5 {
 
 .meet-our-top .detils-inner {
     padding: 10px 0;
-    height: auto;
+    height: 140px;
 }
 
 .subscribe-news-input input.form-control {
@@ -1553,7 +2092,7 @@ footer.mt-5.text-white.pt-5 {
 }
 
 .container.search-destinations {
-    width: 100%;
+    width: 93%;
     display: block;
     margin-bottom: 25px;
     padding-left: 14px;
@@ -1587,9 +2126,9 @@ footer.mt-5.text-white.pt-5 {
         display: none;
     }
 
-    .meet-our-top {
-        margin-top: 25px;
-    }
+.meet-our-top {
+    margin-top: 10px;
+}
 
     .meet-our-top i.fa.fa-chevron-left {
         width: 40px;
@@ -1600,15 +2139,16 @@ footer.mt-5.text-white.pt-5 {
         width: 40px;
         height: 40px;
     }
-
-    .meet-our-top section {
-        margin-top: 80px;
-    }
-
-  .meet-our-top .owl-nav {
-    top: -25%;
+.meet-our-top section {
+    margin-top: 50px;
 }
 
+.meet-our-top .owl-nav {
+    top: -10%;
+    width: 100%;
+    left: 0;
+    justify-content: center !important; 
+}
     .host-main-profile {
         padding-top: 40px;
     }
@@ -1620,7 +2160,7 @@ footer.mt-5.text-white.pt-5 {
 
 .meet-our-top .owl-carousel .owl-item img {
     display: block;
-    height: 170px;
+    height: 265px;
     object-fit: cover;
 }
 
@@ -1663,14 +2203,13 @@ footer.mt-5.text-white.pt-5 {
         padding-right: 0px !important;
         padding-left: 0px !important;
     }
-
-    .select-service-right {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
+.host-profile-by-id .row.booking-mark-sdv .select-service-right {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
 
     .select-a-tool {
-        margin-top: 10px;
+        margin-top: 0px;
         display: block;
         text-align: center;
     }
@@ -1714,12 +2253,18 @@ footer.mt-5.text-white.pt-5 {
     font-size: 19px !important;
 }
 .continue-booking {
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 45%;
     border: none;
-    justify-content: center;
+    color: #fff;
+    cursor: pointer;
     margin: auto;
-    margin-top: 8px;
-    padding: 10px 15px;
+}
+.continue-booking:hover {
+    background: #1d5853;
 }
     .row.maximum-offers-service {
         padding-top: 0;
@@ -1740,10 +2285,10 @@ footer.mt-5.text-white.pt-5 {
         margin-top: 20px;
     }
 
-    .how-work-two {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
+ .how-work-two {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
 
     .row.work-destination .col-md-4 {
         padding: 0;

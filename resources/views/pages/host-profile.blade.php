@@ -5,22 +5,22 @@
     @endpush
 
     <style>
+
         .host-profile-by-id .host-main-profile {
-            padding-top: 15px;
+            padding-top: 0px;
             padding-bottom: 40px;
             padding-left: 0px;
             padding-right: 0px;
         }
 
-        .booking-select-add {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 18px;
-            border-radius: 10px;
-            background-color: #d2ff9991;
-        }
-
+.booking-select-add {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #2a7d76;
+}
         .host-booking-inner label {
             display: flex;
             align-items: center;
@@ -77,16 +77,15 @@
             justify-content: space-between;
         }
 
-        .host-select-add {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 18px;
-            background-color: #d2ff9991;
-            border-radius: 10px;
-            justify-content: space-between;
-        }
-
+.host-select-add {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    background-color: #2a7d76;
+    border-radius: 8px;
+    justify-content: space-between;
+}
         .host-booking-inner {
             flex: 1 1 calc(50% - 1rem);
             background-color: #fff;
@@ -113,18 +112,18 @@
             cursor: pointer;
         }
 
-        .host-booking-inner i {
-            font-size: 1.5rem;
-            color: #002502;
-            flex-shrink: 0;
-            padding-right: 0;
-            margin: initial;
-            background-color: #77a158;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
+.host-booking-inner i {
+    font-size: 1.5rem;
+    color: #fff;
+    flex-shrink: 0;
+    padding-right: 0;
+    margin: initial;
+    background-color: #2a7d76;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
 
         .host-booking-inner p {
             margin: 0;
@@ -171,12 +170,11 @@
             border-radius: 20px;
         }
 
-        .row.maximum-offers-service {
-            padding-top: 20px;
-            position: relative;
-            row-gap: 25px;
-        }
-
+.row.maximum-offers-service {
+    padding-top: 15px;
+    position: relative;
+    row-gap: 25px;
+}
         .select-service-left img {
             width: 220px;
             height: 220px;
@@ -194,24 +192,26 @@
 
 
         @media only screen and (max-width: 767px) {
-            .host-select-add {
-                display: block;
-                align-items: center;
-                gap: 20px;
-                margin: 15px;
-                margin-top: 5px;
-                padding-top: 5px;
-            }
-
-            .booking-select-add {
-                display: block;
-                width: 92%;
-                margin: auto;
-                margin-top: 15px;
-                padding-bottom: 8px;
-            }
-
-            .host-name-text-add p {
+.host-select-add {
+    display: block;
+    align-items: center;
+    gap: 20px;
+    margin: 15px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding: 6px;
+    padding-bottom: 1px;
+}
+.booking-select-add {
+    display: block;
+    width: 92%;
+    margin: auto;
+    margin-top: 15px;
+    padding-bottom: 8px;
+    padding: 6px !important;
+    padding-bottom: 2px !important;
+}         .host-name-text-add p {
                 margin-bottom: 0;
                 padding-top: 10px;
             }
@@ -221,9 +221,9 @@
                 padding-bottom: 0px;
             }
 
-            .select-booking-inner {
-                margin-bottom: 10px;
-            }
+        .select-booking-inner {
+    margin-bottom: 5px;
+}
 
             .biography-sec h4 {
                 text-align: center !important;

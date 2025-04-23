@@ -15,13 +15,13 @@
                     <div class="form-group">
                         <x-input-label for="username" :value="__('Email')" />
                         <x-text-input type="text" class="search-from" name="email" :value="old('email')" required
-                            autocomplete="username" />
+                            autocomplete="username" placeholder="Enter Email" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="form-group">
                         <x-input-label for="password" :value="__('Password')" />
                         <x-text-input id="password" class="search-from" type="password" name="password" required
-                            autocomplete="current-password" />
+                            autocomplete="current-password" placeholder="Enter Password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <x-primary-button class="ms-3">
