@@ -3,7 +3,6 @@
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/booking-style.css') }}" />
     @endpush
-
     <div class="host-profile-by-id">
         <div class="container host-main-profile">
             <div class="booking-page">
@@ -20,7 +19,8 @@
                                         <i class="fas fa-angle-down"></i>
                                     </div>
                                 </button>
-                                <div class="panel time-zone-sct" style="display: block;"> <!-- open by default -->
+                                <div class="panel time-zone-sct" style="display: block;">
+                                    <!-- open by default -->
                                     <ul>
                                         @foreach ($selectedEquipmentPrices as $price)
                                             <li class="time-zone-mark price-option"
@@ -43,9 +43,97 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
-                                    {{-- <input type="date" id="booking-date" min="{{ now()->toDateString() }}">
-                                    <div id="time-slots-wrapper" style="margin-top: 10px;"></div> --}}
-                                    <button class="slot-btn">Add Slot</button>
+                                    <div class="calendar-date">
+                                        <div class="calendar-date-left">
+                                            <div class="calendar">
+                                                <header class="calendar-header">
+                                                    <button onclick="changeMonth(-1)"><i
+                                                            class="fa-solid fa-caret-left"></i></button>
+                                                    <h2 id="month-year">April 2025</h2>
+                                                    <button onclick="changeMonth(1)"><i
+                                                            class="fa-solid fa-caret-right"></i></button>
+                                                </header>
+                                                <div class="days add-day">
+                                                    <div class="day">Sun</div>
+                                                    <div class="day">Mon</div>
+                                                    <div class="day">Tue</div>
+                                                    <div class="day">Wed</div>
+                                                    <div class="day">Thu</div>
+                                                    <div class="day">Fri</div>
+                                                    <div class="day">Sat</div>
+                                                </div>
+                                                <div class="days" id="dates"></div>
+                                            </div>
+
+                                            <script>
+                                                const datesContainer = document.getElementById("dates");
+                                                const monthYear = document.getElementById("month-year");
+
+                                                let today = new Date();
+                                                let currentMonth = today.getMonth();
+                                                let currentYear = today.getFullYear();
+
+                                                function renderCalendar(month, year) {
+                                                    const firstDay = new Date(year, month, 1).getDay();
+                                                    const lastDate = new Date(year, month + 1, 0).getDate();
+
+                                                    datesContainer.innerHTML = "";
+
+                                                    monthYear.innerText = `${today.toLocaleString("default", { month: "long" })} ${year}`;
+
+                                                    for (let i = 0; i < firstDay; i++) {
+                                                        const empty = document.createElement("div");
+                                                        datesContainer.appendChild(empty);
+                                                    }
+
+                                                    for (let i = 1; i <= lastDate; i++) {
+                                                        const date = document.createElement("div");
+                                                        date.className = "date";
+                                                        date.textContent = i;
+
+                                                        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                                                            date.classList.add("today");
+                                                        }
+
+                                                        datesContainer.appendChild(date);
+                                                    }
+                                                }
+
+                                                function changeMonth(direction) {
+                                                    currentMonth += direction;
+                                                    if (currentMonth < 0) {
+                                                        currentMonth = 11;
+                                                        currentYear -= 1;
+                                                    } else if (currentMonth > 11) {
+                                                        currentMonth = 0;
+                                                        currentYear += 1;
+                                                    }
+
+                                                    today = new Date(currentYear, currentMonth, 1);
+                                                    renderCalendar(currentMonth, currentYear);
+                                                }
+
+                                                renderCalendar(currentMonth, currentYear);
+                                            </script>
+                                        </div>
+
+                                        <div class="calendar-date-right">
+                                            <p class="time-date-add">Tue - <span>Apr 29</span></p>
+                                            <h4 class="select-time-text">Select Time</h4>
+                                            <div class="time-add">
+                                                <button type="button" class="slot-btn btn btn-outline-primary m-1">9:00
+                                                    AM</button>
+                                                <button type="button" class="slot-btn btn btn-outline-primary m-1">11:00
+                                                    AM</button>
+                                                <button type="button" class="slot-btn btn btn-outline-primary m-1">1:00
+                                                    PM</button>
+                                                <button type="button" class="slot-btn btn btn-outline-primary m-1">3:00
+                                                    PM</button>
+                                                <button type="button" class="slot-btn btn btn-outline-primary m-1">5:00
+                                                    PM</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <button class="accordion disabled">
@@ -92,17 +180,18 @@
                                         <p id="selected-duration">Not Selected</p>
                                         <p id="selected-price">-</p>
                                     </div>
-
                                 </div>
                                 <div class="Proceed-to-checkout">
                                     <form action="{{ route('user.strip.payment') }}" method="GET">
                                         <input type="hidden" name="gig_id" id="gig-id"
-                                            value="{{ $gig->id }}">
-                                        <input type="hidden" name="price" id="selected-gig-price" value="">
-                                        <input type="hidden" name="duration" id="selected-gig-duration" value="">
+                                            value="{{ $gig->id }}" />
+                                        <input type="hidden" name="price" id="selected-gig-price" value="" />
+                                        <input type="hidden" name="duration" id="selected-gig-duration"
+                                            value="" />
 
-                                        <button type="submit" class="go-to-checkout" id="checkout-btn" disabled>PROCEED
-                                            TO CHECKOUT <i class="fa fa-credit-card" aria-hidden="true"></i></button>
+                                        <button type="submit" class="go-to-checkout" id="checkout-btn"
+                                            disabled>PROCEED TO CHECKOUT <i class="fa fa-credit-card"
+                                                aria-hidden="true"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -132,7 +221,7 @@
                         <div class="form-group">
                             <x-input-label class="text-white" for="username" :value="__('Email')" />
                             <x-text-input type="email" name="email" :value="old('email')" required autofocus
-                                autocomplete="username" placeholder="Enter Email"/>
+                                autocomplete="username" placeholder="Enter Email" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         <div class="form-group">

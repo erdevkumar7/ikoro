@@ -1780,7 +1780,7 @@ nav.navbar.navbar-expand-lg.navbar-light.top-nav-header .container {
     opacity: 1 !important;
 }
 .select-duration-right {
-    height: 308px;
+    height: 325px;
     padding-top: 10px;
     box-shadow: rgba(32, 32, 47, 0.1) 0px 0px 39px 0px;
 }
@@ -1819,6 +1819,13 @@ button#checkout-btn:focus {
 
 @media only screen and (max-width: 767px) {
 
+.select-booking-inner p {
+    margin: 0;
+    font-size: 14px;
+}
+.select-service-right i.fas.fa-circle {
+    font-size: 15px;
+}
 .work-destination .card i {
     width: 50px;
     border-radius: 100%;
@@ -1843,6 +1850,11 @@ button#checkout-btn:focus {
 }
 .login-container {
     padding-top: 35px !important;
+}
+.footer-add-content p.small {
+    font-size: 16px;
+    text-align: left;
+    padding-right: 0px;
 }
 .card.login-card.signup-for-host {
     margin-top: 30px;
@@ -1876,6 +1888,10 @@ form.host-new-filter div#task {
     left: 180px;
     top: -8px;
     width: 54%;
+}
+.duration-second p#selected-price {
+    font-weight: 600 !important;
+    padding-top: 11px;
 }
 .content.flex-grow-1.comfort-your-home .container-fluid.bg-3.text-center {
     padding-left: 0;
@@ -1942,11 +1958,16 @@ form.host-new-filter div#task {
     padding: 0;
     margin-bottom: 0;
 }
+.top-nav-header .logo-img img.logout {
+    margin-left: -15px;
+    width: 180px !important;
+}
 .popular-location-inner .image-text {
     position: absolute;
     top: 56%;
     left: 50%;
     padding: 8px 20px;
+    padding-top: 6px;
 }
 .how-work-three {
     padding: 0;
@@ -1973,8 +1994,9 @@ form.host-new-filter div#task {
 }
 .footer-add-content .logo-img img {
     margin-top: 0;
-    margin-bottom: -25px;
+    margin-bottom: -15px;
     margin-left: -35px;
+    width: 180px !important;
 }
 .meet-our-top h1 {
     text-align: left !important;
@@ -2069,8 +2091,18 @@ button.navbar-toggler i.fa-solid.fa-bars {
 .navbar-light .navbar-toggler {
     color: rgba(0,0,0,.5);
     border-color: #2a7d76;
-    padding: 8px;
+    padding: 10px;
     margin-right: 20px;
+    background-color: #2a7d76;
+}
+.navbar-light .navbar-toggler i {
+    color: #fff !important;
+}
+.navbar-light .navbar-toggler:hover {
+    background: #1d5853;
+}
+.navbar-light .navbar-toggler:hover i {
+    color: #fff !important;
 }
 
 .attend-event-add {
@@ -2081,7 +2113,7 @@ button.navbar-toggler i.fa-solid.fa-bars {
 .attend-event-left h3 {
     font-size: 24px;
     padding-right: 0;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .host-profile-by-id .host-main-profile {
@@ -2208,6 +2240,14 @@ button.navbar-toggler:focus-visible {
 .duration-text {
     display: block;
 }
+.select-duration .duration-text {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
 
 .lists-maximum-offers {
     padding-top: 20px;
@@ -2258,6 +2298,7 @@ div#feedback-testimonials .testimonial-name {
 footer.mt-5.text-white.pt-5 {
     margin-top: 15px !important;
     padding-top: 10px !important;
+    padding-left: 0px !important;
 }
 .host-profile-by-id .row.maximum-offers-service {
     width: 100%;
@@ -2268,6 +2309,7 @@ footer.mt-5.text-white.pt-5 {
     height: auto;
     overflow-y: auto;
     padding-top: 10px;
+    row-gap: 11px;
 }
 
 .host-profile-by-id .row.select-duration-inner {
@@ -2308,23 +2350,19 @@ footer.mt-5.text-white.pt-5 {
     margin-bottom: 5px;
 }
 .select-booking-inner p {
-    margin-bottom: 5px;
-    font-size: 14px;
+    margin-bottom: 5px !important;
+    font-size: 14px !important;
 }
-    .host-profile-by-id .host-main-profile {
-        padding-top: 0px;
-    }
+.host-profile-by-id .host-main-profile {
+    padding-top: 0px;
+}
 
 .host-profile-by-id .host-main-profile h1 {
     text-align: center;
-    font-size: 25px;
+    font-size: 16px !important;
     width: 77%;
     margin: auto;
     margin-top: 0;
-}
-
-.host-profile-by-id .biography-sec h1 {
-    margin-top: 0px;
 }
 
 .meet-our-top .detils-inner {
@@ -2521,10 +2559,13 @@ footer.mt-5.text-white.pt-5 {
         position: relative;
     }
 
-    .panel.time-zone-sct ul {
-        display: block;
-        padding-left: 0;
-    }
+.panel.time-zone-sct ul {
+    display: block;
+    padding-left: 0;
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0;
+}
 
     .panel.time-zone-sct ul li {
         font-size: 18px;

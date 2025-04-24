@@ -1,7 +1,9 @@
 <x-guest-layout>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyZrQ3kL3MZq5NfX5KFWPi7n6ghB0C2kQf" crossorigin="anonymous">
+        </script>
     @endpush
 
     <style>
@@ -245,7 +247,12 @@
 
             .biography-sec h3 {
                 padding-top: 15px;
-                padding-bottom: 15px;
+                padding-bottom: 5px;
+                text-align: center;
+            }
+
+            .biography-sec h2 {
+                padding-top: 5px;
                 text-align: center;
             }
 
@@ -366,10 +373,9 @@
                                                         <div class="col-md-4 gig-box"
                                                             data-task-id="{{ $gig->task_id }}"
                                                             data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
-
                                                             <p class="my-offer-text">
                                                                 <input type="checkbox" class="gig-select-checkbox"
-                                                                    data-gig-id="{{ $gig->id }}" disabled>
+                                                                    data-gig-id="{{ $gig->id }}" disabled />
                                                                 {{ Str::limit($gig->title, 25) }}
                                                             </p>
 
@@ -382,7 +388,7 @@
                                                                                 class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                                                                 <img src="{{ asset('storage/app/public/' . $media->path) }}"
                                                                                     class="d-block w-100"
-                                                                                    alt="Gig Image">
+                                                                                    alt="Gig Image" />
                                                                             </div>
                                                                         @endforeach
                                                                     </div>
@@ -422,7 +428,6 @@
                                                             src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
                                                         <i class="fa-solid fa-heart"></i>
                                                         <h6 class="guest-fav-text">Guest favorite</h6>
-
                                                     </div>
                                                     <div class="col-md-4">
                                                         <p>Lakeside Forest With Lions</p>
@@ -440,6 +445,7 @@
                                                 </div>
                                             @endif
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
