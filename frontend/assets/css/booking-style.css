@@ -1,0 +1,97 @@
+
+.booking-login-add .modal-dialog {
+    margin-top: 94px;
+}
+
+.booking-login-add .modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0;
+    background: #2a7d76 !important;
+    border: 2px solid #2a7d76;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.booking-login-add button.btn.btn-block.login-button.ms-3 {
+    height: 48px;
+    background-color: #000;
+    margin-top: 10px;
+    box-shadow: none;
+    border-radius: 100px;
+    color: #fff;
+}
+
+.booking-login-add button.btn.btn-block.login-button.ms-3:hover {
+    background: #fff;
+    color: #000;
+    border: #dee2e6 !important;
+}
+
+.booking-login-add input.search-from {
+    height: 40px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50px;
+}
+
+.login-booking-add .modal-dialog {
+    width: 510px !important;
+    background: #2a7d76 !important;
+    border: 2px solid #2a7d76 !important;
+    color: rgb(255, 255, 255);
+    top: 85px;
+    border-radius: 5px;
+}
+.login-booking-add .modal-content {
+    background: none;
+    border: none;
+}
+h5#exampleModalLabel {
+    padding-left: 0;
+}
+.login-booking-add .modal-header {
+    border: none;
+    padding-bottom: 0;
+}
+.login-booking-add input.search-from {
+    height: 40px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50px;
+}
+
+.login-booking-add button.btn.btn-block.login-button {
+    height: 48px;
+    background-color: #000;
+    margin-top: 0px;
+    box-shadow: none;
+    color: #fff;
+    border-radius: 100px;
+}
+
+.login-booking-add .modal-footer {
+    border: none;
+}
+.login-booking-add .modal-body {
+    padding-bottom: 0;
+}
+
+/*calender-css-start*/
+
+
+
+
+
+
+
+/*calender-css-start*/

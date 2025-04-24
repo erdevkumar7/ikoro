@@ -19,6 +19,9 @@ body {
 .host-by-name i.fa.fa-user {
     width: 20px !important;
 }
+.top-nav-header img.logout:focus-visible {
+    outline: none;
+}
 div#no-gigs-message p {
     font-size: 18px;
 }
@@ -733,10 +736,19 @@ i.fa-regular.fa-circle {
     align-items: center;
     font-size: 16px !important;
     gap: 8px;
+    cursor: pointer;
 }
 li.time-zone-mark.price-option span {
     color: #2a7d76;
     font-weight: 500;
+}
+.select-duration-left li.time-zone-mark:hover {
+    background-color: #2a7d76;
+    color: #fff;
+    border: 1px solid #2a7d76;
+}
+.select-duration-left li.time-zone-mark:hover span {
+    color: #fff;
 }
 
 .panel.time-zone-sct ul {
@@ -1297,7 +1309,7 @@ a.book-now-btn:hover {
 }
 footer.mt-5.text-white.pt-5.footer-add-content {
     background-color: #2a7d76;
-    margin-top: -5px !important;
+    margin-top: 0px !important;
     padding-left: 5px;
 }
 footer.mt-5.text-white.pt-5 {
@@ -1619,8 +1631,8 @@ form.host-new-filter div#task:hover {
 }
 .card.login-card.signup-for-host {
     margin: auto;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 .login-container {
     align-items: flex-start !important;
@@ -1814,8 +1826,21 @@ button#checkout-btn:focus {
     padding: 8px 10px;
     font-size: 22px;
 }
-
-
+.login-container {
+    align-items: flex-start !important;
+    padding: 20px;
+}
+.container-fluid.mt-2.mb-5.signup-form {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin: 0px !important;
+    padding-bottom: 50px !important;
+}
+.card.login-card.signup-for-host form {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
 .login-container {
     padding-top: 35px !important;
 }
@@ -1871,6 +1896,13 @@ form.host-new-filter div#task {
     align-items: center;
     padding-top: 25px;
 }
+
+.Proceed-to-checkout button#checkout-btn {
+    border: none;
+    display: flex;
+    padding: 15px 20px;
+    border-radius: 5px;
+}
 .work-destination .card {
     padding-bottom: 18px;
     display: flex;
@@ -1888,6 +1920,11 @@ form.host-new-filter div#task {
     position: relative;
     left: 100px;
     top: 90px;
+}
+.select-duration .duration-text p {
+    margin-bottom: 0px;
+    font-weight: 400;
+    text-align: left;
 }
 .popular-location-col {
     padding: 0;
@@ -1961,6 +1998,9 @@ p.mb-3.new-letters-add {
     color: #000;
     text-align: left;
     font-size: 15px;
+}
+.row.meet-top-section-inner .col-sm-2 {
+    padding: 0;
 }
 .subscribe-our {
     padding: 10px;

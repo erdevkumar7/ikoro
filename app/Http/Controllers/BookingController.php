@@ -68,7 +68,7 @@ class BookingController extends Controller
         ->join('states', 'bookings.state_id', '=', 'states.id')
         ->join('cities', 'bookings.city_id', '=', 'cities.id')
         ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-        ->whereIn('bookings.status', [$status, 'completed'])
+        // ->whereIn('bookings.status', [$status, 'completed'])
         ->where('bookings.host_id', Auth::user()->id)
         ->paginate(config('app.pagination'));
     

@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified', 'user'])->prefix('user')->group(function 
 });
 
 
-Route::middleware(['auth', 'verified', 'user'])->group(function(){
+// Route::middleware(['auth', 'verified', 'user'])->group(function(){
     Route::get('/strip/payment', [StripPaymentController::class, 'stripPaymentForm'])->name('user.strip.payment');
     Route::post('/strip/payment', [StripPaymentController::class, 'stripPaymentSubmit'])->name('user.strip.paymentSubmit');
-});
+// });

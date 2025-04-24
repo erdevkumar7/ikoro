@@ -1,54 +1,8 @@
 <x-guest-layout>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('frontend/assets/css/booking-style.css') }}" />
     @endpush
-
-    <style>
-        .booking-login-add .modal-dialog {
-            margin-top: 94px;
-        }
-
-        .booking-login-add .modal-content {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            width: 100%;
-            pointer-events: auto;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid rgba(0, 0, 0, .2);
-            border-radius: .3rem;
-            outline: 0;
-            background: #2a7d76 !important;
-            border: 2px solid #2a7d76;
-            color: rgb(255, 255, 255);
-            border-radius: 10px;
-        }
-
-        .booking-login-add button.btn.btn-block.login-button.ms-3 {
-            height: 48px;
-            background-color: #000;
-            margin-top: 10px;
-            box-shadow: none;
-            border-radius: 100px;
-            color: #fff;
-        }
-
-        .booking-login-add button.btn.btn-block.login-button.ms-3:hover {
-            background: #fff;
-            color: #000;
-            border: #dee2e6 !important;
-        }
-
-        .booking-login-add input.search-from {
-            height: 40px;
-            background-color: #fff;
-            color: #000;
-            border-radius: 50px;
-        }
-    </style>
 
     <div class="host-profile-by-id">
         <div class="container host-main-profile">
@@ -160,9 +114,10 @@
     </div>
 
     <!--Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade login-booking-add" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog col-md-4">
-            <div class="modal-content" style="background: rgb(0, 37, 2);">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="host-modal-title nav-link" id="exampleModalLabel">Login Please</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -177,13 +132,13 @@
                         <div class="form-group">
                             <x-input-label class="text-white" for="username" :value="__('Email')" />
                             <x-text-input type="email" name="email" :value="old('email')" required autofocus
-                                autocomplete="username" />
+                                autocomplete="username" placeholder="Enter Email"/>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         <div class="form-group">
                             <x-input-label class="text-white" for="password" :value="__('Password')" />
                             <x-text-input id="password" type="password" name="password" required
-                                autocomplete="current-password" />
+                                autocomplete="current-password" placeholder="Enter Password" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                     </div>
@@ -228,7 +183,7 @@
                 selectedDuration = $(this).data("duration");
                 selectedPrice = $(this).data("price");
                 const gigId = "{{ $gig->id }}";
-           
+
 
                 $('#selected-gig-price').val(selectedPrice);
                 $('#selected-gig-duration').val(selectedDuration);

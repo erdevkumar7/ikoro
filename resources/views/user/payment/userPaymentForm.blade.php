@@ -48,8 +48,8 @@
                                 </div>
 
                                 <input type="hidden" name="gig_id" id="gig-id" value="{{ $gigId }}">
-                                <input type="hidden" name="price" id="selected-gig-price" value="{{ $duration}}">
-                                <input type="hidden" name="duration" id="selected-gig-duration" value="${{ $price }}">
+                                <input type="hidden" name="price" id="selected-gig-price" value="{{ $price }}">
+                                <input type="hidden" name="duration" id="selected-gig-duration" value="{{ $duration }}">
 
                                 <div class="p-3">
                                     <button type="submit" class="btn btn-primary btn-block free-button">Pay Now</button>

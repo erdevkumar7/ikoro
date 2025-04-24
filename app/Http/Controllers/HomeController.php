@@ -188,7 +188,33 @@ class HomeController extends Controller
         // dd($data);
         return view('pages.host-profile', $data);
     }
- 
+    
+    public function demoBookingDetailByGigId($gig_id)
+    {
+        $clientId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
+        $data = [
+            'loggedIn' => $clientId ?? '',
+        ];
+
+        // Get the gig with all the required relationships
+        $gig = Gig::with(['host','task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
+        $data['gig'] = $gig;
+
+        // Get the selected gig features
+        $data['selectedGig'] = GigFeature::where('gig_id', $gig_id)
+            ->pluck('gig_id')
+            ->toArray();
+
+        // Ensure equipmentPrice exists before accessing equipment_id
+        $equipmentId = $gig->equipmentPrice->equipment_id ?? null;
+
+        // Get selected equipment prices if available
+        $data['selectedEquipmentPrices'] = $equipmentId
+            ? EquipmentPrice::where('equipment_id', $equipmentId)->get()
+            : collect(); // return empty collection if null
+        // dd($data['loggedIn']);
+        return view('pages.demo-booking-details', $data);
+    }
 
     public function bookingDetailByGigId($gig_id)
     {
