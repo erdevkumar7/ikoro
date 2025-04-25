@@ -22,7 +22,8 @@
                                 <div class="panel time-zone-sct" style="display: block;">
                                     <!-- open by default -->
                                     <ul>
-                                        @foreach ($selectedEquipmentPrices as $price)
+
+                                        {{-- @foreach ($selectedEquipmentPrices as $price)
                                             <li class="time-zone-mark price-option"
                                                 data-duration="{{ $price->duration_minutes }}"
                                                 data-price="{{ $price->price }}">
@@ -30,6 +31,28 @@
                                                 <span>${{ $price->price }}</span>
                                             </li>
                                         @endforeach
+                                         --}}
+
+                                        <li class="time-zone-mark price-option" data-duration="30"
+                                            data-price="{{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}">
+                                            30 Mins:
+                                            <span>${{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}</span>
+                                        </li>
+                                        <li class="time-zone-mark price-option" data-duration="60"
+                                            data-price="{{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}">
+                                            60 Mins:
+                                            <span>${{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}</span>
+                                        </li>
+                                        <li class="time-zone-mark price-option" data-duration="90"
+                                            data-price="{{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}">
+                                            90 Mins:
+                                            <span>${{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}</span>
+                                        </li>
+                                        <li class="time-zone-mark price-option" data-duration="120"
+                                            data-price="{{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}">
+                                            120 Mins:
+                                            <span>${{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}</span>
+                                        </li>
                                     </ul>
                                 </div>
 
@@ -43,11 +66,6 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
-                                    {{-- <input type="date" id="booking-date" min="{{ now()->toDateString() }}" />
-                                    <div id="time-slots-wrapper" style="margin-top: 10px;"></div>
-                                    --}}
-                                    <!--                                     <button class="slot-btn">Add Slot</button>
- -->
                                     <div class="calendar-date">
                                         <div class="calendar-date-left">
                                             <div class="calendar">
@@ -141,7 +159,8 @@
                                     <form id="checkout-form" action="{{ route('user.strip.payment') }}" method="GET">
                                         <input type="hidden" name="gig_id" id="gig-id"
                                             value="{{ $gig->id }}" />
-                                        <input type="hidden" name="price" id="selected-gig-price" value="" />
+                                        <input type="hidden" name="price" id="selected-gig-price"
+                                            value="" />
                                         <input type="hidden" name="duration" id="selected-gig-duration"
                                             value="" />
 
