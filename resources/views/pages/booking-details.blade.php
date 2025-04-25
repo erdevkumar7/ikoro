@@ -43,6 +43,11 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
+                                    {{-- <input type="date" id="booking-date" min="{{ now()->toDateString() }}" />
+                                    <div id="time-slots-wrapper" style="margin-top: 10px;"></div>
+                                    --}}
+                                    <!--                                     <button class="slot-btn">Add Slot</button>
+ -->
                                     <div class="calendar-date">
                                         <div class="calendar-date-left">
                                             <div class="calendar">
@@ -65,66 +70,17 @@
                                                 <div class="days" id="dates"></div>
                                             </div>
 
-                                            <script>
-                                                const datesContainer = document.getElementById("dates");
-                                                const monthYear = document.getElementById("month-year");
 
-                                                let today = new Date();
-                                                let currentMonth = today.getMonth();
-                                                let currentYear = today.getFullYear();
-
-                                                function renderCalendar(month, year) {
-                                                    const firstDay = new Date(year, month, 1).getDay();
-                                                    const lastDate = new Date(year, month + 1, 0).getDate();
-
-                                                    datesContainer.innerHTML = "";
-
-                                                    monthYear.innerText = `${today.toLocaleString("default", { month: "long" })} ${year}`;
-
-                                                    for (let i = 0; i < firstDay; i++) {
-                                                        const empty = document.createElement("div");
-                                                        datesContainer.appendChild(empty);
-                                                    }
-
-                                                    for (let i = 1; i <= lastDate; i++) {
-                                                        const date = document.createElement("div");
-                                                        date.className = "date";
-                                                        date.textContent = i;
-
-                                                        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                                                            date.classList.add("today");
-                                                        }
-
-                                                        datesContainer.appendChild(date);
-                                                    }
-                                                }
-
-                                                function changeMonth(direction) {
-                                                    currentMonth += direction;
-                                                    if (currentMonth < 0) {
-                                                        currentMonth = 11;
-                                                        currentYear -= 1;
-                                                    } else if (currentMonth > 11) {
-                                                        currentMonth = 0;
-                                                        currentYear += 1;
-                                                    }
-
-                                                    today = new Date(currentYear, currentMonth, 1);
-                                                    renderCalendar(currentMonth, currentYear);
-                                                }
-
-                                                renderCalendar(currentMonth, currentYear);
-                                            </script>
                                         </div>
 
                                         <div class="calendar-date-right">
-                                            <p class="time-date-add">Tue - <span>Apr 29</span></p>
+                                            <p class="time-date-add">Tue - <span>Apr 25</span></p>
                                             <h4 class="select-time-text">Select Time</h4>
                                             <div class="time-add">
                                                 <button type="button" class="slot-btn btn btn-outline-primary m-1">9:00
                                                     AM</button>
-                                                <button type="button" class="slot-btn btn btn-outline-primary m-1">11:00
-                                                    AM</button>
+                                                <button type="button"
+                                                    class="slot-btn btn btn-outline-primary m-1">11:00 AM</button>
                                                 <button type="button" class="slot-btn btn btn-outline-primary m-1">1:00
                                                     PM</button>
                                                 <button type="button" class="slot-btn btn btn-outline-primary m-1">3:00
@@ -182,7 +138,7 @@
                                     </div>
                                 </div>
                                 <div class="Proceed-to-checkout">
-                                    <form action="{{ route('user.strip.payment') }}" method="GET">
+                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}" method="GET">
                                         <input type="hidden" name="gig_id" id="gig-id"
                                             value="{{ $gig->id }}" />
                                         <input type="hidden" name="price" id="selected-gig-price" value="" />
@@ -217,6 +173,7 @@
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <input type="hidden" id="loggedIn" value="{{ $loggedIn }}" />
+                    <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
                     <div class="modal-body">
                         <div class="form-group">
                             <x-input-label class="text-white" for="username" :value="__('Email')" />
@@ -249,10 +206,14 @@
         </div>
     </div>
 
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
+
+            const today = new Date();
+            displaySelectedDate(today);
+
             // Accordion click behavior
             $(".accordion").click(function() {
                 if ($(this).hasClass("disabled")) return; // Prevent click if disabled
@@ -273,10 +234,9 @@
                 selectedPrice = $(this).data("price");
                 const gigId = "{{ $gig->id }}";
 
-
-                $('#selected-gig-price').val(selectedPrice);
-                $('#selected-gig-duration').val(selectedDuration);
-                $('#gig-id').val(gigId);
+                $("#selected-gig-price").val(selectedPrice);
+                $("#selected-gig-duration").val(selectedDuration);
+                $("#gig-id").val(gigId);
 
                 // Enable and open second accordion
                 const secondAccordion = $(".accordion").eq(1);
@@ -305,25 +265,24 @@
         });
     </script>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const priceOptions = document.querySelectorAll('.price-option');
-            const durationDisplay = document.getElementById('selected-duration');
-            const priceDisplay = document.getElementById('selected-price');
+        document.addEventListener("DOMContentLoaded", function() {
+            const priceOptions = document.querySelectorAll(".price-option");
+            const durationDisplay = document.getElementById("selected-duration");
+            const priceDisplay = document.getElementById("selected-price");
             // const checkoutBtn = document.getElementById('checkout-btn');
 
-            priceOptions.forEach(option => {
-                option.addEventListener('click', function() {
+            priceOptions.forEach((option) => {
+                option.addEventListener("click", function() {
                     // Remove active class from all
-                    priceOptions.forEach(opt => opt.classList.remove('selected'));
+                    priceOptions.forEach((opt) => opt.classList.remove("selected"));
 
                     // Add selected class
-                    this.classList.add('selected');
+                    this.classList.add("selected");
 
                     // Update duration and price display
-                    const duration = this.getAttribute('data-duration');
-                    const price = this.getAttribute('data-price');
+                    const duration = this.getAttribute("data-duration");
+                    const price = this.getAttribute("data-price");
 
                     durationDisplay.textContent = `${duration} Minutes`;
                     priceDisplay.textContent = `$${price}`;
@@ -336,7 +295,252 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            // Set this variable from server side
+            let isUserLoggedIn = {{ Auth::check() && Auth::user()->role === 'user' ? 'true' : 'false' }};
 
+            $('#checkout-btn').on('click', function(e) {
+                if (!isUserLoggedIn) {
+                    e.preventDefault();
 
-
+                    // Send AJAX request to store booking data in session
+                    $.ajax({
+                        url: '{{ route('store.booking.data') }}',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            gig_id: $('#gig-id').val(),
+                            price: $('#selected-gig-price').val(),
+                            duration: $('#selected-gig-duration').val()
+                        },
+                        success: function() {
+                            // Show the login modal after saving session data
+                            $('#loginModal').modal('show');
+                        }
+                    });
+                } else {
+                    // Allow form to be submitted if logged in
+                    $('#checkout-form').submit();
+                }
+            });
+        });
+    </script>
 </x-guest-layout>
+
+<style>
+    .highlighted {
+        background-color: #ffc107;
+        color: #000;
+        border-radius: 50%;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    function displaySelectedDate(date) {
+        const weekdayStr = date.toLocaleDateString("en-US", {
+            weekday: "short"
+        });
+        const monthStr = date.toLocaleDateString("en-US", {
+            month: "short"
+        });
+        const dayStr = date.getDate();
+        const formattedDate = `${weekdayStr} - <span>${monthStr} ${dayStr}</span>`;
+        const timeDateAdd = document.querySelector(".time-date-add");
+        if (timeDateAdd) {
+            timeDateAdd.innerHTML = formattedDate;
+        }
+    }
+
+
+    function parseHour(timeStr) {
+        const [time, modifier] = timeStr.toLowerCase().split(" ");
+        let [hours, minutes] = time.split(":").map(Number);
+        if (modifier === "pm" && hours !== 12) hours += 12;
+        if (modifier === "am" && hours === 12) hours = 0;
+        return hours + minutes / 60;
+    }
+
+    function formatTime(decimalHour) {
+        let totalMinutes = Math.round(decimalHour * 60);
+        let hours = Math.floor(totalMinutes / 60);
+        let minutes = totalMinutes % 60;
+        let ampm = "am";
+
+        if (hours >= 12) {
+            ampm = "pm";
+            if (hours > 12) hours -= 12;
+        }
+        if (hours === 0) hours = 12;
+
+        let minutesStr = minutes < 10 ? "0" + minutes : minutes;
+        return `${hours}:${minutesStr} ${ampm}`;
+    }
+
+    // Inject open/close times for all days from Blade
+    const timeData = {
+        sun: {
+            open: "{{ $gig->host->sun_open_time }}",
+            close: "{{ $gig->host->sun_close_time }}",
+        },
+        mon: {
+            open: "{{ $gig->host->mon_open_time }}",
+            close: "{{ $gig->host->mon_close_time }}",
+        },
+        tue: {
+            open: "{{ $gig->host->tue_open_time }}",
+            close: "{{ $gig->host->tue_close_time }}",
+        },
+        wed: {
+            open: "{{ $gig->host->wed_open_time }}",
+            close: "{{ $gig->host->wed_close_time }}",
+        },
+        thu: {
+            open: "{{ $gig->host->thu_open_time }}",
+            close: "{{ $gig->host->thu_close_time }}",
+        },
+        fri: {
+            open: "{{ $gig->host->fri_open_time }}",
+            close: "{{ $gig->host->fri_close_time }}",
+        },
+        sat: {
+            open: "{{ $gig->host->sat_open_time }}",
+            close: "{{ $gig->host->sat_close_time }}",
+        },
+    };
+
+    document.addEventListener("click", function(e) {
+        if (e.target.classList.contains("date") && e.target.classList.contains("highlighted")) {
+            const dayNumber = parseInt(e.target.textContent.trim());
+            const monthYearStr = document.getElementById("month-year").textContent.trim();
+            const [monthName, yearStr] = monthYearStr.split(" ");
+            const year = parseInt(yearStr);
+            const month = new Date(`${monthName} 1, ${year}`).getMonth();
+
+            const clickedDate = new Date(year, month, dayNumber);
+
+
+            //25 apr 2025
+            displaySelectedDate(clickedDate);
+            //25 apr 2025
+
+            const weekdays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+            const dayName = weekdays[clickedDate.getDay()];
+
+            const selectedOption = document.querySelector(".price-option.selected");
+
+            if (selectedOption) {
+                const duration = parseInt(selectedOption.getAttribute("data-duration")); // in minutes
+
+                const openTimeStr = timeData[dayName]?.open || "12:00 am";
+                const closeTimeStr = timeData[dayName]?.close || "12:00 am";
+
+                const startHour = parseHour(openTimeStr);
+                const endHour = parseHour(closeTimeStr);
+
+                const timeAddContainer = document.querySelector(".time-add");
+                timeAddContainer.innerHTML = ""; // Clear previous buttons
+
+                for (let time = startHour; time < endHour; time += duration / 60) {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "btn btn-outline-primary m-1 slot-btn";
+                    btn.textContent = formatTime(time);
+                    timeAddContainer.appendChild(btn);
+                }
+            } else {
+                alert("No time slot selected.");
+            }
+        }
+    });
+</script>
+
+
+<script>
+    const datesContainer = document.getElementById("dates");
+    const monthYear = document.getElementById("month-year");
+
+    // These values come from Blade and PHP
+    const openDays = {
+        @foreach (['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as $key)
+            '{{ $key }}': {{ $gig->host->{$key . '_is_open'} }},
+        @endforeach
+    };
+
+    let today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+
+    function formatDate(dateObj) {
+        const year = dateObj.getFullYear();
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function getDayKey(dayIndex) {
+        return ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'][dayIndex];
+    }
+
+    function renderCalendar(month, year) {
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+
+        datesContainer.innerHTML = "";
+
+        const currentDisplayedMonth = new Date(year, month);
+        monthYear.innerText = `${currentDisplayedMonth.toLocaleString("default", { month: "long" })} ${year}`;
+
+        // Define the range: today to today + 2 months
+        const startDate = new Date();
+        const endDate = new Date();
+        endDate.setMonth(endDate.getMonth() + 2);
+
+        for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement("div");
+            datesContainer.appendChild(empty);
+        }
+
+        for (let i = 1; i <= lastDate; i++) {
+            const date = document.createElement("div");
+            date.className = "date";
+            date.textContent = i;
+
+            const thisDate = new Date(year, month, i);
+            const dayKey = getDayKey(thisDate.getDay());
+
+            // Only highlight if within the 2-month window and the day is open
+            if (thisDate >= startDate && thisDate <= endDate && openDays[dayKey] === 1) {
+                date.classList.add("highlighted");
+            }
+
+            // Mark today
+            if (
+                i === today.getDate() &&
+                month === today.getMonth() &&
+                year === today.getFullYear()
+            ) {
+                date.classList.add("today");
+            }
+
+            datesContainer.appendChild(date);
+        }
+    }
+
+
+    function changeMonth(direction) {
+        currentMonth += direction;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear -= 1;
+        } else if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear += 1;
+        }
+
+        renderCalendar(currentMonth, currentYear);
+    }
+
+    renderCalendar(currentMonth, currentYear);
+</script>

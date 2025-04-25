@@ -226,4 +226,15 @@ class BookingController extends Controller
 
         return redirect()->back();
     }
+
+    public function storeBookingData(Request $request)
+    {
+        session([
+            'booking.gig_id' => $request->gig_id,
+            'booking.price' => $request->price,
+            'booking.duration' => $request->duration,
+        ]);
+    
+        return response()->json(['status' => 'success']);
+    }
 }
