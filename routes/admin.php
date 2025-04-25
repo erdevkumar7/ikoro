@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
@@ -80,4 +81,6 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('job/completed', function () {
         return view('admin.job.completed');
     })->name('admin.job.completed');
+
+
 });

@@ -1,7 +1,31 @@
-@extends('host.layouts.app')
+{{-- @extends('host.layouts.app') --}}
+
+@extends('host.layout.layout')
+
 @section('title', 'My Gigs')
 @section('content')
-    <div class="container">
+    <div class="content-wrapper">
+
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">My Gigs</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="container-fluid mb-3">
             <div class="row align-items-center">
                 <!-- Heading on the left -->
@@ -30,11 +54,11 @@
             <tbody>
                 @forelse ($gigs as $gig)
                     <tr>
-                        <th scope="row">{{ $gig['title'] }}</th>
+                        <th scope="row">{{ $gig['title']  }}</th>
                         <td>{{ $gig['task']['title'] }}</td>
-                        <td>{{ $gig['country']['name'] }} - {{ $gig['state']['name'] }} - {{ $gig['city']['name'] }} -
-                            {{ $gig['zip']['code'] }} </td>
-                        <td>{{ $gig['status'] }}</td>
+                        <td>{{ $gig['country']['name'] ?? '' }} - {{ $gig['state']['name'] ?? '' }} - {{ $gig['city']['name'] ?? '' }} -
+                            {{ $gig['zip']['code'] ?? '' }} </td>
+                        <td>{{ $gig['status'] ?? '' }}</td>
                         <td>
                             <a class="btn btn-info" href="{{ route('host.gig.addedit', $gig['id']) }}">
                                 <i class="fas fa-edit"></i>

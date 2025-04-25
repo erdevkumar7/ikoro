@@ -2,7 +2,7 @@
 @section('page_conent')
     <div>
         @if ($gigs->isNotEmpty())
-            <div class="filter-host-user">
+            <div class="filter-host-user show-content-filter-add">
                 {{-- <div class="row select-host-click" data-id="{{ $gig->host->id }}" data-url="{{ route('get.selectedhost') }}"> --}}
 
                 <div class="row partial-host-list">
@@ -10,8 +10,8 @@
                         <div class="col-md-4 mb-4">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-4 host-image">
+                                    <div class="row show-content-filter-inner">
+                                        <div class="col-ms-4 host-image">
                                             @if ($gig->host->image)
                                                 <img class="d-block" src="{{ asset('public/' . $gig->host->image) }}"
                                                     alt="">

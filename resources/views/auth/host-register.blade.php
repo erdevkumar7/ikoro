@@ -85,6 +85,11 @@
             margin: auto;
             margin-bottom: 20px;
         }
+.container-fluid.mt-2.mb-5.signup-form {
+    background-color: #f7f7f7;
+    padding: 65px;
+    margin: 0px !important;
+}
 
 @media (min-width:768px) and (max-width:1024px){
 
@@ -112,7 +117,7 @@
 
         </style>
     @endpush
-    <div class="container mt-2 mb-5">
+    <div class="container-fluid mt-2 mb-5 signup-form">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card login-card signup-for-host">

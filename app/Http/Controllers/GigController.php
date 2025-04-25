@@ -40,6 +40,11 @@ class GigController extends Controller
             'state_id' => ['required', 'integer'],
             'city_id' => ['required', 'integer'],
             'zip_id' => ['nullable', 'integer'],
+
+            'price30min' => ['nullable', 'integer'],
+            'price60min' => ['nullable', 'integer'],
+            'price90min' => ['nullable', 'integer'],
+            'price120min' => ['nullable', 'integer'],
         ]);
         // dd($validatedData);
         $validatedData['host_id'] = Auth::user()->id;

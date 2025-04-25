@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class="container d-flex justify-content-center align-items-center login-container">
+    <div class="container-fluid d-flex justify-content-center align-items-center login-container">
         <div class="card login-card" style="width: 100%;">
             <div class="card-body">
                 <h5 class="card-title text-center">Login</h5>

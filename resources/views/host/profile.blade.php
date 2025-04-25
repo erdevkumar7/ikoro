@@ -1,16 +1,41 @@
-@extends('host.layouts.app')
+{{-- @extends('host.layouts.app') --}}
+
+@extends('host.layout.layout')
+
 @section('title', 'Profile')
 @section('content')
+
+
+<div class="content-wrapper">
+
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-body">
                         @if (Session::has('message'))
                             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}
                             </p>
                         @endif
-                        <h5 class="card-title text-center mt-2">Update Your Profile</h5>
+                        <p><h5 class="">Update Your Profile</h5></p><br>
                         <form method="POST" action="{{ route('host.profile.update') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row mt-2">
@@ -138,7 +163,7 @@
                                     <div class="row add-work-hrs">
 
                                         {{-- Day Label --}}
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-3">
                                             <label for="{{ $key }}_is_open">{{ $label }}</label>
 
                                             <input type="hidden" name="{{ $key }}_check" value="0">
@@ -147,7 +172,7 @@
                                         </div>
 
                                         {{-- Open/Close Dropdown --}}
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-3">
                                             <label for="{{ $key }}_is_open">Status</label>
                                             <select name="{{ $key }}_is_open" id="{{ $key }}_is_open" class="chosen-select form-control">
                                                 <option value="1" {{ isset($data) && $data->{$key . '_is_open'} == 1 ? 'selected' : '' }}>Online</option>
@@ -158,7 +183,7 @@
 
                                         {{-- Open Time --}}
                                         <div class="form-group col-md-3">
-                                            <!--
+                                            
                                             <label for="{{ $key }}_open_time">Open Time</label>
                                             <select name="{{ $key }}_open_time" id="{{ $key }}_open_time" class="chosen-select form-control">
                                                 <option>Open time</option>
@@ -182,12 +207,12 @@
                                                 @endfor
                                             </select>
                                             <x-input-error :messages="$errors->get($key . '_open_time')" class="mt-2" />
-                                            -->
+                                            
                                         </div>
 
                                         {{-- Close Time --}}
                                         <div class="form-group col-md-3">
-                                            <!--
+                                            
                                             <label for="{{ $key }}_close_time">Close Time</label>
                                             <select name="{{ $key }}_close_time" id="{{ $key }}_close_time" class="chosen-select form-control">
                                                 <option>Close time</option>
@@ -211,7 +236,7 @@
                                                 @endfor
                                             </select>
                                             <x-input-error :messages="$errors->get($key . '_close_time')" class="mt-2" />
-                                            -->
+                                            
                                         </div>
 
                                     </div>
@@ -258,4 +283,5 @@
             </div>
         </div>
     </div>
+</div>    
 @endsection

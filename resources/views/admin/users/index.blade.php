@@ -1,7 +1,62 @@
-@extends('admin.layouts.app')
+{{-- @extends('admin.layouts.app') --}}
+@extends('admin.layout.layout') 
 @section('title', 'Users')
 @section('content')
-    <div class="container">
+
+
+
+
+@section('current_page_css')
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<style>
+  .slow .toggle-group { transition: left 0.7s; -webkit-transition: left 0.7s; }
+</style>
+@endsection
+
+@section('current_page_js')
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('resources/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{ asset('resources/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@endsection
+
+
+
+    <div class="content-wrapper">
+
+   <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0"></h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Manage Users</li>
+                    </ol>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="container-fluid mb-3">
             <div class="row align-items-center">
                 <!-- Heading on the left -->
@@ -14,9 +69,14 @@
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
-        <table class="table table-responsive-md table-responsive-sm table-bordered">
+
+        <div class="card">
+            <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th scope="col">SNo.</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Email</th>
@@ -26,9 +86,13 @@
                 </tr>
             </thead>
             <tbody>
+                @php $i = ($users->currentPage() - 1) * $users->perPage(); @endphp
                 @forelse ($users as $user)
+                <?php $i++; ?>
                     <tr>
-                        <th scope="row">{{ $user->name }}</th>
+                        <td>{{ $i }}</th>
+                        <td>{{ $user->id }}</th>
+                        <td>{{ $user->name }}</th>
                         <td>{{ $user->gender }}</td>
                         <td>{{ optional($user->user)->email }}</td>
                         <td>{{ $user->phone }}</td>
@@ -78,6 +142,15 @@
                 </li>
             </ul>
         </nav>
+
+
+
+        </div>
+        <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+
     </div>
     @push('scripts')
         <script src="{{ asset('backend/admin/assets/js/hosts.js') }}"></script>

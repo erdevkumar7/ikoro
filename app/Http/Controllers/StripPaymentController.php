@@ -95,7 +95,7 @@ class StripPaymentController extends Controller
                     'host_id' => $gig->host->user->id,
                     'price' => $charge->amount / 100,
                     'equipment_id' => $gig->equipmentPrice->equipment_id ?? null,
-                    'hours' => $request->duration,
+                    'duration' => $request->duration,
                 ]);
             }
           
