@@ -36,6 +36,7 @@ class AuthenticatedSessionController extends Controller
                 'gig_id' => session('booking.gig_id'),
                 'price' => session('booking.price'),
                 'duration' => session('booking.duration'),
+                'operation_time' => session('booking.operation_time'),
             ]);
         }
         // Optional: If redirect URL is passed (e.g., from query param or hidden input)

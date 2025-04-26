@@ -38,12 +38,13 @@ class StripPaymentController extends Controller
             'gigId' => $request->gig_id,
             'price' => $request->price,
             'duration' => $request->duration,
+            'operation_time' => $request->operation_time,
         ]);
     }
 
 
     public function stripPaymentSubmit(Request $request)
-    {       
+    {   
         $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
         $client = User::with('client')->findOrFail($userId);
         $clientId = $client->client->id;
@@ -97,7 +98,7 @@ class StripPaymentController extends Controller
                     'price' => $charge->amount / 100,
                     'equipment_id' => $gig->equipmentPrice->equipment_id ?? null,
                     'duration' => $request->duration,
-                    'operation_time' => '2025-04-29T15:54',
+                    'operation_time' => $request->operation_time,
                 ]);
             }
             Session::flash('payment_success', 'Payment successfuly completed!');  
@@ -105,11 +106,11 @@ class StripPaymentController extends Controller
         } catch (CardException $e) {
             // return redirect()->back()->withErrors('Card error: ' . $e->getMessage());
             Session::flash('payment_fail', 'Payment faild!');  
-            return redirect()->route('user.booking');
+            return redirect()->route('booking.detail.byGigId', $gig_id);
         } catch (\Exception $e) {
             // return redirect()->back()->withErrors('Error processing payment: ' . $e->getMessage());
             Session::flash('payment_fail', 'Payment faild!');  
-            return redirect()->route('user.booking');
+            return redirect()->route('booking.detail.byGigId', $gig_id);
         }
     }
 }

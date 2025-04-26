@@ -5,6 +5,18 @@
     @endpush
     <div class="host-profile-by-id">
         <div class="container host-main-profile">
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            @if (Session::has('payment_fail'))
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong!",
+                        });
+                    });
+                </script>
+            @endif
             <div class="booking-page">
                 <div class="row booking-mark-sdv">
                     <div class="container select-duration">
@@ -100,6 +112,7 @@
                                             <p class="time-date-add">Tue - <span>Apr 25</span></p>
                                             <h4 class="select-time-text">Select Time</h4>
                                             <div class="time-add">
+                                                <!--
                                                 <button type="button" class="slot-btn btn btn-outline-primary m-1">9:00
                                                     AM</button>
                                                 <button type="button"
@@ -110,6 +123,7 @@
                                                     PM</button>
                                                 <button type="button" class="slot-btn btn btn-outline-primary m-1">5:00
                                                     PM</button>
+                                                -->
                                             </div>
                                         </div>
                                     </div>
@@ -150,6 +164,7 @@
                                         <p>(3)</p>
                                     </div>
                                 </div>
+
                                 <div class="duration-text">
                                     <div class="duration-first">
                                         <p>Duration</p>
@@ -168,6 +183,8 @@
                                         <input type="hidden" name="price" id="selected-gig-price"
                                             value="" />
                                         <input type="hidden" name="duration" id="selected-gig-duration"
+                                            value="" />
+                                        <input type="hidden" name="operation_time" id="selected-gig-operation-time"
                                             value="" />
 
                                         <button type="submit" class="go-to-checkout" id="checkout-btn"
@@ -306,6 +323,15 @@
                     // Add selected class
                     this.classList.add("selected");
 
+
+                    // Remove all 'time_button_clicked' classes
+                    document.querySelectorAll('.time_button_clicked').forEach(el => {
+                        el.classList.remove('time_button_clicked');
+                    });
+                    document.getElementById('checkout-btn').classList.remove('active-checkout');
+
+
+
                     // Update duration and price display
                     const duration = this.getAttribute("data-duration");
                     const price = this.getAttribute("data-price");
@@ -339,6 +365,7 @@
                             gig_id: $('#gig-id').val(),
                             price: $('#selected-gig-price').val(),
                             duration: $('#selected-gig-duration').val()
+                            operation_time: $('#selected-gig-operation-time').val()
                         },
                         success: function() {
                             // Show the login modal after saving session data
@@ -358,24 +385,17 @@
     </script>
 </x-guest-layout>
 
-<style>
-    .highlighted {
-        background-color: #ffc107;
-        color: #000;
-        border-radius: 50%;
-        font-weight: bold;
-    }
 
-    .clicked_date {
-        background-color: #f8961f !important;
-        color: #000;
-        border-radius: 50%;
-        font-weight: bold;
-    }
-</style>
 
 <script>
     function displaySelectedDate(date) {
+
+        const n_year = date.getFullYear();
+        const n_month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() is 0-based
+        const n_day = String(date.getDate()).padStart(2, '0');
+
+
+
         const weekdayStr = date.toLocaleDateString("en-US", {
             weekday: "short"
         });
@@ -448,6 +468,45 @@
     };
 
     document.addEventListener("click", function(e) {
+
+
+        // this is for upper click
+        if (e.target.classList.contains("time-zone-mark")) {
+
+            /*
+        alert('test');       
+            
+            const clickedDateElement = document.querySelector(".clicked_date");
+
+            if (clickedDateElement) {              
+
+                alert('date clicked');  // This will alert the complete Date object
+            }
+            else{
+                alert('not  tttdate clicked');
+            }
+*/
+
+
+            const clickedDateElement = document.querySelector(".date.clicked_date");
+
+            if (clickedDateElement) {
+                const dayNumber = parseInt(clickedDateElement.textContent.trim());
+                const monthYearStr = document.getElementById("month-year").textContent.trim();
+                const [monthName, yearStr] = monthYearStr.split(" ");
+                const year = parseInt(yearStr);
+                const month = new Date(`${monthName} 1, ${year}`).getMonth();
+
+                const clickedDate = new Date(year, month, dayNumber);
+
+                // Do something with the clickedDate
+                //alert(clickedDate);  // Example output
+            }
+            //displaySelectedDate(clickedDate);
+
+        }
+        // this is for upper click
+
         if (e.target.classList.contains("date") && e.target.classList.contains("highlighted")) {
 
             document.querySelectorAll(".date.highlighted").forEach(el => {
@@ -491,7 +550,48 @@
                     btn.type = "button";
                     btn.className = "btn btn-outline-primary m-1 slot-btn";
                     btn.textContent = formatTime(time);
+
+                    // Add click event for highlighting
+                    btn.addEventListener("click", function() {
+                        // Remove the class from all buttons
+                        document.querySelectorAll(".slot-btn").forEach(b => {
+                            b.classList.remove("time_button_clicked");
+                        });
+
+                        // Add the class to the clicked button
+                        this.classList.add("time_button_clicked");
+
+                        // Convert 12-hour time to 24-hour format
+                        function convertTo24HourFormat(time12h) {
+                            const [timePart, modifier] = time12h.split(' ');
+
+                            let [hours, minutes] = timePart.split(':');
+                            if (hours === '12') {
+                                hours = '00';
+                            }
+                            if (modifier.toLowerCase() === 'pm') {
+                                hours = parseInt(hours, 10) + 12;
+                            }
+                            return `${String(hours).padStart(2, '0')}:${minutes}`;
+                        }
+
+                        let month_plus = String(clickedDate.getMonth() + 1).padStart(2,
+                            '0'); // Month is 0-indexed
+                        let time24 = convertTo24HourFormat(this.textContent);
+
+                        let operation_time = `${year}-${month_plus}-${dayNumber}T${time24}`;
+                        $('#selected-gig-operation-time').val(operation_time);
+                        // console.log(year, month_plus, dayNumber, time24, operation_time)
+
+                        // const h_duration = document.querySelector('input[name="h_duration"]');
+                        // if (h_duration) {
+                        //     h_duration.value = this.textContent;
+                        // }
+                    });
+
                     timeAddContainer.appendChild(btn);
+
+
                 }
             } else {
                 alert("No time slot selected.");

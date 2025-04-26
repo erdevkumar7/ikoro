@@ -3,13 +3,25 @@
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/content.css') }}">
     @endpush
     <div class="container d-flex justify-content-center mt-5 mb-5">
-        <form action="{{route('user.strip.paymentSubmit')}}" method="POST" id="payment-form">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (Session::has('payment_fail'))
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                    });
+                });
+            </script>
+        @endif
+        <form action="{{ route('user.strip.paymentSubmit') }}" method="POST" id="payment-form">
             @csrf
             <div class="row g-3">
                 <div class="col-md-">
                     <span>Payment Method</span>
                     <div class="card">
-                        <div class="accordion" id="accordionExample"> 
+                        <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-header p-0">
                                     <h2 class="mb-0">
@@ -48,11 +60,16 @@
                                 </div>
 
                                 <input type="hidden" name="gig_id" id="gig-id" value="{{ $gigId }}">
-                                <input type="hidden" name="price" id="selected-gig-price" value="{{ $price }}">
-                                <input type="hidden" name="duration" id="selected-gig-duration" value="{{ $duration }}">
+                                <input type="hidden" name="price" id="selected-gig-price"
+                                    value="{{ $price }}">
+                                <input type="hidden" name="duration" id="selected-gig-duration"
+                                    value="{{ $duration }}">
+                                <input type="hidden" name="operation_time" id="selected-gig-operation-time"
+                                    value="{{ $operation_time }}" />
 
                                 <div class="p-3">
-                                    <button type="submit" class="btn btn-primary btn-block free-button">Pay Now</button>
+                                    <button type="submit" class="btn btn-primary btn-block free-button">Pay
+                                        Now</button>
                                 </div>
 
                             </div>
