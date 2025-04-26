@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Stripe\Exception\CardException;
+use Illuminate\Support\Facades\Session;
 
 class StripPaymentController extends Controller
 {
@@ -96,15 +97,19 @@ class StripPaymentController extends Controller
                     'price' => $charge->amount / 100,
                     'equipment_id' => $gig->equipmentPrice->equipment_id ?? null,
                     'duration' => $request->duration,
+                    'operation_time' => '2025-04-29T15:54',
                 ]);
             }
-          
-
-            return redirect()->route('user.booking')->with('success', 'Payment successfully completed!');
+            Session::flash('payment_success', 'Payment successfuly completed!');  
+            return redirect()->route('user.booking');
         } catch (CardException $e) {
-            return redirect()->back()->withErrors('Card error: ' . $e->getMessage());
+            // return redirect()->back()->withErrors('Card error: ' . $e->getMessage());
+            Session::flash('payment_fail', 'Payment faild!');  
+            return redirect()->route('user.booking');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('Error processing payment: ' . $e->getMessage());
+            // return redirect()->back()->withErrors('Error processing payment: ' . $e->getMessage());
+            Session::flash('payment_fail', 'Payment faild!');  
+            return redirect()->route('user.booking');
         }
     }
 }

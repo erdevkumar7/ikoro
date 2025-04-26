@@ -10,8 +10,32 @@
                 </div>
             </div>
         </div>
+
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (Session::has('payment_success'))
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "{{ Session::get('payment_success') }}",
+                        icon: "success",
+                        draggable: true
+                    });              
+                });
+            </script>
+        @endif
+        @if (Session::has('payment_fail'))
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {                 
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                    });
+                });
+            </script>
         @endif
         <table class="table table-responsive-md table-responsive-sm table-bordered">
             <thead>
@@ -31,7 +55,7 @@
                     <tr>
                         <th scope="row">{{ $booking['title'] }}</th>
                         <th scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</th>
-                        <td>{{ $booking['briefing'] }}</td>
+                        <td>{{ $booking->gig->title ?? '' }}</td>
                         <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
                             {{ $booking['zipcode'] }} </td>
                         <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td>
@@ -45,12 +69,13 @@
                                     <span class="badge badge-success">Pending</span>
                                 @else
                                     <a class=" btn btn-outline-success"
-                                    href="{{ route('user.booking.action', [$booking['id'], $booking['host_id'] ?? '' ]) }}?action=client_done">Mark Completed</a>
+                                        href="{{ route('user.booking.action', [$booking['id'], $booking['host_id'] ?? '']) }}?action=client_done">Mark
+                                        Completed</a>
                                 @endif
                             @endif
                         </td>
                     </tr>
-                    @empty
+                @empty
                     <tr>
                         <td colspan="8" class="text-center">No Data Available</td>
                     </tr>

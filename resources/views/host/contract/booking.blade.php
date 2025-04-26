@@ -55,7 +55,7 @@
                     <tr>
                         <th scope="row">{{ $booking['title'] }}</th>
                         <th scope="row">{{ $booking->client->name }}</th>
-                        <td>{{ $booking['briefing'] }}</td>
+                        <td>{{ $booking->gig->title ?? '' }}</td>
                         <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} - {{ $booking['zipcode'] }} </td>
                         <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td>
                         <td>{{ $booking['client_status'] }}</td>

@@ -24,28 +24,32 @@
                                     <ul>
                                         <!--
                                         @foreach ($selectedEquipmentPrices as $price)
-                                            <li class="time-zone-mark price-option"
+<li class="time-zone-mark price-option"
                                                 data-duration="{{ $price->duration_minutes }}"
                                                 data-price="{{ $price->price }}">
                                                 {{ $price->duration_minutes }} Mins:
                                                 <span>${{ $price->price }}</span>
                                             </li>
-                                        @endforeach
+@endforeach
                                         -->
 
-                                        <li class="time-zone-mark price-option" data-duration="30" data-price="{{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}">
+                                        <li class="time-zone-mark price-option" data-duration="30"
+                                            data-price="{{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}">
                                             30 Mins:
                                             <span>${{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}</span>
                                         </li>
-                                        <li class="time-zone-mark price-option" data-duration="60" data-price="{{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}">
+                                        <li class="time-zone-mark price-option" data-duration="60"
+                                            data-price="{{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}">
                                             60 Mins:
                                             <span>${{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}</span>
                                         </li>
-                                        <li class="time-zone-mark price-option" data-duration="90" data-price="{{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}">
+                                        <li class="time-zone-mark price-option" data-duration="90"
+                                            data-price="{{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}">
                                             90 Mins:
                                             <span>${{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}</span>
                                         </li>
-                                        <li class="time-zone-mark price-option" data-duration="120" data-price="{{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}">
+                                        <li class="time-zone-mark price-option" data-duration="120"
+                                            data-price="{{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}">
                                             120 Mins:
                                             <span>${{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}</span>
                                         </li>
@@ -157,10 +161,12 @@
                                     </div>
                                 </div>
                                 <div class="Proceed-to-checkout">
-                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}" method="GET">
+                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}"
+                                        method="GET">
                                         <input type="hidden" name="gig_id" id="gig-id"
                                             value="{{ $gig->id }}" />
-                                        <input type="hidden" name="price" id="selected-gig-price" value="" />
+                                        <input type="hidden" name="price" id="selected-gig-price"
+                                            value="" />
                                         <input type="hidden" name="duration" id="selected-gig-duration"
                                             value="" />
 
@@ -184,7 +190,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="host-modal-title nav-link" id="exampleModalLabel">Login Please</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" id="close-login-model" class="close" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true" class="text-white">&times;</span>
                     </button>
                 </div>
@@ -343,6 +350,10 @@
                     $('#checkout-form').submit();
                 }
             });
+
+            $(document).on('click', '#close-login-model', function() {
+                $('#loginModal').modal('hide');
+            });
         });
     </script>
 </x-guest-layout>
@@ -354,7 +365,7 @@
         border-radius: 50%;
         font-weight: bold;
     }
-    
+
     .clicked_date {
         background-color: #f8961f !important;
         color: #000;
@@ -440,8 +451,8 @@
         if (e.target.classList.contains("date") && e.target.classList.contains("highlighted")) {
 
             document.querySelectorAll(".date.highlighted").forEach(el => {
-            el.classList.remove("clicked_date");
-                });
+                el.classList.remove("clicked_date");
+            });
             e.target.classList.add("clicked_date");
 
 
