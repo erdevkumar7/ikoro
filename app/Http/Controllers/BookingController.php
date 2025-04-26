@@ -233,6 +233,7 @@ class BookingController extends Controller
             'booking.gig_id' => $request->gig_id,
             'booking.price' => $request->price,
             'booking.duration' => $request->duration,
+            'booking.operation_time' => $request->operation_time,
         ]);
     
         return response()->json(['status' => 'success']);

@@ -44,7 +44,7 @@ class StripPaymentController extends Controller
 
 
     public function stripPaymentSubmit(Request $request)
-    {   
+    { 
         $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
         $client = User::with('client')->findOrFail($userId);
         $clientId = $client->client->id;

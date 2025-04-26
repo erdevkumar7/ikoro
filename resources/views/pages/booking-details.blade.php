@@ -364,8 +364,8 @@
                             _token: '{{ csrf_token() }}',
                             gig_id: $('#gig-id').val(),
                             price: $('#selected-gig-price').val(),
-                            duration: $('#selected-gig-duration').val()
-                            operation_time: $('#selected-gig-operation-time').val()
+                            duration: $('#selected-gig-duration').val(),
+                            operation_time: $('#selected-gig-operation-time').val(),
                         },
                         success: function() {
                             // Show the login modal after saving session data
