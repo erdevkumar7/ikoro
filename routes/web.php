@@ -29,7 +29,6 @@ Route::get('/get-host-{host_id}/profile', [HomeController::class, 'hostProfileBy
 Route::get('/search/gig/task', [HomeController::class, 'gigSearchedOnTask'])->name('home.task');
 
 Route::get('/booking/gig-id-{gig_id}/detail', [HomeController::class, 'bookingDetailByGigId'])->name('booking.detail.byGigId');
-Route::get('/demo-booking/gig-id-{gig_id}/detail', [HomeController::class, 'demoBookingDetailByGigId'])->name('demo.booking.detail.byGigId');
 Route::post('/store-booking', [HomeController::class, 'storeBooking'])->name('booking.store');
 
 Route::get('check-out/{gig_id}/detail', [PaymentController::class, 'bookingCheckOutPage'])->name('user.booking.checkout');

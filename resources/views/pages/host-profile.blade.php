@@ -1,11 +1,12 @@
 <x-guest-layout>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyZrQ3kL3MZq5NfX5KFWPi7n6ghB0C2kQf" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyZrQ3kL3MZq5NfX5KFWPi7n6ghB0C2kQf" crossorigin="anonymous">
+        </script>
     @endpush
 
     <style>
-
         .host-profile-by-id .host-main-profile {
             padding-top: 0px;
             padding-bottom: 40px;
@@ -13,14 +14,15 @@
             padding-right: 0px;
         }
 
-.booking-select-add {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px;
-    border-radius: 10px;
-    background-color: #2a7d76;
-}
+        .booking-select-add {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 10px;
+            background-color: #2a7d76;
+        }
+
         .host-booking-inner label {
             display: flex;
             align-items: center;
@@ -77,15 +79,16 @@
             justify-content: space-between;
         }
 
-.host-select-add {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px;
-    background-color: #2a7d76;
-    border-radius: 8px;
-    justify-content: space-between;
-}
+        .host-select-add {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+            background-color: #2a7d76;
+            border-radius: 8px;
+            justify-content: space-between;
+        }
+
         .host-booking-inner {
             flex: 1 1 calc(50% - 1rem);
             background-color: #fff;
@@ -112,18 +115,18 @@
             cursor: pointer;
         }
 
-.host-booking-inner i {
-    font-size: 1.5rem;
-    color: #fff;
-    flex-shrink: 0;
-    padding-right: 0;
-    margin: initial;
-    background-color: #2a7d76;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-}
+        .host-booking-inner i {
+            font-size: 1.5rem;
+            color: #fff;
+            flex-shrink: 0;
+            padding-right: 0;
+            margin: initial;
+            background-color: #2a7d76;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
 
         .host-booking-inner p {
             margin: 0;
@@ -170,11 +173,12 @@
             border-radius: 20px;
         }
 
-.row.maximum-offers-service {
-    padding-top: 15px;
-    position: relative;
-    row-gap: 25px;
-}
+        .row.maximum-offers-service {
+            padding-top: 15px;
+            position: relative;
+            row-gap: 25px;
+        }
+
         .select-service-left img {
             width: 220px;
             height: 220px;
@@ -192,26 +196,29 @@
 
 
         @media only screen and (max-width: 767px) {
-.host-select-add {
-    display: block;
-    align-items: center;
-    gap: 20px;
-    margin: 15px;
-    margin-top: 5px;
-    padding-top: 5px;
-    padding-bottom: 2px;
-    padding: 6px;
-    padding-bottom: 1px;
-}
-.booking-select-add {
-    display: block;
-    width: 92%;
-    margin: auto;
-    margin-top: 15px;
-    padding-bottom: 8px;
-    padding: 6px !important;
-    padding-bottom: 2px !important;
-}         .host-name-text-add p {
+            .host-select-add {
+                display: block;
+                align-items: center;
+                gap: 20px;
+                margin: 15px;
+                margin-top: 5px;
+                padding-top: 5px;
+                padding-bottom: 2px;
+                padding: 6px;
+                padding-bottom: 1px;
+            }
+
+            .booking-select-add {
+                display: block;
+                width: 92%;
+                margin: auto;
+                margin-top: 15px;
+                padding-bottom: 8px;
+                padding: 6px !important;
+                padding-bottom: 2px !important;
+            }
+
+            .host-name-text-add p {
                 margin-bottom: 0;
                 padding-top: 10px;
             }
@@ -221,9 +228,9 @@
                 padding-bottom: 0px;
             }
 
-        .select-booking-inner {
-    margin-bottom: 5px;
-}
+            .select-booking-inner {
+                margin-bottom: 5px;
+            }
 
             .biography-sec h4 {
                 text-align: center !important;
@@ -238,15 +245,16 @@
                 text-align: center;
             }
 
-.biography-sec h3 {
-    padding-top: 15px;
-    padding-bottom: 5px;
-    text-align: center;
-}
-.biography-sec h2 {
-    padding-top: 5px;
-    text-align: center;
-}
+            .biography-sec h3 {
+                padding-top: 15px;
+                padding-bottom: 5px;
+                text-align: center;
+            }
+
+            .biography-sec h2 {
+                padding-top: 5px;
+                text-align: center;
+            }
 
         }
     </style>
@@ -301,27 +309,26 @@
                                 <p>Available Hours
                                     {{ $host_profile->available_hours ? $host_profile->available_hours . ' hr' : 'N/a' }}
                                 </p>
-                                
+
                                 @php
                                     $today_is_open = strtolower(date('D')) . '_is_open';
                                     $today_is_chk_open = strtolower(date('D')) . '_check';
                                 @endphp
 
                                 <p>
-                                      
+
                                     {{ isset($host_profile->$today_is_chk_open) && $host_profile->$today_is_chk_open == 1 ? '' : '' }}
 
-                                    {!! isset($host_profile->$today_is_open) && $host_profile->$today_is_open == 1 
-                                        ? 'Online <i class="fas fa-circle" style="color: green;"></i>' 
-                                        : 'Offline <i class="fas fa-circle" style="color: red;"></i>' 
-                                    !!}
+                                    {!! isset($host_profile->$today_is_open) && $host_profile->$today_is_open == 1
+                                        ? 'Online <i class="fas fa-circle" style="color: green;"></i>'
+                                        : 'Offline <i class="fas fa-circle" style="color: red;"></i>' !!}
                                 </p>
                             </div>
 
                             <div class="select-a-service">
                                 <h3>Select a Service </h3>
                                 <div class="host-select-add">
-                                    @foreach ($tasks as $task)
+                                    {{-- @foreach ($tasks as $task)
                                         <div class="host-booking-inner">
                                             <label for="task-checkbox-{{ $task->id }}">
                                                 <i class="{{ $task->icon }}"></i>
@@ -330,25 +337,59 @@
                                             <input type="checkbox" class="task-checkbox"
                                                 id="task-checkbox-{{ $task->id }}" value="{{ $task->id }}" />
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
+
+                                    @if ($host_profile->gigs->isNotEmpty())
+                                        @foreach ($host_profile->gigs->unique('task_id') as $gig)
+                                            <div class="host-booking-inner">
+                                                <label for="task-checkbox-{{ $gig->task->id }}">
+                                                    <i class="{{ $gig->task->icon }}"></i>
+                                                    <p>{{ $gig->task->title }}</p>
+                                                </label>
+                                                <input type="checkbox" class="task-checkbox"
+                                                    id="task-checkbox-{{ $gig->task->id }}"
+                                                    value="{{ $gig->task->id }}" />
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="host-booking-inner">
+                                            <label for="city-tours-checkbox">
+                                                <i class="fa-solid fa-city"></i>
+                                                <p>No Sevice available.</p>
+                                            </label>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
-                            <div class="select-a-tool">
-                                <h3>Select Tools </h3>
-                                <div class="booking-select-add">
-                                    @foreach ($equipments as $equipment)
+                            <div class="select-a-tool" id="select-a-tool" style="display: none;">
+                                <h3>Select Tools</h3>
+                                <div class="booking-select-add" id="equipment-container">
+                                    @if ($host_profile->gigs->isNotEmpty())
+                                        @foreach ($host_profile->gigs->unique('equipment_id') as $gig)
+                                            <div class="select-booking-inner equipment-item"
+                                                data-task-id="{{ $gig->task_id }}" style="display: none;">
+                                                <label for="equipment-checkbox-{{ $gig->equipment->id }}">
+                                                    <p>{{ $gig->equipment->name }}</p>
+                                                    <input type="checkbox" class="equipment-checkbox"
+                                                        id="equipment-checkbox-{{ $gig->equipment->id }}"
+                                                        value="{{ $gig->id }}" />
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    @else
                                         <div class="select-booking-inner">
-                                            <label for="equipment-checkbox-{{ $equipment->id }}">
-                                                <p>{{ $equipment->name }}</p>
-                                                <input type="checkbox" class="equipment-checkbox"
-                                                    id="equipment-checkbox-{{ $equipment->id }}"
-                                                    value="{{ $equipment->id }}" disabled />
+                                            <label>
+                                                <p>No tool available</p>
                                             </label>
                                         </div>
-                                    @endforeach
+                                    @endif
                                 </div>
                             </div>
+
+
+
+
 
 
                             <div class="biography-finibus">
@@ -357,69 +398,88 @@
                                 </div>
 
                                 <div class="biography-right-content">
-                                    <div class="lists-maximum-offers">
-                                <div class="container">
-    <h1 class="text-white text-center">My Offers</h1>
-    @if ($host_profile->gigs->isNotEmpty())
-    <div class="row maximum-offers-service all-media">
-        @foreach ($host_profile->gigs as $gig)
-        <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}" data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
-            <p class="my-offer-text">
-                <input type="checkbox" class="gig-select-checkbox" data-gig-id="{{ $gig->id }}" disabled />
-                {{ Str::limit($gig->title, 25) }}
-            </p>
+                                    {{-- <div class="lists-maximum-offers">
+                                        <div class="container">
+                                            <h1 class="text-white text-center">My Offers</h1>
+                                            @if ($host_profile->gigs->isNotEmpty())
+                                                <div class="row maximum-offers-service all-media">
+                                                    @foreach ($host_profile->gigs as $gig)
+                                                        <div class="col-md-4 gig-box"
+                                                            data-task-id="{{ $gig->task_id }}"
+                                                            data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
+                                                            <p class="my-offer-text">
+                                                                <input type="checkbox" class="gig-select-checkbox"
+                                                                    data-gig-id="{{ $gig->id }}" disabled />
+                                                                {{ Str::limit($gig->title, 25) }}
+                                                            </p>
 
-            @if ($gig->media->count())
-            <div id="gigCarousel-{{ $gig->id }}" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($gig->media as $index => $media)
-                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                        <img src="{{ asset('storage/app/public/' . $media->path) }}" class="d-block w-100" alt="Gig Image" />
-                    </div>
-                    @endforeach
-                </div>
-                @if ($gig->media->count() > 1)
-                <button class="carousel-control-prev" type="button" data-bs-target="#gigCarousel-{{ $gig->id }}" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#gigCarousel-{{ $gig->id }}" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </button>
-                @endif
-            </div>
-            @else
-            <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-            @endif
-        </div>
-        @endforeach
-        <div id="no-gigs-message" style="display: none;" class="text-center w-100">
-            <p>No offer available for the selected field.</p>
-        </div>
-    </div>
-    @else
-    <div class="row maximum-offers-service">
-        <div class="col-md-4">
-            <p>Hill View Mountains Has Monkeys</p>
-            <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-            <i class="fa-solid fa-heart"></i>
-            <h6 class="guest-fav-text">Guest favorite</h6>
-        </div>
-        <div class="col-md-4">
-            <p>Lakeside Forest With Lions</p>
-            <img src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-            <i class="fa-solid fa-heart"></i>
-        </div>
+                                                            @if ($gig->media->count())
+                                                                <div id="gigCarousel-{{ $gig->id }}"
+                                                                    class="carousel slide" data-bs-ride="carousel">
+                                                                    <div class="carousel-inner">
+                                                                        @foreach ($gig->media as $index => $media)
+                                                                            <div
+                                                                                class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                                                <img src="{{ asset('storage/app/public/' . $media->path) }}"
+                                                                                    class="d-block w-100"
+                                                                                    alt="Gig Image" />
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    @if ($gig->media->count() > 1)
+                                                                        <button class="carousel-control-prev"
+                                                                            type="button"
+                                                                            data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                            data-bs-slide="prev">
+                                                                            <span
+                                                                                class="carousel-control-prev-icon"></span>
+                                                                        </button>
+                                                                        <button class="carousel-control-next"
+                                                                            type="button"
+                                                                            data-bs-target="#gigCarousel-{{ $gig->id }}"
+                                                                            data-bs-slide="next">
+                                                                            <span
+                                                                                class="carousel-control-next-icon"></span>
+                                                                        </button>
+                                                                    @endif
+                                                                </div>
+                                                            @else
+                                                                <img
+                                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                    <div id="no-gigs-message" style="display: none;"
+                                                        class="text-center w-100">
+                                                        <p>No offer available for the selected field.</p>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="row maximum-offers-service">
+                                                    <div class="col-md-4">
+                                                        <p>Hill View Mountains Has Monkeys</p>
+                                                        <img
+                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                        <i class="fa-solid fa-heart"></i>
+                                                        <h6 class="guest-fav-text">Guest favorite</h6>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>Lakeside Forest With Lions</p>
+                                                        <img
+                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </div>
 
-        <div class="col-md-4">
-            <p>Achia Forest Beautiful Sites</p>
-            <img src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-            <i class="fa-solid fa-heart"></i>
-        </div>
-    </div>
-    @endif
-</div>
-
-                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p>Achia Forest Beautiful Sites</p>
+                                                        <img
+                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -435,9 +495,9 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
-    <script>
+
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const taskCheckboxes = document.querySelectorAll('.task-checkbox');
             const equipmentCheckboxes = document.querySelectorAll('.equipment-checkbox');
@@ -506,10 +566,71 @@
                 cb.addEventListener('change', filterGigs);
             });
         });
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            let selectedGigId = null;
+
+            // When a service is clicked
+            $('.task-checkbox').on('change', function() {
+                let selectedTaskId = $(this).val();
+
+                // Uncheck other services
+                $('.task-checkbox').not(this).prop('checked', false);
+
+                if ($(this).is(':checked')) {
+                    $('#select-a-tool').slideDown();
+                    $('.equipment-item').hide();
+                    $('.equipment-checkbox').prop('checked', false);
+                    $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
+
+                    // Show only related tools
+                    $('.equipment-item').each(function() {
+                        if ($(this).data('task-id') == selectedTaskId) {
+                            $(this).fadeIn();
+                        }
+                    });
+                } else {
+                    $('#select-a-tool').slideUp();
+                    $('.equipment-item').hide();
+                    $('.equipment-checkbox').prop('checked', false);
+                    $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
+                }
+            });
+
+            // When a tool is clicked
+            $(document).on('change', '.equipment-checkbox', function() {
+                $('.equipment-checkbox').not(this).prop('checked', false);
+
+                if ($('.equipment-checkbox:checked').length > 0) {
+                    // Enable booking button and add class
+                    $('#booking-button').prop('disabled', false).addClass('active-booking-btn');
+
+                    // Save selected gig id (tool id)
+                    selectedGigId = $('.equipment-checkbox:checked').val();
+                } else {
+                    // Disable booking button and remove class
+                    $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
+                    selectedGigId = null;
+                }
+            });
+
+            // When clicking the "Book Now" button
+            $('#booking-button').on('click', function() {
+                if (selectedGigId) {
+                    window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
+                }
+            });
+        });
     </script>
 
+
+
+
+
     <!-- script for book now button -->
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.gig-select-checkbox');
             const bookingButton = document.getElementById('booking-button');
@@ -541,6 +662,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
+
 
 </x-guest-layout>

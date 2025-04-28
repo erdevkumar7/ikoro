@@ -23,7 +23,7 @@ class StripPaymentController extends Controller
     {
         $client = Auth::check() && Auth::user()->role === 'user' ? Auth::id() : null;
 
-        if (!$client) {
+        if (!$client || !session()->has('booking')) {
             return redirect()->back()->withErrors(['error' => 'Unauthorized user']);
         }
 
@@ -44,20 +44,20 @@ class StripPaymentController extends Controller
 
 
     public function stripPaymentSubmit(Request $request)
-    { 
+    {
         $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
         $client = User::with('client')->findOrFail($userId);
         $clientId = $client->client->id;
         $gig_id =  $request->gig_id;
-      
+
         $data = [
             'loggedIn' => $clientId ?? '',
         ];
 
-        $gig = Gig::with(['host','task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
+        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
         $data['gig'] = $gig;
-    
-         Stripe::setApiKey(config('services.stripe.secret'));
+
+        Stripe::setApiKey(config('services.stripe.secret'));
         $token = $request->stripeToken;
 
         try {
@@ -69,7 +69,7 @@ class StripPaymentController extends Controller
                 'source' => $token,
             ]);
 
-          
+
             // dd($request->price);
             // Store payment details in the database
             $paymentDetail = PaymentDetail::create([
@@ -84,7 +84,7 @@ class StripPaymentController extends Controller
                 'status' => $charge->status,
             ]);
 
-            if($charge->status === 'succeeded'){
+            if ($charge->status === 'succeeded') {
                 Booking::create([
                     'task_id' => $gig->task->id,
                     'gig_id' => $gig->id,
@@ -101,15 +101,17 @@ class StripPaymentController extends Controller
                     'operation_time' => $request->operation_time,
                 ]);
             }
-            Session::flash('payment_success', 'Payment successfuly completed!');  
+            Session::flash('payment_success', 'Payment successfuly completed!');
+            // clear booking session
+            session()->forget('booking');
             return redirect()->route('user.booking');
         } catch (CardException $e) {
             // return redirect()->back()->withErrors('Card error: ' . $e->getMessage());
-            Session::flash('payment_fail', 'Payment faild!');  
+            Session::flash('payment_fail', 'Payment faild!');
             return redirect()->route('booking.detail.byGigId', $gig_id);
         } catch (\Exception $e) {
             // return redirect()->back()->withErrors('Error processing payment: ' . $e->getMessage());
-            Session::flash('payment_fail', 'Payment faild!');  
+            Session::flash('payment_fail', 'Payment faild!');
             return redirect()->route('booking.detail.byGigId', $gig_id);
         }
     }
