@@ -117,8 +117,7 @@
         <div class="container">
             <div class="row attend-event-inner">
                 <div class="col-md-7 attend-event-left">
-                    <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home
-                        or office. it is 1:1, live, and interactive. IKORO.co is a 1:1 live Video hailing App.</h3>
+                    <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home or office.</h3>
                 </div>
 
                 <div class="col-md-5 attend-event-right">

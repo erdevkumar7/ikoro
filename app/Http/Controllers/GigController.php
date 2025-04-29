@@ -9,6 +9,9 @@ use App\Models\GigFeature;
 use App\Models\GigMedia;
 use App\Models\Task;
 use Exception;
+
+use Illuminate\Support\Facades\File;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +63,9 @@ class GigController extends Controller
                 $validatedData
             );
 
+
+
+            /*
             GigFeature::where('gig_id', $gig->id)->delete();
             $gigFeatures = [];
             if($features)
@@ -71,6 +77,76 @@ class GigController extends Controller
                 ];
             }
             GigFeature::insert($gigFeatures);  // Bulk insert for performance
+            */
+
+                                
+            // Initialize the $gigFeatures array
+            $gigFeatures = [];
+
+            if ($features) {  
+                foreach ($features['label'] as $i => $label) {
+                    $featureValue = null;
+
+                    // Check if new file uploaded for this feature
+                    if ($request->hasFile('features.value.' . $i)) {
+                        $file = $request->file('features.value.' . $i);
+
+                        // Generate unique filename
+                        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                        $destinationPath = public_path('uploads/offer_images');
+
+                        // Move the file to the uploads directory
+                        $file->move($destinationPath, $filename);
+
+                        // Save the relative path
+                        $featureValue = 'public/uploads/offer_images/' . $filename;
+                    } else {
+                        // If no new file is uploaded, use the existing value from the database
+                        $existingFeature = GigFeature::where('gig_id', $gig->id)
+                            ->where('label', $label)
+                            ->first();
+
+                        // If there's an existing feature value, use it
+                        if ($existingFeature) {
+                            $featureValue = $existingFeature->value;
+                        } else {
+                            $featureValue = null;  // or set default if needed
+                        }
+                    }
+
+                    // If featureValue is not null, prepare the data to either update or insert
+                    if ($featureValue !== null) {
+                        $gigFeature = GigFeature::where('gig_id', $gig->id)
+                                                ->where('label', $label)
+                                                ->first();
+
+                        if ($gigFeature) {
+                            // Update the existing feature if found
+                            $gigFeature->value = $featureValue;
+                            $gigFeature->save();
+                        } else {
+                            // Insert a new feature if not found
+                            $gigFeatures[] = [
+                                'gig_id' => $gig->id,
+                                'label' => $label,
+                                'value' => $featureValue,
+                            ];
+                        }
+                    }
+                }
+            }
+
+            // Bulk insert remaining new features if any
+            if (!empty($gigFeatures)) {
+                GigFeature::insert($gigFeatures);
+            }
+
+
+
+
+
+
+            
 
             DB::commit();
 
@@ -128,6 +204,44 @@ class GigController extends Controller
             return redirect()->back();
         }
     }
+
+
+
+
+
+
+    public function deleteMediaOffer($offer_id, Request $request)
+    {
+        try {
+            $feature = GigFeature::find($offer_id);
+    
+            if ($feature) {
+                if (!empty($feature->value)) {
+                    // Get only the file name from the full path
+                    $filename = basename($feature->value);
+    
+                    // Build the full image path
+                    $imagePath = public_path('uploads/offer_images/' . $filename);
+    
+                    if (File::exists($imagePath)) {
+                        File::delete($imagePath);
+                    }
+                }
+    
+                // Now delete the record from the table
+                $feature->delete();
+    
+                return response()->json(['status' => 'success', 'message' => 'Offer image deleted successfully.']);
+            } else {
+                return response()->json(['status' => 'error', 'message' => 'No offer found with this ID.']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error while deleting: ' . $e->getMessage()]);
+        }
+    }
+    
+
+
 
     public function deleteMedia($media_id, Request $request)
     {     

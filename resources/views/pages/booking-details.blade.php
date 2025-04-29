@@ -47,23 +47,19 @@
 
                                         <li class="time-zone-mark price-option" data-duration="30"
                                             data-price="{{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}">
-                                            30 Mins:
-                                            <span>${{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}</span>
+                                            30 Mins: ${{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}
                                         </li>
                                         <li class="time-zone-mark price-option" data-duration="60"
                                             data-price="{{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}">
-                                            60 Mins:
-                                            <span>${{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}</span>
+                                            60 Mins: ${{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}
                                         </li>
                                         <li class="time-zone-mark price-option" data-duration="90"
                                             data-price="{{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}">
-                                            90 Mins:
-                                            <span>${{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}</span>
+                                            90 Mins: ${{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}
                                         </li>
                                         <li class="time-zone-mark price-option" data-duration="120"
                                             data-price="{{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}">
-                                            120 Mins:
-                                            <span>${{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}</span>
+                                            120 Mins:   ${{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}
                                         </li>
                                     </ul>
                                 </div>
@@ -471,40 +467,94 @@
 
 
         // this is for upper click
-        if (e.target.classList.contains("time-zone-mark")) {
+        let hasInteracted = false;
+if (e.target.classList.contains("time-zone-mark")) {
+    hasInteracted = true;
+// Remove previous "selected" class from all price options
+document.querySelectorAll(".price-option").forEach(el => {
+    el.classList.remove("selected");
+});
 
-            /*
-        alert('test');       
-            
-            const clickedDateElement = document.querySelector(".clicked_date");
+// Add "selected" class to the clicked one
+e.target.classList.add("selected");
 
-            if (clickedDateElement) {              
+const clickedDateElement = document.querySelector(".date.clicked_date");
 
-                alert('date clicked');  // This will alert the complete Date object
-            }
-            else{
-                alert('not  tttdate clicked');
-            }
-*/
+if (clickedDateElement) {
+    const dayNumber = parseInt(clickedDateElement.textContent.trim());
+    const monthYearStr = document.getElementById("month-year").textContent.trim();
+    const [monthName, yearStr] = monthYearStr.split(" ");
+    const year = parseInt(yearStr);
+    const month = new Date(`${monthName} 1, ${year}`).getMonth();
+    const clickedDate = new Date(year, month, dayNumber);
 
+    displaySelectedDate(clickedDate); // Reuse your existing function
 
-            const clickedDateElement = document.querySelector(".date.clicked_date");
+    const weekdays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const dayName = weekdays[clickedDate.getDay()];
 
-            if (clickedDateElement) {
-                const dayNumber = parseInt(clickedDateElement.textContent.trim());
-                const monthYearStr = document.getElementById("month-year").textContent.trim();
-                const [monthName, yearStr] = monthYearStr.split(" ");
-                const year = parseInt(yearStr);
-                const month = new Date(`${monthName} 1, ${year}`).getMonth();
+    const selectedOption = document.querySelector(".price-option.selected");
 
-                const clickedDate = new Date(year, month, dayNumber);
+    if (selectedOption) {
+        const duration = parseInt(selectedOption.getAttribute("data-duration")); // in minutes
 
-                // Do something with the clickedDate
-                //alert(clickedDate);  // Example output
-            }
-            //displaySelectedDate(clickedDate);
+        const openTimeStr = timeData[dayName]?.open || "12:00 am";
+        const closeTimeStr = timeData[dayName]?.close || "12:00 am";
 
+        const startHour = parseHour(openTimeStr);
+        const endHour = parseHour(closeTimeStr);
+
+        const timeAddContainer = document.querySelector(".time-add");
+        timeAddContainer.innerHTML = ""; // Clear previous buttons
+
+        for (let time = startHour; time < endHour; time += duration / 60) {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "btn btn-outline-primary m-1 slot-btn";
+            btn.textContent = formatTime(time);
+
+            // Add click event for slot buttons
+            btn.addEventListener("click", function () {
+                document.querySelectorAll(".slot-btn").forEach(b => {
+                    b.classList.remove("time_button_clicked");
+                });
+
+                this.classList.add("time_button_clicked");
+
+                function convertTo24HourFormat(time12h) {
+                    const [timePart, modifier] = time12h.split(' ');
+                    let [hours, minutes] = timePart.split(':');
+                    if (hours === '12') {
+                        hours = '00';
+                    }
+                    if (modifier.toLowerCase() === 'pm') {
+                        hours = parseInt(hours, 10) + 12;
+                    }
+                    return `${String(hours).padStart(2, '0')}:${minutes}`;
+                }
+
+                let month_plus = String(clickedDate.getMonth() + 1).padStart(2, '0');
+                let time24 = convertTo24HourFormat(this.textContent);
+
+                let operation_time = `${year}-${month_plus}-${dayNumber}T${time24}`;
+                $('#selected-gig-operation-time').val(operation_time);
+            });
+
+            timeAddContainer.appendChild(btn);
         }
+    }
+
+} else {
+        //alert("Please select a date first.");
+        if (hasInteracted) {
+            alert("Please select a date first.");
+        }
+}
+}
+
+
+
+        
         // this is for upper click
 
         if (e.target.classList.contains("date") && e.target.classList.contains("highlighted")) {

@@ -1,3 +1,18 @@
+ 
+<style>
+  img.brand-image.img-circle.elevation-3 {
+    float: left;
+    line-height: .8;
+    margin-left: .8rem;
+    margin-right: .5rem;
+    margin-top: -3px;
+    width: 40px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+    object-fit: cover !important;
+}
+  
+</style>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -42,7 +57,7 @@
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
-                    My Gigs
+                  Service Management
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -50,15 +65,26 @@
                   <li class="nav-item">
                     <a href="{{ url('/host/gigs/index') }}" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>My Gigs</p>
+                      <p>Services</p>
                     </a>
                   </li>
+                  <!--
                   <li class="nav-item">
                     <a href="{{ url('/host/gig/addedit') }}" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Add New</p>
                     </a>
-                  </li>                  
+                  </li>  
+                             
+                  
+
+                  <li class="nav-item">
+                    <a href="{{ url('/host/gig/addedit----') }}" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Offers</p>
+                    </a>
+                  </li>                 
+                -->     
                 </ul>
           </li>
           

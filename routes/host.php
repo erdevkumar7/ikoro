@@ -30,6 +30,11 @@ Route::middleware(['auth', 'verified', 'host'])->prefix('host')->group(function 
 
     Route::post('gig/storeMedia/{gig_id?}', [GigController::class, 'storeMedia'])->name('host.gig.storeMedia');
     Route::GET('gig/deleteMedia/{gig_id}', [GigController::class, 'deleteMedia'])->name('host.gig.deleteMedia');
+
+
+    
+    Route::GET('gig/deleteMediaOffer/{gig_id}', [GigController::class, 'deleteMediaOffer'])->name('host.gig.deleteMediaOffer');
+    //28 apr 25
     
     Route::get('contract/booking', [BookingController::class, 'hostIndex'])->name('host.contract.booking');
     Route::get('contract/booking/action/{booking_id}/{host_id}', [BookingController::class, 'action'])->name('host.booking.action');

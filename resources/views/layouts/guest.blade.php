@@ -41,6 +41,25 @@ i.fa-solid.fa-bars {
 nav.navbar.navbar-expand-lg.navbar-light {
     padding-bottom: 20px;
 }
+.top-nav-toggle-add {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: solid 1px lightgray;
+    border-radius: 50px;
+    padding: 13px 15px;
+}
+
+.top-nav-toggle-add i.fa.fa-bars {
+    margin-top: 0px;
+}
+
+.top-nav-toggle-add i.fas.fa-user-circle.fa-lg {
+    margin-top: 0;
+    font-size: 30px;
+    color: gray;
+}
+
     </style>
 </head>
 
@@ -71,6 +90,10 @@ nav.navbar.navbar-expand-lg.navbar-light {
 
             <!-- Right Side -->
             <ul class="navbar-nav">
+                     <div class="top-nav-toggle-add">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                        <i class="fas fa-user-circle fa-lg"></i>
+                    </div>
                 @if (Auth::check() && Auth::user()->role == 'user')
                     <li class="nav-item mx-2">
                         <a class="nav-link" href="{{ route('dashboard') }}">My Dashboard</a>
@@ -115,7 +138,7 @@ nav.navbar.navbar-expand-lg.navbar-light {
 
                 <!-- Column 2: Quick Links -->
                 <div class="col-12 col-md-3 mb-4">
-                    <h5 class="text-uppercase font-weight-bold">Quick Links</h5>
+                    <h5 class="text-uppercase font-weight-bold">The Company</h5>
                     <ul class="list-unstyled">
                         <li>
                             @if (Auth::check())

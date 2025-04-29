@@ -182,8 +182,12 @@ class HomeController extends Controller
             $data['loggedIn'] = $client;
         }
 
-        $data['host_profile']  = Host::with('gigs.media')->findOrFail($host_id);      
-      
+        $data['host_profile'] = Host::with(['gigs' => function ($query) {
+            $query->with(['features' => function ($q) {
+                $q->latest()->take(3);
+            }]);
+        }])->findOrFail($host_id);  
+        // dd($data['host_profile'] );
         return view('pages.host-profile', $data);
     }
     

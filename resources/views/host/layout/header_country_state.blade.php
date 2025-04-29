@@ -3,4 +3,4 @@
 <script src="{{ asset('backend/admin/assets/js/get-locations.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/admin/assets/js/gigs.js') }}"></script>
 
-    
+<script type="text/javascript" src="{{ asset('backend/admin/assets/js/equipment_time.js') }}"></script>    

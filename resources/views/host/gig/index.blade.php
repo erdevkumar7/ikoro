@@ -30,7 +30,9 @@
             <div class="row align-items-center">
                 <!-- Heading on the left -->
                 <div class="col-md ">
-                    <h4>My Gigs</h4>
+                    <h4>My Gigs
+                    <a class="btn btn-info" href="{{ url('/host/gig/addedit') }}" class="nav-link">Add New</a>
+                    </h4>
                 </div>
             </div>
         </div>

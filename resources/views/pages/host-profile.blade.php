@@ -296,8 +296,6 @@
                                         <h1>N/A</h1>
                                     @endif
                                 </div>
-                                {{-- <a href="#" class="book-now-btn">Book Now</a> --}}
-
                             </div>
 
                         </div>
@@ -313,11 +311,8 @@
                                     $today_is_open = strtolower(date('D')) . '_is_open';
                                     $today_is_chk_open = strtolower(date('D')) . '_check';
                                 @endphp
-
                                 <p>
-
                                     {{ isset($host_profile->$today_is_chk_open) && $host_profile->$today_is_chk_open == 1 ? '' : '' }}
-
                                     {!! isset($host_profile->$today_is_open) && $host_profile->$today_is_open == 1
                                         ? 'Online <i class="fas fa-circle" style="color: green;"></i>'
                                         : 'Offline <i class="fas fa-circle" style="color: red;"></i>' !!}
@@ -327,17 +322,6 @@
                             <div class="select-a-service">
                                 <h3>Select a Service </h3>
                                 <div class="host-select-add">
-                                    {{-- @foreach ($tasks as $task)
-                                        <div class="host-booking-inner">
-                                            <label for="task-checkbox-{{ $task->id }}">
-                                                <i class="{{ $task->icon }}"></i>
-                                                <p>{{ $task->title }}</p>
-                                            </label>
-                                            <input type="checkbox" class="task-checkbox"
-                                                id="task-checkbox-{{ $task->id }}" value="{{ $task->id }}" />
-                                        </div>
-                                    @endforeach --}}
-
                                     @if ($host_profile->gigs->isNotEmpty())
                                         @foreach ($host_profile->gigs->unique('task_id') as $gig)
                                             <div class="host-booking-inner">
@@ -362,31 +346,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="select-a-tool" id="select-a-tool" style="display: none;">
-                                <h3>Select Tools</h3>
-                                <div class="booking-select-add" id="equipment-container">
-                                    @if ($host_profile->gigs->isNotEmpty())
-                                        @foreach ($host_profile->gigs->unique('equipment_id') as $gig)
-                                            <div class="select-booking-inner equipment-item"
-                                                data-task-id="{{ $gig->task->id }}" style="display: none;">
-                                                <label for="equipment-checkbox-{{ $gig->equipment->id }}">
-                                                    <p>{{ $gig->equipment->name }}</p> 
-                                                    <input type="checkbox" class="equipment-checkbox"
-                                                        id="equipment-checkbox-{{ $gig->equipment->id }}"
-                                                        value="{{ $gig->id }}" />
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div class="select-booking-inner">
-                                            <label>
-                                                <p>No tool available</p>
-                                            </label>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div> --}}
-
                             <div class="select-a-tool" style="display: none;">
                                 <h3>Select Tools </h3>
                                 <div class="booking-select-add">
@@ -404,102 +363,46 @@
                                 </div>
                             </div>
 
-
-
-
-
-
-
-                            <div class="biography-finibus">
-                                <div class="biography-left-content">
-
-                                </div>
-
-                                <div class="biography-right-content">
-                                    {{-- <div class="lists-maximum-offers">
-                                        <div class="container">
-                                            <h1 class="text-white text-center">My Offers</h1>
-                                            @if ($host_profile->gigs->isNotEmpty())
-                                                <div class="row maximum-offers-service all-media">
-                                                    @foreach ($host_profile->gigs as $gig)
-                                                        <div class="col-md-4 gig-box"
-                                                            data-task-id="{{ $gig->task_id }}"
-                                                            data-equipments="{{ $gig->equipmentPrice->equipment->id }}">
-                                                            <p class="my-offer-text">
-                                                                <input type="checkbox" class="gig-select-checkbox"
-                                                                    data-gig-id="{{ $gig->id }}" disabled />
-                                                                {{ Str::limit($gig->title, 25) }}
-                                                            </p>
-
-                                                            @if ($gig->media->count())
-                                                                <div id="gigCarousel-{{ $gig->id }}"
-                                                                    class="carousel slide" data-bs-ride="carousel">
-                                                                    <div class="carousel-inner">
-                                                                        @foreach ($gig->media as $index => $media)
-                                                                            <div
-                                                                                class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                                                <img src="{{ asset('storage/app/public/' . $media->path) }}"
-                                                                                    class="d-block w-100"
-                                                                                    alt="Gig Image" />
-                                                                            </div>
-                                                                        @endforeach
-                                                                    </div>
-                                                                    @if ($gig->media->count() > 1)
-                                                                        <button class="carousel-control-prev"
-                                                                            type="button"
-                                                                            data-bs-target="#gigCarousel-{{ $gig->id }}"
-                                                                            data-bs-slide="prev">
-                                                                            <span
-                                                                                class="carousel-control-prev-icon"></span>
-                                                                        </button>
-                                                                        <button class="carousel-control-next"
-                                                                            type="button"
-                                                                            data-bs-target="#gigCarousel-{{ $gig->id }}"
-                                                                            data-bs-slide="next">
-                                                                            <span
-                                                                                class="carousel-control-next-icon"></span>
-                                                                        </button>
-                                                                    @endif
-                                                                </div>
-                                                            @else
-                                                                <img
-                                                                    src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
-                                                    <div id="no-gigs-message" style="display: none;"
-                                                        class="text-center w-100">
-                                                        <p>No offer available for the selected field.</p>
+                            {{-- <div class="biography-right-content" style="display: none;">
+                                <div class="lists-maximum-offers">
+                                    <div class="container">
+                                        <h1 class="text-white text-center">My Offers</h1>
+                                        <div class="row maximum-offers-service all-media">
+                                            @foreach ($host_profile->gigs as $gig)
+                                                @foreach ($gig->features as $feature)
+                                                    <div class="col-md-4 gig-box">
+                                                        <p class="my-offer-text">
+                                                            {{ Str::limit($feature->label, 25) }}</p>
+                                                        <img src="{{ asset('/' . $feature->value) }}"
+                                                            alt="{{ $feature->name }}" />
                                                     </div>
-                                                </div>
-                                            @else
-                                                <div class="row maximum-offers-service">
-                                                    <div class="col-md-4">
-                                                        <p>Hill View Mountains Has Monkeys</p>
-                                                        <img
-                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                        <i class="fa-solid fa-heart"></i>
-                                                        <h6 class="guest-fav-text">Guest favorite</h6>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <p>Lakeside Forest With Lions</p>
-                                                        <img
-                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/pexels-photo-1658967.jpeg" />
-                                                        <i class="fa-solid fa-heart"></i>
-                                                    </div>
-
-                                                    <div class="col-md-4">
-                                                        <p>Achia Forest Beautiful Sites</p>
-                                                        <img
-                                                            src="https://votivelaravel.in/ikoro/public/uploads/host/snowy-winter.jpeg" />
-                                                        <i class="fa-solid fa-heart"></i>
-                                                    </div>
-                                                </div>
-                                            @endif
+                                                @endforeach
+                                            @endforeach
                                         </div>
-                                    </div> --}}
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            <div id="features-section" class="biography-right-content" style="display: none;">
+                                <div class="lists-maximum-offers">
+                                    <div class="container">
+                                        <h1 class="text-white text-center">My Offers</h1>
+                                        <div class="row maximum-offers-service all-media" id="features-container">
+                                            @foreach ($host_profile->gigs as $gig)
+                                                @foreach ($gig->features as $feature)
+                                                    <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}">
+                                                        <p class="my-offer-text">{{ Str::limit($feature->label, 25) }}
+                                                        </p>
+                                                        <img src="{{ asset('/' . $feature->value) }}"
+                                                            alt="{{ $feature->name }}" />
+                                                    </div>
+                                                @endforeach
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
 
                             <div class="booking0now-btn">
                                 <button id="booking-button" disabled class="book-now-btn continue-booking">Book
@@ -508,7 +411,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         @else
             <div class="host-main-profile">
@@ -516,137 +418,6 @@
             </div>
         @endif
     </div>
-
-
-
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const taskCheckboxes = document.querySelectorAll('.task-checkbox');
-            const equipmentCheckboxes = document.querySelectorAll('.equipment-checkbox');
-            const gigCheckboxes = document.querySelectorAll('.gig-select-checkbox');
-            const gigs = document.querySelectorAll('.gig-box');
-            const noGigsMessage = document.getElementById('no-gigs-message');
-
-            function filterGigs() {
-                const selectedTask = Array.from(taskCheckboxes).find(cb => cb.checked);
-                //enable Tools(equipment) checkbox
-                equipmentCheckboxes.forEach(eq => {
-                    eq.disabled = !selectedTask;
-                });
-
-                const selectedEquipments = Array.from(equipmentCheckboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.value);
-
-                // Enable or disable gig checkboxes based on equipment selection
-                const anyEquipmentSelected = selectedEquipments.length > 0;
-                gigCheckboxes.forEach(cb => {
-                    cb.disabled = !anyEquipmentSelected;
-                    if (!anyEquipmentSelected) {
-                        cb.checked = false;
-                    }
-                });
-
-                gigs.forEach(gig => {
-                    const gigTaskId = gig.getAttribute('data-task-id');
-                    const gigEquipments = gig.getAttribute('data-equipments');
-                    console.log(gigEquipments)
-
-                    const matchTask = selectedTask ? gigTaskId === selectedTask.value : true;
-                    const matchEquipment = selectedEquipments.length === 0 || selectedEquipments.some(eq =>
-                        gigEquipments.includes(eq));
-
-                    if (matchTask && matchEquipment) {
-                        gig.style.display = 'block';
-                    } else {
-                        gig.style.display = 'none';
-                    }
-                });
-
-                // 🔍 Check if any gigs are visible
-                const anyVisible = Array.from(gigs).some(gig => gig.style.display === 'block');
-                noGigsMessage.style.display = anyVisible ? 'none' : 'block';
-            }
-
-            taskCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    // Only allow one task checkbox
-                    taskCheckboxes.forEach(cb => {
-                        if (cb !== this) cb.checked = false;
-                    });
-
-                    // Reset all equipment checkboxes to unchecked and disabled
-                    equipmentCheckboxes.forEach(eq => {
-                        eq.checked = false;
-                        eq.disabled = !this.checked;
-                    });
-                    filterGigs();
-                });
-            });
-
-            equipmentCheckboxes.forEach(cb => {
-                cb.addEventListener('change', filterGigs);
-            });
-        });
-    </script> --}}
-
-    {{-- <script>
-        $(document).ready(function() {
-            let selectedGigId = null;
-
-            // When a service is clicked
-            $('.task-checkbox').on('change', function() {
-                let selectedTaskId = $(this).val();
-
-                // Uncheck other services
-                $('.task-checkbox').not(this).prop('checked', false);
-
-                if ($(this).is(':checked')) {
-                    $('#select-a-tool').slideDown();
-                    $('.equipment-item').hide();
-                    $('.equipment-checkbox').prop('checked', false);
-                    $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
-
-                    // Show only related tools
-                    $('.equipment-item').each(function() {
-                        if ($(this).data('task-id') == selectedTaskId) {
-                            $(this).fadeIn();
-                        }
-                    });
-                } else {
-                    $('#select-a-tool').slideUp();
-                    $('.equipment-item').hide();
-                    $('.equipment-checkbox').prop('checked', false);
-                    $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
-                }
-            });
-
-            // When a tool is clicked
-            $(document).on('change', '.equipment-checkbox', function() {
-                $('.equipment-checkbox').not(this).prop('checked', false);
-
-                if ($('.equipment-checkbox:checked').length > 0) {
-                    // Enable booking button and add class
-                    $('#booking-button').prop('disabled', false).addClass('active-booking-btn');
-
-                    // Save selected gig id (tool id)
-                    selectedGigId = $('.equipment-checkbox:checked').val();
-                } else {
-                    // Disable booking button and remove class
-                    $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
-                    selectedGigId = null;
-                }
-            });
-
-            // When clicking the "Book Now" button
-            $('#booking-button').on('click', function() {
-                if (selectedGigId) {
-                    window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
-                }
-            });
-        });
-    </script> --}}
 
     <script>
         let selectedGigId = null;
@@ -658,20 +429,33 @@
             const taskId = $(this).val();
 
             if ($(this).is(':checked')) {
+                // Show tools
                 $('.select-a-tool').show();
                 $('.equipment-item').hide();
-                $('.equipment-checkbox').prop('checked', false); // Uncheck previous tools
+                $('.equipment-checkbox').prop('checked', false);
                 $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
                 selectedGigId = null;
-
-                // Show tools for selected task
                 $(`.equipment-item[data-task-id="${taskId}"]`).show();
+
+                // Show features
+                $('#features-container .gig-box').hide(); // hide all first
+                const relatedFeatures = $(`#features-container .gig-box[data-task-id="${taskId}"]`);
+                if (relatedFeatures.length > 0) {
+                    $('#features-section').show();
+                    relatedFeatures.show();
+                } else {
+                    $('#features-section').hide();
+                }
+
             } else {
+                // Hide all if unselected
                 $('.select-a-tool').hide();
                 $('.equipment-item').hide();
                 $('.equipment-checkbox').prop('checked', false);
                 $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
                 selectedGigId = null;
+
+                $('#features-section').hide(); // also hide features
             }
         });
 
@@ -695,49 +479,10 @@
         // Redirect on button click
         $('#booking-button').on('click', function() {
             if (selectedGigId) {
-                // console.log('selectedGigId', selectedGigId)
                 window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
             }
         });
     </script>
-
-
-
-
-    <!-- script for book now button -->
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.gig-select-checkbox');
-            const bookingButton = document.getElementById('booking-button');
-            let selectedGigId = null;
-
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', function() {
-                    // Only allow one gig to be selected
-                    checkboxes.forEach(other => {
-                        if (other !== this) other.checked = false;
-                    });
-
-                    if (this.checked) {
-                        selectedGigId = this.dataset.gigId;
-                        bookingButton.disabled = false;
-                        bookingButton.classList.add('active-booking-btn');
-                    } else {
-                        selectedGigId = null;
-                        bookingButton.disabled = true;
-                        bookingButton.classList.remove('active-booking-btn');
-                    }
-                });
-            });
-
-            bookingButton.addEventListener('click', function() {
-                if (selectedGigId) {
-                    // Redirect to booking page (adjust route as needed)
-                    window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
-                }
-            });
-        });
-    </script> --}}
 
 
 </x-guest-layout>
