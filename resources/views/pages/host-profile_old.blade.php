@@ -345,8 +345,7 @@
                                                     <i class="{{ $gig->task->icon }}"></i>
                                                     <p>{{ $gig->task->title }}</p>
                                                 </label>
-                                                <input type="checkbox" class="task-checkbox" name="task"
-                                                    data-task-id="{{ $gig->task->id }}"
+                                                <input type="checkbox" class="task-checkbox"
                                                     id="task-checkbox-{{ $gig->task->id }}"
                                                     value="{{ $gig->task->id }}" />
                                             </div>
@@ -362,7 +361,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="select-a-tool" id="select-a-tool" style="display: none;">
+                            <div class="select-a-tool" id="select-a-tool" style="display: none;">
                                 <h3>Select Tools</h3>
                                 <div class="booking-select-add" id="equipment-container">
                                     @if ($host_profile->gigs->isNotEmpty())
@@ -385,25 +384,7 @@
                                         </div>
                                     @endif
                                 </div>
-                            </div> --}}
-
-                            <div class="select-a-tool" style="display: none;">
-                                <h3>Select Tools </h3>
-                                <div class="booking-select-add">
-                                    @foreach ($host_profile->gigs as $gig)
-                                        <div class="select-booking-inner equipment-item"
-                                            data-task-id="{{ $gig->task_id }}" style="display: none;">
-                                            <label for="equipment-checkbox-{{ $gig->equipment->id }}">
-                                                <p>{{ $gig->equipment->name }}</p>
-                                                <input type="checkbox" class="equipment-checkbox"
-                                                    id="equipment-checkbox-{{ $gig->equipment->id }}"
-                                                    value="{{ $gig->id }}" />
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                </div>
                             </div>
-
 
 
 
@@ -591,7 +572,7 @@
         });
     </script> --}}
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             let selectedGigId = null;
 
@@ -646,60 +627,8 @@
                 }
             });
         });
-    </script> --}}
-
-    <script>
-        let selectedGigId = null;
-
-        // Only one task selectable
-        $(document).on('change', '.task-checkbox', function() {
-            $('.task-checkbox').not(this).prop('checked', false);
-
-            const taskId = $(this).val();
-
-            if ($(this).is(':checked')) {
-                $('.select-a-tool').show();
-                $('.equipment-item').hide();
-                $('.equipment-checkbox').prop('checked', false); // Uncheck previous tools
-                $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
-                selectedGigId = null;
-
-                // Show tools for selected task
-                $(`.equipment-item[data-task-id="${taskId}"]`).show();
-            } else {
-                $('.select-a-tool').hide();
-                $('.equipment-item').hide();
-                $('.equipment-checkbox').prop('checked', false);
-                $('#booking-button').prop('disabled', true).removeClass('active-booking-btn');
-                selectedGigId = null;
-            }
-        });
-
-        // Only one equipment selectable + enable booking button
-        $(document).on('change', '.equipment-checkbox', function() {
-            $('.equipment-checkbox').not(this).prop('checked', false);
-
-            if ($(this).is(':checked')) {
-                selectedGigId = $(this).val();
-                $('#booking-button')
-                    .prop('disabled', false)
-                    .addClass('active-booking-btn');
-            } else {
-                selectedGigId = null;
-                $('#booking-button')
-                    .prop('disabled', true)
-                    .removeClass('active-booking-btn');
-            }
-        });
-
-        // Redirect on button click
-        $('#booking-button').on('click', function() {
-            if (selectedGigId) {
-                console.log('selectedGigId', selectedGigId)
-                // window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
-            }
-        });
     </script>
+
 
 
 
