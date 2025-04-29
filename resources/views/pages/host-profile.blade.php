@@ -393,10 +393,10 @@
                                     @foreach ($host_profile->gigs as $gig)
                                         <div class="select-booking-inner equipment-item"
                                             data-task-id="{{ $gig->task_id }}" style="display: none;">
-                                            <label for="equipment-checkbox-{{ $gig->equipment->id }}">
+                                            <label for="equipment-checkbox-{{ $gig->id }}">
                                                 <p>{{ $gig->equipment->name }}</p>
                                                 <input type="checkbox" class="equipment-checkbox"
-                                                    id="equipment-checkbox-{{ $gig->equipment->id }}"
+                                                    id="equipment-checkbox-{{ $gig->id }}"
                                                     value="{{ $gig->id }}" />
                                             </label>
                                         </div>
@@ -695,8 +695,8 @@
         // Redirect on button click
         $('#booking-button').on('click', function() {
             if (selectedGigId) {
-                console.log('selectedGigId', selectedGigId)
-                // window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
+                // console.log('selectedGigId', selectedGigId)
+                window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
             }
         });
     </script>
