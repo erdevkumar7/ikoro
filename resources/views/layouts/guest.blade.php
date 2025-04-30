@@ -108,55 +108,77 @@
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="{{ route('host.register') }}">Become a host</a>
                         </li>
-                        {{-- <li class="nav-item mx-2">
-                    <a class="nav-link" href="{{ route('user.register') }}">Sign Up</a>
-                </li> --}}
                     @endif
                 </ul>
 
 
                 <!-- Right Side -->
                 <ul class="navbar-nav">
-                    <div class="top-nav-toggle-add dropdown">
+                    <div class="dropdown">
                         @if (Auth::check() && Auth::user()->role == 'user')
                             {{-- <li class="nav-item mx-2">
-                            <a class="nav-link" href="{{ route('dashboard') }}">My Dashboard</a>
-                             </li> --}}
-                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <a class="nav-link" href="{{ route('dashboard') }}"><i
+                                        class="fas fa-user-circle fa-lg"></i></a>
+                            </li> --}}
+                            <div id="menu-toggle" class="dropdown-toggle d-flex align-items-center gap-2"
+                                data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                                <i class="fa fa-bars"></i>
+                                <i class="fas fa-user-circle fa-lg"></i>
+                            </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('dashboard') }}">My Dashboard</a></li>
                             </ul>
-                            <i class="fas fa-user-circle fa-lg"></i>
                         @elseif (Auth::check() && Auth::user()->role == 'host')
                             {{-- <li class="nav-item mx-2">
-                             <a class="nav-link" href="{{ route('host.dashboard') }}">My Dashboard</a>
+                                <a class="nav-link" href="{{ route('host.dashboard') }}">                                   
+                                <i class="fas fa-user-circle fa-lg"></i>
+                                </a>
                             </li> --}}
-                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <div id="menu-toggle" class="dropdown-toggle d-flex align-items-center gap-2"
+                                data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                                <i class="fa fa-bars"></i>
+                                @if (auth()->user()->host->image)
+                                    <img src="{{ asset('public') }}/{{ auth()->user()->host->image }}" alt="Logo"
+                                        class="home-host-image">
+                                @else
+                                    <i class="fas fa-user-circle fa-lg"></i>
+                                @endif
+                            </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('host.dashboard') }}">My Dashboard</a></li>
                             </ul>
-                            <i class="fas fa-user-circle fa-lg"></i>
                         @elseif (Auth::check() && Auth::user()->role == 'admin')
                             {{-- <li class="nav-item mx-2">
-                            <a class="nav-link" href="{{ route('admin.dashboard') }}">My Dashboard</a>
-                           </li> --}}
-                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}"><i
+                                        class="fas fa-user-circle fa-lg"></i></a>
+                            </li> --}}
+                            <div id="menu-toggle" class="dropdown-toggle d-flex align-items-center gap-2"
+                                data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                                <i class="fa fa-bars"></i>
+                                <i class="fas fa-user-circle fa-lg"></i>
+                            </div>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">My Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">My Dashboard</a>
+                                </li>
                             </ul>
-                            <i class="fas fa-user-circle fa-lg"></i>
                         @else
                             {{-- <li class="nav-item mx-2">
-                            <a class="nav-link" href="{{ route('login') }}">Account</a>
-                           </li> --}}
-                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <a class="nav-link" href="{{ route('login') }}"><i
+                                    class="fas fa-user-circle fa-lg"></i></a>
+                        </li> --}}
+
+                            <div id="menu-toggle" class="dropdown-toggle d-flex align-items-center gap-2"
+                                data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                                <i class="fa fa-bars"></i>
+                                <i class="fas fa-user-circle fa-lg"></i>
+                            </div>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                             </ul>
-                            <i class="fas fa-user-circle fa-lg"></i>
                         @endif
                     </div>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -194,8 +216,10 @@
                             @endif
                         </li>
                         <li><a href="{{ route('aboutUs') }}" class="text-white text-decoration-none">About Us</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Blog <br> <small></small></a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Announcements <br> <small></small>
+                        <li><a href="#" class="text-white text-decoration-none">Blog <br> <small></small></a>
+                        </li>
+                        <li><a href="#" class="text-white text-decoration-none">Announcements <br>
+                                <small></small>
                             </a></li>
                         <li><a href="{{ route('FAQ') }}" class="text-white text-decoration-none">FAQs</a></li>
                         <li><a href="{{ route('termAndCondition') }}" class="text-white text-decoration-none">Terms &

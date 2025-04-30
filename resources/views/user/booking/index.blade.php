@@ -41,10 +41,10 @@
             <thead>
                 <tr>
                     <th scope="col">Task</th>
-                    <th scope="col">Host</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Tool</th>                                       
                     <th scope="col">Locations</th>
                     <th scope="col">Time</th>
+                    <th scope="col">Host</th> 
                     <th scope="col">Host Status</th>
                     <th scope="col">Admin Status</th>
                     <th scope="col">Action</th>
@@ -54,11 +54,12 @@
                 @forelse ($bookings as $booking)
                     <tr>
                         <th scope="row">{{ $booking['title'] }}</th>
-                        <th scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</th>
-                        <td>{{ $booking->gig->title ?? '' }}</td>
+                        <td>{{ $booking->gig->equipment_name ?? '' }}</td>                      
+                        
                         <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
                             {{ $booking['zipcode'] }} </td>
                         <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td>
+                        <th scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</th>
                         <td>{{ $booking['host_status'] }}</td>
                         <td>{{ $booking['status'] }}</td>
                         <td>

@@ -222,7 +222,7 @@ select:focus-visible {
     padding: 10px 0;
     position: relative;
     left: 100px;
-    top: 90px;
+    top: 143px;
 }
 
 .meet-our-top .star-count a {
@@ -274,14 +274,16 @@ select:focus-visible {
 .meet-our-top i.fa.fa-chevron-right:hover {
     background: #1d5853;    
 }
-
-.detils-inner p {
+.single-box .detils-inner p {
     color: black;
     text-align: left;
-    padding: 0px 10px;
+    padding: 0px 5px;
     margin-bottom: 0px;
     margin: -4px;
     font-size: 15px;
+}
+p.rating-review-point {
+    padding-top: 8px !important;
 }
 .meet-our-top .owl-carousel .owl-item img {
     display: block;
@@ -296,7 +298,7 @@ select:focus-visible {
 .meet-our-top .detils-inner i {
     padding-right: 10px;
     width: 24px;
-    font-size: 20px;
+    font-size: 18px;
     height: 24px;
 }
 .subscribe-our {
@@ -332,6 +334,7 @@ p.mb-3.new-letters-add {
     padding: 10px;
     margin-top: 0px !important;
     padding-top: 1px;
+    padding-bottom: 60px;
 }
 /*.meet-our-top .clients-carousel.owl-carousel.owl-loaded.owl-drag .single-box a:hover {
     text-decoration: none;
@@ -624,13 +627,25 @@ a.book-now-btn {
     cursor: pointer;
     opacity: 0.5;
 }
-.active-booking-btn {
+.booking0now-btn .active-booking-btn {
     opacity: 1;
 }
-.continue-booking:hover {
+.booking0now-btn .active-booking-btn:hover {
     background: #1d5853;
     color: #fff;
 }
+
+.booking0now-btn .active-booking-btn:focus-visible {
+    outline: none;
+}
+
+.booking0now-btn .active-booking-btn:focus {
+    outline: none;
+}
+/*.continue-booking:hover {
+    background: #1d5853;
+    color: #fff;
+}*/
 
 a.book-now-btn:hover {
     color: black;
@@ -1565,6 +1580,7 @@ h1.mobile-view-host-name {
     padding-left: 30px;
 }
 /*21-4-25 new-css-add*/
+
 .top-nav-header {
     background-color: #fff;
     padding: 0px !important;
@@ -1869,6 +1885,43 @@ form#payment-form button.btn.btn-primary.btn-block.free-button {
     border: none;
 }
 
+ul.navbar-nav img.home-host-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50px;
+    margin-top: 9px;
+}
+ul.navbar-nav i.fas.fa-user-circle.fa-lg {
+    font-size: 35px;
+    color: gray;
+    /* height: 28px !important; */
+    margin-top: 10px;
+}
+div#menu-toggle i.fa.fa-bars {
+    padding-right: 10px;
+    margin-top: 8px;
+}
+ul.navbar-nav div#menu-toggle {
+    border: solid 1px lightgray;
+    border-radius: 50px;
+    padding-left: 25px;
+    padding-right: 10px;
+    align-items: center !important;
+    padding-bottom: 10px;
+    height: 53px;
+}
+ul.navbar-nav .dropdown-toggle::after{
+    display: none;
+}
+
+ul.navbar-nav ul.dropdown-menu.show {
+    left: -18px;
+    padding: 0;
+    height: 50px;
+}
+
+
 /*21-4-25 new-css-add*/
 
 @media only screen and (max-width: 767px) {
@@ -1939,7 +1992,7 @@ form.host-new-filter div#task {
     padding-bottom: 10px;
     padding: 10px 0;
     position: relative;
-    left: 180px;
+    left: 218px;
     top: -8px;
     width: 54%;
 }
@@ -1988,8 +2041,8 @@ form.host-new-filter div#task {
 .meet-our-top .star-count {
     padding: 10px 0;
     position: relative;
-    left: 100px;
-    top: 90px;
+    left: 111px;
+    top: 145px;
 }
 .select-duration .duration-text p {
     margin-bottom: 0px;
@@ -2128,6 +2181,8 @@ form.d-flex.justify-content-center.align-items-center.gap-2.subscribe-news-input
     font-weight: 600 !important;
     font-size: 18px;
     padding-left: 20px;
+    text-align: right;
+    padding-top: 0;
 }
 .popular-location {
     padding-top: 20px;
@@ -2306,9 +2361,43 @@ button.navbar-toggler:focus-visible {
     padding-top: 20px;
 }
 
-.navbar-collapse {
+.top-nav-header .navbar-collapse {
     background-color: #2a7d76;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
+div#menu-toggle i.fa.fa-bars {
+    padding-right: 10px;
+    margin-top: 8px;
+    color: #fff;
+}
+ul.navbar-nav ul.dropdown-menu.show {
+    left: 93px;
+    padding: 0;
+    height: auto;
+    top: 60px;
+    position: relative;
+    width: 40%;
+    float: right;
+}
+ul.navbar-nav i.fas.fa-user-circle.fa-lg {
+    font-size: 35px;
+    color: #fff;
+    margin-top: 10px;
+}
+ul.navbar-nav div#menu-toggle {
+    border: solid 1px lightgray;
+    border-radius: 50px;
+    padding-left: 25px;
+    padding-right: 10px;
+    align-items: center !important;
+    padding-bottom: 10px;
+    height: 53px;
+    width: 23%;
+    float: right;
+    margin-right: 10px;
+}
+
 .search-destinations .search-button {
     text-align: right;
 }
@@ -2419,7 +2508,7 @@ footer.mt-5.text-white.pt-5 {
 }
 
 .meet-our-top .detils-inner {
-    padding: 10px 0;
+    padding: 10px 5px;
     height: 140px;
 }
 

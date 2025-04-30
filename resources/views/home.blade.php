@@ -230,6 +230,80 @@
                                                     </div> -->
 
 
+<div class="new-testimonials-develop">
+    <section class="testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="nav-link mt-5">Testimonials</h3>
+
+                    <div id="feedback-testimonials" class="owl-carousel">
+                        <!--TESTIMONIAL 1 -->
+
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <p>
+                                    I was scouting to buy a property in Lagos. Flying from Kano to Lagos for inspection
+                                    was a huge problem until I got introduced to iKORO. With iKORO, I inspected a lot of
+                                    properties and finally made a
+                                    successful purchase. I think they are Uber for interactive live videos.
+                                </p>
+                            </div>
+
+                            <div class="testimonial-name">Ahmed Yusuf.</div>
+
+                            <div class="testimonial-location-add">Kano.</div>
+                        </div>
+
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <p>Developing a property in Asaba from the United States was easy. I used iKORO to
+                                    monitor live progress of the project. It felt like I was present on site always.</p>
+                            </div>
+
+                            <div class="testimonial-name">Jonathan Osadebe.</div>
+
+                            <div class="testimonial-location-add">Houston Texas.</div>
+                        </div>
+
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <p>iKORO made my house hunting in Abuja seamless. From the streets to markets and every
+                                    corner of the apartment I inspected them via iKORO interactive virtual live video.
+                                </p>
+                            </div>
+
+                            <div class="testimonial-name">Helen Uzor.</div>
+
+                            <div class="testimonial-location-add">Abuja.</div>
+                        </div>
+
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <p>
+                                    I was going to travel from London to Nigeria for a meeting. The cost was
+                                    discouraging until someone referred me to iKORO. iKORO connected me to the meeting
+                                    and it was interactive for me. I give them 5
+                                    stars for this innovation.
+                                </p>
+                            </div>
+
+                            <div class="testimonial-name">Fred Wood.</div>
+
+                            <div class="testimonial-location-add">London.</div>
+                        </div>
+
+                        <!--END OF TESTIMONIAL 1 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
         <div class="popular-location">
             <div class="container">
                 <h1>Popular Location</h1>

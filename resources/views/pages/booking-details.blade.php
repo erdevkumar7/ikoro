@@ -384,6 +384,7 @@
 
 
 <script>
+    let hasInteracted = false;
     function displaySelectedDate(date) {
 
         const n_year = date.getFullYear();
@@ -467,9 +468,9 @@
 
 
         // this is for upper click
-        let hasInteracted = false;
+        
 if (e.target.classList.contains("time-zone-mark")) {
-    hasInteracted = true;
+    
 // Remove previous "selected" class from all price options
 document.querySelectorAll(".price-option").forEach(el => {
     el.classList.remove("selected");
@@ -547,7 +548,7 @@ if (clickedDateElement) {
 } else {
         //alert("Please select a date first.");
         if (hasInteracted) {
-            alert("Please select a date first.");
+            alert("Please select a date from calender.");
         }
 }
 }
@@ -563,7 +564,7 @@ if (clickedDateElement) {
                 el.classList.remove("clicked_date");
             });
             e.target.classList.add("clicked_date");
-
+            hasInteracted = true;
 
             const dayNumber = parseInt(e.target.textContent.trim());
             const monthYearStr = document.getElementById("month-year").textContent.trim();
