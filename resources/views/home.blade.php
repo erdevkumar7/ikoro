@@ -18,7 +18,6 @@
                                     <div class="img-area">
                                         {{-- <img alt="" class="img-fluid" src="https://votivelaravel.in/ikoro/frontend/images/host.jpg" /> --}}
                                         @if ($host->image)
-
                                             <img class="img-fluid" src="{{ asset('public/' . $host->image) }}"
                                                 alt="{{ $host->name }}" />
                                         @else
@@ -30,29 +29,45 @@
                                         </div>
                                     </div>
                                     <div class="detils-inner">
-                                <!--         <p><i class="fa fa-user" aria-hidden="true"></i>{{ $host->name }}</p> -->
-                                        <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                            @php
-                                                $uniqueCities = $host->gigs
-                                                    ->unique('city_id')
-                                                    ->pluck('city.name')
-                                                    ->filter()
-                                                    ->first();
-                                            @endphp
-
-                                            {{ $uniqueCities ?? 'N/A' }}
+                                        <p> <i class="fa fa-user" aria-hidden="true"></i>
+                                            Hosted by: {{ $host->name }}
                                         </p>
-<!--                                         <p><i class="fa fa-cogs" aria-hidden="true"></i>
-                                            @if ($host->gigs->isNotEmpty())
-                                                {{ $host->gigs->unique('task_id')->first()->task->title }}
+                                        @php
+                                            $firstValidGig = $host->gigs->first();
+                                            // $uniqueCities = $host->gigs
+                                            //     ->unique('city_id')
+                                            //     ->pluck('city.name')
+                                            //     ->filter()
+                                            //     ->first();
+                                        @endphp
+
+                                        <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            @if ($firstValidGig)
+                                                {{ $firstValidGig->city->name ?? 'N/A' }},
+                                                {{ $firstValidGig->city->state->name ?? 'N/A' }}
                                             @else
                                                 N/A
                                             @endif
-                                        </p> -->
+                                        </p>
+                                        {{-- <p><i class="fa fa-cogs" aria-hidden="true"></i>
+                                            @if ($firstValidGig)
+                                                {{ $firstValidGig->task->title }}
+                                            @else
+                                                N/A
+                                            @endif
+                                        </p> --}}
 
                                         <p> <i class="fa fa-camera-retro" aria-hidden="true"></i>
-                                            @if ($host->gigs->isNotEmpty())
-                                                {{ $host->gigs->unique('equipment_id')->first()->equipmentPrice->equipment->name }}
+                                            @if ($firstValidGig)
+                                                {{ $firstValidGig->equipmentPrice->equipment->name }}
+                                            @else
+                                                N/A
+                                            @endif
+                                        </p>
+
+                                        <p> <i class="fa fa-money" aria-hidden="true"></i>
+                                            @if ($firstValidGig)
+                                               From ${{ $firstValidGig->price30min }} Per 30 minutes
                                             @else
                                                 N/A
                                             @endif
@@ -64,9 +79,7 @@
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
                                         </p>
-
                                     </div>
-
                                 </div>
                             @endforeach
                         </div>
@@ -127,49 +140,54 @@
             <h1 class="text-center text-white">How It Work</h1>
             <div class="row work-destination">
                 <div class="col-md-3 how-work-one">
-<!--                     <p class="text-white">Book a Tour Guide in your Destination</p>
- -->                    <div class="column">
+                    <!--                     <p class="text-white">Book a Tour Guide in your Destination</p>
+                                                     -->
+                    <div class="column">
                         <div class="card">
-<!--                             <img src="./frontend/images/find.png">
- -->                            <i class="fa-solid fa-city"></i>
+                            <!--                             <img src="./frontend/images/find.png">
+                                                     --> <i class="fa-solid fa-city"></i>
                             <h3>Find a city (destination) chose your task in the city.</h3>
                         </div>
                     </div>
                 </div>
 
-                     <div class="col-md-3 how-work-one">
-<!--                     <p class="text-white">Book a Tour Guide in your Destination</p>
- -->                    <div class="column">
+                <div class="col-md-3 how-work-one">
+                    <!--                     <p class="text-white">Book a Tour Guide in your Destination</p>
+                                                     -->
+                    <div class="column">
                         <div class="card">
-<!--                             <img src="./frontend/images/find.png">
- -->                            <i class="fa-solid fa-gears"></i>
-                            <h3>Choose your perffered host Gender and tools<br> Eg. smart phone and gimbal, drone or professional camera.</h3>
+                            <!--                             <img src="./frontend/images/find.png">
+                                                     --> <i class="fa-solid fa-gears"></i>
+                            <h3>Choose your perffered host Gender and tools<br> Eg. smart phone and gimbal, drone or
+                                professional camera.</h3>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-3 how-work-two">
-<!--                     <p class="text-white">Select Date & Time</p>
- -->                    <div class="column">
+                    <!--                     <p class="text-white">Select Date & Time</p>
+                                                     -->
+                    <div class="column">
                         <div class="card">
-<!--                             <img src="./frontend/images/e-book.png">
- -->                            <i class="fa-solid fa-dollar-sign"></i>
+                            <!--                             <img src="./frontend/images/e-book.png">
+                                                     --> <i class="fa-solid fa-dollar-sign"></i>
                             <h3>Book and make payment to confirm your service.<br>chosse time and date or(instantly).</h3>
-                    <!--         <p>Select a time works for both you and your expert's schedule</p> -->
+                            <!--         <p>Select a time works for both you and your expert's schedule</p> -->
 
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-3 how-work-three">
-<!--                     <p class="text-white">Enjoy an Interactive Live Video Session</p>
- -->                    <div class="column">
+                    <!--                     <p class="text-white">Enjoy an Interactive Live Video Session</p>
+                                                     -->
+                    <div class="column">
                         <div class="card">
-<!--                             <img src="./frontend/images/virtual-assistant.png">
- -->                           <i class="fa fa-check"></i>
+                            <!--                             <img src="./frontend/images/virtual-assistant.png">
+                                                     --> <i class="fa fa-check"></i>
 
                             <h3>Relax and enjoy 1:1 interactive live video tour of your destination</h3>
-                           <!--  <p>Join the 1-on-1 video call, ask questions, and get expert advice</p> -->
+                            <!--  <p>Join the 1-on-1 video call, ask questions, and get expert advice</p> -->
                         </div>
                     </div>
                 </div>
@@ -195,86 +213,88 @@
             }
         </script>
 
-   
-
-
-<!-- <div class="subscribe-our">
-        <div class="py-3 subscribe-news">
-            <div class="container text-center">
-                <h5 class="mb-3 new-letters-add">Subscribe to Our Newsletter</h5>
-                <form class="d-flex justify-content-center align-items-center gap-2 subscribe-news-input">
-                    <input type="email" class="form-control w-50" placeholder="Enter your email" required>
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
-                </form>
-            </div>
-        </div>
-
-</div> -->
-
-
-<div class="popular-location">
-<div class="container">
-    <h1>Popular Location</h1>
-    <div class="row popular-location-inner">
-
-<div class="col-md-3 popular-location-col">
-  <div class="image-wrapper">
-    <img src="/ikoro/frontend/images/lagos-nigeria.jpg" alt="Lagos Nigeria">
-    <div class="image-text">Lagos Nigeria</div>
-  </div>
-</div>
-
-
-<div class="col-md-3 popular-location-col">
-  <div class="image-wrapper">
-    <img src="/ikoro/frontend/images/abuja-nigeria.jpg" alt="Abuja Nigeria">
-    <div class="image-text">Abuja Nigeria</div>
-  </div>
-</div>
-
- <div class="col-md-3 popular-location-col">
-  <div class="image-wrapper">
-    <img src="/ikoro/frontend/images/accra-ghana.jpg" alt="Accra Ghana">
-    <div class="image-text">Accra Ghana</div>
-  </div>
-</div>
-
- <div class="col-md-3 popular-location-col">
-  <div class="image-wrapper">
-     <img src="/ikoro/frontend/images/cape-town-south.jpg" alt="South Africa">
-    <div class="image-text">South Africa</div>
-  </div>
-</div>
 
 
 
+        <!-- <div class="subscribe-our">
+                                                            <div class="py-3 subscribe-news">
+                                                                <div class="container text-center">
+                                                                    <h5 class="mb-3 new-letters-add">Subscribe to Our Newsletter</h5>
+                                                                    <form class="d-flex justify-content-center align-items-center gap-2 subscribe-news-input">
+                                                                        <input type="email" class="form-control w-50" placeholder="Enter your email" required>
+                                                                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
 
-    </div>
-</div>
-
-</div>
+                                                    </div> -->
 
 
+        <div class="popular-location">
+            <div class="container">
+                <h1>Popular Location</h1>
+                <div class="row popular-location-inner">
 
-<div class="subscribe-our">
-        <div class="py-3 subscribe-news">
-            <div class="container text-center">
-                <div class="row news-subscribe-inner">
-                    <div class="col-md-7 news-subscribe-left">
-                <h5 class="mb-3 new-letters-add">Subscribe To Our Newsletter</h5>
-                <p class="mb-3 new-letters-add">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                </div>
-                <div class="col-md-5 news-subscribe-right">
-                <form class="d-flex justify-content-center align-items-center gap-2 subscribe-news-input">
-                    <input type="email" class="form-control w-50" placeholder="Enter your email" required>
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
-                </form>
-                </div>
+                    <div class="col-md-3 popular-location-col">
+                        <div class="image-wrapper">
+                            <img src="/ikoro/frontend/images/lagos-nigeria.jpg" alt="Lagos Nigeria">
+                            <div class="image-text">Lagos Nigeria</div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 popular-location-col">
+                        <div class="image-wrapper">
+                            <img src="/ikoro/frontend/images/abuja-nigeria.jpg" alt="Abuja Nigeria">
+                            <div class="image-text">Abuja Nigeria</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 popular-location-col">
+                        <div class="image-wrapper">
+                            <img src="/ikoro/frontend/images/accra-ghana.jpg" alt="Accra Ghana">
+                            <div class="image-text">Accra Ghana</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 popular-location-col">
+                        <div class="image-wrapper">
+                            <img src="/ikoro/frontend/images/cape-town-south.jpg" alt="South Africa">
+                            <div class="image-text">South Africa</div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
             </div>
+
         </div>
 
-</div>
+
+
+        <div class="subscribe-our">
+            <div class="py-3 subscribe-news">
+                <div class="container text-center">
+                    <div class="row news-subscribe-inner">
+                        <div class="col-md-7 news-subscribe-left">
+                            <h5 class="mb-3 new-letters-add">Subscribe To Our Newsletter</h5>
+                            <p class="mb-3 new-letters-add">There are many variations of passages of Lorem Ipsum available,
+                                but the majority have suffered alteration in some form, by injected humour, or randomised
+                                words which don't look even slightly believable.</p>
+                        </div>
+                        <div class="col-md-5 news-subscribe-right">
+                            <form class="d-flex justify-content-center align-items-center gap-2 subscribe-news-input">
+                                <input type="email" class="form-control w-50" placeholder="Enter your email" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
     </div>

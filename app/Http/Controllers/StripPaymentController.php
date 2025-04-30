@@ -23,7 +23,7 @@ class StripPaymentController extends Controller
     {
         $client = Auth::check() && Auth::user()->role === 'user' ? Auth::id() : null;
 
-        if (!$client || !session()->has('booking')) {
+        if (!$client && !session()->has('booking')) {
             return redirect()->back()->withErrors(['error' => 'Unauthorized user']);
         }
 

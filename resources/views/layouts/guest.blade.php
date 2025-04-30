@@ -19,102 +19,147 @@
     <!-- ::::::::: select2 CSS :::::::::: -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/select2/select2.min.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         .dot {
             color: rgb(169 240 5);
             font-size: 40px;
             margin-top: 0px;
         }
+
         ul.navbar-nav a.nav-link {
-    color: #fff !important;
-}
-i.fa-solid.fa-bars {
-    color: #fff;
-    font-size: 26px;
-}
-.navbar-light .navbar-nav .nav-link:hover {
-    color: #a9f005 !important;
-}
+            color: #fff !important;
+        }
 
-nav.navbar.navbar-expand-lg.navbar-light {
-    padding-bottom: 20px;
-}
-.top-nav-toggle-add {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border: solid 1px lightgray;
-    border-radius: 50px;
-    padding: 13px 15px;
-}
+        i.fa-solid.fa-bars {
+            color: #fff;
+            font-size: 26px;
+        }
 
-.top-nav-toggle-add i.fa.fa-bars {
-    margin-top: 0px;
-}
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #a9f005 !important;
+        }
 
-.top-nav-toggle-add i.fas.fa-user-circle.fa-lg {
-    margin-top: 0;
-    font-size: 30px;
-    color: gray;
-}
+        nav.navbar.navbar-expand-lg.navbar-light {
+            padding-bottom: 20px;
+        }
 
+        .top-nav-toggle-add {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: solid 1px lightgray;
+            border-radius: 50px;
+            padding: 13px 15px;
+        }
+
+        .top-nav-toggle-add.dropdown ul.dropdown-menu.show {
+            padding: 0;
+        }
+
+        .top-nav-toggle-add i.fa.fa-bars {
+            margin-top: 0px;
+            cursor: pointer;
+        }
+
+        .top-nav-toggle-add .dropdown-item.active,
+        .dropdown-item:active {
+            color: #fff;
+            text-decoration: none;
+            background-color: #2a7d76;
+        }
+
+        .top-nav-toggle-add .dropdown-item:focus,
+        .dropdown-item:hover {
+            background-color: #2a7d76;
+            color: #fff;
+        }
+
+        .top-nav-toggle-add i.fa.fa-bars:hover {
+            color: #2a7d76;
+        }
+
+        .top-nav-toggle-add i.fas.fa-user-circle.fa-lg {
+            margin-top: 0;
+            font-size: 30px;
+            color: gray;
+        }
     </style>
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-expand-lg navbar-light top-nav-header">
-    <div class="container">
-        <!-- Left Side (Logo) -->
-        <x-application-logo />
+    <nav class="navbar navbar-expand-lg navbar-light top-nav-header">
+        <div class="container">
+            <!-- Left Side (Logo) -->
+            <x-application-logo />
 
-        <!-- Toggler Button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+            <!-- Toggler Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-        <!-- Collapsible Section -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                @if (!Auth::id())
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="{{ route('host.register') }}">Become a host</a>                          
-                </li>
-                {{-- <li class="nav-item mx-2">
+            <!-- Collapsible Section -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    @if (!Auth::id())
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="{{ route('host.register') }}">Become a host</a>
+                        </li>
+                        {{-- <li class="nav-item mx-2">
                     <a class="nav-link" href="{{ route('user.register') }}">Sign Up</a>
                 </li> --}}
-            @endif
-            </ul>
+                    @endif
+                </ul>
 
-            <!-- Right Side -->
-            <ul class="navbar-nav">
-                     <div class="top-nav-toggle-add">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                        <i class="fas fa-user-circle fa-lg"></i>
+
+                <!-- Right Side -->
+                <ul class="navbar-nav">
+                    <div class="top-nav-toggle-add dropdown">
+                        @if (Auth::check() && Auth::user()->role == 'user')
+                            {{-- <li class="nav-item mx-2">
+                            <a class="nav-link" href="{{ route('dashboard') }}">My Dashboard</a>
+                             </li> --}}
+                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">My Dashboard</a></li>
+                            </ul>
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        @elseif (Auth::check() && Auth::user()->role == 'host')
+                            {{-- <li class="nav-item mx-2">
+                             <a class="nav-link" href="{{ route('host.dashboard') }}">My Dashboard</a>
+                            </li> --}}
+                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('host.dashboard') }}">My Dashboard</a></li>
+                            </ul>
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        @elseif (Auth::check() && Auth::user()->role == 'admin')
+                            {{-- <li class="nav-item mx-2">
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}">My Dashboard</a>
+                           </li> --}}
+                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">My Dashboard</a></li>
+                            </ul>
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        @else
+                            {{-- <li class="nav-item mx-2">
+                            <a class="nav-link" href="{{ route('login') }}">Account</a>
+                           </li> --}}
+                            <i class="fa fa-bars" id="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                            </ul>
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        @endif
                     </div>
-                @if (Auth::check() && Auth::user()->role == 'user')
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{ route('dashboard') }}">My Dashboard</a>
-                    </li>
-                @elseif (Auth::check() && Auth::user()->role == 'host')
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{ route('host.dashboard') }}">My Dashboard</a>
-                    </li>
-                @elseif (Auth::check() && Auth::user()->role == 'admin')
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{ route('admin.dashboard') }}">My Dashboard</a>
-                    </li>
-                @else
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{ route('login') }}">Account</a>
-                    </li>
-                @endif
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 
     {{ $slot }}
@@ -131,7 +176,7 @@ nav.navbar.navbar-expand-lg.navbar-light {
                         comfort of your home or office.
                     </p>
                     <div class="become-host-footer">
-                      <a class="nav-link" href="https://votivelaravel.in/ikoro/host-register">Become a host</a>
+                        <a class="nav-link" href="https://votivelaravel.in/ikoro/host-register">Become a host</a>
                     </div>
 
                 </div>
@@ -159,7 +204,8 @@ nav.navbar.navbar-expand-lg.navbar-light {
                                 Policy</a></li>
                         <li><a href="{{ route('cookiePolicy') }}" class="text-white text-decoration-none">Cookie
                                 Policy</a></li>
-                        <li><a href="#" class="text-white text-decoration-none d-none">Complaints Policy</a></li>
+                        <li><a href="#" class="text-white text-decoration-none d-none">Complaints Policy</a>
+                        </li>
                         <li><a href="#" class="text-white text-decoration-none d-none">Safeguarding Policy</a>
                         </li>
                     </ul>
@@ -172,7 +218,7 @@ nav.navbar.navbar-expand-lg.navbar-light {
                         <li><i class="fa-solid fa-envelope"></i> <a href="mailto:support@ikoro.ng"
                                 style="color: white;">mail@ikoro.co</a></li>
                     </ul>
-                        <div class="social-icon d-flex justify-content-center gap-3">
+                    <div class="social-icon d-flex justify-content-center gap-3">
                         <a href="https://www.facebook.com/ikoroHQ" target="_blank" class="text-white"
                             aria-label="Facebook"><i class="fa-brands fa-facebook fa-lg"></i></a>
                         <a href="https://x.com/ikoroHq" target="_blank" class="text-white" aria-label="Twitter"><i
@@ -199,10 +245,10 @@ nav.navbar.navbar-expand-lg.navbar-light {
         </div>
     </footer>
 
-<!--     <div class="border-bottom border-light mt-4"></div>
+    <!--     <div class="border-bottom border-light mt-4"></div>
  -->
     @stack('scripts')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Bootstrap JS and dependencies -->

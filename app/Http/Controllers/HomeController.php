@@ -57,7 +57,6 @@ class HomeController extends Controller
     {
         $data = $this->prepareData($request);
         $data['hosts'] = Host::with('gigs')->where('recommended_sequence', '>', 0)->get();
-        $data['host_profile'] = Host::with('gigs')->where('recommended_sequence', '=', 2)->first();
         $data['tasks'] = Task::all();
         return view('home', $data);
     }

@@ -421,6 +421,7 @@ form.d-flex.justify-content-center.align-items-center.gap-2.subscribe-news-input
 
 div#feedback-testimonials .testimonial-name {
     margin: 5px auto 0;
+    padding-bottom: 5px;
 }
 .host-profile-by-id {
     background-color: #fff;
@@ -599,10 +600,19 @@ a.book-now-btn {
     justify-content: center;
     width: 46%;
 }
+.host-name-text-add i.fas.fa-circle {
+    font-size: 14px;
+}
+.footer-add-content ul.list-unstyled a:hover {
+    text-decoration: underline !important;
+}
+.footer-add-content .become-host-footer .nav-link:hover {
+    text-decoration: underline !important;
+}
 .continue-booking {
     color: black;
     background: #2a7d76;
-    padding: 7px 15px;
+    padding: 12px 15px;
     border-radius: 50px;
     text-decoration: none !important;
     display: flex;
@@ -612,6 +622,10 @@ a.book-now-btn {
     border: none;
     color: #fff;
     cursor: pointer;
+    opacity: 0.5;
+}
+.active-booking-btn {
+    opacity: 1;
 }
 .continue-booking:hover {
     background: #1d5853;
@@ -1058,14 +1072,12 @@ li.time-zone-mark.price-option span {
     border-radius: 3px;
 }
 
-
 .popular-location-inner .image-wrapper {
   position: relative;
   width: 100%;
   height: auto;
   overflow: hidden;
 }
-
 
 .popular-location-inner .image-text {
     position: absolute;
@@ -1085,8 +1097,6 @@ li.time-zone-mark.price-option span {
     background-color: #fff;
     color: #000;
 }
-
-
 
 .work-destination .column {
     height: 300px;
@@ -1281,7 +1291,6 @@ p.rating-review-point {
     gap: 10px;
 }
 
-
 .host-profile-by-id .select-a-tool {
     gap: 0;
     display: block;
@@ -1390,9 +1399,6 @@ h6.guest-fav-text {
 .meet-top-section-owl p.card-title {
     font-weight: 500;
 }
-
-
-
 
 .show-content-filter-add .row.partial-host-list .card-body img {
     width: 100% !important;
@@ -1504,14 +1510,12 @@ span.nav-link-dash.host-name-text {
     border: none;
     padding-right: 20px;
 }
-
 .maximum-offers-service.all-media .owl-dots {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 63px;
 }
-
 .maximum-offers-service.all-media .owl-theme .owl-dots .owl-dot span {
     width: 5px !important;
     height: 5px !important;
@@ -1539,13 +1543,7 @@ span.nav-link-dash.host-name-text {
     padding-left: 0;
 }
 
-/*.select-a-service .host-select-add .task-checkbox {
-    display: block;
-    text-align: center;
-    margin: auto;
-    margin-top: 5px;
-}
-*/.row.maximum-offers-service.all-media::-webkit-scrollbar {
+.row.maximum-offers-service.all-media::-webkit-scrollbar {
     width: 10px;
 }
 .logo-img img {
@@ -1558,10 +1556,6 @@ p.small {
 
 h1.mobile-view-host-name {
     display: none;
-}
-.active-booking-btn {
-    background-color: #8BC34A !important;
-    color: #000;
 }
 
 .footer-add-content ul.list-unstyled {
@@ -1602,7 +1596,6 @@ h1.mobile-view-host-name {
     margin-right: 0px;
     margin-top: 10px;
 }
-
 
 form.host-new-filter div#task {
     color: #000;
@@ -1747,7 +1740,7 @@ footer.mt-5.text-white.pt-5 h5.text-uppercase.font-weight-bold {
     margin-top: 5px;
 }
 .footer-add-content .terms-policy a:hover {
-    color: #e0e4c2 !important;
+    text-decoration: underline !important;
 }
 nav.navbar.navbar-expand-lg.navbar-light.top-nav-header .container {
     padding-left: 0px;
@@ -1827,7 +1820,6 @@ button#checkout-btn:focus {
     padding-top: 25px;
 }
 
-
 .new-testimonials-develop .testimonial-name {
     margin: -17px auto 0;
     display: table;
@@ -1867,10 +1859,17 @@ button#checkout-btn:focus {
     font-size: 14px;
     font-weight: 500;
 }
+
+form#payment-form button.btn.btn-primary.btn-block.free-button:hover {
+    background-color: #2a7d76;
+    border: none;
+}
+
+form#payment-form button.btn.btn-primary.btn-block.free-button {
+    border: none;
+}
+
 /*21-4-25 new-css-add*/
-
-
-
 
 @media only screen and (max-width: 767px) {
 
@@ -2244,7 +2243,6 @@ button.navbar-toggler:focus-visible {
     width: 100%;
 }
 
-
 .select-duration button.accordion span {
     font-size: 16px;
 }
@@ -2437,9 +2435,9 @@ footer.mt-5.text-white.pt-5 {
     padding-left: 14px;
 }
 
-    select#choose-service {
-        margin-top: 2px;
-    }
+select#choose-service {
+    margin-top: 2px;
+}
 
 .destination-section {
     margin-bottom: 8px;
@@ -2452,7 +2450,7 @@ footer.mt-5.text-white.pt-5 {
     border-bottom: solid 1px #ddd2d2;
 }
 
-  .gender-section {
+.gender-section {
     margin-bottom: 8px;
     border-bottom: solid 1px #ddd2d2;
 }
@@ -2694,9 +2692,7 @@ footer.mt-5.text-white.pt-5 {
 
 }
 
-
 @media (min-width:768px) and (max-width:1024px) {
-
 
 footer .logo-img {
     margin-top: -30px;
@@ -2720,8 +2716,6 @@ footer .logo-img {
 .host-main-profile h1 {
     font-size: 25px;
 }
-
-
 .host-profile-by-id .row.booking-mark-sdv {
     width: 100%;
     margin: auto;
@@ -2884,7 +2878,6 @@ span.nav-link-dash.host-name-text {
     height: 135px;
     margin-top: 0;
 }
-
     .available-time p {
         font-size: 16px;
     }
@@ -3042,9 +3035,10 @@ span.nav-link-dash.host-name-text {
     margin-top: -144px;
 }
 
-    .biography-sec {
-        padding-top: 20px;
-    }
+.biography-sec {
+    padding-top: 20px;
+}
+
 
 }
 

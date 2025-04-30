@@ -13,6 +13,10 @@ class City extends Model
 
     protected $guarded = [];
 
+    public function state() {
+        return $this->belongsTo(State::class);
+    }
+
 }
 
 
