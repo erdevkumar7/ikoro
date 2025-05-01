@@ -117,7 +117,8 @@
         <div class="container">
             <div class="row attend-event-inner">
                 <div class="col-md-7 attend-event-left">
-                    <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home or office.</h3>
+                    <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home
+                        or office.</h3>
                 </div>
 
                 <div class="col-md-5 attend-event-right">
@@ -243,7 +244,6 @@
                         }
                     @endphp
                     <div class="destination-section">
-                        {{-- <label for="search-destination">Where</label> --}}
                         <input type="text" name="location_name" id="citySearchByInput" class="search-destination"
                             data-url="{{ route('search.cities') }}" placeholder="Search destinations" required
                             autocomplete="off" value="{{ $locationName }}" />
@@ -260,7 +260,6 @@
 
                     <!-- Service Section -->
                     <div class="service-section">
-                        {{-- <label for="choose-service">Choose a service</label> --}}
                         <select id="choose-service" name="task_id" class="choose-service">
                             <option value="" {{ old('task_id', request('task_id')) == '' ? 'selected' : '' }}>
                                 Choose a service
@@ -276,8 +275,7 @@
 
                     <!-- Tool Section -->
                     <div class="tool-section">
-                        {{-- <label for="choose-tool">Choose a tool</label> --}}
-                        <select name="equipment_id" id="equipment_id" class="choose-tool">
+                        {{-- <select name="equipment_id" id="equipment_id" class="choose-tool">
                             <option value=""
                                 {{ old('equipment_id', request('equipment_id')) == '' ? 'selected' : '' }}>Choose a
                                 tool</option>
@@ -287,15 +285,24 @@
                                     {{ $row->name }}
                                 </option>
                             @endforeach
+                        </select> --}}
+                       
+                        <select id="is_open" name="is_open" class="choose-tool">
+                            <option value="" {{ old('is_open', request('is_open')) == '' ? 'selected' : '' }}>
+                                Every Host
+                            </option>
+                            <option value="1"
+                                {{ old('is_open', request('is_open')) == '1' ? 'selected' : '' }}>
+                                Host Online
+                            </option>
                         </select>
                     </div>
 
                     <!-- Gender Section -->
                     <div class="gender-section">
-                        {{-- <label for="choose-gender">Host gender</label> --}}
                         <select id="gender" name="gender" class="choose-gender">
                             <option value="" {{ old('gender', request('gender')) == '' ? 'selected' : '' }}>
-                                Host gender
+                                Any Host
                             </option>
                             <option value="male" {{ old('gender', request('gender')) == 'male' ? 'selected' : '' }}>
                                 Male

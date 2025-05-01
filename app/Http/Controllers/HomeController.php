@@ -119,7 +119,7 @@ class HomeController extends Controller
     }
 
     public function filterHost(Request $request)
-    {
+    {   
         $data = $this->prepareData($request);
         $data['tasks'] = Task::all();
         $where = [];
@@ -127,6 +127,11 @@ class HomeController extends Controller
         // if ($request->filled('city_id')) {
         //     $where['city_id'] = $request->input('city_id');
         // }
+
+        // if ($request->filled('equipment_id')) {
+        //     $where['equipment_id'] = $request->input('equipment_id');
+        // }
+
         if ($request->filled('location_id') && $request->filled('location_type')) {
             $locationId = $request->input('location_id');
             $locationType = $request->input('location_type');
@@ -142,16 +147,21 @@ class HomeController extends Controller
 
         if ($request->filled('task_id')) {
             $where['task_id'] = $request->input('task_id');
-        }
-        if ($request->filled('equipment_id')) {
-            $where['equipment_id'] = $request->input('equipment_id');
-        }
+        }     
 
         $gigs = Gig::where($where);
         if ($request->filled('gender')) {
             $gender = $request->input('gender');
             $gigs->whereHas('host', function ($query) use ($gender) {
                 $query->where('gender', $gender);
+            });
+        }
+       
+        if($request->filled('is_open')){           
+            $is_open = strtolower(date('D')) . '_is_open' ? 1 : '';
+            $gigs->whereHas('host', function ($query) use ($is_open) {
+                $today_is_open = strtolower(date('D')) . '_is_open';
+                $query->where($today_is_open, $is_open);
             });
         }
 
