@@ -33,9 +33,9 @@ class GigController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'task_id' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'equipment_price_id' => ['required', 'integer'],
+            // 'equipment_price_id' => ['required', 'integer'],
             'equipment_name' => ['nullable', 'string'],
-            'equipment_id' => ['required', 'integer'],
+            // 'equipment_id' => ['required', 'integer'],
             'price' => ['nullable', 'string'],
             'minutes' => ['nullable', 'string'],
             'status' => ['nullable', 'string'],
@@ -62,9 +62,6 @@ class GigController extends Controller
                 ['id' => $gigId],
                 $validatedData
             );
-
-
-
             /*
             GigFeature::where('gig_id', $gig->id)->delete();
             $gigFeatures = [];
@@ -79,7 +76,6 @@ class GigController extends Controller
             GigFeature::insert($gigFeatures);  // Bulk insert for performance
             */
 
-                                
             // Initialize the $gigFeatures array
             $gigFeatures = [];
 
@@ -139,14 +135,7 @@ class GigController extends Controller
             // Bulk insert remaining new features if any
             if (!empty($gigFeatures)) {
                 GigFeature::insert($gigFeatures);
-            }
-
-
-
-
-
-
-            
+            }            
 
             DB::commit();
 
@@ -160,7 +149,6 @@ class GigController extends Controller
             Session::flash('message', 'Error while saving/updating gig: ' . $e->getMessage());
             Session::flash('alert-class', 'alert-warning');
         }
-
         return redirect()->back();
     }
 
