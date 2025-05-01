@@ -122,8 +122,6 @@
     </style>
 
     <div class="content-wrapper">
-
-
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container">
@@ -313,16 +311,6 @@
                             </div>
                         </div>
 
-
-
-
-
-
-
-
-
-
-
                         <div class="form-row">
                             <div class="form-group col-md">
                                 <x-input-label for="description" :value="__('Description')" />
@@ -333,17 +321,6 @@
 
                     </div>
                     <div class="card-footer add-edit-content">
-
-
-
-
-
-
-
-
-
-
-
 
                         <div class="mb-3">
                             <!-- <h4>Features</h4> -->
@@ -382,7 +359,6 @@
                                         </div>
     @endforeach
                                 @endif -->
-
 
                                 @if (isset($gig['features']))
                                     @foreach ($gig['features'] as $feature)
@@ -439,9 +415,6 @@
                                         </div>
                                     @endforeach
                                 @endif
-
-
-
                                 <div id="html_to">
 
                                 </div>

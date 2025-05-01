@@ -23,7 +23,7 @@ class GigController extends Controller
     public function index($status='enabled')
     {
         $data['gigs'] = Gig::where('status', $status)->where('host_id', Auth::id())->paginate(config('app.pagination'));
-        $data['equipment_price'] = EquipmentPrice::get()->toArray();        
+        // $data['equipment_price'] = EquipmentPrice::get()->toArray();        
         return view('host.gig.index', $data);
     }
 
@@ -34,7 +34,7 @@ class GigController extends Controller
             'task_id' => ['required', 'string'],
             'description' => ['required', 'string'],
             // 'equipment_price_id' => ['required', 'integer'],
-            'equipment_name' => ['nullable', 'string'],
+            'equipment_name' => ['required', 'string', 'max:25'],
             // 'equipment_id' => ['required', 'integer'],
             'price' => ['nullable', 'string'],
             'minutes' => ['nullable', 'string'],

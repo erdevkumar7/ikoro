@@ -31,7 +31,7 @@
                                                 {{ $gig->task->title }}</p>
 
                                             <p><i class="fa fa-camera-retro" aria-hidden="true"></i>
-                                                {{ $gig->equipmentPrice->equipment->name }}</p>
+                                                {{ $gig->equipment_name }}</p>
                                         </div>
 
                                         {{-- <div class="detils-inner">
@@ -45,7 +45,7 @@
                                             </p>
     
                                             <p> <i class="fa fa-camera-retro" aria-hidden="true"></i>
-                                                {{ $gig->equipmentPrice->equipment->name }}
+                                                {{ $gig->equipment_name }}
                                             </p>
     
                                             <p class="rating-review-point">

@@ -59,7 +59,7 @@
 
                                         <p> <i class="fa fa-camera-retro" aria-hidden="true"></i>
                                             @if ($firstValidGig)
-                                                {{ $firstValidGig->equipmentPrice->equipment->name }}
+                                                {{ $firstValidGig->equipment_name }}
                                             @else
                                                 N/A
                                             @endif

@@ -353,7 +353,7 @@
                                         <div class="select-booking-inner equipment-item"
                                             data-task-id="{{ $gig->task_id }}" style="display: none;">
                                             <label for="equipment-checkbox-{{ $gig->id }}">
-                                                <p>{{ $gig->equipment->name }}</p>
+                                                <p>{{ $gig->equipment_name}}</p>
                                                 <input type="checkbox" class="equipment-checkbox"
                                                     id="equipment-checkbox-{{ $gig->id }}"
                                                     value="{{ $gig->id }}" />

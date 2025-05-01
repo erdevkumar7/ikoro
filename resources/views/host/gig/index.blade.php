@@ -46,8 +46,9 @@
         <table class="table table-responsive-md table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
+                    {{-- <th scope="col">Name</th> --}}
                     <th scope="col">Type</th>
+                    <th scope="col">Tool</th>
                     <th scope="col">Locations</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
@@ -56,8 +57,9 @@
             <tbody>
                 @forelse ($gigs as $gig)
                     <tr>
-                        <th scope="row">{{ $gig['title']  }}</th>
+                        {{-- <th scope="row">{{ $gig['title']  }}</th> --}}
                         <td>{{ $gig['task']['title'] }}</td>
+                        <td>{{ $gig['equipment_name'] }}</td>
                         <td>{{ $gig['country']['name'] ?? '' }} - {{ $gig['state']['name'] ?? '' }} - {{ $gig['city']['name'] ?? '' }} -
                             {{ $gig['zip']['code'] ?? '' }} </td>
                         <td>{{ $gig['status'] ?? '' }}</td>
@@ -167,7 +169,7 @@
                                     </tr>
                                     <tr>
                                         <th>Equiment Used</th>
-                                        <td>{{ $gig['equipmentPrice']['equipment_name'] }}</td>
+                                        {{-- <td>{{ $gig['equipmentPrice']['equipment_name'] }}</td> --}}
                                     </tr>
                                     <tr>
                                         <th>Pricing ($/mins)</th>
