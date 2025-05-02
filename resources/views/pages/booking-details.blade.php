@@ -709,6 +709,9 @@ if (clickedDateElement) {
             if (thisDate >= startDate && thisDate <= endDate && openDays[dayKey] === 1) {
                 date.classList.add("highlighted");
             }
+            else {
+                date.classList.add("date-disable");
+            }
 
             // Mark today
             if (

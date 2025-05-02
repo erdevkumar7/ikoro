@@ -353,7 +353,7 @@
                                         <div class="select-booking-inner equipment-item"
                                             data-task-id="{{ $gig->task_id }}" style="display: none;">
                                             <label for="equipment-checkbox-{{ $gig->id }}">
-                                                <p>{{ $gig->equipment_name}}</p>
+                                                <p>{{ $gig->equipment_name }}</p>
                                                 <input type="checkbox" class="equipment-checkbox"
                                                     id="equipment-checkbox-{{ $gig->id }}"
                                                     value="{{ $gig->id }}" />
@@ -391,13 +391,17 @@
                                             @foreach ($host_profile->gigs as $gig)
                                                 @foreach ($gig->features as $feature)
                                                     <div class="col-md-4 gig-box" data-task-id="{{ $gig->task_id }}">
-                                                        <p class="my-offer-text">{{ Str::limit($feature->label, 25) }}
+                                                        <p class="my-offer-text">
+                                                            <input type="checkbox" class="gig-feature-checkbox"
+                                                                data-feature-id="{{ $feature->id }}" />
+                                                            {{ Str::limit($feature->label, 25) }}
                                                         </p>
                                                         <img src="{{ asset('/' . $feature->value) }}"
                                                             alt="{{ $feature->name }}" />
                                                     </div>
                                                 @endforeach
                                             @endforeach
+
                                         </div>
                                     </div>
                                 </div>
@@ -439,6 +443,7 @@
 
                 // Show features
                 $('#features-container .gig-box').hide(); // hide all first
+                $('.gig-feature-checkbox').prop('checked', false); // Uncheck all features
                 const relatedFeatures = $(`#features-container .gig-box[data-task-id="${taskId}"]`);
                 if (relatedFeatures.length > 0) {
                     $('#features-section').show();
@@ -456,6 +461,7 @@
                 selectedGigId = null;
 
                 $('#features-section').hide(); // also hide features
+                $('.gig-feature-checkbox').prop('checked', false);
             }
         });
 
@@ -481,6 +487,10 @@
             if (selectedGigId) {
                 window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
             }
+        });
+        // Only one feature selectable
+        $(document).on('change', '.gig-feature-checkbox', function() {
+            $('.gig-feature-checkbox').not(this).prop('checked', false);
         });
     </script>
 
