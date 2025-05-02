@@ -34,32 +34,36 @@
                                 <div class="panel time-zone-sct" style="display: block;">
                                     <!-- open by default -->
                                     <ul>
-                                        <!--
-                                        @foreach ($selectedEquipmentPrices as $price)
-<li class="time-zone-mark price-option"
+
+                                        {{-- @foreach ($selectedEquipmentPrices as $price)
+                                            <li class="time-zone-mark price-option"
                                                 data-duration="{{ $price->duration_minutes }}"
                                                 data-price="{{ $price->price }}">
                                                 {{ $price->duration_minutes }} Mins:
                                                 <span>${{ $price->price }}</span>
                                             </li>
-@endforeach
-                                        -->
+                                        @endforeach --}}
+
 
                                         <li class="time-zone-mark price-option" data-duration="30"
                                             data-price="{{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}">
-                                            30 Mins: ${{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}
+                                            30 Mins:
+                                            ${{ isset($gig->price30min) ? number_format($gig->price30min, 2) : '' }}
                                         </li>
                                         <li class="time-zone-mark price-option" data-duration="60"
                                             data-price="{{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}">
-                                            60 Mins: ${{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}
+                                            60 Mins:
+                                            ${{ isset($gig->price60min) ? number_format($gig->price60min, 2) : '' }}
                                         </li>
                                         <li class="time-zone-mark price-option" data-duration="90"
                                             data-price="{{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}">
-                                            90 Mins: ${{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}
+                                            90 Mins:
+                                            ${{ isset($gig->price90min) ? number_format($gig->price90min, 2) : '' }}
                                         </li>
                                         <li class="time-zone-mark price-option" data-duration="120"
                                             data-price="{{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}">
-                                            120 Mins:   ${{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}
+                                            120 Mins:
+                                            ${{ isset($gig->price120min) ? number_format($gig->price120min, 2) : '' }}
                                         </li>
                                     </ul>
                                 </div>
@@ -172,8 +176,7 @@
                                     </div>
                                 </div>
                                 <div class="Proceed-to-checkout">
-                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}"
-                                        method="GET">
+                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}" method="GET">
                                         <input type="hidden" name="gig_id" id="gig-id"
                                             value="{{ $gig->id }}" />
                                         <input type="hidden" name="price" id="selected-gig-price"
@@ -182,6 +185,8 @@
                                             value="" />
                                         <input type="hidden" name="operation_time" id="selected-gig-operation-time"
                                             value="" />
+                                        <input type="hidden" name="features_ids" id="selected-features_ids"
+                                            value="{{ implode(',', $selectedFeatureIds) }}" />
 
                                         <button type="submit" class="go-to-checkout" id="checkout-btn"
                                             disabled>PROCEED TO CHECKOUT <i class="fa fa-credit-card"
@@ -247,7 +252,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+    <script>         
         $(document).ready(function() {
 
             const today = new Date();
@@ -272,11 +277,12 @@
                 selectedDuration = $(this).data("duration");
                 selectedPrice = $(this).data("price");
                 const gigId = "{{ $gig->id }}";
+               
 
                 $("#selected-gig-price").val(selectedPrice);
                 $("#selected-gig-duration").val(selectedDuration);
                 $("#gig-id").val(gigId);
-
+              
                 // Enable and open second accordion
                 const secondAccordion = $(".accordion").eq(1);
                 const secondPanel = secondAccordion.next(".panel");
@@ -362,6 +368,7 @@
                             price: $('#selected-gig-price').val(),
                             duration: $('#selected-gig-duration').val(),
                             operation_time: $('#selected-gig-operation-time').val(),
+                            feature_ids: $('#selected-features_ids').val(),
                         },
                         success: function() {
                             // Show the login modal after saving session data
@@ -385,6 +392,7 @@
 
 <script>
     let hasInteracted = false;
+
     function displaySelectedDate(date) {
 
         const n_year = date.getFullYear();
@@ -468,94 +476,94 @@
 
 
         // this is for upper click
-        
-if (e.target.classList.contains("time-zone-mark")) {
-    
-// Remove previous "selected" class from all price options
-document.querySelectorAll(".price-option").forEach(el => {
-    el.classList.remove("selected");
-});
 
-// Add "selected" class to the clicked one
-e.target.classList.add("selected");
+        if (e.target.classList.contains("time-zone-mark")) {
 
-const clickedDateElement = document.querySelector(".date.clicked_date");
-
-if (clickedDateElement) {
-    const dayNumber = parseInt(clickedDateElement.textContent.trim());
-    const monthYearStr = document.getElementById("month-year").textContent.trim();
-    const [monthName, yearStr] = monthYearStr.split(" ");
-    const year = parseInt(yearStr);
-    const month = new Date(`${monthName} 1, ${year}`).getMonth();
-    const clickedDate = new Date(year, month, dayNumber);
-
-    displaySelectedDate(clickedDate); // Reuse your existing function
-
-    const weekdays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    const dayName = weekdays[clickedDate.getDay()];
-
-    const selectedOption = document.querySelector(".price-option.selected");
-
-    if (selectedOption) {
-        const duration = parseInt(selectedOption.getAttribute("data-duration")); // in minutes
-
-        const openTimeStr = timeData[dayName]?.open || "12:00 am";
-        const closeTimeStr = timeData[dayName]?.close || "12:00 am";
-
-        const startHour = parseHour(openTimeStr);
-        const endHour = parseHour(closeTimeStr);
-
-        const timeAddContainer = document.querySelector(".time-add");
-        timeAddContainer.innerHTML = ""; // Clear previous buttons
-
-        for (let time = startHour; time < endHour; time += duration / 60) {
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "btn btn-outline-primary m-1 slot-btn";
-            btn.textContent = formatTime(time);
-
-            // Add click event for slot buttons
-            btn.addEventListener("click", function () {
-                document.querySelectorAll(".slot-btn").forEach(b => {
-                    b.classList.remove("time_button_clicked");
-                });
-
-                this.classList.add("time_button_clicked");
-
-                function convertTo24HourFormat(time12h) {
-                    const [timePart, modifier] = time12h.split(' ');
-                    let [hours, minutes] = timePart.split(':');
-                    if (hours === '12') {
-                        hours = '00';
-                    }
-                    if (modifier.toLowerCase() === 'pm') {
-                        hours = parseInt(hours, 10) + 12;
-                    }
-                    return `${String(hours).padStart(2, '0')}:${minutes}`;
-                }
-
-                let month_plus = String(clickedDate.getMonth() + 1).padStart(2, '0');
-                let time24 = convertTo24HourFormat(this.textContent);
-
-                let operation_time = `${year}-${month_plus}-${dayNumber}T${time24}`;
-                $('#selected-gig-operation-time').val(operation_time);
+            // Remove previous "selected" class from all price options
+            document.querySelectorAll(".price-option").forEach(el => {
+                el.classList.remove("selected");
             });
 
-            timeAddContainer.appendChild(btn);
+            // Add "selected" class to the clicked one
+            e.target.classList.add("selected");
+
+            const clickedDateElement = document.querySelector(".date.clicked_date");
+
+            if (clickedDateElement) {
+                const dayNumber = parseInt(clickedDateElement.textContent.trim());
+                const monthYearStr = document.getElementById("month-year").textContent.trim();
+                const [monthName, yearStr] = monthYearStr.split(" ");
+                const year = parseInt(yearStr);
+                const month = new Date(`${monthName} 1, ${year}`).getMonth();
+                const clickedDate = new Date(year, month, dayNumber);
+
+                displaySelectedDate(clickedDate); // Reuse your existing function
+
+                const weekdays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+                const dayName = weekdays[clickedDate.getDay()];
+
+                const selectedOption = document.querySelector(".price-option.selected");
+
+                if (selectedOption) {
+                    const duration = parseInt(selectedOption.getAttribute("data-duration")); // in minutes
+
+                    const openTimeStr = timeData[dayName]?.open || "12:00 am";
+                    const closeTimeStr = timeData[dayName]?.close || "12:00 am";
+
+                    const startHour = parseHour(openTimeStr);
+                    const endHour = parseHour(closeTimeStr);
+
+                    const timeAddContainer = document.querySelector(".time-add");
+                    timeAddContainer.innerHTML = ""; // Clear previous buttons
+
+                    for (let time = startHour; time < endHour; time += duration / 60) {
+                        const btn = document.createElement("button");
+                        btn.type = "button";
+                        btn.className = "btn btn-outline-primary m-1 slot-btn";
+                        btn.textContent = formatTime(time);
+
+                        // Add click event for slot buttons
+                        btn.addEventListener("click", function() {
+                            document.querySelectorAll(".slot-btn").forEach(b => {
+                                b.classList.remove("time_button_clicked");
+                            });
+
+                            this.classList.add("time_button_clicked");
+
+                            function convertTo24HourFormat(time12h) {
+                                const [timePart, modifier] = time12h.split(' ');
+                                let [hours, minutes] = timePart.split(':');
+                                if (hours === '12') {
+                                    hours = '00';
+                                }
+                                if (modifier.toLowerCase() === 'pm') {
+                                    hours = parseInt(hours, 10) + 12;
+                                }
+                                return `${String(hours).padStart(2, '0')}:${minutes}`;
+                            }
+
+                            let month_plus = String(clickedDate.getMonth() + 1).padStart(2, '0');
+                            let time24 = convertTo24HourFormat(this.textContent);
+
+                            let operation_time = `${year}-${month_plus}-${dayNumber}T${time24}`;
+                            $('#selected-gig-operation-time').val(operation_time);
+                        });
+
+                        timeAddContainer.appendChild(btn);
+                    }
+                }
+
+            } else {
+                //alert("Please select a date first.");
+                if (hasInteracted) {
+                    alert("Please select a date from calender.");
+                }
+            }
         }
-    }
-
-} else {
-        //alert("Please select a date first.");
-        if (hasInteracted) {
-            alert("Please select a date from calender.");
-        }
-}
-}
 
 
 
-        
+
         // this is for upper click
 
         if (e.target.classList.contains("date") && e.target.classList.contains("highlighted")) {
@@ -708,8 +716,7 @@ if (clickedDateElement) {
             // Only highlight if within the 2-month window and the day is open
             if (thisDate >= startDate && thisDate <= endDate && openDays[dayKey] === 1) {
                 date.classList.add("highlighted");
-            }
-            else {
+            } else {
                 date.classList.add("date-disable");
             }
 

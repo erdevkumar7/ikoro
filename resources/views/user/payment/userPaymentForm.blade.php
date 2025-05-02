@@ -67,6 +67,9 @@
                                 <input type="hidden" name="operation_time" id="selected-gig-operation-time"
                                     value="{{ $operation_time }}" />
 
+                                <input type="hidden" name="feature_ids" id="selected-features_ids"
+                                    value="{{ $feature_ids }}" />
+
                                 <div class="p-3">
                                     <button type="submit" class="btn btn-primary btn-block free-button">Pay
                                         Now</button>

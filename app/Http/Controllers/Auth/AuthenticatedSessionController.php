@@ -31,12 +31,13 @@ class AuthenticatedSessionController extends Controller
         $role = Auth::user()->role;
 
         // If booking data exists in session, redirect to payment page with those details
-        if ($role === 'user' && session()->has('booking.gig_id')) {            
+        if ($role === 'user' && session()->has('booking.gig_id')) {                 
             return redirect()->route('user.strip.payment', [
                 'gig_id' => session('booking.gig_id'),
                 'price' => session('booking.price'),
                 'duration' => session('booking.duration'),
                 'operation_time' => session('booking.operation_time'),
+                'feature_ids' => session('booking.feature_ids'),
             ]);
         }
         // Optional: If redirect URL is passed (e.g., from query param or hidden input)

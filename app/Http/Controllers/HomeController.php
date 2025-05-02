@@ -228,8 +228,8 @@ class HomeController extends Controller
         return view('pages.demo-booking-details', $data);
     }
 
-    public function bookingDetailByGigId($gig_id)
-    {
+    public function bookingDetailByGigId(Request $request, $gig_id)
+    {       
         $clientId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
         $data = [
             'loggedIn' => $clientId ?? '',
@@ -240,18 +240,16 @@ class HomeController extends Controller
         $data['gig'] = $gig;
 
         // Get the selected gig features
-        $data['selectedGig'] = GigFeature::where('gig_id', $gig_id)
-            ->pluck('gig_id')
-            ->toArray();
-
-        // Ensure equipmentPrice exists before accessing equipment_id
-        $equipmentId = $gig->equipmentPrice->equipment_id ?? null;
-
-        // Get selected equipment prices if available
-        $data['selectedEquipmentPrices'] = $equipmentId
-            ? EquipmentPrice::where('equipment_id', $equipmentId)->get()
-            : collect(); // return empty collection if null
-        // dd($data['loggedIn']);
+        $data['selectedFeatureIds'] = (array) $request->query('features');
+        // $data['selectedGig'] = GigFeature::where('gig_id', $gig_id)
+        //     ->pluck('gig_id')
+        //     ->toArray();        
+        
+        // $equipmentId = $gig->equipmentPrice->equipment_id ?? null;  
+        // $data['selectedEquipmentPrices'] = $equipmentId
+        //     ? EquipmentPrice::where('equipment_id', $equipmentId)->get()
+        //     : collect(); 
+        // dd($data['selectedFeatureIds']);
         return view('pages.booking-details', $data);
     }
 

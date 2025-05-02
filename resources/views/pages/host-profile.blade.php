@@ -485,7 +485,21 @@
         // Redirect on button click
         $('#booking-button').on('click', function() {
             if (selectedGigId) {
-                window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail`;
+                // Gather selected feature IDs
+                const selectedFeatureIds = [];
+                $('.gig-feature-checkbox:checked').each(function() {
+                    const featureId = $(this).data('feature-id');
+                    if (featureId) {
+                        selectedFeatureIds.push(featureId);
+                    }
+                });
+
+                // You can now send this info via query string or post form
+                // Example with query string:
+                const query = $.param({
+                    features: selectedFeatureIds,
+                });
+                window.location.href = `/ikoro/booking/gig-id-${selectedGigId}/detail?${query}`;
             }
         });
         // Only one feature selectable

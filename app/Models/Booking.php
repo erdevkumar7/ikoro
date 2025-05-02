@@ -30,4 +30,9 @@ class Booking extends Model
         return $this->belongsTo(Gig::class, 'gig_id');
     }
 
+    public function feature()
+    {
+        return $this->belongsTo(GigFeature::class, 'feature_id');
+    }
+
 }

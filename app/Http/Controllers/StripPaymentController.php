@@ -39,6 +39,7 @@ class StripPaymentController extends Controller
             'price' => $request->price,
             'duration' => $request->duration,
             'operation_time' => $request->operation_time,
+            'feature_ids' => $request->features_ids,
         ]);
     }
 
@@ -85,6 +86,7 @@ class StripPaymentController extends Controller
             ]);
 
             if ($charge->status === 'succeeded') {
+                // dd($request->feature_ids);
                 Booking::create([
                     'task_id' => $gig->task->id,
                     'gig_id' => $gig->id,
@@ -99,6 +101,7 @@ class StripPaymentController extends Controller
                     'equipment_name' => $gig->equipment_name ?? null,
                     'duration' => $request->duration,
                     'operation_time' => $request->operation_time,
+                    'feature_id' => $request->feature_ids,
                 ]);
             }
             Session::flash('payment_success', 'Payment successfuly completed!');
