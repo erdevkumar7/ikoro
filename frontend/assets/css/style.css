@@ -1918,9 +1918,11 @@ ul.navbar-nav .dropdown-toggle::after{
 ul.navbar-nav ul.dropdown-menu.show {
     left: -18px;
     padding: 0;
-    height: 50px;
 }
 
+ul.navbar-nav ul.dropdown-menu.show a.dropdown-item {
+    padding: 8px 15px;
+}
 
 /*21-4-25 new-css-add*/
 
@@ -2388,7 +2390,7 @@ ul.navbar-nav i.fas.fa-user-circle.fa-lg {
 ul.navbar-nav div#menu-toggle {
     border: solid 1px lightgray;
     border-radius: 50px;
-    padding-left: 25px;
+    padding-left: 18px;
     padding-right: 10px;
     align-items: center !important;
     padding-bottom: 10px;

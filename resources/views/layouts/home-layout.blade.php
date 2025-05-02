@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="col-md-5 attend-event-right">
-                    <img src="./frontend/images/teacher-three.jpg">
+                    <img src="./frontend/images/teacher-three.png">
                 </div>
 
 

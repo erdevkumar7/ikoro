@@ -317,11 +317,11 @@ $(document).ready(function () {
     });
 });
 
-// $(document).ready(function(){
-//     $(document).on('click', '.go-to-checkout', function(){       
-//             var loggedIn = $("#loggedIn").val();
-//             if (loggedIn == "") {
-//                 $('#loginModal').modal('show');
-//             }   
-//     });
-// });
+$(document).ready(function(){
+    $(document).on('click', '.go-to-checkout', function(){       
+            var loggedIn = $("#loggedIn").val();
+            if (loggedIn == "") {
+                $('#loginModal').modal('show');
+            }   
+    });
+});
