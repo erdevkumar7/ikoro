@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">My Gigs</li>
+                        <li class="breadcrumb-item active">My Services </li>
                         </ol>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
             <div class="row align-items-center">
                 <!-- Heading on the left -->
                 <div class="col-md ">
-                    <h4>My Gigs
+                    <h4>My Services
                     <a class="btn btn-info" href="{{ url('/host/gig/addedit') }}" class="nav-link">Add New</a>
                     </h4>
                 </div>

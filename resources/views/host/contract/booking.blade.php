@@ -17,7 +17,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active">My Tasks</li>
+                <li class="breadcrumb-item active">My Bookings</li>
                 </ol>
             </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="row align-items-center">
                 <!-- Heading on the left -->
                 <div class="col-md ">
-                    <h4>My Tasks</h4>
+                    <h4>My Bookings</h4>
                 </div>
             </div>
         </div>

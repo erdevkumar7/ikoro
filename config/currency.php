@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'default' => env('DEFAULT_CURRENCY', 'ZAR'),
+    'default' => env('DEFAULT_CURRENCY', '$'),
 ];

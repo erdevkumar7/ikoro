@@ -132,7 +132,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">{{ isset($gig['id']) ? 'Edit Gigs' : 'Create Gigs' }}</li>
+                            <li class="breadcrumb-item active">{{ isset($gig['id']) ? 'Edit Service' : 'Create Service' }}</li>
                         </ol>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                 <div class="row align-items-center">
                     <!-- Heading on the left -->
                     <div class="col-md">
-                        <h4>{{ isset($gig['id']) ? 'Edit Gigs' : 'Create Gigs' }}</h4>
+                        <h4>{{ isset($gig['id']) ? 'Edit Service' : 'Create Service' }}</h4>
                     </div>
                 </div>
             </div>

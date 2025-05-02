@@ -139,7 +139,7 @@ class GigController extends Controller
 
             DB::commit();
 
-            $message = isset($gigId) ? 'Gig updated successfully.' : 'Gig saved successfully.';
+            $message = isset($gigId) ? 'Service updated successfully.' : 'Service saved successfully.';
             Session::flash('message', $message);
             Session::flash('alert-class', 'alert-success');
             return redirect()->route('host.gig.addedit', $gig->id);

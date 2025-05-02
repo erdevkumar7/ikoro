@@ -37,6 +37,14 @@
             font-size: 26px;
         }
 
+        .new-logo-footer {
+            width: 150px;
+            display: flex;
+            margin-top: -30px;
+            margin-bottom: 0;
+            margin-left: -35px;
+        }
+
         .navbar-light .navbar-nav .nav-link:hover {
             color: #a9f005 !important;
         }
@@ -192,7 +200,8 @@
             <div class="row text-center text-md-start">
                 <!-- Column 1: Company Information -->
                 <div class="col-12 col-md-6 mb-4">
-                    <h5 class="text-uppercase font-weight-bold"><x-application-logo /></h5>
+                    <!--  <h5 class="text-uppercase font-weight-bold"><x-application-logo /></h5> -->
+                    <img src="{{ asset('frontend/images/new-footer-logo.png') }}" class="new-logo-footer">
                     <p class="small">iKORO is one-on-one interactive on-demand live video hailing application.
                         Enjoy culture, people, see places, and make that long trip from the
                         comfort of your home or office.
@@ -215,7 +224,8 @@
                                 <a href="{{ route('login') }}" class="text-white text-decoration-none">Support</a>
                             @endif
                         </li>
-                        <li><a href="{{ route('aboutUs') }}" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="{{ route('aboutUs') }}" class="text-white text-decoration-none">About Us</a>
+                        </li>
                         <li><a href="#" class="text-white text-decoration-none">Blog <br> <small></small></a>
                         </li>
                         <li><a href="#" class="text-white text-decoration-none">Announcements <br>
