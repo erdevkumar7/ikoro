@@ -35,34 +35,18 @@
    @yield('current_page_css')
 
    </head>
-
    <body class="hold-transition sidebar-mini layout-fixed">
       <div class="wrapper">
          <input type="hidden" value="{{url('/')}}" id="baseUrl" name="baseUrl">
          <input type="hidden" value="{{ csrf_token() }}" id="csrfToken" name="csrfToken">
  
          <!-- Navbar Header -->
-
          @include('host.layout.header')
-
-
-
-         <!-- Main Sidebar Container -->         
-
-         @include('host.layout.sidebar')
-
-         
-
+         <!-- Main Sidebar Container -->      
+         @include('host.layout.sidebar')  
          @yield('content')
-
-
-
          <!-- /.Footer -->
-
-         @include('host.layout.footer')
-
-         
-
+         @include('host.layout.footer') 
       </div>
 
       <!-- ./wrapper -->

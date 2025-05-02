@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\GigController;
 use App\Http\Controllers\OfferController;
@@ -48,5 +49,8 @@ Route::middleware(['auth', 'verified', 'host'])->prefix('host')->group(function 
 
     Route::get('profile', [ProfileController::class, 'host_profile'])->name('host.profile');
     Route::post('profile/update', [ProfileController::class, 'host_profile_update'])->name('host.profile.update');
+
+    Route::get('bank/add-edit/{bank_id?}', [BankController::class, 'host_addEditBank'])->name('host.addEditBank');
+    Route::post('bank/store', [BankController::class, 'host_saveBankDetail'])->name('host.save.bank');  
 
 });
