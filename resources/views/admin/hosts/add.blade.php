@@ -1,34 +1,34 @@
 {{--  @extends('admin.layouts.app') --}}
-@extends('admin.layout.layout') 
+@extends('admin.layout.layout')
 @section('title', isset($host) ? 'Edit Hosts' : 'Create Hosts')
 @section('content')
-    <div class="container-fluid" style="margin-bottom: 10px;">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('backend/admin/assets/js/get-locations.js') }}"></script>
+    {{-- <div class="container-fluid" style="margin-bottom: 10px;">
         <div class="row align-items-center">
-            <!-- Heading on the left -->
             <div class="col-md">
                 <h4>{{ isset($host) ? 'Edit Hosts' : 'Create Hosts' }}</h4>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="content-wrapper">
-
-
-<!-- Content Header (Page header) -->
-    <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0"></h1>
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">{{ isset($host) ? 'Update Host' : 'Create Host' }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">{{ isset($host) ? 'Update Host' : 'Create Host' }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </div>
-        </div>
-    </div>
-    </div>
 
 
 
@@ -52,9 +52,11 @@
                             <label for="sex">Gender</label>
                             <select class="form-control" id="gender" name="gender" required>
                                 <option value="" disabled selected>Select your gender</option>
-                                <option value="male" {{ isset($host) && $host->gender == 'male' ? 'selected' : '' }}>Male</option>
-                                <option value="female" {{ isset($host) && $host->gender == 'female' ? 'selected' : '' }}>Female</option>
-                            </select>                            
+                                <option value="male" {{ isset($host) && $host->gender == 'male' ? 'selected' : '' }}>Male
+                                </option>
+                                <option value="female" {{ isset($host) && $host->gender == 'female' ? 'selected' : '' }}>
+                                    Female</option>
+                            </select>
                             <x-input-error :messages="$errors->get('gender')" class="mt-2" />
                         </div>
                         <div class="form-group col-md-4">
@@ -81,14 +83,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <x-input-label for="password" :value="__('Password')" />
-                            <x-text-input id="password" class="form-control" type="password" name="password" 
+                            <x-text-input id="password" class="form-control" type="password" name="password"
                                 autocomplete="new-password" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                         <div class="form-group col-md-6">
                             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                             <x-text-input id="password_confirmation" class="form-control" type="password"
-                                name="password_confirmation"  autocomplete="new-password" />
+                                name="password_confirmation" autocomplete="new-password" />
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
                     </div>
@@ -99,8 +101,7 @@
                                 <option value="">Select Country</option>
                                 @foreach ($country as $val)
                                     <option value="{{ $val->id }}"
-                                        {{ isset($host) && $host->country_id == $val->id ? 'selected' : '' }}
-                                    >
+                                        {{ isset($host) && $host->country_id == $val->id ? 'selected' : '' }}>
                                         {{ $val->name }}
                                     </option>
                                 @endforeach
@@ -138,8 +139,8 @@
                                 <option value="">Select Tasks</option>
                                 @foreach ($tasks as $val)
                                     <option value="{{ $val->id }}"
-                                        {{ isset($host) && in_array($val->id, $selectedTask) ? 'selected' : '' }}
-                                        >{{ $val->title }}</option>
+                                        {{ isset($host) && in_array($val->id, $selectedTask) ? 'selected' : '' }}>
+                                        {{ $val->title }}</option>
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('task_id')" class="mt-2" />
@@ -165,6 +166,37 @@
                             <x-input-error :messages="$errors->get('skype_id')" class="mt-2" />
                         </div>
                     </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="bank_name">Bank Name</label>
+                            <x-text-input type="text" class="form-control" id="bank_name" name="bank_name"
+                                :value="isset($host->bank->name) ? $host->bank->name : old('bank_name')" disabled />
+                            <x-input-error :messages="$errors->get('bank_name')" class="mt-2" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="account_number">Bank Account Number</label>
+                            <x-text-input type="text" class="form-control" id="account_number" name="account_number"
+                                :value="isset($host->bank->account_number) ? $host->bank->account_number : old('account_number')" disabled />
+                            <x-input-error :messages="$errors->get('account_number')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="branch_code">Bank Branch Code</label>
+                            <x-text-input type="text" class="form-control" id="branch_code" name="branch_code"
+                                :value="isset($host->bank->branch_code) ? $host->bank->branch_code : old('branch_code')" disabled />
+                            <x-input-error :messages="$errors->get('branch_code')" class="mt-2" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="swift_code">Bank Swift Code</label>
+                            <x-text-input type="text" class="form-control" id="swift_code" name="swift_code"
+                                :value="isset($host->bank->swift_code) ? $host->bank->swift_code : old('swift_code')" disabled />
+                            <x-input-error :messages="$errors->get('swift_code')" class="mt-2" />
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="enrolement_datetime">Enrolment Briefing Date / Time</label>
                         <x-text-input type="datetime-local" class="form-control" id="enrolement_datetime"
@@ -172,7 +204,8 @@
                         <x-input-error :messages="$errors->get('enrolement_datetime')" class="mt-2" />
                     </div>
                     <input type="hidden" name="role" value="host">
-                    <button type="submit" class="btn btn-primary float-right">{{ isset($host) ? 'Update' : 'Create' }}</button>
+                    <button type="submit"
+                        class="btn btn-primary float-right">{{ isset($host) ? 'Update' : 'Create' }}</button>
                 </form>
             </div>
         </div>
@@ -180,9 +213,8 @@
     <script>
         let host = @json($host ?? []);
         console.log("==========", host.country.name);
-        console.log("==========",host.state.name);
-        console.log("==========",host.city.name);
-        console.log("==========",host.zip.code);
-        
+        console.log("==========", host.state.name);
+        console.log("==========", host.city.name);
+        console.log("==========", host.zip.code);
     </script>
 @endsection

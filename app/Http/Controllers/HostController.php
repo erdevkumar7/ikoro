@@ -161,7 +161,7 @@ class HostController extends Controller
 
     public function edit($host)
     {
-        $data['host'] = Host::with(['country', 'state', 'city', 'zip'])->findOrFail($host);
+        $data['host'] = Host::with(['country', 'state', 'city', 'zip','bank'])->findOrFail($host);  
         $data['country'] = DB::table('countries')->get();
         $data['tasks'] = Task::all();
         $data['selectedTask'] = HostTask::where('host_id', $host)
