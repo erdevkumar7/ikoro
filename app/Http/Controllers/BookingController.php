@@ -11,6 +11,11 @@ use App\Services\WalletService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Carbon;
+
+
 class BookingController extends Controller
 {
     protected $walletService;
@@ -46,6 +51,22 @@ class BookingController extends Controller
             )
         );
     }
+
+
+    public function getMatchingBookings(Request $request)
+    {          
+        $date = $request->input('date'); // e.g. '2025-04-30'
+        //$gig_id = $request->input('gig_id');
+        $bookings = DB::table('bookings')            
+            ->where('operation_time', 'like', $date . 'T%')
+            //->where('gig_id', $gig_id)
+            ->get();
+
+
+
+        return response()->json($bookings);
+    }
+
 
     public function newBookingsCnt()
     {
@@ -176,6 +197,18 @@ class BookingController extends Controller
             if($action == "admin_done"){
                 $data = [
                     'status' => 'completed',
+                ];
+            }
+
+            if($action == "host_accepted"){
+                $data = [
+                    'is_accepted' => 'accepted',
+                ];
+            }
+            
+            if($action == "host_rejected"){
+                $data = [
+                    'is_accepted' => 'rejected',
                 ];
             }
 
