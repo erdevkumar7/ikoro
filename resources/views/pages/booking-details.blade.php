@@ -516,11 +516,132 @@
                     const timeAddContainer = document.querySelector(".time-add");
                     timeAddContainer.innerHTML = ""; // Clear previous buttons
 
+
+                    let clickedDate1 = new Date(clickedDate); 
+                    let formattedDate = clickedDate1.getFullYear() + '-' +
+                    String(clickedDate1.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(clickedDate1.getDate()).padStart(2, '0');  
+
+
+
+
                     for (let time = startHour; time < endHour; time += duration / 60) {
                         const btn = document.createElement("button");
                         btn.type = "button";
                         btn.className = "btn btn-outline-primary m-1 slot-btn";
                         btn.textContent = formatTime(time);
+
+
+
+
+
+
+                        var ajaxUrl = "{{ url('/get-matching-bookings') }}";
+                    $.ajax({
+                        url: ajaxUrl,
+                        type: 'GET',
+                        async: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {        
+                            date: formattedDate
+                        },
+                        success: function(response) {                              
+                                        const bookedRanges  = [];
+                                        response.forEach(function(booking) {
+                                            const formatted = formatBookingTime(booking.operation_time, booking.duration);
+                                            if (formatted) {
+                                                bookedRanges .push(formatted);
+                                            }
+                                        });
+                                        if (bookedRanges .length > 0) {
+                                            //alert(bookedRanges .join('\n'));
+                                        }
+                                            var timeToCheck = convertDecimalToTime(time);
+                                            
+                                                   
+                                            function parseTimeToDate(timeStr) {
+                                                const today = new Date();
+                                                const [time, modifier] = timeStr.split(' ');
+                                                let [hours, minutes] = time.split(':').map(Number);
+
+                                                if (modifier.toLowerCase() === 'pm' && hours !== 12) hours += 12;
+                                                if (modifier.toLowerCase() === 'am' && hours === 12) hours = 0;
+
+                                                return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
+                                            }
+
+                                            // Convert timeToCheck to a Date
+                                            const checkTime = parseTimeToDate(timeToCheck);
+
+                                            // Check each range
+                                            let isBooked = false;
+
+                                            bookedRanges.forEach(range => {
+                                                const [startStr, endStr] = range.split(' to ');
+                                                const startTime = parseTimeToDate(startStr.trim());
+                                                const endTime = parseTimeToDate(endStr.trim());
+
+                                                if (checkTime >= startTime && checkTime < endTime) {
+                                                    isBooked = true;
+                                                }
+                                            });
+
+                                            if (isBooked) {
+                                                
+
+                                                if (btn.textContent === timeToCheck) {
+                                                    btn.disabled = true;
+                                                    btn.classList.add("disabled"); // Optional: for visual styling
+                                                }
+
+
+                                            } else {
+                                                //alert(`${timeToCheck} is available`);
+                                            }
+
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX Error:", status, error);
+                            }
+                        });
+
+
+
+
+                        function formatBookingTime(operationTime, durationMinutes) {
+                            const start = new Date(operationTime);
+                            const end = new Date(start.getTime() + durationMinutes * 60000); // 60000 ms in 1 minute
+
+                            const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+                            const startFormatted = start.toLocaleTimeString('en-US', options);
+                            const endFormatted = end.toLocaleTimeString('en-US', options);
+
+                            return `${startFormatted} to ${endFormatted}`;
+                        }
+
+                        function convertDecimalToTime(decimalTime) {
+                            const hours = Math.floor(decimalTime);
+                            const minutes = Math.round((decimalTime - hours) * 60);
+
+                            const date = new Date();
+                            date.setHours(hours);
+                            date.setMinutes(minutes);
+
+                            return date.toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true
+                            }).toLowerCase();
+                        }
+
+
+
+
+
+
+
 
                         // Add click event for slot buttons
                         btn.addEventListener("click", function() {
@@ -604,11 +725,134 @@
                 const timeAddContainer = document.querySelector(".time-add");
                 timeAddContainer.innerHTML = ""; // Clear previous buttons
 
+
+                let clickedDate1 = new Date(clickedDate); 
+                let formattedDate = clickedDate1.getFullYear() + '-' +
+                    String(clickedDate1.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(clickedDate1.getDate()).padStart(2, '0');  
+
+
+
                 for (let time = startHour; time < endHour; time += duration / 60) {
                     const btn = document.createElement("button");
                     btn.type = "button";
                     btn.className = "btn btn-outline-primary m-1 slot-btn";
                     btn.textContent = formatTime(time);
+
+
+
+
+
+                    var ajaxUrl = "{{ url('/get-matching-bookings') }}";
+                    $.ajax({
+                        url: ajaxUrl,
+                        type: 'GET',
+                        async: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {        
+                            date: formattedDate
+                        },
+                        success: function(response) {                              
+                                        const bookedRanges  = [];
+                                        response.forEach(function(booking) {
+                                            const formatted = formatBookingTime(booking.operation_time, booking.duration);
+                                            if (formatted) {
+                                                bookedRanges .push(formatted);
+                                            }
+                                        });
+                                        if (bookedRanges .length > 0) {
+                                            //alert(bookedRanges .join('\n'));
+                                        }
+                                            var timeToCheck = convertDecimalToTime(time);
+                                            
+                                                   
+                                            function parseTimeToDate(timeStr) {
+                                                const today = new Date();
+                                                const [time, modifier] = timeStr.split(' ');
+                                                let [hours, minutes] = time.split(':').map(Number);
+
+                                                if (modifier.toLowerCase() === 'pm' && hours !== 12) hours += 12;
+                                                if (modifier.toLowerCase() === 'am' && hours === 12) hours = 0;
+
+                                                return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
+                                            }
+
+                                            // Convert timeToCheck to a Date
+                                            const checkTime = parseTimeToDate(timeToCheck);
+
+                                            // Check each range
+                                            let isBooked = false;
+
+                                            bookedRanges.forEach(range => {
+                                                const [startStr, endStr] = range.split(' to ');
+                                                const startTime = parseTimeToDate(startStr.trim());
+                                                const endTime = parseTimeToDate(endStr.trim());
+
+                                                if (checkTime >= startTime && checkTime < endTime) {
+                                                    isBooked = true;
+                                                }
+                                            });
+
+                                            if (isBooked) {
+                                                
+
+                                                if (btn.textContent === timeToCheck) {
+                                                    btn.disabled = true;
+                                                    btn.classList.add("disabled"); // Optional: for visual styling
+                                                }
+
+
+                                            } else {
+                                                //alert(`${timeToCheck} is available`);
+                                            }
+
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX Error:", status, error);
+                            }
+                        });
+
+
+
+
+                        function formatBookingTime(operationTime, durationMinutes) {
+                            const start = new Date(operationTime);
+                            const end = new Date(start.getTime() + durationMinutes * 60000); // 60000 ms in 1 minute
+
+                            const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+                            const startFormatted = start.toLocaleTimeString('en-US', options);
+                            const endFormatted = end.toLocaleTimeString('en-US', options);
+
+                            return `${startFormatted} to ${endFormatted}`;
+                        }
+
+                        function convertDecimalToTime(decimalTime) {
+                            const hours = Math.floor(decimalTime);
+                            const minutes = Math.round((decimalTime - hours) * 60);
+
+                            const date = new Date();
+                            date.setHours(hours);
+                            date.setMinutes(minutes);
+
+                            return date.toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true
+                            }).toLowerCase();
+                        }
+
+
+
+
+
+
+
+
+
+
+
 
                     // Add click event for highlighting
                     btn.addEventListener("click", function() {

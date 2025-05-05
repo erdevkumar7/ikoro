@@ -43,3 +43,6 @@ Route::middleware(['auth', 'verified', 'user'])->group(function(){
 });
 
 Route::post('/store-booking-data', [BookingController::class, 'storeBookingData'])->name('store.booking.data');
+
+Route::get('/get-matching-bookings', [BookingController::class, 'getMatchingBookings']);
+    
