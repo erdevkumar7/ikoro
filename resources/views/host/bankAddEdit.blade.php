@@ -158,12 +158,12 @@
             <div class="container">
                 <div class="card">
                     <div class="card-body">
-                        <input type="hidden" name="bank_id" value="{{ $bank['id'] ?? '' }}">
+                        <input type="hidden" name="bank_id" value="{{ $bank->bank->id ?? '' }}">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <x-input-label for="name" :value="__('Bank Name')" />
                                 <x-text-input type="text" class="form-control" id="name" name="name"
-                                    :value="$bank['name'] ?? old('name')" required />
+                                :value="$bank->bank->name ?? old('name')" required />
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
 
@@ -171,7 +171,7 @@
                             <div class="form-group col-md-6">
                                 <x-input-label for="account_number" :value="__('Account Number')" />
                                 <x-text-input type="text" class="form-control" id="account_number" name="account_number"
-                                    :value="$bank['account_number'] ?? old('account_number')" required />
+                                    :value="$bank->bank->account_number ?? old('account_number')" required />
                                 <x-input-error :messages="$errors->get('account_number')" class="mt-2" />
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                             <div class="form-group col-md-6">
                                 <x-input-label for="branch_code" :value="__('Branch Code')" />
                                 <x-text-input type="text" class="form-control" id="branch_code" name="branch_code"
-                                    :value="$bank['branch_code'] ?? old('branch_code')" required />
+                                    :value="$bank->bank->branch_code ?? old('branch_code')" required />
                                 <x-input-error :messages="$errors->get('branch_code')" class="mt-2" />
                             </div>
 
@@ -188,7 +188,7 @@
                             <div class="form-group col-md-6">
                                 <x-input-label for="swift_code" :value="__('Swift Code')" />
                                 <x-text-input type="text" class="form-control" id="swift_code" name="swift_code"
-                                    :value="$bank['swift_code'] ?? old('swift_code')" required />
+                                    :value="$bank->bank->swift_code ?? old('swift_code')" required />
                                 <x-input-error :messages="$errors->get('swift_code')" class="mt-2" />
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                     </div>
                     <div class="card-footer add-edit-content">
                         <button type="submit"
-                            class="btn btn-primary float-right">{{ isset($bank['id']) ? 'Update' : 'Add' }}</button>
+                            class="btn btn-primary float-right">{{ isset($bank->bank->id) ? 'Update' : 'Add' }}</button>
                     </div>
                 </div>
         </form>

@@ -38,6 +38,10 @@ class Host extends Model
     public function gigs() {
         return $this->hasMany(Gig::class, 'host_id', 'user_id');
     }
+
+    public function bank() {
+        return $this->hasOne(Bank::class);
+    }
 }
 
 

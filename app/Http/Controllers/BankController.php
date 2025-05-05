@@ -11,14 +11,15 @@ use Illuminate\Support\Facades\Session;
 
 class BankController extends Controller
 {
-    public function host_addEditBank($bank_id = "")
-    {
-        $data['bank'] = [];
-
-        if($bank_id != ""){
-            $data['bank'] = Bank::with(['host'])->findOrFail($bank_id);           
+    public function host_addEditBank()
+    {        
+        $host = Host::where('user_id', Auth::user()->id)->first();
+    
+        if (!$host) {
+            return redirect()->back()->withErrors(['error' => 'Invalid or missing host.']);
         }
-
+        $data['bank'] = [];
+        $data['bank'] = Host::with(['bank'])->findOrFail($host->id);      
         return view('host.bankAddEdit', $data);
     }
 
@@ -53,7 +54,7 @@ class BankController extends Controller
             Session::flash('message', $message);
             Session::flash('alert-class', 'alert-success');
     
-            return redirect()->route('host.addEditBank', $bank->id);
+            return redirect()->route('host.addEditBank');
     
         } catch (\Exception $e) {
             Session::flash('message', 'Error while saving/updating bank: ' . $e->getMessage());
