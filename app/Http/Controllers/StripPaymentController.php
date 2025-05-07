@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\Session;
 class StripPaymentController extends Controller
 {
     public function stripPaymentForm(Request $request)
-    {
+    { 
         $client = Auth::check() && Auth::user()->role === 'user' ? Auth::id() : null;
 
-        if (!$client && !session()->has('booking')) {
+        if (!session()->has('booking')) {
             return redirect()->back()->withErrors(['error' => 'Unauthorized user']);
         }
 
@@ -83,6 +83,7 @@ class StripPaymentController extends Controller
                 'amount' => $charge->amount / 100,
                 'currency' => $charge->currency,
                 'status' => $charge->status,
+                'payment_type' => 'stripe'
             ]);
 
             if ($charge->status === 'succeeded') {
@@ -101,6 +102,9 @@ class StripPaymentController extends Controller
                     'duration' => session('booking.duration') ?? $request->duration,
                     'operation_time' => session('booking.operation_time') ?? $request->operation_time,
                     'feature_id' => session('booking.feature_ids') ?? $request->feature_ids,
+                    'feedback_tool' => session('booking.feedback_tool'),
+                    'feedback_tool_value' => session('booking.feedback_tool_value'),
+                    'host_notes' => session('booking.host_notes'),
                 ]);
             }
             Session::flash('payment_success', 'Payment successfuly completed!');
@@ -110,10 +114,12 @@ class StripPaymentController extends Controller
         } catch (CardException $e) {
             // return redirect()->back()->withErrors('Card error: ' . $e->getMessage());
             Session::flash('payment_fail', 'Payment faild!');
+            session()->forget('booking');
             return redirect()->route('booking.detail.byGigId', $gig_id);
         } catch (\Exception $e) {
             // return redirect()->back()->withErrors('Error processing payment: ' . $e->getMessage());
             Session::flash('payment_fail', 'Payment faild!');
+            session()->forget('booking');
             return redirect()->route('booking.detail.byGigId', $gig_id);
         }
     }

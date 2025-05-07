@@ -101,6 +101,9 @@ class PayPalController extends Controller
                     $operationTime = session('booking.operation_time');
                     $featureIds = session('booking.feature_ids');
                     $price = session('booking.price');
+                    $feedback_tool = session('booking.feedback_tool');
+                    $feedback_tool_value = session('booking.feedback_tool_value');
+                    $host_notes = session('booking.host_notes');
 
                     $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gigId);
 
@@ -110,11 +113,11 @@ class PayPalController extends Controller
                         'client_id' => $clientId,
                         'gig_id' => $gigId,
                         'duration' => $duration,
-                        'payment_intent_id' => $payment->getId(),
-                        'payment_method' => 'paypal',
+                        'payment_intent_id' => $payment->getId(),                        
                         'amount' => $price,
                         'currency' => 'USD',
                         'status' => $result->getState(),
+                        'payment_type' => 'paypal'
                     ]);
 
                     // Save Booking
@@ -133,22 +136,28 @@ class PayPalController extends Controller
                         'duration' => $duration,
                         'operation_time' => $operationTime,
                         'feature_id' => $featureIds,
+                        'feedback_tool' => $feedback_tool,
+                        'feedback_tool_value' => $feedback_tool_value,
+                        'host_notes' => $host_notes,
                     ]);
 
                     session()->forget('booking');
                     Session::flash('payment_success', 'Payment successfully completed!');
-                    return view('user.payment.success');
+                    // return view('user.payment.success');
+                    return redirect()->route('user.booking');
                 }
             }
         } catch (\Exception $ex) {
+            session()->forget('booking');
             return back()->withError('Payment execution failed.');
         }
 
-        return back()->withError('Subscription failed.');
+        return back()->withError('Booking failed.');
     }
 
     public function cancelPayment()
     {
-        return view('user.payment.cancel');
+        session()->forget('booking');
+        return back()->withError('Payment execution failed.');
     }
 }

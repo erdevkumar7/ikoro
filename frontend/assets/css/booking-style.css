@@ -1,28 +1,32 @@
-
 .booking-login-add .modal-dialog {
     margin-top: 94px;
 }
-    .highlighted {
-        background-color: #ffc107;
-        color: #000;
-        border-radius: 50%;
-        font-weight: bold;
-    }
+
+.highlighted {
+    background-color: #ffc107;
+    color: #000;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
 .calendar-date-left .date.date-disable {
     background-color: #e6e1e1;
     opacity: 0.6;
     color: #000;
 }
-    .date.highlighted.clicked_date {
-        background-color: #ffc37a !important;
-        color: #000;
-        font-weight: bold;
-    }
-    .btn.btn-outline-primary.m-1.slot-btn.time_button_clicked {
+
+.date.highlighted.clicked_date {
+    background-color: #ffc37a !important;
+    color: #000;
+    font-weight: bold;
+}
+
+.btn.btn-outline-primary.m-1.slot-btn.time_button_clicked {
     background-color: #2a7d76;
     color: #fff;
     border-color: #2a7d76;
-    }
+}
+
 .booking-login-add .modal-content {
     position: relative;
     display: -ms-flexbox;
@@ -72,17 +76,21 @@
     top: 85px;
     border-radius: 5px;
 }
+
 .login-booking-add .modal-content {
     background: none;
     border: none;
 }
+
 h5#exampleModalLabel {
     padding-left: 0;
 }
+
 .login-booking-add .modal-header {
     border: none;
     padding-bottom: 0;
 }
+
 .login-booking-add input.search-from {
     height: 40px;
     background-color: #fff;
@@ -98,27 +106,34 @@ h5#exampleModalLabel {
     color: #fff;
     border-radius: 100px;
 }
+
 .login-booking-add button.btn.btn-block.login-button:hover {
     background: #fff !important;
     color: #000;
 }
+
 .login-booking-add .modal-footer {
     border: none;
 }
+
 .login-booking-add .modal-body {
     padding-bottom: 0;
 }
+
 li.time-zone-mark.price-option.selected {
     background-color: #2a7d76;
     border: 1px solid #2a7d76;
     color: #fff;
 }
+
 .select-duration-left li.time-zone-mark:hover span {
     color: #fff !important;
 }
+
 li.time-zone-mark.price-option.selected span {
     color: #fff;
 }
+
 /*calender-css-start*/
 
 
@@ -127,42 +142,52 @@ li.time-zone-mark.price-option.selected span {
     width: 100%;
     gap: 25px;
 }
+
+.contact-and-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .calendar-date-left {
     width: 100%;
 }
+
 .calendar-date-right {
     width: 100%;
     padding-top: 20px;
     height: 400px;
     overflow-y: scroll;
 }
-   .calendar header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+
+.calendar header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .calendar h2 {
     margin: 0;
     font-size: 20px;
 }
-    .calendar .nav {
-      display: flex;
-      gap: 10px;
-    }
 
-    .calendar .nav button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.calendar .nav {
+    display: flex;
+    gap: 10px;
+}
 
-    .calendar .nav button:hover {
-      background: #0056b3;
-    }
+.calendar .nav button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar .nav button:hover {
+    background: #0056b3;
+}
 
 .calendar .days {
     display: grid;
@@ -170,12 +195,14 @@ li.time-zone-mark.price-option.selected span {
     margin-top: 20px;
     gap: 5px;
 }
+
 .highlighted {
-    background-color: #2a7d765c !important; 
+    background-color: #2a7d765c !important;
     color: #000;
     border-radius: 50%;
     font-weight: bold;
 }
+
 .calendar .day {
     text-align: center;
     padding: 10px 0;
@@ -183,22 +210,24 @@ li.time-zone-mark.price-option.selected span {
     color: #222;
 }
 
-    .calendar .date {
-      text-align: center;
-      padding: 10px 0;
-      cursor: pointer;
-      border-radius: 5px;
-    }
+.calendar .date {
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
 .calendar .date:hover {
     background: #1d5853;
     color: white;
 }
+
 .calendar .today {
     background: #2a7d76;
     color: white;
     border-radius: 5px;
 }
+
 .calendar-date-left .calendar {
     padding: 15px;
     background-color: #fff;
@@ -207,15 +236,18 @@ li.time-zone-mark.price-option.selected span {
     margin-right: 0;
     box-shadow: 0 8px 30px #72717133;
 }
+
 .calendar header button {
     border: none;
 }
+
 .calendar-date-right .time-add {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     width: 80%;
 }
+
 .calendar-date-right button.btn.btn-outline-primary.m-1 {
     border: none;
     padding: 10px 0;
@@ -226,14 +258,18 @@ li.time-zone-mark.price-option.selected span {
     font-weight: 500;
     font-size: 18px;
 }
+
 .calendar-date-right button.btn.btn-outline-primary.m-1:focus {
     box-shadow: none;
 }
 
-.calendar-date-right .btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+.calendar-date-right .btn-outline-primary:not(:disabled):not(.disabled).active,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show>.btn-outline-primary.dropdown-toggle {
     background-color: #2a7d76;
     border-color: #2a7d76;
 }
+
 .calendar-date-right button.btn.btn-outline-primary.m-1:hover {
     background-color: #2a7d76;
     color: #fff;
@@ -245,6 +281,7 @@ h4.select-time-text {
     padding-bottom: 25px;
     font-size: 20px;
 }
+
 p.time-date-add {
     font-size: 18px;
 }
@@ -255,64 +292,70 @@ p.time-date-add {
 
 @media only screen and (max-width: 767px) {
 
-.calendar .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin-top: 10px;
-    gap: 4px;
-}
-.calendar-date-right {
-    width: 100%;
-    padding-top: 20px;
-    height: auto;
-    overflow-y: initial;
-}
-.calendar-date {
-    display: block;
-    width: 95%;
-    gap: 25px;
-}
-.calendar-date-left .calendar {
-    border-radius: 5px;
-    margin-right: 0;
-    margin-left: 8px;
-}
+    .calendar .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin-top: 10px;
+        gap: 4px;
+    }
 
-.calendar-date-right button.btn.btn-outline-primary.m-1 {
-    padding: 6px 0;
-}
+    .calendar-date-right {
+        width: 100%;
+        padding-top: 20px;
+        height: auto;
+        overflow-y: initial;
+    }
 
-.calendar-date-right .time-add {
-    width: 100%;
-    padding: 10px;
-    padding-right: 5px;
-    padding-top: 0;
-}
-.days.add-day {
-    gap: 9px;
-    margin-left: -3px;
-}
-.calendar-date-right {
-    width: 100%;
-    padding-top: 0px;
-}
-h4.select-time-text {
-    padding-bottom: 10px;
-}
+    .calendar-date {
+        display: block;
+        width: 95%;
+        gap: 25px;
+    }
+
+    .calendar-date-left .calendar {
+        border-radius: 5px;
+        margin-right: 0;
+        margin-left: 8px;
+    }
+
+    .calendar-date-right button.btn.btn-outline-primary.m-1 {
+        padding: 6px 0;
+    }
+
+    .calendar-date-right .time-add {
+        width: 100%;
+        padding: 10px;
+        padding-right: 5px;
+        padding-top: 0;
+    }
+
+    .days.add-day {
+        gap: 9px;
+        margin-left: -3px;
+    }
+
+    .calendar-date-right {
+        width: 100%;
+        padding-top: 0px;
+    }
+
+    h4.select-time-text {
+        padding-bottom: 10px;
+    }
 
     .login-a:hover {
-    background: #fff;
-    color: #000;
-}
+        background: #fff;
+        color: #000;
+    }
 
-.login-booking-add .modal-dialog {
-    width: 94% !important;
-    background: #2a7d76 !important;
-    border: 2px solid #2a7d76 !important;
-    color: rgb(255, 255, 255);
-    top: 130px;
-    border-radius: 5px;
-    margin: auto !important;
-}
+    .login-booking-add .modal-dialog {
+        width: 94% !important;
+        background: #2a7d76 !important;
+        border: 2px solid #2a7d76 !important;
+        color: rgb(255, 255, 255);
+        top: 130px;
+        border-radius: 5px;
+        margin: auto !important;
+    }
 
 }

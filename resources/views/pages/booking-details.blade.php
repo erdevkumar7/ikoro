@@ -82,7 +82,7 @@
                                     <div id="time-slots-wrapper" style="margin-top: 10px;"></div>
                                     --}}
                                     <!--                                     <button class="slot-btn">Add Slot</button>
- -->
+                                      -->
                                     <div class="calendar-date">
                                         <div class="calendar-date-left">
                                             <div class="calendar">
@@ -132,6 +132,34 @@
                                 <button class="accordion disabled">
                                     <div class="accordion-list">
                                         <p class="number-list">3</p>
+                                        <span>Service Feedback Tool</span>
+                                    </div>
+                                    <div class="angle-icons">
+                                        <i class="fas fa-angle-down"></i>
+                                    </div>
+                                </button>
+                                <div class="panel time-zone-sct">
+                                    <div class="contact-and-info">
+                                        <div class="col-md-6 booking-contatct">
+                                            <select class="form-control" id="feedback-tool" name="feedback_tool">
+                                                <option value="whatsapp">WhatsApp</option>
+                                                <option value="wechat_id">Wechat Id</option>
+                                                <option value="telegram_no">Telegram No</option>
+                                                <option value="facebook_live_id">Facebook Live Id</option>
+                                                <option value="google_meet_id">Google Meet Id</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 booking-contatct-info">
+                                            <input type="text" class="form-control" id="feedback-tool-value"
+                                                name="feedback_tool_value">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="accordion disabled">
+                                    <div class="accordion-list">
+                                        <p class="number-list">4</p>
                                         <span>Notes for the Host</span>
                                     </div>
                                     <div class="angle-icons">
@@ -139,7 +167,8 @@
                                     </div>
                                 </button>
                                 <div class="panel time-zone-sct">
-                                    <textarea class="form-control booking-host-expert-note" placeholder="Write your message here."></textarea>
+                                    <textarea id="host-notes" name="host_notes" class="form-control booking-host-expert-note"
+                                        placeholder="Write your message here."></textarea>
                                 </div>
                             </div>
 
@@ -176,7 +205,8 @@
                                     </div>
                                 </div>
                                 <div class="Proceed-to-checkout">
-                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}" method="GET">
+                                    <form id="checkout-form" action="{{ route('user.strip.payment') }}"
+                                        method="GET">
                                         <input type="hidden" name="gig_id" id="gig-id"
                                             value="{{ $gig->id }}" />
                                         <input type="hidden" name="price" id="selected-gig-price"
@@ -252,7 +282,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>         
+    <script>
         $(document).ready(function() {
 
             const today = new Date();
@@ -277,12 +307,12 @@
                 selectedDuration = $(this).data("duration");
                 selectedPrice = $(this).data("price");
                 const gigId = "{{ $gig->id }}";
-               
+
 
                 $("#selected-gig-price").val(selectedPrice);
                 $("#selected-gig-duration").val(selectedDuration);
                 $("#gig-id").val(gigId);
-              
+
                 // Enable and open second accordion
                 const secondAccordion = $(".accordion").eq(1);
                 const secondPanel = secondAccordion.next(".panel");
@@ -297,12 +327,17 @@
             // Step 2: Time slot generation (assumes slot buttons already handled)
             $(document).on("click", ".slot-btn", function() {
                 const thirdAccordion = $(".accordion").eq(2);
+                const fourthAccordion = $(".accordion").eq(3);
                 const checkoutBtn = $("#checkout-btn");
                 checkoutBtn.removeAttr("disabled").addClass("active-checkout");
 
                 const thirdPanel = thirdAccordion.next(".panel");
                 thirdAccordion.removeClass("disabled").addClass("active");
                 thirdPanel.slideDown();
+
+                const fourthPanel = fourthAccordion.next(".panel");
+                fourthAccordion.removeClass("disabled").addClass("active");
+                fourthPanel.slideDown();
 
                 $(".accordion").not(thirdAccordion).removeClass("active");
                 $(".panel").not(thirdPanel).slideUp();
@@ -349,43 +384,58 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-            // Set this variable from server side
-            let isUserLoggedIn = {{ Auth::check() && Auth::user()->role === 'user' ? 'true' : 'false' }};
+<script>
+    $(document).ready(function () {
+        // Set this variable from server side
+        let isUserLoggedIn = {{ Auth::check() && Auth::user()->role === 'user' ? 'true' : 'false' }};
 
-            $('#checkout-btn').on('click', function(e) {
-                if (!isUserLoggedIn) {
-                    e.preventDefault();
+        $('#checkout-btn').on('click', function (e) {
+            e.preventDefault();
 
-                    // Send AJAX request to store booking data in session
-                    $.ajax({
-                        url: '{{ route('store.booking.data') }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            gig_id: $('#gig-id').val(),
-                            price: $('#selected-gig-price').val(),
-                            duration: $('#selected-gig-duration').val(),
-                            operation_time: $('#selected-gig-operation-time').val(),
-                            feature_ids: $('#selected-features_ids').val(),
-                        },
-                        success: function() {
-                            // Show the login modal after saving session data
-                            $('#loginModal').modal('show');
-                        }
-                    });
-                } else {
-                    // Allow form to be submitted if logged in
-                    $('#checkout-form').submit();
+            // Disable the button to prevent double clicks
+            $(this).prop('disabled', true);
+
+            // Send AJAX request to store booking data in session
+            $.ajax({
+                url: '{{ route('store.booking.data') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    gig_id: $('#gig-id').val(),
+                    price: $('#selected-gig-price').val(),
+                    duration: $('#selected-gig-duration').val(),
+                    operation_time: $('#selected-gig-operation-time').val(),
+                    feature_ids: $('#selected-features_ids').val(),
+                    feedback_tool: $('#feedback-tool').val(),
+                    feedback_tool_value: $('#feedback-tool-value').val(),
+                    host_notes: $('#host-notes').val(),
+                },
+                success: function () {
+                    console.log('Booking session created.');
+
+                    if (!isUserLoggedIn) {
+                        $('#loginModal').modal('show');
+                    } else {
+                        // Submit the form if user is logged in
+                        $('#checkout-form').submit();
+                    }
+
+                    // Re-enable the button if needed
+                    $('#checkout-btn').prop('disabled', false);
+                },
+                error: function () {
+                    alert('Failed to create booking session. Please try again.');
+                    $('#checkout-btn').prop('disabled', false);
                 }
             });
-
-            $(document).on('click', '#close-login-model', function() {
-                $('#loginModal').modal('hide');
-            });
         });
-    </script>
+
+        $(document).on('click', '#close-login-model', function () {
+            $('#loginModal').modal('hide');
+        });
+    });
+</script>
+
 </x-guest-layout>
 
 
@@ -517,10 +567,10 @@
                     timeAddContainer.innerHTML = ""; // Clear previous buttons
 
 
-                    let clickedDate1 = new Date(clickedDate); 
+                    let clickedDate1 = new Date(clickedDate);
                     let formattedDate = clickedDate1.getFullYear() + '-' +
-                    String(clickedDate1.getMonth() + 1).padStart(2, '0') + '-' +
-                    String(clickedDate1.getDate()).padStart(2, '0');  
+                        String(clickedDate1.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(clickedDate1.getDate()).padStart(2, '0');
 
 
 
@@ -537,89 +587,94 @@
 
 
                         var ajaxUrl = "{{ url('/get-matching-bookings') }}";
-                    $.ajax({
-                        url: ajaxUrl,
-                        type: 'GET',
-                        async: false,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {        
-                            date: formattedDate
-                        },
-                        success: function(response) {                              
-                                        const bookedRanges  = [];
-                                        response.forEach(function(booking) {
-                                            const formatted = formatBookingTime(booking.operation_time, booking.duration);
-                                            if (formatted) {
-                                                bookedRanges .push(formatted);
-                                            }
-                                        });
-                                        if (bookedRanges .length > 0) {
-                                            //alert(bookedRanges .join('\n'));
-                                        }
-                                            var timeToCheck = convertDecimalToTime(time);
-                                            
-                                               
-                                            function isBetween(value, start, end, inclusive = true) {
-                                                    return inclusive 
-                                                    ? value >= start && value <= end 
-                                                    : value > start && value < end;
-                                                }
-
-                                            function parseTimeToDate(timeStr) {
-                                                const today = new Date();
-                                                const [time, modifier] = timeStr.split(' ');
-                                                let [hours, minutes] = time.split(':').map(Number);
-
-                                                if (modifier.toLowerCase() === 'pm' && hours !== 12) hours += 12;
-                                                if (modifier.toLowerCase() === 'am' && hours === 12) hours = 0;
-
-                                                return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
-                                            }
-
-                                            // Convert timeToCheck to a Date
-                                            const checkTime = parseTimeToDate(timeToCheck);
-
-                                            // Check each range
-                                            let isBooked = false;
-
-                                            bookedRanges.forEach(range => {
-                                                const [startStr, endStr] = range.split(' to ');
-                                                const startTime = parseTimeToDate(startStr.trim());
-                                                const endTime = parseTimeToDate(endStr.trim());
+                        $.ajax({
+                            url: ajaxUrl,
+                            type: 'GET',
+                            async: false,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: {
+                                date: formattedDate
+                            },
+                            success: function(response) {
+                                const bookedRanges = [];
+                                response.forEach(function(booking) {
+                                    const formatted = formatBookingTime(booking
+                                        .operation_time, booking.duration);
+                                    if (formatted) {
+                                        bookedRanges.push(formatted);
+                                    }
+                                });
+                                if (bookedRanges.length > 0) {
+                                    //alert(bookedRanges .join('\n'));
+                                }
+                                var timeToCheck = convertDecimalToTime(time);
 
 
-var checkTimeDuration = new Date(checkTime);
+                                function isBetween(value, start, end, inclusive = true) {
+                                    return inclusive ?
+                                        value >= start && value <= end :
+                                        value > start && value < end;
+                                }
 
-// Add 120 minutes
-checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
+                                function parseTimeToDate(timeStr) {
+                                    const today = new Date();
+                                    const [time, modifier] = timeStr.split(' ');
+                                    let [hours, minutes] = time.split(':').map(Number);
 
-                                                //if (checkTime >= startTime && checkTime < endTime) {
-                                                if (isBetween(checkTime, startTime, endTime) ){
-                                                
-                                                    isBooked = true;
-                                                }
-                                                
-                                                if (checkTime <= startTime && endTime <= checkTimeDuration )
-                                                {
-                                                    isBooked = true;
-                                                                                                
-                                                }
-                                            });
+                                    if (modifier.toLowerCase() === 'pm' && hours !== 12) hours +=
+                                        12;
+                                    if (modifier.toLowerCase() === 'am' && hours === 12) hours = 0;
 
-                                            if (isBooked) {
-                                                
+                                    return new Date(today.getFullYear(), today.getMonth(), today
+                                        .getDate(), hours, minutes);
+                                }
 
-                                                if (btn.textContent === timeToCheck) {
-                                                    btn.disabled = true;
-                                                    btn.classList.add("disabled"); // Optional: for visual styling
-                                                }
+                                // Convert timeToCheck to a Date
+                                const checkTime = parseTimeToDate(timeToCheck);
+
+                                // Check each range
+                                let isBooked = false;
+
+                                bookedRanges.forEach(range => {
+                                    const [startStr, endStr] = range.split(' to ');
+                                    const startTime = parseTimeToDate(startStr.trim());
+                                    const endTime = parseTimeToDate(endStr.trim());
 
 
-                                            } else {
-                                                //alert(`${timeToCheck} is available`);
-                                            }
+                                    var checkTimeDuration = new Date(checkTime);
+
+                                    // Add 120 minutes
+                                    checkTimeDuration.setMinutes(checkTime.getMinutes() +
+                                        duration);
+
+                                    //if (checkTime >= startTime && checkTime < endTime) {
+                                    if (isBetween(checkTime, startTime, endTime)) {
+
+                                        isBooked = true;
+                                    }
+
+                                    if (checkTime <= startTime && endTime <=
+                                        checkTimeDuration) {
+                                        isBooked = true;
+
+                                    }
+                                });
+
+                                if (isBooked) {
+
+
+                                    if (btn.textContent === timeToCheck) {
+                                        btn.disabled = true;
+                                        btn.classList.add(
+                                            "disabled"); // Optional: for visual styling
+                                    }
+
+
+                                } else {
+                                    //alert(`${timeToCheck} is available`);
+                                }
 
                             },
                             error: function(xhr, status, error) {
@@ -632,9 +687,14 @@ checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
 
                         function formatBookingTime(operationTime, durationMinutes) {
                             const start = new Date(operationTime);
-                            const end = new Date(start.getTime() + durationMinutes * 60000); // 60000 ms in 1 minute
+                            const end = new Date(start.getTime() + durationMinutes *
+                                60000); // 60000 ms in 1 minute
 
-                            const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+                            const options = {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true
+                            };
                             const startFormatted = start.toLocaleTimeString('en-US', options);
                             const endFormatted = end.toLocaleTimeString('en-US', options);
 
@@ -746,10 +806,10 @@ checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
                 timeAddContainer.innerHTML = ""; // Clear previous buttons
 
 
-                let clickedDate1 = new Date(clickedDate); 
+                let clickedDate1 = new Date(clickedDate);
                 let formattedDate = clickedDate1.getFullYear() + '-' +
                     String(clickedDate1.getMonth() + 1).padStart(2, '0') + '-' +
-                    String(clickedDate1.getDate()).padStart(2, '0');  
+                    String(clickedDate1.getDate()).padStart(2, '0');
 
 
 
@@ -771,117 +831,124 @@ checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        data: {        
+                        data: {
                             date: formattedDate
                         },
-                        success: function(response) {                              
-                                        const bookedRanges  = [];
-                                        response.forEach(function(booking) {
-                                            const formatted = formatBookingTime(booking.operation_time, booking.duration);
-                                            if (formatted) {
-                                                bookedRanges .push(formatted);
-                                            }
-                                        });
-                                        if (bookedRanges .length > 0) {
-                                            //alert(bookedRanges .join('\n'));
-                                        }
-                                            var timeToCheck = convertDecimalToTime(time);
-                                            
-
-function isBetween(value, start, end, inclusive = true) {
-return inclusive 
-? value >= start && value <= end 
-: value > start && value < end;
-}
-
-                                                   
-                                            function parseTimeToDate(timeStr) {
-                                                const today = new Date();
-                                                const [time, modifier] = timeStr.split(' ');
-                                                let [hours, minutes] = time.split(':').map(Number);
-
-                                                if (modifier.toLowerCase() === 'pm' && hours !== 12) hours += 12;
-                                                if (modifier.toLowerCase() === 'am' && hours === 12) hours = 0;
-
-                                                return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
-                                            }
-
-                                            // Convert timeToCheck to a Date
-                                            const checkTime = parseTimeToDate(timeToCheck);
-
-                                            // Check each range
-                                            let isBooked = false;
-
-                                            bookedRanges.forEach(range => {
-                                                const [startStr, endStr] = range.split(' to ');
-                                                const startTime = parseTimeToDate(startStr.trim());
-                                                const endTime = parseTimeToDate(endStr.trim());
-
-
-var checkTimeDuration = new Date(checkTime);
-// Add 120 minutes
-checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
-
-
-                                                //if (checkTime >= startTime && checkTime < endTime) {
-                                                if (isBetween(checkTime, startTime, endTime) ){
-                                                    isBooked = true;
-                                                }
-
-                                                if (checkTime <= startTime && endTime <= checkTimeDuration )
-                                                {
-                                                    isBooked = true;
-                                                                                                
-                                                }
-                                            });
-
-                                            if (isBooked) {
-                                                
-
-                                                if (btn.textContent === timeToCheck) {
-                                                    btn.disabled = true;
-                                                    btn.classList.add("disabled"); // Optional: for visual styling
-                                                }
-
-
-                                            } else {
-                                                //alert(`${timeToCheck} is available`);
-                                            }
-
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("AJAX Error:", status, error);
+                        success: function(response) {
+                            const bookedRanges = [];
+                            response.forEach(function(booking) {
+                                const formatted = formatBookingTime(booking.operation_time,
+                                    booking.duration);
+                                if (formatted) {
+                                    bookedRanges.push(formatted);
+                                }
+                            });
+                            if (bookedRanges.length > 0) {
+                                //alert(bookedRanges .join('\n'));
                             }
-                        });
+                            var timeToCheck = convertDecimalToTime(time);
 
 
+                            function isBetween(value, start, end, inclusive = true) {
+                                return inclusive ?
+                                    value >= start && value <= end :
+                                    value > start && value < end;
+                            }
 
 
-                        function formatBookingTime(operationTime, durationMinutes) {
-                            const start = new Date(operationTime);
-                            const end = new Date(start.getTime() + durationMinutes * 60000); // 60000 ms in 1 minute
+                            function parseTimeToDate(timeStr) {
+                                const today = new Date();
+                                const [time, modifier] = timeStr.split(' ');
+                                let [hours, minutes] = time.split(':').map(Number);
 
-                            const options = { hour: 'numeric', minute: '2-digit', hour12: true };
-                            const startFormatted = start.toLocaleTimeString('en-US', options);
-                            const endFormatted = end.toLocaleTimeString('en-US', options);
+                                if (modifier.toLowerCase() === 'pm' && hours !== 12) hours += 12;
+                                if (modifier.toLowerCase() === 'am' && hours === 12) hours = 0;
 
-                            return `${startFormatted} to ${endFormatted}`;
+                                return new Date(today.getFullYear(), today.getMonth(), today
+                                    .getDate(), hours, minutes);
+                            }
+
+                            // Convert timeToCheck to a Date
+                            const checkTime = parseTimeToDate(timeToCheck);
+
+                            // Check each range
+                            let isBooked = false;
+
+                            bookedRanges.forEach(range => {
+                                const [startStr, endStr] = range.split(' to ');
+                                const startTime = parseTimeToDate(startStr.trim());
+                                const endTime = parseTimeToDate(endStr.trim());
+
+
+                                var checkTimeDuration = new Date(checkTime);
+                                // Add 120 minutes
+                                checkTimeDuration.setMinutes(checkTime.getMinutes() +
+                                    duration);
+
+
+                                //if (checkTime >= startTime && checkTime < endTime) {
+                                if (isBetween(checkTime, startTime, endTime)) {
+                                    isBooked = true;
+                                }
+
+                                if (checkTime <= startTime && endTime <=
+                                    checkTimeDuration) {
+                                    isBooked = true;
+
+                                }
+                            });
+
+                            if (isBooked) {
+
+
+                                if (btn.textContent === timeToCheck) {
+                                    btn.disabled = true;
+                                    btn.classList.add("disabled"); // Optional: for visual styling
+                                }
+
+
+                            } else {
+                                //alert(`${timeToCheck} is available`);
+                            }
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("AJAX Error:", status, error);
                         }
+                    });
 
-                        function convertDecimalToTime(decimalTime) {
-                            const hours = Math.floor(decimalTime);
-                            const minutes = Math.round((decimalTime - hours) * 60);
 
-                            const date = new Date();
-                            date.setHours(hours);
-                            date.setMinutes(minutes);
 
-                            return date.toLocaleTimeString('en-US', {
-                                hour: 'numeric',
-                                minute: '2-digit',
-                                hour12: true
-                            }).toLowerCase();
-                        }
+
+                    function formatBookingTime(operationTime, durationMinutes) {
+                        const start = new Date(operationTime);
+                        const end = new Date(start.getTime() + durationMinutes * 60000); // 60000 ms in 1 minute
+
+                        const options = {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true
+                        };
+                        const startFormatted = start.toLocaleTimeString('en-US', options);
+                        const endFormatted = end.toLocaleTimeString('en-US', options);
+
+                        return `${startFormatted} to ${endFormatted}`;
+                    }
+
+                    function convertDecimalToTime(decimalTime) {
+                        const hours = Math.floor(decimalTime);
+                        const minutes = Math.round((decimalTime - hours) * 60);
+
+                        const date = new Date();
+                        date.setHours(hours);
+                        date.setMinutes(minutes);
+
+                        return date.toLocaleTimeString('en-US', {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true
+                        }).toLowerCase();
+                    }
 
 
 

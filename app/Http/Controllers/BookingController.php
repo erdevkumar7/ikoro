@@ -268,6 +268,9 @@ class BookingController extends Controller
             'booking.duration' => $request->duration,
             'booking.operation_time' => $request->operation_time,
             'booking.feature_ids' => $request->feature_ids,
+            'booking.feedback_tool' => $request->feedback_tool,
+            'booking.feedback_tool_value' => $request->feedback_tool_value,
+            'booking.host_notes' => $request->host_notes,
         ]);
     
         return response()->json(['status' => 'success']);
