@@ -1996,7 +1996,7 @@ form.host-new-filter div#task {
     position: relative;
     left: 218px;
     top: -8px;
-    width: 54%;
+    width: 40%;
 }
 .duration-second p#selected-price {
     font-weight: 600 !important;
@@ -2070,6 +2070,11 @@ form.host-new-filter div#task {
 .top-nav-header .logo-img img.logout {
     margin-left: -15px;
     width: 180px !important;
+}
+.new-logo-footer {
+    margin-top: 0px !important;
+    margin-bottom: 0px;
+    margin-left: -30px !important;
 }
 .popular-location-inner .image-text {
     position: absolute;

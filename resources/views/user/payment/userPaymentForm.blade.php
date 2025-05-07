@@ -2,7 +2,7 @@
     @push('styles')
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/content.css') }}">
     @endpush
-    <div class="container d-flex justify-content-center mt-5 mb-5">
+    {{-- <div class="container d-flex justify-content-center mt-5 mb-5">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (Session::has('payment_fail'))
             <script>
@@ -82,6 +82,126 @@
 
             </div>
         </form>
+    </div> --}}
+
+
+    <div class="container d-flex justify-content-center mt-5 mb-5">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (Session::has('payment_fail'))
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                    });
+                });
+            </script>
+        @endif
+
+        <div class="col-md-6">
+            <span>Payment Method</span>
+            <div class="card">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header p-0" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button
+                                    class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom"
+                                    type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="d-flex align-items-center justify-content-between">
+
+                                        <span>Paypal</span>
+                                        <img src="https://i.imgur.com/7kQEsHU.png" width="30">
+
+                                    </div>
+                                </button>
+                            </h2>
+                        </div>
+                        <form action="{{ route('payment.create') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    {{-- <input type="text" class="form-control" placeholder="Paypal email"> --}}
+                                    <input type="hidden" name="gig_id" id="gig-id" value="{{ $gigId }}">
+                                    <input type="hidden" name="price" id="selected-gig-price"
+                                        value="{{ $price }}">
+                                    <input type="hidden" name="duration" id="selected-gig-duration"
+                                        value="{{ $duration }}">
+                                    <input type="hidden" name="operation_time" id="selected-gig-operation-time"
+                                        value="{{ $operation_time }}" />
+
+                                    <input type="hidden" name="feature_ids" id="selected-features_ids"
+                                        value="{{ $feature_ids }}" />
+                                </div>
+                                <div class="p-3">
+                                    <button type="submit" class="btn btn-primary btn-block free-button">Pay
+                                        Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <form action="{{ route('user.strip.paymentSubmit') }}" method="POST" id="payment-form">
+                            @csrf
+                            <div class="card-header p-0">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-light btn-block text-left p-3 rounded-0">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span>Card Number</span>
+                                            <div class="icons">
+                                                <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                                <img src="https://i.imgur.com/W1vtnOV.png" width="30">
+                                                <img src="https://i.imgur.com/35tC99g.png" width="30">
+                                                <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                            </div>
+                                        </div>
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body payment-card-body">
+                                    <span class="font-weight-normal card-text">Card Details</span>
+
+                                    <!-- Card Element will be inserted here -->
+                                    <div id="card-element" class="form-control"
+                                        style="padding: 10px; border: 1px solid #ccc;">
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+
+                                    <!-- Error message placeholder -->
+                                    <div id="card-errors" role="alert" style="color: red;"></div>
+
+                                    <span class="text-muted certificate-text">
+                                        <i class="fa fa-lock"></i> Your transaction is secured with SSL certificate
+                                    </span>
+                                </div>
+                                <div class="p-3">
+                                    <button type="submit" class="btn btn-primary btn-block free-button">Pay
+                                        Now</button>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="gig_id" id="gig-id" value="{{ $gigId }}">
+                            <input type="hidden" name="price" id="selected-gig-price" value="{{ $price }}">
+                            <input type="hidden" name="duration" id="selected-gig-duration"
+                                value="{{ $duration }}">
+                            <input type="hidden" name="operation_time" id="selected-gig-operation-time"
+                                value="{{ $operation_time }}" />
+
+                            <input type="hidden" name="feature_ids" id="selected-features_ids"
+                                value="{{ $feature_ids }}" />
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </x-guest-layout>
 

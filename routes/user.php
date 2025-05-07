@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\StripPaymentController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
@@ -33,16 +34,18 @@ Route::middleware(['auth', 'verified', 'user'])->prefix('user')->group(function 
     Route::get('jobs/completed', function () {
         return view('user.job.completed');
     })->name('user.job.completed');
-
 });
 
 
-Route::middleware(['auth', 'verified', 'user'])->group(function(){
+Route::middleware(['auth', 'verified', 'user'])->group(function () {
     Route::get('/strip/payment', [StripPaymentController::class, 'stripPaymentForm'])->name('user.strip.payment');
     Route::post('/strip/payment', [StripPaymentController::class, 'stripPaymentSubmit'])->name('user.strip.paymentSubmit');
+
+    Route::post('/payment/create', [PayPalController::class, 'createPayment'])->name('payment.create');
+    Route::get('/payment/execute', [PayPalController::class, 'executePayment'])->name('payment.execute');
+    Route::get('/payment/cancel', [PayPalController::class, 'cancelPayment'])->name('payment.cancel');
 });
 
 Route::post('/store-booking-data', [BookingController::class, 'storeBookingData'])->name('store.booking.data');
 
 Route::get('/get-matching-bookings', [BookingController::class, 'getMatchingBookings']);
-    

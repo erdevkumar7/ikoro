@@ -560,7 +560,13 @@
                                         }
                                             var timeToCheck = convertDecimalToTime(time);
                                             
-                                                   
+                                               
+                                            function isBetween(value, start, end, inclusive = true) {
+                                                    return inclusive 
+                                                    ? value >= start && value <= end 
+                                                    : value > start && value < end;
+                                                }
+
                                             function parseTimeToDate(timeStr) {
                                                 const today = new Date();
                                                 const [time, modifier] = timeStr.split(' ');
@@ -583,8 +589,22 @@
                                                 const startTime = parseTimeToDate(startStr.trim());
                                                 const endTime = parseTimeToDate(endStr.trim());
 
-                                                if (checkTime >= startTime && checkTime < endTime) {
+
+var checkTimeDuration = new Date(checkTime);
+
+// Add 120 minutes
+checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
+
+                                                //if (checkTime >= startTime && checkTime < endTime) {
+                                                if (isBetween(checkTime, startTime, endTime) ){
+                                                
                                                     isBooked = true;
+                                                }
+                                                
+                                                if (checkTime <= startTime && endTime <= checkTimeDuration )
+                                                {
+                                                    isBooked = true;
+                                                                                                
                                                 }
                                             });
 
@@ -767,6 +787,13 @@
                                         }
                                             var timeToCheck = convertDecimalToTime(time);
                                             
+
+function isBetween(value, start, end, inclusive = true) {
+return inclusive 
+? value >= start && value <= end 
+: value > start && value < end;
+}
+
                                                    
                                             function parseTimeToDate(timeStr) {
                                                 const today = new Date();
@@ -790,8 +817,21 @@
                                                 const startTime = parseTimeToDate(startStr.trim());
                                                 const endTime = parseTimeToDate(endStr.trim());
 
-                                                if (checkTime >= startTime && checkTime < endTime) {
+
+var checkTimeDuration = new Date(checkTime);
+// Add 120 minutes
+checkTimeDuration.setMinutes(checkTime.getMinutes() + duration);
+
+
+                                                //if (checkTime >= startTime && checkTime < endTime) {
+                                                if (isBetween(checkTime, startTime, endTime) ){
                                                     isBooked = true;
+                                                }
+
+                                                if (checkTime <= startTime && endTime <= checkTimeDuration )
+                                                {
+                                                    isBooked = true;
+                                                                                                
                                                 }
                                             });
 
