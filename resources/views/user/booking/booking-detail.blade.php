@@ -64,11 +64,11 @@
                         <p><strong>Amount Paid:</strong> ${{ number_format($booking->payment->amount, 2) }}</p>
                         <p><strong>Currency:</strong> {{ strtoupper($booking->payment->currency) }}</p>
                         <p><strong>Status:</strong>
-                            <span class="badge bg-{{ $booking->payment->status == 'approved' ? 'success' : 'danger' }}">
+                            <span class="badge bg-{{ $booking->payment->status == 'succeeded' ? 'success' : 'danger' }}">
                                 {{ ucfirst($booking->payment->status) }}
                             </span>
                         </p>
-                        <p><strong>Payment Method:</strong> {{ $booking->payment->payment_method ?? 'N/A' }}</p> 
+                        {{-- <p><strong>Payment Method:</strong> {{ $booking->payment->payment_method ?? 'N/A' }}</p>  --}}
                         <p><strong>Payment Type:</strong> {{ $booking->payment->payment_type ?? 'N/A' }}</p>                      
                     </div>
                 </div>

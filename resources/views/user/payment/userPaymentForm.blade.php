@@ -149,7 +149,9 @@
                             @csrf
                             <div class="card-header p-0">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-light btn-block text-left p-3 rounded-0">
+                                    <button class="btn btn-light btn-block text-left p-3 rounded-0"
+                                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                        aria-controls="collapseOne">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <span>Card Number</span>
                                             <div class="icons">

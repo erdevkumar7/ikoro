@@ -42,11 +42,22 @@ class PayPalController extends Controller
 
     public function createPayment(Request $request)
     {
+        $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : null;
+
+        if (!$userId) {
+            return redirect()->route('login')->withErrors(['error' => 'Unauthorized']);
+        }
+
+        if (!session()->has('booking')) {
+            return redirect()->back()->withErrors(['error' => 'Your session expired. Please select booking details again.']);
+        }
+        
+        $booking = session('booking');
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setTotal($request->price); // Use validated input
+        $amount->setTotal($booking['price']); // Use validated input
         $amount->setCurrency('USD');
 
         $transaction = new Transaction();
@@ -77,6 +88,16 @@ class PayPalController extends Controller
 
     public function executePayment(Request $request)
     {
+        $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : null;
+
+        if (!$userId) {
+            return redirect()->route('login')->withErrors(['error' => 'Unauthorized']);
+        }
+
+        if (!session()->has('booking')) {
+            return redirect()->back()->withErrors(['error' => 'Your session expired. Please select booking details again.']);
+        }
+        $booking = session('booking');
         $paymentId = $request->paymentId;
         $payerId = $request->PayerID;
 
@@ -87,66 +108,53 @@ class PayPalController extends Controller
 
         try {
             $result = $payment->execute($execution, $this->apiContext);
+            
+            $client = User::with('client')->findOrFail($userId);
+            $clientId = $client->client->id;
+            $gigId =  $booking['gig_id'];
+            $p_status = $result->getState() === 'approved' ? 'succeeded' : $result->getState();
+            $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gigId);
+
+            // Save PaymentDetail
+            $paymentDetail = PaymentDetail::create([
+                'user_id' => $userId,
+                'client_id' => $clientId,
+                'gig_id' => $booking['gig_id'],
+                'duration' => $booking['duration'],
+                'payment_intent_id' => $payment->getId(),
+                'amount' => $booking['price'],
+                'currency' => 'USD',
+                'status' => $p_status,
+                'payment_type' => 'paypal'
+            ]);
 
             if ($result->getState() === 'approved') {
-                // Retrieve user data from session  
+                // Save Booking
+                $booking = Booking::create([
+                    'task_id' => $gig->task->id,
+                    'gig_id' => $gig->id,
+                    'country_id' => $gig->country->id,
+                    'state_id' => $gig->state->id,
+                    'city_id' => $gig->city->id,
+                    'zip_id' => $gig->zip->id,
+                    'preferred_gender' => $gig->host->gender,
+                    'client_id' => $userId,
+                    'host_id' => $gig->host->user->id,
+                    'price' => $booking['price'],
+                    'equipment_name' => $gig->equipment_name ?? null,
+                    'duration' => $booking['duration'] ?? null,
+                    'operation_time' => $booking['operation_time'] ?? null,
+                    'feature_id' =>  $booking['feature_ids'] ?? null,
+                    'feedback_tool' => $booking['feedback_tool'] ?? null,
+                    'feedback_tool_value' => $booking['feedback_tool_value'] ?? null,
+                    'host_notes' => $booking['host_notes'] ?? null,
+                    'payment_detail_id' => $paymentDetail->id,
+                ]);
 
-                if ($result->getState() === 'approved') {
-                    // SUCCESSFUL PAYMENT — SAVE TO DB
-                    $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : '';
-                    $client = User::with('client')->findOrFail($userId);
-                    $clientId = $client->client->id;
-                    $gigId = session('booking.gig_id');
-                    $duration = session('booking.duration');
-                    $operationTime = session('booking.operation_time');
-                    $featureIds = session('booking.feature_ids');
-                    $price = session('booking.price');
-                    $feedback_tool = session('booking.feedback_tool');
-                    $feedback_tool_value = session('booking.feedback_tool_value');
-                    $host_notes = session('booking.host_notes');
-
-                    $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gigId);
-
-                    // Save PaymentDetail
-                    $paymentDetail = PaymentDetail::create([
-                        'user_id' => $userId,
-                        'client_id' => $clientId,
-                        'gig_id' => $gigId,
-                        'duration' => $duration,
-                        'payment_intent_id' => $payment->getId(),                        
-                        'amount' => $price,
-                        'currency' => 'USD',
-                        'status' => $result->getState(),
-                        'payment_type' => 'paypal'
-                    ]);
-
-                    // Save Booking
-                    $booking = Booking::create([
-                        'task_id' => $gig->task->id,
-                        'gig_id' => $gig->id,
-                        'country_id' => $gig->country->id,
-                        'state_id' => $gig->state->id,
-                        'city_id' => $gig->city->id,
-                        'zip_id' => $gig->zip->id,
-                        'preferred_gender' => $gig->host->gender,
-                        'client_id' => $userId,
-                        'host_id' => $gig->host->user->id,
-                        'price' => $price,
-                        'equipment_name' => $gig->equipment_name ?? null,
-                        'duration' => $duration,
-                        'operation_time' => $operationTime,
-                        'feature_id' => $featureIds,
-                        'feedback_tool' => $feedback_tool,
-                        'feedback_tool_value' => $feedback_tool_value,
-                        'host_notes' => $host_notes,
-                        'payment_detail_id' => $paymentDetail->id,
-                    ]);
-
-                    session()->forget('booking');
-                    Session::flash('payment_success', 'Payment successfully completed!');
-                    // return view('user.payment.success');
-                    return redirect()->route('user.booking.byBookingId', $booking->id);
-                }
+                session()->forget('booking');
+                Session::flash('payment_success', 'Payment successfully completed!');
+                // return view('user.payment.success');
+                return redirect()->route('user.booking.byBookingId', $booking->id);
             }
         } catch (\Exception $ex) {
             session()->forget('booking');

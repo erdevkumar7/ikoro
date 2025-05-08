@@ -142,6 +142,7 @@
                                     <div class="contact-and-info">
                                         <div class="col-md-6 booking-contatct">
                                             <select class="form-control" id="feedback-tool" name="feedback_tool">
+                                                <option value="">Select tool</option>
                                                 <option value="whatsapp">WhatsApp</option>
                                                 <option value="wechat_id">Wechat Id</option>
                                                 <option value="telegram_no">Telegram No</option>

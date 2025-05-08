@@ -20,64 +20,78 @@ use Illuminate\Support\Facades\Session;
 class StripPaymentController extends Controller
 {
     public function stripPaymentForm(Request $request)
-    { 
-        $client = Auth::check() && Auth::user()->role === 'user' ? Auth::id() : null;
+    {
+        $clientId = Auth::check() && Auth::user()->role === 'user' ? Auth::id() : null;
 
-        if (!session()->has('booking')) {
-            return redirect()->back()->withErrors(['error' => 'Unauthorized user']);
+        if (!$clientId) {
+            return redirect()->route('login')->withErrors(['error' => 'Please login to continue.']);
         }
 
-        $request->validate([
-            'gig_id' => 'required|exists:gigs,id',
-            'price' => 'required',
-            'duration' => 'required',
-        ]);
+        if (!session()->has('booking')) {
+            // return redirect()->route('booking.page')->withErrors(['error' => 'Your session expired. Please select booking details again.']);
+            return redirect()->back()->withErrors(['error' => 'Your session expired. Please select booking details again.']);
+        }
 
-        //    dd($dataa);
+        $booking = session('booking');
+
         return view('user.payment.userPaymentForm', [
-            'gigId' => $request->gig_id,
-            'price' => $request->price,
-            'duration' => $request->duration,
-            'operation_time' => $request->operation_time,
-            'feature_ids' => $request->features_ids,
+            'gigId' => $booking['gig_id'],
+            'price' => $booking['price'],
+            'duration' => $booking['duration'],
+            'operation_time' => $booking['operation_time'],
+            'feature_ids' => $booking['feature_ids'],
+            'feedback_tool' => $booking['feedback_tool'] ?? null,
+            'feedback_tool_value' => $booking['feedback_tool_value'] ?? null,
+            'host_notes' => $booking['host_notes'] ?? null,
         ]);
     }
 
 
+
     public function stripPaymentSubmit(Request $request)
     {
-        $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
+        // $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
+        // $client = User::with('client')->findOrFail($userId);
+        // $clientId = $client->client->id;
+        // $gig_id =  $request->gig_id;
+      
+        $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : null;
+
+        if (!$userId) {
+            return redirect()->route('login')->withErrors(['error' => 'Unauthorized']);
+        }
+    
+        if (!session()->has('booking')) {
+            return redirect()->back()->withErrors(['error' => 'Your session expired. Please select booking details again.']);
+        }
+    
+        $booking = session('booking');
+    
         $client = User::with('client')->findOrFail($userId);
         $clientId = $client->client->id;
-        $gig_id =  $request->gig_id;
+        $gig_id = $booking['gig_id'];
+        $price = $booking['price'];
 
-        $data = [
-            'loggedIn' => $clientId ?? '',
-        ];
-
-        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
-        $data['gig'] = $gig;
-
-        Stripe::setApiKey(config('services.stripe.secret'));
-        $token = $request->stripeToken;
+        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);  
 
         try {
+            Stripe::setApiKey(config('services.stripe.secret'));
+            $token = $request->stripeToken;
             // Charge the user via Stripe
             $charge = Charge::create([
-                'amount' => $request->price * 100, // Convert to cents
+                'amount' => $price * 100, // Convert to cents
                 'currency' => 'usd',
                 'description' => 'Payment for ' . $gig->title . ' plan',
                 'source' => $token,
             ]);
-
 
             // dd($request->price);
             // Store payment details in the database
             $paymentDetail = PaymentDetail::create([
                 'user_id' => $userId,
                 'client_id' => $clientId,
-                'gig_id' => $request->gig_id,
-                'duration' => $request->duration,
+                'gig_id' => $booking['gig_id'],
+                'duration' => $booking['duration'],
                 'payment_intent_id' => $charge->id,
                 'payment_method' => $charge->payment_method,
                 'amount' => $charge->amount / 100,
@@ -89,7 +103,7 @@ class StripPaymentController extends Controller
             if ($charge->status === 'succeeded') {
                 $booking = Booking::create([
                     'task_id' => $gig->task->id,
-                    'gig_id' => session('booking.gig_id') ?? $gig->id,
+                    'gig_id' => $booking['gig_id'] ?? $gig->id,
                     'country_id' => $gig->country->id,
                     'state_id' => $gig->state->id,
                     'city_id' => $gig->city->id,
@@ -99,12 +113,12 @@ class StripPaymentController extends Controller
                     'host_id' => $gig->host->user->id,
                     'price' => $charge->amount / 100,
                     'equipment_name' => $gig->equipment_name ?? null,
-                    'duration' => session('booking.duration') ?? $request->duration,
-                    'operation_time' => session('booking.operation_time') ?? $request->operation_time,
-                    'feature_id' => session('booking.feature_ids') ?? $request->feature_ids,
-                    'feedback_tool' => session('booking.feedback_tool'),
-                    'feedback_tool_value' => session('booking.feedback_tool_value'),
-                    'host_notes' => session('booking.host_notes'),
+                    'duration' => $booking['duration'] ?? null,
+                    'operation_time' => $booking['operation_time'] ?? null,
+                    'feature_id' => $booking['feature_ids'] ?? null,
+                    'feedback_tool' => $booking['feedback_tool'] ?? null,
+                    'feedback_tool_value' => $booking['feedback_tool_value'] ?? null,
+                    'host_notes' => $booking['host_notes'] ?? null,
                     'payment_detail_id' => $paymentDetail->id,
                 ]);
             }
