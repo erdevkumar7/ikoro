@@ -275,4 +275,14 @@ class BookingController extends Controller
     
         return response()->json(['status' => 'success']);
     }
+
+    public function bookingDetailByBookingId(Request $request, $booking_id)
+    {
+        $clientId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
+        $data = [
+            'loggedIn' => $clientId ?? '',
+        ];
+        $data['booking'] = Booking::with('payment')->where(['id'=> $booking_id, 'client_id' => $clientId])->first();        
+        return view('user.booking.booking-detail', $data);
+    }
 }

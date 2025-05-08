@@ -23,4 +23,9 @@ class PaymentDetail extends Model
         'status',
         'payment_type',
     ];
+
+    public function booking()
+    {
+        return $this->hasOne(Booking::class);
+    }
 }

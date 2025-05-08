@@ -13,15 +13,18 @@ class Booking extends Model
 
     protected $guarded = [];
 
-    public function client() {
+    public function client()
+    {
         return $this->belongsTo(User::class, 'client_id', 'id');
     }
 
-    public function host() {
+    public function host()
+    {
         return $this->belongsTo(User::class, 'host_id', 'id');
     }
 
-    public function admin() {
+    public function admin()
+    {
         return $this->belongsTo(User::class, 'admin_id', 'id');
     }
 
@@ -35,4 +38,8 @@ class Booking extends Model
         return $this->belongsTo(GigFeature::class, 'feature_id');
     }
 
+    public function payment()
+    {
+        return $this->belongsTo(PaymentDetail::class, 'payment_detail_id');
+    }
 }

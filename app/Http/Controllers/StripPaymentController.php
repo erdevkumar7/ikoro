@@ -87,7 +87,7 @@ class StripPaymentController extends Controller
             ]);
 
             if ($charge->status === 'succeeded') {
-                Booking::create([
+                $booking = Booking::create([
                     'task_id' => $gig->task->id,
                     'gig_id' => session('booking.gig_id') ?? $gig->id,
                     'country_id' => $gig->country->id,
@@ -105,12 +105,13 @@ class StripPaymentController extends Controller
                     'feedback_tool' => session('booking.feedback_tool'),
                     'feedback_tool_value' => session('booking.feedback_tool_value'),
                     'host_notes' => session('booking.host_notes'),
+                    'payment_detail_id' => $paymentDetail->id,
                 ]);
             }
             Session::flash('payment_success', 'Payment successfuly completed!');
             // clear booking session
             session()->forget('booking');
-            return redirect()->route('user.booking');
+            return redirect()->route('user.booking.byBookingId', $booking->id);
         } catch (CardException $e) {
             // return redirect()->back()->withErrors('Card error: ' . $e->getMessage());
             Session::flash('payment_fail', 'Payment faild!');

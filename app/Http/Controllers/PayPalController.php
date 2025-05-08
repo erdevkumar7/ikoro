@@ -108,7 +108,7 @@ class PayPalController extends Controller
                     $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gigId);
 
                     // Save PaymentDetail
-                    PaymentDetail::create([
+                    $paymentDetail = PaymentDetail::create([
                         'user_id' => $userId,
                         'client_id' => $clientId,
                         'gig_id' => $gigId,
@@ -121,7 +121,7 @@ class PayPalController extends Controller
                     ]);
 
                     // Save Booking
-                    Booking::create([
+                    $booking = Booking::create([
                         'task_id' => $gig->task->id,
                         'gig_id' => $gig->id,
                         'country_id' => $gig->country->id,
@@ -139,12 +139,13 @@ class PayPalController extends Controller
                         'feedback_tool' => $feedback_tool,
                         'feedback_tool_value' => $feedback_tool_value,
                         'host_notes' => $host_notes,
+                        'payment_detail_id' => $paymentDetail->id,
                     ]);
 
                     session()->forget('booking');
                     Session::flash('payment_success', 'Payment successfully completed!');
                     // return view('user.payment.success');
-                    return redirect()->route('user.booking');
+                    return redirect()->route('user.booking.byBookingId', $booking->id);
                 }
             }
         } catch (\Exception $ex) {

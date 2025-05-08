@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified', 'user'])->prefix('user')->group(function 
 
     Route::get('bookings', [BookingController::class, 'clientIndex'])->name('user.booking');
     Route::get('booking/action/{booking_id}/{host_id}', [BookingController::class, 'action'])->name('user.booking.action');
+    Route::get('booking-{booking_id}/details', [BookingController::class, 'bookingDetailByBookingId'])->name('user.booking.byBookingId');
 
     Route::post('pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback');;
