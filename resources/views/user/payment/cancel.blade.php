@@ -1,1 +1,0 @@
-<h1>Payment cancel</h1>
