@@ -282,15 +282,35 @@ class BookingController extends Controller
         return view('user.booking.booking-detail', $data);
     }
 
+    public function hostBookingDetailByBookingId(Request $request, $booking_id)
+    {
+        $hostId = (Auth::check() && Auth::user()->role === 'host') ? Auth::id() : ''; // cleaner way
+
+        $data['booking'] = Booking::with('payment')->where(['id' => $booking_id, 'host_id' => $hostId])->first();
+        return view('host.booking-detail', $data);
+    }
+
     public function downloadInvoice($booking_id)
-    {           
-        $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);       
+    {
+        $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);
         // Optional: check if user is authorized
         // if (Auth::id() !== $booking->client_id) {
         //     abort(403);
         // }
 
-        $pdf = Pdf::loadView('pages.booking-invoice', compact('booking'));
+        $pdf = Pdf::loadView('user.booking-invoice', compact('booking'));
+        return $pdf->download('invoice-booking-' . $booking->id . '.pdf');
+    }
+
+    public function hostDownloadInvoice($booking_id)
+    {
+        $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);
+        // Optional: check if user is authorized
+        // if (Auth::id() !== $booking->client_id) {
+        //     abort(403);
+        // }
+
+        $pdf = Pdf::loadView('host.booking-invoice', compact('booking'));
         return $pdf->download('invoice-booking-' . $booking->id . '.pdf');
     }
 }

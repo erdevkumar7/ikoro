@@ -64,7 +64,7 @@
             <tbody>
                 @forelse ($bookings as $booking)
                     <tr>
-                        <th scope="row">{{ $booking['title'] }}</th>
+                        <th scope="row"><a href="{{route('host.booking.byBookingId', $booking['id'])}}">{{ $booking['title'] }}</a></th>
                         <td>{{ $booking->gig->equipment_name ?? '' }}</td>
                         <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
                             {{ $booking['zipcode'] }} </td>

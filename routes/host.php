@@ -39,6 +39,8 @@ Route::middleware(['auth', 'verified', 'host'])->prefix('host')->group(function 
     
     Route::get('contract/booking', [BookingController::class, 'hostIndex'])->name('host.contract.booking');
     Route::get('contract/booking/action/{booking_id}/{host_id}', [BookingController::class, 'action'])->name('host.booking.action');
+    Route::get('booking-{booking_id}/details', [BookingController::class, 'hostBookingDetailByBookingId'])->name('host.booking.byBookingId');
+    Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'hostDownloadInvoice'])->name('host.booking.invoice.download');
     
     Route::get('wallet', [WalletController::class, 'hostWallet'])->name('host.wallet');
 

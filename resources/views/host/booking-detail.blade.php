@@ -1,4 +1,4 @@
-@extends('user.layout-new.app')
+@extends('host.layout.layout')
 @section('title', 'Booking-detail')
 @section('content')
     <div class="content-wrapper">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Home</a></li>
+                             <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">Booking-detail</li>
                         </ol>
                     </div>
@@ -20,30 +20,7 @@
 
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-        @endif
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @if (Session::has('payment_success'))
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    Swal.fire({
-                        title: "{{ Session::get('payment_success') }}",
-                        icon: "success",
-                        draggable: true
-                    });
-                });
-            </script>
-        @endif
-        @if (Session::has('payment_fail'))
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Something went wrong!",
-                    });
-                });
-            </script>
-        @endif
+        @endif      
 
         @if ($booking)
             <div class="container mt-4">
@@ -53,7 +30,7 @@
                             <div class="card-header bg-primary text-white">Booking Information</div>
                             <div class="card-body">
                                 <p><strong>Booking Task:</strong> {{ $booking->gig->task->title ?? 'N/A' }}</p>
-                                <p><strong>Host Name:</strong> {{ $booking->host->name ?? 'N/A' }}</p>
+                                <p><strong>User Name:</strong> {{ $booking->client->name ?? 'N/A' }}</p>
                                 <p><strong>Tool:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
                                 <p><strong>Duration:</strong> {{ $booking->duration }}</p>
                                 <p><strong>Operation Time:</strong> {{ $booking->operation_time }}</p>
@@ -95,7 +72,7 @@
                                         </span>
                                     </p>
                                     <p><strong>Payment Type:</strong> {{ $booking->payment->payment_type ?? 'N/A' }}</p>
-                                    <a href="{{ route('booking.invoice.download', $booking->id) }}"
+                                    <a href="{{ route('host.booking.invoice.download', $booking->id) }}"
                                         class="btn btn-sm btn-outline-primary mt-3">
                                         <i class="fas fa-file-download"></i> Download Invoice
                                     </a>

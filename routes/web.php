@@ -31,7 +31,6 @@ Route::get('/search/gig/task', [HomeController::class, 'gigSearchedOnTask'])->na
 
 Route::get('/booking/gig-id-{gig_id}/detail', [HomeController::class, 'bookingDetailByGigId'])->name('booking.detail.byGigId');
 Route::post('/store-booking', [HomeController::class, 'storeBooking'])->name('booking.store');
-Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'downloadInvoice'])->name('booking.invoice.download');
 
 Route::get('check-out/{gig_id}/detail', [PaymentController::class, 'bookingCheckOutPage'])->name('user.booking.checkout');
 

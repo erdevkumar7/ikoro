@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified', 'user'])->prefix('user')->group(function 
     Route::get('bookings', [BookingController::class, 'clientIndex'])->name('user.booking');
     Route::get('booking/action/{booking_id}/{host_id}', [BookingController::class, 'action'])->name('user.booking.action');
     Route::get('booking-{booking_id}/details', [BookingController::class, 'bookingDetailByBookingId'])->name('user.booking.byBookingId');
+    Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'downloadInvoice'])->name('booking.invoice.download');
 
     Route::post('pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
     Route::get('payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback');;
@@ -49,4 +50,3 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
 Route::post('/store-booking-data', [BookingController::class, 'storeBookingData'])->name('store.booking.data');
 Route::get('/get-matching-bookings', [BookingController::class, 'getMatchingBookings']);
-
