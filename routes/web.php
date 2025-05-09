@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleLoginController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FacebookLoginController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\HomeController;
@@ -30,6 +31,7 @@ Route::get('/search/gig/task', [HomeController::class, 'gigSearchedOnTask'])->na
 
 Route::get('/booking/gig-id-{gig_id}/detail', [HomeController::class, 'bookingDetailByGigId'])->name('booking.detail.byGigId');
 Route::post('/store-booking', [HomeController::class, 'storeBooking'])->name('booking.store');
+Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'downloadInvoice'])->name('booking.invoice.download');
 
 Route::get('check-out/{gig_id}/detail', [PaymentController::class, 'bookingCheckOutPage'])->name('user.booking.checkout');
 

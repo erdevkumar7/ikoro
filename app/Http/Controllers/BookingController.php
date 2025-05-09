@@ -8,6 +8,7 @@ use App\Models\Gig;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Services\WalletService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -25,24 +26,24 @@ class BookingController extends Controller
         $this->walletService = $walletService;
     }
 
-    public function index($status="new_order")
+    public function index($status = "new_order")
     {
         $bookings = Booking::select(
-            'bookings.*', 
-            'tasks.title AS title', 
-            'countries.name AS country_name', 
-            'states.name AS state_name', 
-            'cities.name AS city_name', 
+            'bookings.*',
+            'tasks.title AS title',
+            'countries.name AS country_name',
+            'states.name AS state_name',
+            'cities.name AS city_name',
             'zipcodes.code AS zipcode'
         )
-        ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-        ->join('countries', 'bookings.country_id', '=', 'countries.id')
-        ->join('states', 'bookings.state_id', '=', 'states.id')
-        ->join('cities', 'bookings.city_id', '=', 'cities.id')
-        ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-        ->where('bookings.status', $status)
-        ->paginate(config('app.pagination'));
-    
+            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+            ->join('countries', 'bookings.country_id', '=', 'countries.id')
+            ->join('states', 'bookings.state_id', '=', 'states.id')
+            ->join('cities', 'bookings.city_id', '=', 'cities.id')
+            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
+            ->where('bookings.status', $status)
+            ->paginate(config('app.pagination'));
+
         return view(
             'admin.booking.index',
             compact(
@@ -54,10 +55,10 @@ class BookingController extends Controller
 
 
     public function getMatchingBookings(Request $request)
-    {          
+    {
         $date = $request->input('date'); // e.g. '2025-04-30'
         //$gig_id = $request->input('gig_id');
-        $bookings = DB::table('bookings')            
+        $bookings = DB::table('bookings')
             ->where('operation_time', 'like', $date . 'T%')
             //->where('gig_id', $gig_id)
             ->get();
@@ -74,25 +75,25 @@ class BookingController extends Controller
         return response()->json(['new_bookings_cnt' => $cnt]);
     }
 
-    public function hostIndex($status="pending")
+    public function hostIndex($status = "pending")
     {
         $bookings = Booking::select(
-            'bookings.*', 
-            'tasks.title AS title', 
-            'countries.name AS country_name', 
-            'states.name AS state_name', 
-            'cities.name AS city_name', 
+            'bookings.*',
+            'tasks.title AS title',
+            'countries.name AS country_name',
+            'states.name AS state_name',
+            'cities.name AS city_name',
             'zipcodes.code AS zipcode'
         )
-        ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-        ->join('countries', 'bookings.country_id', '=', 'countries.id')
-        ->join('states', 'bookings.state_id', '=', 'states.id')
-        ->join('cities', 'bookings.city_id', '=', 'cities.id')
-        ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-        // ->whereIn('bookings.status', [$status, 'completed'])
-        ->where('bookings.host_id', Auth::user()->id)
-        ->paginate(config('app.pagination'));
-    
+            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+            ->join('countries', 'bookings.country_id', '=', 'countries.id')
+            ->join('states', 'bookings.state_id', '=', 'states.id')
+            ->join('cities', 'bookings.city_id', '=', 'cities.id')
+            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
+            // ->whereIn('bookings.status', [$status, 'completed'])
+            ->where('bookings.host_id', Auth::user()->id)
+            ->paginate(config('app.pagination'));
+
         return view(
             'host.contract.booking',
             compact(
@@ -102,25 +103,25 @@ class BookingController extends Controller
         );
     }
 
-    public function clientIndex($status="new_order")
+    public function clientIndex($status = "new_order")
     {
         $bookings = Booking::select(
-            'bookings.*', 
-            'tasks.title AS title', 
-            'countries.name AS country_name', 
-            'states.name AS state_name', 
-            'cities.name AS city_name', 
+            'bookings.*',
+            'tasks.title AS title',
+            'countries.name AS country_name',
+            'states.name AS state_name',
+            'cities.name AS city_name',
             'zipcodes.code AS zipcode',
         )
-        ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-        ->join('countries', 'bookings.country_id', '=', 'countries.id')
-        ->join('states', 'bookings.state_id', '=', 'states.id')
-        ->join('cities', 'bookings.city_id', '=', 'cities.id')
-        ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-        // ->whereIn('bookings.status', [$status, 'pending', 'completed'])
-        ->where('bookings.client_id', Auth::user()->id)
-        ->paginate(config('app.pagination'));
-    
+            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+            ->join('countries', 'bookings.country_id', '=', 'countries.id')
+            ->join('states', 'bookings.state_id', '=', 'states.id')
+            ->join('cities', 'bookings.city_id', '=', 'cities.id')
+            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
+            // ->whereIn('bookings.status', [$status, 'pending', 'completed'])
+            ->where('bookings.client_id', Auth::user()->id)
+            ->paginate(config('app.pagination'));
+
         return view(
             'user.booking.index',
             compact(
@@ -133,32 +134,32 @@ class BookingController extends Controller
     public function match($booking_id)
     {
         $booking = Booking::select(
-            'bookings.*', 
+            'bookings.*',
             'clients.name',
-            'tasks.title AS title', 
-            'countries.name AS country_name', 
-            'states.name AS state_name', 
-            'cities.name AS city_name', 
+            'tasks.title AS title',
+            'countries.name AS country_name',
+            'states.name AS state_name',
+            'cities.name AS city_name',
             'zipcodes.code AS zipcode'
         )
-        ->join('clients', 'bookings.client_id', '=', 'clients.user_id')
-        ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-        ->join('countries', 'bookings.country_id', '=', 'countries.id')
-        ->join('states', 'bookings.state_id', '=', 'states.id')
-        ->join('cities', 'bookings.city_id', '=', 'cities.id')
-        ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-        ->where('bookings.id', $booking_id)
-        ->first()->toArray();
-    
+            ->join('clients', 'bookings.client_id', '=', 'clients.user_id')
+            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+            ->join('countries', 'bookings.country_id', '=', 'countries.id')
+            ->join('states', 'bookings.state_id', '=', 'states.id')
+            ->join('cities', 'bookings.city_id', '=', 'cities.id')
+            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
+            ->where('bookings.id', $booking_id)
+            ->first()->toArray();
+
         $gigs = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])
-        ->where('task_id', $booking['task_id'])
-        ->where('country_id', $booking['country_id'])
-        ->where('state_id', $booking['state_id'])
-        ->where('city_id', $booking['city_id'])
-        ->whereHas('host', function ($query) use ($booking) {
-            $query->where('gender', $booking['preferred_gender']); // Add the condition on the host table
-        })
-        ->get()->toArray();
+            ->where('task_id', $booking['task_id'])
+            ->where('country_id', $booking['country_id'])
+            ->where('state_id', $booking['state_id'])
+            ->where('city_id', $booking['city_id'])
+            ->whereHas('host', function ($query) use ($booking) {
+                $query->where('gender', $booking['preferred_gender']); // Add the condition on the host table
+            })
+            ->get()->toArray();
 
         return view(
             'admin.booking.match',
@@ -169,59 +170,56 @@ class BookingController extends Controller
         );
     }
 
-    public function action($booking_id, $host_id="", Request $request)
+    public function action($booking_id, $host_id = "", Request $request)
     {
         $action = $request->input("action");
 
-        try{
+        try {
             $data = [];
 
-            if($action == "assign"){
+            if ($action == "assign") {
                 $data = [
-                    'host_id' => $host_id, 
-                    'status' => 'pending', 
+                    'host_id' => $host_id,
+                    'status' => 'pending',
                     'admin_id' => Auth::user()->id
                 ];
             }
-            if($action == "host_done"){
+            if ($action == "host_done") {
                 $data = [
                     'host_status' => 'done',
                 ];
             }
-            if($action == "client_done"){
+            if ($action == "client_done") {
                 $data = [
                     'client_status' => 'done',
                 ];
             }
 
-            if($action == "admin_done"){
+            if ($action == "admin_done") {
                 $data = [
                     'status' => 'completed',
                 ];
             }
 
-            if($action == "host_accepted"){
+            if ($action == "host_accepted") {
                 $data = [
                     'is_accepted' => 'accepted',
                 ];
             }
-            
-            if($action == "host_rejected"){
+
+            if ($action == "host_rejected") {
                 $data = [
                     'is_accepted' => 'rejected',
                 ];
             }
 
             Booking::where("id", $booking_id)->update($data);
-            
-            Session::flash('message', 'Booking Status changed successfuly.'); 
-            Session::flash('alert-class', 'alert-success'); 
 
-        }
-        catch(\Exception $e){
-            Session::flash('message', 'Error while assigning to host.'); 
+            Session::flash('message', 'Booking Status changed successfuly.');
+            Session::flash('alert-class', 'alert-success');
+        } catch (\Exception $e) {
+            Session::flash('message', 'Error while assigning to host.');
             Session::flash('alert-class', 'alert-warning');
-
         }
         return redirect()->back();
     }
@@ -232,7 +230,7 @@ class BookingController extends Controller
         $booking = Booking::where('id', $data['booking_id'])->first();
         unset($data['booking_id']);
 
-        try{
+        try {
             $clientWallet = $booking->client->wallet;
             $hostWallet = $booking->host->wallet;
             $adminWallet = $booking->admin->wallet;
@@ -246,14 +244,12 @@ class BookingController extends Controller
             $booking->update($data);
             DB::commit();
 
-            Session::flash('message', 'Credits transfered saved successfuly.'); 
-            Session::flash('alert-class', 'alert-success'); 
-
-        }
-        catch(\Exception $e){
+            Session::flash('message', 'Credits transfered saved successfuly.');
+            Session::flash('alert-class', 'alert-success');
+        } catch (\Exception $e) {
 
             DB::rollBack();
-            Session::flash('message', 'Error saving pricing.'. json_encode($e->getMessage())); 
+            Session::flash('message', 'Error saving pricing.' . json_encode($e->getMessage()));
             Session::flash('alert-class', 'alert-warning');
         }
 
@@ -261,7 +257,7 @@ class BookingController extends Controller
     }
 
     public function storeBookingData(Request $request)
-    {   
+    {
         session([
             'booking.gig_id' => $request->gig_id,
             'booking.price' => $request->price,
@@ -272,7 +268,7 @@ class BookingController extends Controller
             'booking.feedback_tool_value' => $request->feedback_tool_value,
             'booking.host_notes' => $request->host_notes,
         ]);
-    
+
         return response()->json(['status' => 'success']);
     }
 
@@ -282,7 +278,19 @@ class BookingController extends Controller
         $data = [
             'loggedIn' => $clientId ?? '',
         ];
-        $data['booking'] = Booking::with('payment')->where(['id'=> $booking_id, 'client_id' => $clientId])->first();        
+        $data['booking'] = Booking::with('payment')->where(['id' => $booking_id, 'client_id' => $clientId])->first();
         return view('user.booking.booking-detail', $data);
+    }
+
+    public function downloadInvoice($booking_id)
+    {           
+        $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);       
+        // Optional: check if user is authorized
+        // if (Auth::id() !== $booking->client_id) {
+        //     abort(403);
+        // }
+
+        $pdf = Pdf::loadView('pages.booking-invoice', compact('booking'));
+        return $pdf->download('invoice-booking-' . $booking->id . '.pdf');
     }
 }
