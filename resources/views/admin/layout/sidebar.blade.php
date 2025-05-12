@@ -1,29 +1,31 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{ url('/admin/dashboard') }}" class="brand-link">
-      <img src="{{ asset('resources/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Admin</span>
-    </a>
+      <!-- Brand Logo -->
+      <a href="{{ url('/admin/dashboard') }}" class="brand-link">
+          <img src="{{ asset('resources/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+              class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">Admin</span>
+      </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar"> 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
+      <!-- Sidebar -->
+      <div class="sidebar">
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                  data-accordion="false">
+                  <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="{{ url('/admin/dashboard') }}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <!-- <i class="right fas fa-angle-left"></i> -->
-              </p>
-            </a>
-          </li>
+                  <li class="nav-item">
+                      <a href="{{ url('/admin/dashboard') }}" class="nav-link">
+                          <i class="nav-icon fas fa-tachometer-alt"></i>
+                          <p>
+                              Dashboard
+                              <!-- <i class="right fas fa-angle-left"></i> -->
+                          </p>
+                      </a>
+                  </li>
 
-<!--
+                  <!--
 
           <li class="nav-item">
             <a href="javascript:void(0)" class="nav-link a">
@@ -115,7 +117,7 @@
                     </a>
                   </li>
                 </ul>
-              </li> 
+              </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -142,7 +144,7 @@
                     </a>
                   </li>
                 </ul>
-              </li> 
+              </li>
             </ul>
           </li>
 
@@ -173,7 +175,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tour Sub Type</p>
                 </a>
-              </li> 
+              </li>
               <li class="nav-item">
                 <a href="{{ url('/admin/tourList') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -297,7 +299,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Space Review & Rating</p>
                 </a>
-              </li> 
+              </li>
             </ul>
           </li>
     
@@ -458,7 +460,7 @@
                       <p>Why Choose Us</p>
                     </a>
                   </li>
-                </ul>  
+                </ul>
               </li>
             </ul>
           </li>
@@ -488,141 +490,150 @@
                 Blog List
               </p>
             </a>
-          </li> 
+          </li>
 -->
 
 
-          <li class="nav-item">
-            <a href="{{ url('/admin/tasks') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-              Tasks
-              </p>
-            </a>
-          </li> 
-
-
-
-          <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Booking
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/admin/booking/list/new_order') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>New Orders</p>
-                    </a>
+                      <a href="{{ url('/admin/tasks') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Tasks
+                          </p>
+                      </a>
                   </li>
+
+
+
                   <li class="nav-item">
-                    <a href="{{ url('/admin/booking/list/pending') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Pending Tasks</p>
-                    </a>
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                              Booking
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/booking/list/new_order') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>New Orders</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/booking/list/pending') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Pending Tasks</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/booking/list/completed') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Completed</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/booking/report-problem') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Report a Problem</p>
+                              </a>
+                          </li>
+                      </ul>
                   </li>
+
+
+
+
                   <li class="nav-item">
-                    <a href="{{ url('/admin/booking/list/completed') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Completed</p>
-                    </a>
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                              Manage Hosts
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/hosts') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Pending</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/hosts/approved') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Approved</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/hosts/blocked') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Blocked</p>
+                              </a>
+                          </li>
+                      </ul>
                   </li>
+
+
+
                   <li class="nav-item">
-                    <a href="{{ url('/admin/booking/report-problem') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Report a Problem</p>
-                    </a>
+                      <a href="{{ url('/admin/users') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Manage Users
+                          </p>
+                      </a>
                   </li>
-                </ul>
-          </li>
 
-
-
-
-          <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Manage Hosts
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/admin/hosts') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Pending</p>
-                    </a>
+                      <a href="{{ url('/admin/locations') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Locations
+                          </p>
+                      </a>
                   </li>
+
                   <li class="nav-item">
-                    <a href="{{ url('/admin/hosts/approved') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Approved</p>
-                    </a>
+                      <a href="{{ url('/admin/payments') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Payments
+                          </p>
+                      </a>
                   </li>
+
                   <li class="nav-item">
-                    <a href="{{ url('/admin/hosts/blocked') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Blocked</p>
-                    </a>
-                  </li>                  
-                </ul>
-          </li>
+                      <a href="{{ url('/admin/support') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Support
+                          </p>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="{{ url('/admin/admin/problems') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Problems
+                          </p>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="{{ route('admin.commission.form') }}" class="nav-link">
+                          <i class="nav-icon fas fa-book"></i>
+                          <p>
+                              Commission
+                          </p>
+                      </a>
+                  </li>
 
 
-
-          <li class="nav-item">
-            <a href="{{ url('/admin/users') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-              Manage Users
-              </p>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a href="{{ url('/admin/locations') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-              Locations
-              </p>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a href="{{ url('/admin/payments') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-              Payments
-              </p>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a href="{{ url('/admin/support') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-              Support
-              </p>
-            </a>
-          </li> 
-
-          <li class="nav-item">
-            <a href="{{ url('/admin/admin/problems') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-              Problems
-              </p>
-            </a>
-          </li> 
-
-
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
+              </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
   </aside>

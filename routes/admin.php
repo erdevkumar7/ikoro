@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +32,9 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('host/status/{host}', [HostController::class, 'status'])->name('admin.host.status');
     Route::post('host/recommended_sequence/{host_id}', [HostController::class, 'setRecommendedSequence'])->name('admin.host.setRecommendedSequence');
     Route::get('host/wallet/{host_id}', [WalletController::class, 'hostWalletAdmin'])->name('admin.host.wallet');
-    
+
     Route::post('transfer-to-host/{wallet_id}', [WalletController::class, 'transfertoHost'])->name('admin.host.transfer');
-    
+
     Route::get('users', [UserController::class, 'index'])->name('admin.user');
     Route::get('users/delete', [UserController::class, 'destroy'])->name('admin.user.delete');
 
@@ -58,7 +58,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('locations/get_cities', [LocationController::class, 'getCities'])->name('admin.location.getcities');
     Route::get('locations/get_states', [LocationController::class, 'getStates'])->name('admin.location.getstates');
     Route::get('locations/get_zipcodes', [LocationController::class, 'getZipCodes'])->name('admin.location.getzipcodes');
-    
+
     // Route::post('host/delete', [LocationController::class, 'destroy'])->name('admin.host.delete');
 
 
@@ -82,5 +82,8 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
         return view('admin.job.completed');
     })->name('admin.job.completed');
 
-
+    //ErDev
+    Route::get('commission/add-update', [BankController::class, 'adminCommissionForm'])->name('admin.commission.form');
+    Route::post('commission', [BankController::class, 'storeCommission'])->name('admin.storeCommission');
+    Route::put('commission/{id}', [BankController::class, 'updateCommission'])->name('admin.updateCommission');
 });
