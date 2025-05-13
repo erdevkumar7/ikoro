@@ -41,10 +41,10 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('booking/list/{status}', [BookingController::class, 'index'])->name('admin.booking.order');
     Route::get('booking/match/{booking_id}', [BookingController::class, 'match'])->name('admin.booking.match');
     Route::get('booking/action/{booking_id}/{host_id}', [BookingController::class, 'action'])->name('admin.booking.action');
-
     Route::post('booking/pricing/', [BookingController::class, 'savePricing'])->name('admin.booking.pricing');
-
     Route::get('new-bookings-cnt', [BookingController::class, 'newBookingsCnt'])->name('admin.new-bookings-cnt');
+
+    Route::get('booking-{booking_id}/details', [BookingController::class, 'adminBookingDetailByBookingId'])->name('admin.booking.byBookingId');
 
     Route::get('booking/report-problem', function () {
         return view('admin.booking.problem');

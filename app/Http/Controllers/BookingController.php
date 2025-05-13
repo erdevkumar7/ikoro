@@ -290,6 +290,14 @@ class BookingController extends Controller
         return view('host.booking-detail', $data);
     }
 
+
+    public function adminBookingDetailByBookingId($booking_id)
+    {
+        $adminId = (Auth::check() && Auth::user()->role === 'admin') ? Auth::id() : ''; 
+        $data['booking'] = Booking::with('payment')->where(['id' => $booking_id])->first();
+        return view('admin.booking.booking-detail', $data);
+    }
+
     public function downloadInvoice($booking_id)
     {
         $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);

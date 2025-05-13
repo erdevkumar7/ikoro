@@ -50,6 +50,7 @@
                     <table class="table table-responsive-md table-responsive-sm table-bordered">
                         <thead>
                             <tr>
+                                <th scope="col">S.No </th>
                                 <th scope="col">Task</th>
                                 <th scope="col">Tool</th>
                                 {{-- <th scope="col">Locations</th> --}}
@@ -58,12 +59,13 @@
                                 {{-- <th scope="col">Host Status</th> --}}
                                 {{-- <th scope="col">Admin Status</th> --}}
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">View</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($bookings as $booking)
                                 <tr>
+                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <th scope="row"><a
                                             href="{{ route('user.booking.byBookingId', $booking['id']) }}">{{ $booking['title'] }}</a>
                                     </th>
