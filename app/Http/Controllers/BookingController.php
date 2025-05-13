@@ -26,9 +26,9 @@ class BookingController extends Controller
         $this->walletService = $walletService;
     }
 
-    public function index($status = "new_order")
+    public function index($status = null)
     {
-        $bookings = Booking::select(
+        $query = Booking::select(
             'bookings.*',
             'tasks.title AS title',
             'countries.name AS country_name',
@@ -40,18 +40,18 @@ class BookingController extends Controller
             ->join('countries', 'bookings.country_id', '=', 'countries.id')
             ->join('states', 'bookings.state_id', '=', 'states.id')
             ->join('cities', 'bookings.city_id', '=', 'cities.id')
-            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-            ->where('bookings.status', $status)
-            ->paginate(config('app.pagination'));
+            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id');
 
-        return view(
-            'admin.booking.index',
-            compact(
-                'bookings',
-                'status',
-            )
-        );
+        if ($status && $status !== 'all-booking') {
+            $query->where('bookings.status', $status);
+        }
+
+        $bookings = $query->paginate(config('app.pagination'));
+
+        return view('admin.booking.index', compact('bookings', 'status'));
     }
+
+
 
 
     public function getMatchingBookings(Request $request)
@@ -293,7 +293,7 @@ class BookingController extends Controller
 
     public function adminBookingDetailByBookingId($booking_id)
     {
-        $adminId = (Auth::check() && Auth::user()->role === 'admin') ? Auth::id() : ''; 
+        $adminId = (Auth::check() && Auth::user()->role === 'admin') ? Auth::id() : '';
         $data['booking'] = Booking::with('payment')->where(['id' => $booking_id])->first();
         return view('admin.booking.booking-detail', $data);
     }

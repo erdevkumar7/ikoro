@@ -533,6 +533,12 @@
                               </a>
                           </li>
                           <li class="nav-item">
+                              <a href="{{ url('/admin/booking/list/all-booking') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>All Booking</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
                               <a href="{{ url('/admin/booking/report-problem') }}" class="nav-link">
                                   <i class="far fa-dot-circle nav-icon"></i>
                                   <p>Report a Problem</p>

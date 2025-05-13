@@ -33,8 +33,8 @@
                                 <p><strong>User Name:</strong> {{ $booking->client->name ?? 'N/A' }}</p>
                                 <p><strong>Host Name:</strong> {{ $booking->host->name ?? 'N/A' }}</p>
                                 <p><strong>Tool Used:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
-                                {{-- <p><strong>Duration:</strong> {{ $booking->duration }}</p> --}}
-                                {{-- <p><strong>Operation Time:</strong> {{ $booking->operation_time }}</p> --}}
+                                <p><strong>Duration:</strong> {{ $booking->duration }}</p>
+                                <p><strong>Operation Time:</strong> {{ $booking->operation_time }}</p>
                                 <p><strong>Payment Release: </strong>
                                     @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                                         Released

@@ -54,7 +54,7 @@
                                 <th scope="col">Task</th>
                                 <th scope="col">Tool</th>
                                 {{-- <th scope="col">Locations</th> --}}
-                                <th scope="col">Time</th>
+                                {{-- <th scope="col">Time</th> --}}
                                 <th scope="col">Host</th>
                                 {{-- <th scope="col">Host Status</th> --}}
                                 {{-- <th scope="col">Admin Status</th> --}}
@@ -74,7 +74,7 @@
                                     {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} -
                                         {{ $booking['city_name'] }} -
                                         {{ $booking['zipcode'] }} </td> --}}
-                                    <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td>
+                                    {{-- <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td> --}}
                                     <td scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</td>
                                     {{-- <td>{{ $booking['host_status'] }}</td> --}}
                                     {{-- <td>{{ $booking['status'] }}</td> --}}

@@ -66,7 +66,7 @@
                             @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                                 <span class="badge badge-success">Released</span>
                             @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                <a class=" btn btn-outline-success">Ready to Release</a>
+                                <a class=" btn btn-outline-success mark-completed">Ready to Release</a>
                             @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
                                <span class="badge badge-warning">Pending</span>
                             @endif

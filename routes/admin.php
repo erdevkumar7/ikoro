@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('users', [UserController::class, 'index'])->name('admin.user');
     Route::get('users/delete', [UserController::class, 'destroy'])->name('admin.user.delete');
 
-    Route::get('booking/list/{status}', [BookingController::class, 'index'])->name('admin.booking.order');
+    Route::get('booking/list/{status?}', [BookingController::class, 'index'])->name('admin.booking.order');
     Route::get('booking/match/{booking_id}', [BookingController::class, 'match'])->name('admin.booking.match');
     Route::get('booking/action/{booking_id}/{host_id}', [BookingController::class, 'action'])->name('admin.booking.action');
     Route::post('booking/pricing/', [BookingController::class, 'savePricing'])->name('admin.booking.pricing');
