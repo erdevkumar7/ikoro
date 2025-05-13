@@ -321,4 +321,12 @@ class BookingController extends Controller
         $pdf = Pdf::loadView('host.booking-invoice', compact('booking'));
         return $pdf->download('invoice-booking-' . $booking->id . '.pdf');
     }
+
+     public function adminDownloadInvoice($booking_id)
+    {
+        $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);
+
+        $pdf = Pdf::loadView('admin.booking.booking-invoice', compact('booking'));
+        return $pdf->download('invoice-booking-' . $booking->id . '.pdf');
+    }
 }

@@ -55,10 +55,10 @@
                                 <p><strong>Booking Task:</strong> {{ $booking->gig->task->title ?? 'N/A' }}</p>
                                 <p><strong>Host Name:</strong> {{ $booking->host->name ?? 'N/A' }}</p>
                                 <p><strong>Tool:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
-                                <p><strong>Duration:</strong> {{ $booking->duration }}</p>
-                                <p><strong>Location:</strong>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} -
-                                        {{ $booking['city_name'] }} -
-                                        {{ $booking['zipcode'] }}</p>
+                                   <p><strong>Location:</strong> {{ $booking->gig->state->name }} -
+                                        {{ $booking->gig->city->name }} -
+                                        {{ $booking->gig->zip->code }}</p>
+                                <p><strong>Duration:</strong> {{ $booking->duration }}</p>                             
                                 <p><strong>Operation Time:</strong> {{ $booking->operation_time }}</p>
                                 @if (!empty($booking->feedback_tool))
                                     <p><strong>Feedback Tool:</strong> {{ $booking->feedback_tool ?? 'N/A' }}</p>

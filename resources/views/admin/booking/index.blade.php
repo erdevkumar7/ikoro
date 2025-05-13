@@ -2,7 +2,7 @@
 @extends('admin.layout.layout')
 @section('title', $status . ' Booking Task')
 <style>
-  
+
 </style>
 @section('content')
     <div class="content-wrapper">
@@ -40,13 +40,14 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    <th scope="col">Task</th>
                     <th scope="col">User</th>
+                    <th scope="col">Service</th>                    
                     <th scope="col">Host</th>
                     {{-- <th scope="col">Description</th> --}}
                     {{-- <th scope="col">Locations</th> --}}
                     {{-- <th scope="col">Time</th> --}}
-                    <th scope="col">Status</th>
+                    <th scope="col">Booking Status</th>
+                    <th scope="col">Payment Status</th>
                     {{-- <th scope="col">Host Status</th> --}}
                     <th scope="col">View</th>
                 </tr>
@@ -55,20 +56,29 @@
                 @forelse ($bookings as $booking)
                     <tr>
                         <td scope="row">{{ $loop->iteration }}</td>
-                        <td scope="row">{{ $booking['title'] }}</td>
-                        <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
+                         <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
+                        <td scope="row">{{ $booking['title'] }}</td>                       
                         <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td>
                         {{-- <td>{{ $booking['briefing'] }}</td> --}}
                         {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
                             {{ $booking['zipcode'] }} </td> --}}
                         {{-- <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td> --}}
+                        <td scope="row">
+                            @if ($booking['is_accepted'] == 'accepted')
+                                <span class="badge badge-success">Accepted</span>
+                            @elseif($booking['is_accepted'] == 'pending')
+                                <span class="badge badge-warning">Pending</span>
+                            @elseif($booking['is_accepted'] == 'rejected')
+                                <span class="badge badge-danger">Rejected</span>
+                            @endif
+                        </td>
                         <td>
                             @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                                 <span class="badge badge-success">Released</span>
                             @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
                                 <a class=" btn btn-outline-success mark-completed">Ready to Release</a>
                             @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
-                               <span class="badge badge-warning">Pending</span>
+                                <span class="badge badge-warning">Pending</span>
                             @endif
                         </td>
                         <td>

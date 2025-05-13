@@ -30,18 +30,30 @@
                             <div class="card-header bg-primary text-white">Booking Information</div>
                             <div class="card-body">
                                 <p><strong>Booking Task:</strong> {{ $booking->gig->task->title ?? 'N/A' }}</p>
+                                <p><strong>Booking Status:</strong>
+                                    @if ($booking['is_accepted'] == 'accepted')
+                                        <span class="badge badge-success">Accepted</span>
+                                    @elseif($booking['is_accepted'] == 'pending')
+                                        <span class="badge badge-warning">Pending</span>
+                                    @elseif($booking['is_accepted'] == 'rejected')
+                                        <span class="badge badge-danger">Rejected</span>
+                                    @endif
+                                </p>
                                 <p><strong>User Name:</strong> {{ $booking->client->name ?? 'N/A' }}</p>
                                 <p><strong>Host Name:</strong> {{ $booking->host->name ?? 'N/A' }}</p>
                                 <p><strong>Tool Used:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
+                                <p><strong>Location:</strong> {{ $booking->gig->state->name }} -
+                                    {{ $booking->gig->city->name }} -
+                                    {{ $booking->gig->zip->code }}</p>
                                 <p><strong>Duration:</strong> {{ $booking->duration }}</p>
                                 <p><strong>Operation Time:</strong> {{ $booking->operation_time }}</p>
                                 <p><strong>Payment Release: </strong>
                                     @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
-                                        Released
+                                        <span class="badge badge-success"> Released </span>
                                     @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                        Ready to Release
+                                        <span class="badge badge-success"> Ready to Release </span>
                                     @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
-                                        Pending
+                                        <span class="badge badge-warning"> Pending </span>
                                     @endif
                                 </p>
                                 @if (!empty($booking->feedback_tool))
@@ -82,7 +94,7 @@
                                         </span>
                                     </p>
                                     <p><strong>Payment Type:</strong> {{ $booking->payment->payment_type ?? 'N/A' }}</p>
-                                    <a href="{{ route('booking.invoice.download', $booking->id) }}"
+                                    <a href="{{ route('admin.booking.invoice.download', $booking->id) }}"
                                         class="btn btn-sm btn-outline-primary mt-3">
                                         <i class="fas fa-file-download"></i> Download Invoice
                                     </a>

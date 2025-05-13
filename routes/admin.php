@@ -45,7 +45,8 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('new-bookings-cnt', [BookingController::class, 'newBookingsCnt'])->name('admin.new-bookings-cnt');
 
     Route::get('booking-{booking_id}/details', [BookingController::class, 'adminBookingDetailByBookingId'])->name('admin.booking.byBookingId');
-
+    Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'adminDownloadInvoice'])->name('admin.booking.invoice.download');
+    
     Route::get('booking/report-problem', function () {
         return view('admin.booking.problem');
     })->name('admin.booking.problem');
