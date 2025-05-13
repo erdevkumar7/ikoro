@@ -4,7 +4,7 @@ return [
 
     'favicon' => 'frontend/images/favicon.png',
 
-    "pagination" => 10,
+    "pagination" => 5,
 
     "feedback_tool" => [
         'WhatsApp',

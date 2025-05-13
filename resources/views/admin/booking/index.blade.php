@@ -1,31 +1,31 @@
 {{-- @extends('admin.layouts.app') --}}
-@extends('admin.layout.layout') 
+@extends('admin.layout.layout')
 @section('title', $status . ' Booking Task')
 @section('content')
     <div class="content-wrapper">
 
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0"></h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Manage Bookings ({{ $status }})</li>
-                    </ol>
-                </div>
+                    <div class="col-sm-6">
+                        <h1 class="m-0"></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Manage Bookings </li>
+                        </ol>
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="container-fluid">
             <div class="row align-items-center mb-3">
                 <!-- Heading on the left -->
                 <div class="col-md">
-                    <h4>Manage Bookings ({{ $status }})</h4>
+                    <h4>Manage Bookings </h4>
                 </div>
             </div>
         </div>
@@ -36,54 +36,46 @@
         <table class="table table-responsive-md table-responsive-sm table-bordered">
             <thead>
                 <tr>
+                    <th>S.No</th>
                     <th scope="col">Task</th>
-                    <th scope="col">Client</th>
+                    <th scope="col">User</th>
                     <th scope="col">Host</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Locations</th>
+                    {{-- <th scope="col">Description</th> --}}
+                    {{-- <th scope="col">Locations</th> --}}
                     <th scope="col">Time</th>
-                    <th scope="col">Client Status</th>
-                    <th scope="col">Host Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Status</th>
+                    {{-- <th scope="col">Host Status</th> --}}
+                    <th scope="col">View</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($bookings as $booking)
-                    <tr>
-                        <th scope="row">{{ $booking['title'] }}</th>
-                        <th scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</th>
-                        <th scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</th>                        <td>{{ $booking['briefing'] }}</td>
-                        <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
-                            {{ $booking['zipcode'] }} </td>
+                    <tr> <td scope="row">{{ $loop->iteration }}</td>
+                        <td scope="row">{{ $booking['title'] }}</td>
+                        <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
+                        <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td>
+                        {{-- <td>{{ $booking['briefing'] }}</td> --}}
+                        {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
+                            {{ $booking['zipcode'] }} </td> --}}
                         <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td>
                         <td>
-                            @if($booking['client_status'] == "done")
-                            <i class="fa-solid fa-check" style="color:green"></i> 
-                            @else
-                            <i class="fa-solid fa-xmark" style="color:red"></i> 
+                            @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
+                                Released
+                            @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
+                                Ready released
+                            @elseif($booking['client_status'] == 'done' || $booking['host_status'] == 'done')
+                                Pending                          
+                            
                             @endif
                         </td>
                         <td>
-                            @if($booking['host_status'] == "done")
-                            <i class="fa-solid fa-check" style="color:green"></i> 
-                            @else
-                            <i class="fa-solid fa-xmark" style="color:red"></i> 
-                            @endif
-                        </td>
-                        <td>
-                            @if ($status == 'new_order')
-                                <a class=" btn btn-outline-success"
-                                    href="{{ route('admin.booking.match', $booking['id']) }}">Match</a>
-                            @elseif($status == 'pending' && $booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                <a booking_id="{{$booking['id']}}" host_id="{{$booking['host_id']}}" class="mark-completed btn btn-outline-success">Mark Completed</a>
-                            @elseif($status == 'completed')
-                                <span class="badge badge-success">Completed</span>
-                            @else
-                            <span class="badge badge-dark">waiting...</span>
-                            @endif
+                            <a class=" btn btn-outline-success"
+                                href="{{ route('admin.booking.match', $booking['id']) }}">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </a>
                         </td>
                     </tr>
-                    @empty
+                @empty
                     <tr>
                         <td colspan="9" class="text-center">No Data Available</td>
                     </tr>
@@ -108,7 +100,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('admin.booking.pricing')}}" method="POST">
+                <form action="{{ route('admin.booking.pricing') }}" method="POST">
                     @csrf
                     <input type="hidden" name="booking_id" id="booking_id" value="" />
 
@@ -119,7 +111,7 @@
                         </div>
                         <div class="form-group">
                             <label>Commission (%)</label>
-                            <input name="commission" id="commission" class="form-control" required  />
+                            <input name="commission" id="commission" class="form-control" required />
                         </div>
                         <div class="form-group">
                             <label>Amount debitted from client</label>
@@ -143,23 +135,23 @@
     </div>
 
     @push('scripts')
-    <script>
-        $("#commission").on('input', function(e){
-            let price = $("#price").val();
-            let commission = $("#commission").val();
-            let admin_credit = price * commission / 100;
-            let credit = price * commission / 100;
+        <script>
+            $("#commission").on('input', function(e) {
+                let price = $("#price").val();
+                let commission = $("#commission").val();
+                let admin_credit = price * commission / 100;
+                let credit = price * commission / 100;
 
-            $("#client_debit").val(price);
-            $("#host_credit").val(price - admin_credit);
-            $("#admin_credit").val(admin_credit);
-        });
-        
-        $(".mark-completed").click(function(e){
-            e.preventDefault();
-            $('#booking_id').val($(this).attr("booking_id"));
-            $('#PricingModal').modal('show');
-        });
-    </script>
+                $("#client_debit").val(price);
+                $("#host_credit").val(price - admin_credit);
+                $("#admin_credit").val(admin_credit);
+            });
+
+            $(".mark-completed").click(function(e) {
+                e.preventDefault();
+                $('#booking_id').val($(this).attr("booking_id"));
+                $('#PricingModal').modal('show');
+            });
+        </script>
     @endpush
 @endsection

@@ -507,9 +507,9 @@
 
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
+                          <i class="fa fa-arrows-alt nav-icon"></i>
                           <p>
-                              Booking
+                              Manage Booking
                               <i class="right fas fa-angle-left"></i>
                           </p>
                       </a>
@@ -546,7 +546,7 @@
 
                   <li class="nav-item">
                       <a href="#" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
+                          <i class="fa fa-sitemap nav-icon"></i>
                           <p>
                               Manage Hosts
                               <i class="right fas fa-angle-left"></i>
@@ -578,7 +578,7 @@
 
                   <li class="nav-item">
                       <a href="{{ url('/admin/users') }}" class="nav-link">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fa fa-users"></i>
                           <p>
                               Manage Users
                           </p>
@@ -587,7 +587,7 @@
 
                   <li class="nav-item">
                       <a href="{{ url('/admin/locations') }}" class="nav-link">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fa fa-globe"></i>
                           <p>
                               Locations
                           </p>
@@ -596,7 +596,7 @@
 
                   <li class="nav-item">
                       <a href="{{ url('/admin/payments') }}" class="nav-link">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fa fa-wallet"></i>
                           <p>
                               Payments
                           </p>
@@ -614,7 +614,7 @@
 
                   <li class="nav-item">
                       <a href="{{ url('/admin/admin/problems') }}" class="nav-link">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fa fa-exclamation-triangle"></i>
                           <p>
                               Problems
                           </p>
@@ -623,7 +623,7 @@
 
                   <li class="nav-item">
                       <a href="{{ route('admin.commission.form') }}" class="nav-link">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fa fa-wallet"></i>
                           <p>
                               Commission
                           </p>
