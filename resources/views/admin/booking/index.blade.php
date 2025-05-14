@@ -12,7 +12,10 @@
         line-height: 1 !important;
     }
 </style>
+
 @section('content')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.3.0/js/dataTables.js"></script>
     <div class="content-wrapper">
 
         <!-- Content Header (Page header) -->
@@ -44,12 +47,12 @@
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
 
-        <table class="table table-responsive-md table-responsive-sm table-bordered">
+        <table id="myTable" class="display table table-responsive-md table-responsive-sm table-bordered">
             <thead>
                 <tr>
                     <th>S.No</th>
                     <th scope="col">Booking Id</th>
-                    <th scope="col">Service</th>
+                    <th scope="col">Service Name</th>
                     <th scope="col">User Name</th>
                     <th scope="col">User Contact Info</th>
 
@@ -96,7 +99,8 @@
                             @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                                 <span class="badge badge-success">Released</span>
                             @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                <a href="{{route('admin.booking.payment', $booking['id'])}}" class=" btn btn-outline-success release-btn">Ready to Release</a>
+                                <a href="{{ route('admin.booking.payment', $booking['id']) }}"
+                                    class=" btn btn-outline-success release-btn">Ready to Release</a>
                             @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
                                 <span class="badge badge-warning">Pending</span>
                             @endif
@@ -115,16 +119,16 @@
                 @endforelse
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
+        {{-- <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
                 <li class="page-item">
                     {{ $bookings->links() }}
                 </li>
             </ul>
-        </nav>
+        </nav> --}}
     </div>
 
-    <div class="modal fade" id="PricingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="PricingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,8 +169,13 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
+    <script>
+        let table = new DataTable('#myTable', {
+            responsive: true
+        });
+    </script>
     @push('scripts')
         <script>
             $("#commission").on('input', function(e) {

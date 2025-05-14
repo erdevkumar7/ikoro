@@ -49,7 +49,7 @@ class BookingController extends Controller
             $query->where('status', $status); // No need to prefix 'bookings.' here when using Eloquent
         }
 
-        $bookings = $query->paginate(config('app.pagination'));
+        $bookings = $query->get();
 
         return view('admin.booking.index', compact('bookings', 'status'));
     }

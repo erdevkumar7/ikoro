@@ -51,11 +51,13 @@
                         <thead>
                             <tr>
                                 <th scope="col">S.No </th>
-                                <th scope="col">Task</th>
+                                <th scope="col">Booking Id</th>
+                                <th scope="col">Service Name</th>
+                                <th scope="col">Host Name</th>
                                 <th scope="col">Tool</th>
                                 {{-- <th scope="col">Locations</th> --}}
                                 {{-- <th scope="col">Time</th> --}}
-                                <th scope="col">Host</th>
+
                                 {{-- <th scope="col">Host Status</th> --}}
                                 {{-- <th scope="col">Admin Status</th> --}}
                                 <th scope="col">Status</th>
@@ -65,17 +67,17 @@
                         <tbody>
                             @forelse ($bookings as $booking)
                                 <tr>
-                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <th scope="row"><a
-                                            href="{{ route('user.booking.byBookingId', $booking['id']) }}">{{ $booking['title'] }}</a>
-                                    </th>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td scope="row">{{ $booking['id'] }}</td>
+                                    <td scope="row">{{ $booking['title'] }}</td>
+                                    <td scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</td>
                                     <td>{{ $booking->gig->equipment_name ?? '' }}</td>
 
                                     {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} -
                                         {{ $booking['city_name'] }} -
                                         {{ $booking['zipcode'] }} </td> --}}
                                     {{-- <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td> --}}
-                                    <td scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</td>
+
                                     {{-- <td>{{ $booking['host_status'] }}</td> --}}
                                     {{-- <td>{{ $booking['status'] }}</td> --}}
 

@@ -117,8 +117,8 @@
         <div class="container">
             <div class="row attend-event-inner">
                 <div class="col-md-7 attend-event-left">
-                    <h3>Book our hosts, tour the world, attend events, see new places, people & culture form your home
-                        or office.</h3>
+                    <h3>Tour the world from the comfort of
+                        your home or Office with iKORO.</h3>
                 </div>
 
                 <div class="col-md-5 attend-event-right">
@@ -286,13 +286,12 @@
                                 </option>
                             @endforeach
                         </select> --}}
-                       
+
                         <select id="is_open" name="is_open" class="choose-tool">
                             <option value="" {{ old('is_open', request('is_open')) == '' ? 'selected' : '' }}>
                                 Every Host
                             </option>
-                            <option value="1"
-                                {{ old('is_open', request('is_open')) == '1' ? 'selected' : '' }}>
+                            <option value="1" {{ old('is_open', request('is_open')) == '1' ? 'selected' : '' }}>
                                 Host Online
                             </option>
                         </select>
