@@ -65,7 +65,9 @@
     <table>
         <tr>
             <!-- Booking Details -->
-            <td>
+            <td>               
+                <span class="label">User Name:</span> {{ $booking->client->name ?? 'N/A' }}<br>
+                <span class="label">User Name:</span> {{ $booking->client->email}}<br>
                 <span class="label">Booking Task:</span> {{ $booking->gig->task->title ?? 'N/A' }}<br>
                 <span class="label">Booking Status:</span>
                 @if ($booking['is_accepted'] == 'accepted')
@@ -76,7 +78,7 @@
                     <span class="badge badge-danger">Rejected</span>
                 @endif
                 <br>
-                <span class="label">User Name:</span> {{ $booking->client->name ?? 'N/A' }}<br>
+                
                 <span class="label">Host Name:</span> {{ $booking->host->name ?? 'N/A' }}<br>
                 <span class="label">Tool Used:</span> {{ $booking->equipment_name ?? 'N/A' }}<br>
                 <span class="label">Payment Release: </span>

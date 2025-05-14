@@ -93,6 +93,11 @@
             font-size: 30px;
             color: gray;
         }
+
+        nav.navbar.navbar-expand-lg.navbar-light {
+            padding-bottom: 20px;
+            padding: 18px !important;
+        }
     </style>
 
 </head>

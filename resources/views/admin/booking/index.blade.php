@@ -2,7 +2,15 @@
 @extends('admin.layout.layout')
 @section('title', $status . ' Booking Task')
 <style>
+    .table td,
+    .table th {
+        padding: .50rem !important;
+    }
 
+    .release-btn {
+        padding: .200rem .150rem !important;
+        line-height: 1 !important;
+    }
 </style>
 @section('content')
     <div class="content-wrapper">
@@ -40,25 +48,33 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Service</th>                    
-                    <th scope="col">Host</th>
+                    <th scope="col">Booking Id</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">User Contact Info</th>
+
+                    {{-- <th scope="col">Host Name</th> --}}
                     {{-- <th scope="col">Description</th> --}}
                     {{-- <th scope="col">Locations</th> --}}
                     {{-- <th scope="col">Time</th> --}}
                     <th scope="col">Booking Status</th>
                     <th scope="col">Payment Status</th>
                     {{-- <th scope="col">Host Status</th> --}}
-                    <th scope="col">View</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($bookings as $booking)
                     <tr>
                         <td scope="row">{{ $loop->iteration }}</td>
-                         <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
-                        <td scope="row">{{ $booking['title'] }}</td>                       
-                        <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td>
+                        <td scope="row"> {{ $booking->id }}</td>
+                        <td scope="row">{{ $booking['title'] }}</td>
+                        <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
+                        <td scope="row"><strong>Email: </strong>{{ $booking->client->email }}<br>
+                            <strong>Mobile: </strong> 
+                        </td>
+
+                        {{-- <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td> --}}
                         {{-- <td>{{ $booking['briefing'] }}</td> --}}
                         {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
                             {{ $booking['zipcode'] }} </td> --}}
@@ -76,7 +92,7 @@
                             @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                                 <span class="badge badge-success">Released</span>
                             @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                <a class=" btn btn-outline-success mark-completed">Ready to Release</a>
+                                <a class=" btn btn-outline-success release-btn">Ready to Release</a>
                             @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
                                 <span class="badge badge-warning">Pending</span>
                             @endif

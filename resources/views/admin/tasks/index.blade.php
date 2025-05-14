@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Manage Tasks</li>
+                            <li class="breadcrumb-item active">Manage Services</li>
                         </ol>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
             <div class="row align-items-center mb-3">
                 <!-- Heading on the left -->
                 <div class="col-md-4 text-md-left">
-                    <h4>Manage Tasks</h4>
+                    <h4>Manage Services</h4>
                 </div>
                 <!-- Form on the right -->
                 <div class="col-md-8 text-md-right">
@@ -105,8 +105,8 @@
         <table class="table table-responsive-md table-responsive-sm table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Task Title</th>
-                    <th scope="col">Task Icon</th>
+                    <th scope="col">Service Title</th>
+                    <th scope="col">Service Icon</th>
                     <th scope="col" colspan="2">Description</th>
                     <th scope="col">Action</th>
                 </tr>
