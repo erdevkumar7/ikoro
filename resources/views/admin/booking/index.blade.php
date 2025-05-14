@@ -68,10 +68,14 @@
                     <tr>
                         <td scope="row">{{ $loop->iteration }}</td>
                         <td scope="row"> {{ $booking->id }}</td>
-                        <td scope="row">{{ $booking['title'] }}</td>
+                        <td scope="row">{{ $booking->gig->task->title }}</td>
                         <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
                         <td scope="row"><strong>Email: </strong>{{ $booking->client->email }}<br>
-                            <strong>Mobile: </strong> 
+                            @if ($booking->clientDetails->feedback_tool == 'Skype')
+                                <strong>Skype: </strong> {{ $booking->clientDetails->skype }}
+                            @elseif($booking->clientDetails->feedback_tool == 'WhatsApp')
+                                <strong>WhatsApp: </strong> {{ $booking->clientDetails->whatsapp }}
+                            @endif
                         </td>
 
                         {{-- <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td> --}}
@@ -92,7 +96,7 @@
                             @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                                 <span class="badge badge-success">Released</span>
                             @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                <a class=" btn btn-outline-success release-btn">Ready to Release</a>
+                                <a href="{{route('admin.booking.payment', $booking['id'])}}" class=" btn btn-outline-success release-btn">Ready to Release</a>
                             @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
                                 <span class="badge badge-warning">Pending</span>
                             @endif

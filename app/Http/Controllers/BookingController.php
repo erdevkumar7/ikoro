@@ -28,22 +28,25 @@ class BookingController extends Controller
 
     public function index($status = null)
     {
-        $query = Booking::select(
-            'bookings.*',
-            'tasks.title AS title',
-            'countries.name AS country_name',
-            'states.name AS state_name',
-            'cities.name AS city_name',
-            'zipcodes.code AS zipcode'
-        )
-            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-            ->join('countries', 'bookings.country_id', '=', 'countries.id')
-            ->join('states', 'bookings.state_id', '=', 'states.id')
-            ->join('cities', 'bookings.city_id', '=', 'cities.id')
-            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id');
+        // $query = Booking::select(
+        //     'bookings.*',
+        //     'tasks.title AS title',
+        //     'countries.name AS country_name',
+        //     'states.name AS state_name',
+        //     'cities.name AS city_name',
+        //     'zipcodes.code AS zipcode'
+        // )
+        //     ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+        //     ->join('countries', 'bookings.country_id', '=', 'countries.id')
+        //     ->join('states', 'bookings.state_id', '=', 'states.id')
+        //     ->join('cities', 'bookings.city_id', '=', 'cities.id')
+        //     ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id');
 
+        $query = Booking::with(['client', 'clientDetails', 'host', 'gig', 'feature', 'payment']);
+
+        // Apply status filter if provided and not 'all-booking'
         if ($status && $status !== 'all-booking') {
-            $query->where('bookings.status', $status);
+            $query->where('status', $status); // No need to prefix 'bookings.' here when using Eloquent
         }
 
         $bookings = $query->paginate(config('app.pagination'));
@@ -224,6 +227,23 @@ class BookingController extends Controller
         return redirect()->back();
     }
 
+    public function doingHostbookingPayment($booking_id, Request $request)
+    {
+        try {
+            $data = [];
+            $data = ['payment_status' => 1,];
+
+            Booking::where("id", $booking_id)->update($data);
+
+            Session::flash('message', 'Payment released successfuly.');
+            Session::flash('alert-class', 'alert-success');
+        } catch (\Exception $e) {
+            Session::flash('message', 'Error while assigning to host.');
+            Session::flash('alert-class', 'alert-warning');
+        }
+        return redirect()->back();
+    }
+
     public function savePricing(Request $request)
     {
         $data = $request->all();
@@ -322,7 +342,7 @@ class BookingController extends Controller
         return $pdf->download('invoice-booking-' . $booking->id . '.pdf');
     }
 
-     public function adminDownloadInvoice($booking_id)
+    public function adminDownloadInvoice($booking_id)
     {
         $booking = Booking::with(['payment', 'gig.task'])->findOrFail($booking_id);
 

@@ -44,6 +44,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::post('booking/pricing/', [BookingController::class, 'savePricing'])->name('admin.booking.pricing');
     Route::get('new-bookings-cnt', [BookingController::class, 'newBookingsCnt'])->name('admin.new-bookings-cnt');
 
+    Route::get('booking/payment/{booking_id}/', [BookingController::class, 'doingHostbookingPayment'])->name('admin.booking.payment');
     Route::get('booking-{booking_id}/details', [BookingController::class, 'adminBookingDetailByBookingId'])->name('admin.booking.byBookingId');
     Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'adminDownloadInvoice'])->name('admin.booking.invoice.download');
     

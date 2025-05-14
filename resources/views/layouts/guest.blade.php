@@ -40,9 +40,8 @@
         .new-logo-footer {
             width: 150px;
             display: flex;
-            margin-top: -30px;
-            margin-bottom: 0;
-            margin-left: -35px;
+            margin-bottom: 20px;
+            margin-left: 0px;
         }
 
         .navbar-light .navbar-nav .nav-link:hover {
