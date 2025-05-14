@@ -28,6 +28,11 @@ class Booking extends Model
         return $this->belongsTo(User::class, 'host_id', 'id');
     }
 
+      public function hostDetails()
+    {
+        return $this->hasOne(Host::class, 'user_id', 'host_id'); // This refers to the clients table
+    }
+
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id', 'id');

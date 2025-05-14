@@ -47,85 +47,91 @@
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
 
-        <table id="myTable" class="display table table-responsive-md table-responsive-sm table-bordered">
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th scope="col">Booking Id</th>
-                    <th scope="col">Service Name</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">User Contact Info</th>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <table id="myTable" class="display table table-responsive-md table-responsive-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th scope="col">Booking Id</th>
+                                <th scope="col">Service Name</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">User Contact Info</th>
 
-                    {{-- <th scope="col">Host Name</th> --}}
-                    {{-- <th scope="col">Description</th> --}}
-                    {{-- <th scope="col">Locations</th> --}}
-                    {{-- <th scope="col">Time</th> --}}
-                    <th scope="col">Booking Status</th>
-                    <th scope="col">Payment Status</th>
-                    {{-- <th scope="col">Host Status</th> --}}
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($bookings as $booking)
-                    <tr>
-                        <td scope="row">{{ $loop->iteration }}</td>
-                        <td scope="row"> {{ $booking->id }}</td>
-                        <td scope="row">{{ $booking->gig->task->title }}</td>
-                        <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
-                        <td scope="row"><strong>Email: </strong>{{ $booking->client->email }}<br>
-                            @if ($booking->clientDetails->feedback_tool == 'Skype')
-                                <strong>Skype: </strong> {{ $booking->clientDetails->skype }}
-                            @elseif($booking->clientDetails->feedback_tool == 'WhatsApp')
-                                <strong>WhatsApp: </strong> {{ $booking->clientDetails->whatsapp }}
-                            @endif
-                        </td>
+                                {{-- <th scope="col">Host Name</th> --}}
+                                {{-- <th scope="col">Description</th> --}}
+                                {{-- <th scope="col">Locations</th> --}}
+                                {{-- <th scope="col">Time</th> --}}
+                                <th scope="col">Booking Status</th>
+                                <th scope="col">Payment Status</th>
+                                {{-- <th scope="col">Host Status</th> --}}
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($bookings as $booking)
+                                <tr>
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td scope="row"> {{ $booking->id }}</td>
+                                    <td scope="row">{{ $booking->gig->task->title }}</td>
+                                    <td scope="row">{{ optional($booking)->client->name ?? 'N/A' }}</td>
+                                    <td scope="row"><strong>Email: </strong>{{ $booking->client->email }}<br>
+                                        @if ($booking->clientDetails->feedback_tool == 'Skype')
+                                            <strong>Skype: </strong> {{ $booking->clientDetails->skype }}
+                                        @elseif($booking->clientDetails->feedback_tool == 'WhatsApp')
+                                            <strong>WhatsApp: </strong> {{ $booking->clientDetails->whatsapp }}
+                                        @endif
+                                    </td>
 
-                        {{-- <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td> --}}
-                        {{-- <td>{{ $booking['briefing'] }}</td> --}}
-                        {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
+                                    {{-- <td scope="row">{{ optional($booking)->host->name ?? 'N/A' }}</td> --}}
+                                    {{-- <td>{{ $booking['briefing'] }}</td> --}}
+                                    {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} - {{ $booking['city_name'] }} -
                             {{ $booking['zipcode'] }} </td> --}}
-                        {{-- <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td> --}}
-                        <td scope="row">
-                            @if ($booking['is_accepted'] == 'accepted')
-                                <span class="badge badge-success">Accepted</span>
-                            @elseif($booking['is_accepted'] == 'pending')
-                                <span class="badge badge-warning">Pending</span>
-                            @elseif($booking['is_accepted'] == 'rejected')
-                                <span class="badge badge-danger">Rejected</span>
-                            @endif
-                        </td>
-                        <td>
-                            @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
-                                <span class="badge badge-success">Released</span>
-                            @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
-                                <a href="{{ route('admin.booking.payment', $booking['id']) }}"
-                                    class=" btn btn-outline-success release-btn">Ready to Release</a>
-                            @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
-                                <span class="badge badge-warning">Pending</span>
-                            @endif
-                        </td>
-                        <td>
-                            <a class=" btn btn-outline-primary"
-                                href="{{ route('admin.booking.byBookingId', $booking['id']) }}">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="9" class="text-center">No Data Available</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        {{-- <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    {{ $bookings->links() }}
-                </li>
-            </ul>
-        </nav> --}}
+                                    {{-- <td>{{ date('d-M-Y g:ia', strtotime($booking['operation_time'])) }}</td> --}}
+                                    <td scope="row">
+                                        @if ($booking['is_accepted'] == 'accepted')
+                                            <span class="badge badge-success">Accepted</span>
+                                        @elseif($booking['is_accepted'] == 'pending')
+                                            <span class="badge badge-warning">Pending</span>
+                                        @elseif($booking['is_accepted'] == 'rejected')
+                                            <span class="badge badge-danger">Rejected</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
+                                            <span class="badge badge-success">Released</span>
+                                        @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
+                                            <a href="{{ route('admin.booking.payment', $booking['id']) }}"
+                                                class=" btn btn-outline-success release-btn">Ready to Release</a>
+                                        @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
+                                            <span class="badge badge-warning">Pending</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a class=" btn btn-outline-primary"
+                                            href="{{ route('admin.booking.byBookingId', $booking['id']) }}">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">No Data Available</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        {{-- <ul class="pagination justify-content-end">
+                       <li class="page-item">
+                       {{ $bookings->links() }}
+                        </li>
+                      </ul> --}}
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- <div class="modal fade" id="PricingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

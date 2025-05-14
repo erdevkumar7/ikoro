@@ -108,22 +108,26 @@ class BookingController extends Controller
 
     public function clientIndex($status = "new_order")
     {
-        $bookings = Booking::select(
-            'bookings.*',
-            'tasks.title AS title',
-            'countries.name AS country_name',
-            'states.name AS state_name',
-            'cities.name AS city_name',
-            'zipcodes.code AS zipcode',
-        )
-            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-            ->join('countries', 'bookings.country_id', '=', 'countries.id')
-            ->join('states', 'bookings.state_id', '=', 'states.id')
-            ->join('cities', 'bookings.city_id', '=', 'cities.id')
-            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-            // ->whereIn('bookings.status', [$status, 'pending', 'completed'])
-            ->where('bookings.client_id', Auth::user()->id)
-            ->paginate(config('app.pagination'));
+        // $bookings = Booking::select(
+        //     'bookings.*',
+        //     'tasks.title AS title',
+        //     'countries.name AS country_name',
+        //     'states.name AS state_name',
+        //     'cities.name AS city_name',
+        //     'zipcodes.code AS zipcode',
+        // )
+        //     ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+        //     ->join('countries', 'bookings.country_id', '=', 'countries.id')
+        //     ->join('states', 'bookings.state_id', '=', 'states.id')
+        //     ->join('cities', 'bookings.city_id', '=', 'cities.id')
+        //     ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
+        //     // ->whereIn('bookings.status', [$status, 'pending', 'completed'])
+        //     ->where('bookings.client_id', Auth::user()->id)
+        //     ->paginate(config('app.pagination'));
+
+        $query = Booking::with(['client', 'clientDetails', 'host', 'hostDetails', 'gig', 'feature', 'payment']);
+        $query->where('client_id', Auth::user()->id);
+        $bookings = $query->get();
 
         return view(
             'user.booking.index',

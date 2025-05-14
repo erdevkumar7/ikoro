@@ -34,6 +34,25 @@
             width: 400px;
             height: 300px;
         }
+
+        .service-content {
+            margin-top: 40px;
+        }
+
+        .service-content img.our-service-img {
+            width: 100%;
+        }
+
+        .host-gimbal2-img {
+            width: 500px;
+            height: 300px;
+        }
+
+        .host-gimbal-img {
+            width: 500px;
+            height: 300px;
+            margin: 15px 0;
+        }
     </style>
 
     @push('styles')

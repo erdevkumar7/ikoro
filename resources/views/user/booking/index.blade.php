@@ -1,6 +1,19 @@
 @extends('user.layout-new.app')
 @section('title', 'Bookings')
+<style>
+    .table td,
+    .table th {
+        padding: .50rem !important;
+    }
+
+    .mark-complete-btn {
+        padding: .200rem .150rem !important;
+        line-height: 1 !important;
+    }
+</style>
 @section('content')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.3.0/js/dataTables.js"></script>
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container">
@@ -21,46 +34,25 @@
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @if (Session::has('payment_success'))
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    Swal.fire({
-                        title: "{{ Session::get('payment_success') }}",
-                        icon: "success",
-                        draggable: true
-                    });
-                });
-            </script>
-        @endif
-        @if (Session::has('payment_fail'))
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Something went wrong!",
-                    });
-                });
-            </script>
-        @endif
+
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-responsive-md table-responsive-sm table-bordered">
+                    <table id="myTable" class="display table table-responsive-md table-responsive-sm table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">S.No </th>
                                 <th scope="col">Booking Id</th>
                                 <th scope="col">Service Name</th>
                                 <th scope="col">Host Name</th>
-                                <th scope="col">Tool</th>
+                                <th scope="col">Host Contact Info</th>
+                                <th scope="col">Booking Status</th>
                                 {{-- <th scope="col">Locations</th> --}}
                                 {{-- <th scope="col">Time</th> --}}
 
                                 {{-- <th scope="col">Host Status</th> --}}
                                 {{-- <th scope="col">Admin Status</th> --}}
-                                <th scope="col">Status</th>
+                                <th scope="col">Service Status</th>
                                 <th scope="col">View</th>
                             </tr>
                         </thead>
@@ -69,9 +61,23 @@
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td scope="row">{{ $booking['id'] }}</td>
-                                    <td scope="row">{{ $booking['title'] }}</td>
+                                    <td scope="row">{{ $booking->gig->task->title }}</td>
                                     <td scope="row">{{ $booking->host->name ?? 'Not Assigned' }}</td>
-                                    <td>{{ $booking->gig->equipment_name ?? '' }}</td>
+                                    <td scope="row">
+                                        <strong>Email: </strong>{{ $booking->host->email }}<br>
+                                        @if ($booking->hostDetails->phone)
+                                            <strong>Contact: </strong> {{ $booking->hostDetails->phone }}
+                                        @endif
+                                    </td>
+                                    <td scope="row">
+                                        @if ($booking['is_accepted'] == 'accepted')
+                                            <span class="badge badge-success">Accepted</span>
+                                        @elseif($booking['is_accepted'] == 'pending')
+                                            <span class="badge badge-warning">Pending</span>
+                                        @elseif($booking['is_accepted'] == 'rejected')
+                                            <span class="badge badge-danger">Rejected</span>
+                                        @endif
+                                    </td>
 
                                     {{-- <td>{{ $booking['country_name'] }} - {{ $booking['state_name'] }} -
                                         {{ $booking['city_name'] }} -
@@ -82,15 +88,18 @@
                                     {{-- <td>{{ $booking['status'] }}</td> --}}
 
                                     <td>
+
                                         @if ($booking['client_status'] == 'done')
                                             <span class="badge badge-success">Done</span>
                                         @else
-                                            @if ($booking['client_status'] == 'pending' && $booking['host_id'] == '')
-                                                <span class="badge badge-success">Pending</span>
-                                            @else
-                                                <a class=" btn btn-outline-success"
+                                            @if ($booking['is_accepted'] == 'accepted')
+                                                <a class=" btn btn-outline-success mark-complete-btn"
                                                     href="{{ route('user.booking.action', [$booking['id'], $booking['host_id'] ?? '']) }}?action=client_done">Mark
                                                     Completed</a>
+                                            @elseif($booking['is_accepted'] == 'rejected')
+                                                <span class="badge badge-warning">Host rejected</span>
+                                            @else
+                                                <span class="badge badge-warning">Wait for accepting</span>
                                             @endif
                                         @endif
                                     </td>
@@ -107,14 +116,19 @@
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
+                        {{-- <ul class="pagination justify-content-end">
                             <li class="page-item">
                                 {{ $bookings->links() }}
                             </li>
-                        </ul>
+                        </ul> --}}
                     </nav>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        let table = new DataTable('#myTable', {
+            responsive: true
+        });
+    </script>
 @endsection
