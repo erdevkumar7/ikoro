@@ -31,9 +31,18 @@
                             <div class="card-body">
                                 <p><strong>Booking Status:</strong> {{ $booking->id }}</p>
                                 <p><strong>User Name:</strong> {{ $booking->client->name ?? 'N/A' }}</p>
-                                <p><strong>User Email:</strong> {{ $booking->client->email}}</p>
+                                <p><strong>User Email:</strong> {{ $booking->client->email }}</p>
+                                <p>
+                                    @if ($booking->clientDetails->feedback_tool == 'Skype')
+                                        <strong>User Skype: </strong> {{ $booking->clientDetails->skype }}
+                                    @elseif($booking->clientDetails->feedback_tool == 'WhatsApp')
+                                        <strong>User WhatsApp: </strong> {{ $booking->clientDetails->whatsapp }}
+                                    @endif
+                                </p>
                                 <p><strong>Booking Task:</strong> {{ $booking->gig->task->title ?? 'N/A' }}</p>
                                 <p><strong>Host Name:</strong> {{ $booking->host->name ?? 'N/A' }}</p>
+                                {{-- <p><strong>Host Email: </strong> {{ $booking->host->email }}</p> --}}
+                                <p><strong>Host-Contact: </strong> {{ $booking->hostDetails->phone }}</p>
                                 <p><strong>Booking Status:</strong>
                                     @if ($booking['is_accepted'] == 'accepted')
                                         <span class="badge badge-success">Accepted</span>
@@ -42,7 +51,7 @@
                                     @elseif($booking['is_accepted'] == 'rejected')
                                         <span class="badge badge-danger">Rejected</span>
                                     @endif
-                                </p>                                
+                                </p>
                                 <p><strong>Tool Used:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
                                 <p><strong>Location:</strong> {{ $booking->gig->state->name }} -
                                     {{ $booking->gig->city->name }} -

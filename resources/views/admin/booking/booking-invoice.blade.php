@@ -65,10 +65,16 @@
     <table>
         <tr>
             <!-- Booking Details -->
-            <td>               
+            <td>
                 <span class="label">User Name:</span> {{ $booking->client->name ?? 'N/A' }}<br>
-                <span class="label">User Name:</span> {{ $booking->client->email}}<br>
+                <span class="label">User Email:</span> {{ $booking->client->email }}<br>
+                @if ($booking->clientDetails->feedback_tool == 'Skype')
+                    <span class="label">User-Skype: </span> {{ $booking->clientDetails->skype }}<br>
+                @elseif($booking->clientDetails->feedback_tool == 'WhatsApp')
+                    <span class="label">User-WhatsApp: </spane> {{ $booking->clientDetails->whatsapp }}<br>
+                @endif
                 <span class="label">Booking Task:</span> {{ $booking->gig->task->title ?? 'N/A' }}<br>
+                <span class="label">Tool Used:</span> {{ $booking->equipment_name ?? 'N/A' }}<br>
                 <span class="label">Booking Status:</span>
                 @if ($booking['is_accepted'] == 'accepted')
                     <span class="badge badge-success">Accepted</span>
@@ -78,9 +84,10 @@
                     <span class="badge badge-danger">Rejected</span>
                 @endif
                 <br>
-                
+
                 <span class="label">Host Name:</span> {{ $booking->host->name ?? 'N/A' }}<br>
-                <span class="label">Tool Used:</span> {{ $booking->equipment_name ?? 'N/A' }}<br>
+                {{-- <span class="label">Host Email:</span> {{ $booking->host->email }}</br> --}}
+                 <span class="label">Host-Contact: </span>{{ $booking->hostDetails->phone }}<br>
                 <span class="label">Payment Release: </span>
                 @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
                     <span class="badge badge-success"> Released </span>
@@ -92,7 +99,6 @@
                 <br>
                 <span class="label">Duration:</span> {{ $booking->duration }}<br>
                 <span class="label">Operation Time:</span> {{ $booking->operation_time }}<br>
-                <span class="label">Host Notes:</span> {{ $booking->host_notes ?? 'N/A' }}
             </td>
 
             <!-- Payment Details -->
@@ -100,7 +106,7 @@
                 <span class="label">Amount Paid:</span> ${{ number_format($booking->payment->amount, 2) }}<br>
                 <span class="label">Currency:</span> {{ strtoupper($booking->payment->currency) }}<br>
                 <span class="label">Payment Status:</span>
-                 <span class="badge badge-{{ $booking->payment->status == 'succeeded' ? 'success' : 'warning' }}">
+                <span class="badge badge-{{ $booking->payment->status == 'succeeded' ? 'success' : 'warning' }}">
                     {{ ucfirst($booking->payment->status) }}
                 </span><br>
                 <span class="label">Payment Method:</span> {{ $booking->payment->payment_type ?? 'N/A' }}<br>

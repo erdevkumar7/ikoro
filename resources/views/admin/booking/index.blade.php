@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"></h1>
+                        <h1 class="m-0">Manage Bookings</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -35,14 +35,7 @@
             </div>
         </div>
 
-        <div class="container-fluid">
-            <div class="row align-items-center mb-3">
-                <!-- Heading on the left -->
-                <div class="col-md">
-                    <h4>Manage Bookings </h4>
-                </div>
-            </div>
-        </div>
+      
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif

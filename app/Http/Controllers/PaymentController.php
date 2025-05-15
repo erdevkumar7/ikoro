@@ -89,8 +89,8 @@ class PaymentController extends Controller
     {
         $payments = PaymentDetail::with('booking','user', 'userDetails','gig')
                     ->where('status', 'succeeded')
-                    ->get();
-        // dd($payments);
+                    ->orderBy('created_at', 'desc')
+                    ->get();        
         return view('admin.payment.index', compact('payments'));
     }
 
