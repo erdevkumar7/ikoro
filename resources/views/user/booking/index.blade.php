@@ -99,7 +99,7 @@
                                             @elseif($booking['is_accepted'] == 'rejected')
                                                 <span class="badge badge-warning">Host rejected</span>
                                             @else
-                                                <span class="badge badge-warning">Wait for accepting</span>
+                                                <span class="badge badge-warning">Pending</span>
                                             @endif
                                         @endif
                                     </td>

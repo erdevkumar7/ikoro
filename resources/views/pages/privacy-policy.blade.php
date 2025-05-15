@@ -28,8 +28,12 @@
             color: #000 !important;
         }
 
-        .priavecy-content a:hover {
-            color: #2a7d76;
+        .priavecy-content a {
+            color: #2a7d76 !important;
+        }      
+     
+        .sub-heading:hover {
+            color: #000 !important;
         }
     </style>
     @push('styles')
@@ -44,7 +48,7 @@
 
         <p class="paragraph">
 
-            <a href="https://ikoro.ng" target="_blank">IKORO.NG</a>, Registered and trading as Tradesisi Ventures BN
+            <a href="https://votivelaravel.in/ikoro/" target="_blank">iKORO.CO</a>, Registered and trading as Tradesisi Ventures BN
             REGISTRATION NO. 3391073. and its subsidiaries
 
             ("Company" or "We") respect your privacy and are committed to protecting it through our compliance with this
@@ -53,7 +57,7 @@
 
             This policy describes the types of information we collect from you or that you may provide when you visit
 
-            the website <a href="https://ikoro.ng/" target="_blank">ikoro.ng</a> and <a href="https://www.ikoro.co/"
+            the website <a href="https://votivelaravel.in/ikoro/" target="_blank">ikoro.co</a> and <a href="https://votivelaravel.in/ikoro/"
                 target="_blank">ikoro.co</a> (our "Website") and our practices for collecting, using,
 
             maintaining, protecting, and disclosing that information
@@ -136,8 +140,8 @@
 
             verification of parental consent, we will immediately delete that information. If you believe we might have
 
-            any information from or about a child under 18, please contact us at <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a></p>
+            any information from or about a child under 18, please contact us at <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a></p>
 
 
 
@@ -502,8 +506,8 @@
 
         <strong>Access: </strong><span>To make a verifiable request for information about the personal information we
 
-            have collected about you, please email <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a>. Please note that almost all, if not all, of the information
+            have collected about you, please email <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a>. Please note that almost all, if not all, of the information
 
             that we collect from you will be contained in your account profile on the platform.</span>
 
@@ -511,8 +515,8 @@
 
             platform.</span>
 
-        <br> <strong>Erasure: </strong><span>You may exercise this right by emailing <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a>. Please note that if you request the erasure of your personal
+        <br> <strong>Erasure: </strong><span>You may exercise this right by emailing <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a>. Please note that if you request the erasure of your personal
 
             information:</span>
 
@@ -532,17 +536,17 @@
 
         </ul>
 
-        <strong>Restriction: </strong><span>You may exercise this right by emailing <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a>. or by discontinuing your use of the platform.</span>
+        <strong>Restriction: </strong><span>You may exercise this right by emailing <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a>. or by discontinuing your use of the platform.</span>
 
-        <br><strong>Object: </strong><span>You may exercise this right by emailing <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a>.</span>
+        <br><strong>Object: </strong><span>You may exercise this right by emailing <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a>.</span>
 
         <br><strong>Data portability: </strong><span>You may exercise this right by emailing <a
-                href="mailto:support@ikoro.ng" style="color: white;">support@ikoro.ng</a>.</span>
+                href="mailto:mail@ikoro.co" style="color: white;">mail@ikoro.co</a>.</span>
 
         <br><strong>Automated decision-making: </strong><span>You may exercise this right by emailing <a
-                href="mailto:support@ikoro.ng" style="color: white;">support@ikoro.ng</a>. However, please know that we
+                href="mailto:mail@ikoro.co" style="color: white;">mail@ikoro.co</a>. However, please know that we
             do not exercise any sort of automated decision-making. All of our decisions regarding your profile are made
             internally by our support staff.</span>
 
@@ -619,11 +623,11 @@
         <p class="paragraph sub-para">Contact Information</p>
 
         <p class="paragraph">To ask questions or comment about this privacy policy and our privacy practices, contact us
-            and our Data Protection Officer at <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a>.</p>
+            and our Data Protection Officer at <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a>.</p>
 
-        <p class="paragraph">To register a complaint or concern, please email <a href="mailto:support@ikoro.ng"
-                style="color: white;">support@ikoro.ng</a>.</p>
+        <p class="paragraph">To register a complaint or concern, please email <a href="mailto:mail@ikoro.co"
+                style="color: white;">mail@ikoro.co</a>.</p>
 
     </div>
 

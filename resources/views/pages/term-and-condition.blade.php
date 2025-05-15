@@ -20,12 +20,16 @@
             color: #000;
         }
 
-        .term-content a:hover {
+        .term-content a {
             color: #2a7d76 !important;
         }
 
         .term-content ul {
             padding-left: 18px;
+        }
+
+        .sub-heading:hover {
+            color: #000 !important;
         }
     </style>
     @push('styles')
@@ -40,27 +44,27 @@
 
         <p class="paragraph">
 
-            <a href="https://ikoro.ng" target="_blank">IKORO.NG</a> A member of Tradesisi Ventures BN REGISTRATION NO.
-            3391073 (Nigeria) (“IKORO”, “we” or “us”) offers
+            <a href="https://votivelaravel.in/ikoro/" target="_blank">iKORO.CO</a> A member of Tradesisi Ventures BN REGISTRATION NO.
+            3391073 (Nigeria) (“iKORO”, “we” or “us”) offers
 
             live video services. Should you choose to become our user or host, we will create one or more accounts for
 
             you after training:
 
-            IKORO products and services are provided by Tradesisi Ventures BN REGISTRATION NO. 3391073. These terms of
+            iKORO products and services are provided by Tradesisi Ventures BN REGISTRATION NO. 3391073. These terms of
 
-            service ("Terms") govern your use of IKORO websites, products and services (collectively, the "Services"),
+            service ("Terms") govern your use of iKORO websites, products and services (collectively, the "Services"),
 
             so please read them carefully.
 
-            IKORO (referred to as "Company," "us," "our," or "we") provides the <a href="https://ikoro.ng"
-                target="_blank">www.ikoro.ng</a> website ("Site") and
+            iKORO (referred to as "Company," "us," "our," or "we") provides the <a href="https://votivelaravel.in/ikoro/"
+                target="_blank">https://votivelaravel.in/ikoro</a> website ("Site") and
 
             various related services, such as its document generator and informational articles or media ("Services")
 
             subject to your compliance with these terms, conditions, and notices contained or referenced herein (the
 
-            "Terms of Use"), as well as any other written agreement between IKORO and you or your company. The terms
+            "Terms of Use"), as well as any other written agreement between iKORO and you or your company. The terms
 
             "you" and "your" refer to each customer, visitor, or user of our Site and Services.
 
@@ -72,7 +76,7 @@
 
             or organization's behalf.
 
-            By accessing this website or using the Services, you are agreeing to the Terms, and IKORO’s <a
+            By accessing this website or using the Services, you are agreeing to the Terms, and iKORO’s <a
                 href="{{ route('privacyPolicy') }}" target="_blank">Privacy Policy</a>.
 
             If you do not wish to be bound by these Terms of Use, please discontinue use of the Site immediately.
@@ -93,23 +97,23 @@
 
         <p class="paragraph">
 
-            IKORO is a platform where content creators, skilled videographers, and drone pilots get orders from users
+            iKORO is a platform where content creators, skilled videographers, and drone pilots get orders from users
 
-            for live video services. Creators are affiliated with IKORO to offer interactive live video services to
+            for live video services. Creators are affiliated with iKORO to offer interactive live video services to
 
             users. We provide a number of methods by which you can purchase definite creative video services or have a
 
-            direct, confidential discussion with any of our creators. Although some of these methods involve IKORO
+            direct, confidential discussion with any of our creators. Although some of these methods involve iKORO
 
-            processing a transaction on your behalf, in all instances, IKORO is simply the intermediary in such
+            processing a transaction on your behalf, in all instances, iKORO is simply the intermediary in such
 
             transactions. Any Host-client relationship formed as a result of such discussions is between you and the
 
-            host you speak with not between you and IKORO. Furthermore, you understand that IKORO cannot be held
+            host you speak with not between you and iKORO. Furthermore, you understand that iKORO cannot be held
 
-            responsible for the quality or accuracy of any service provided by the host you connect with via IKORO. But,
+            responsible for the quality or accuracy of any service provided by the host you connect with via iKORO. But,
 
-            in all process IKORO will ensure excellence and protect users against poor services.
+            in all process iKORO will ensure excellence and protect users against poor services.
 
         </p>
 
@@ -141,11 +145,11 @@
 
             information you provide on this Site will be correct, current, and complete and that you will abide by these
 
-            Terms of Use. If IKORO believes that the information you provide is not correct, current, or complete, that
+            Terms of Use. If iKORO believes that the information you provide is not correct, current, or complete, that
 
-            you have violated any provision in these Terms of Use, or for any or no reason at all, IKORO has the right
+            you have violated any provision in these Terms of Use, or for any or no reason at all, iKORO has the right
 
-            to refuse you access to this Site or any of its resources, to suspend your access to any of IKORO live video
+            to refuse you access to this Site or any of its resources, to suspend your access to any of iKORO live video
 
             Service, or to temporarily suspend or permanently terminate your user account. All information you provide
 
@@ -238,27 +242,27 @@
 
                 interfere with any other party's use and enjoyment of the Site;</li>
 
-            <li>Impersonate another user or an employee of IKORO, or its partners or hosts;</li>
+            <li>Impersonate another user or an employee of iKORO, or its partners or hosts;</li>
 
             <li>"Frame," online link or similarly display the Site's content or property without the express prior
 
-                written permission of an authorized representative of IKORO; or</li>
+                written permission of an authorized representative of iKORO; or</li>
 
             <li>Co-brand this Site without the express prior written permission of an authorized representative of
 
-                IKORO. For purposes of these Terms of Use, "co-branding" means to display a name, logo, trademark, or
+                iKORO. For purposes of these Terms of Use, "co-branding" means to display a name, logo, trademark, or
 
                 other means of attribution or identification of any party in such a manner as is reasonably likely to
 
                 give a user the impression that such other party has the right to display, publish, or distribute this
 
-                Site or content accessible within this Site (IKORO).</li>
+                Site or content accessible within this Site (iKORO).</li>
 
         </ul>
 
         <h1 class="section-title">Payment of fees</h1>
 
-        <p class="paragraph">All services on this site IKORO requires payment of a fee, you agree to pay all associated
+        <p class="paragraph">All services on this site iKORO requires payment of a fee, you agree to pay all associated
 
             fees as required by the Service. We will bill your payment card for all charges for Services on this Site.
 
@@ -280,7 +284,7 @@
 
         <h1 class="section-title">Copyright and Trademarks</h1>
 
-        <p class="paragraph">The Company name, the terms IKORO, the IKORO logo, and all related names, logos, product
+        <p class="paragraph">The Company name, the terms iKORO, the iKORO logo, and all related names, logos, product
 
             and service names, designs and slogans are copyright and trademarks of the Company or its affiliates or
 
@@ -304,11 +308,11 @@
 
         <h1 class="section-title">Accessibility of website</h1>
 
-        <p class="paragraph">Our aim is to ensure accessibility to the website at all times. However, IKORO cannot
+        <p class="paragraph">Our aim is to ensure accessibility to the website at all times. However, iKORO cannot
 
             guarantee that the Service will always function without disruptions, delay or other imperfections. Since the
 
-            IKORO Service will be transmitted through public internet lines and the public switched telephone network,
+            iKORO Service will be transmitted through public internet lines and the public switched telephone network,
 
             there may be power outages or internet service disruption and You may experience some disruptions e.g.
 
@@ -341,12 +345,12 @@
 
             of activating these Social Networking Services use, storage and disclosure of information related to you and
 
-            your use of such services within IKORO please see our <a href="{{ route('privacyPolicy') }}"
+            your use of such services within iKORO please see our <a href="{{ route('privacyPolicy') }}"
                 target="_blank">Privacy Policy</a>.
 
             However, please remember that the manner in which Social Networking Services use, store and disclose your
 
-            information is governed solely by the policies of such third parties, and IKORO shall have no liability or
+            information is governed solely by the policies of such third parties, and iKORO shall have no liability or
 
             responsibility for the privacy practices or other actions of any third party site or service that may be
 
@@ -358,7 +362,7 @@
 
         <p class="paragraph">It is solely the responsibility of lawyers and law firms to ensure that any information or
 
-            advertisements they post or place on the IKORO website (including without limitation any Legal Information),
+            advertisements they post or place on the iKORO website (including without limitation any Legal Information),
 
             and any communications they may have with prospective clients through the Services, fully complies with all
 
@@ -394,7 +398,7 @@
 
         <h1 class="section-title">Disclaimers and Acknowledgements regarding the use of Legal Information</h1>
 
-        <p class="paragraph">While IKORO strives to provide and to allow creators to provide useful information
+        <p class="paragraph">While iKORO strives to provide and to allow creators to provide useful information
 
             regarding places, culture, people and other services listed on site, there are some things that we cannot
 
@@ -402,11 +406,11 @@
 
             are certain inherent limitations to the accuracy or currency of such information, that legal and other
 
-            information may be incomplete, may contain inaccuracies, or may be based on opinion. IKORO DOES NOT SCREEN
+            information may be incomplete, may contain inaccuracies, or may be based on opinion. iKORO DOES NOT SCREEN
 
-            SUCH INFORMATION FOR ACCURACY OR RELIABILITY. TO THE FULLEST EXTENT PERMITTED BY LAW, IKORO AND ITS HOSTS
+            SUCH INFORMATION FOR ACCURACY OR RELIABILITY. TO THE FULLEST EXTENT PERMITTED BY LAW, iKORO AND ITS HOSTS
 
-            MAKE NO WARRANTIES, EITHER EXPRESS OR IMPLIED, ABOUT THE SERVICES. THE SERVICES ARE PROVIDED "AS IS." IKORO
+            MAKE NO WARRANTIES, EITHER EXPRESS OR IMPLIED, ABOUT THE SERVICES. THE SERVICES ARE PROVIDED "AS IS." iKORO
 
             ALSO DISCLAIMS ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND
 
@@ -414,7 +418,7 @@
 
         <h1 class="section-title">Limitation of Liability</h1>
 
-        <p class="paragraph">To the fullest extent permitted by law, in no event shall IKORO or any of its hosts,
+        <p class="paragraph">To the fullest extent permitted by law, in no event shall iKORO or any of its hosts,
 
             creators, and employees, or any of their respective directors, and agents, be liable for any special,
 
@@ -428,7 +432,7 @@
 
             alteration of legal information.
 
-            To the extent permitted by law, the total liability of IKORO, and its affiliates, suppliers and
+            To the extent permitted by law, the total liability of iKORO, and its affiliates, suppliers and
 
             distributors, for any claim arising out of or relating in any manner to the use of the services, is limited
 
@@ -440,27 +444,27 @@
 
         <h1 class="section-title">User posted content and other Interactive services or areas</h1>
 
-        <p class="paragraph">IKORO includes interactive areas in which you may post content and information, including
+        <p class="paragraph">iKORO includes interactive areas in which you may post content and information, including
 
             peer and client reviews, questions and answers, comments, photos, and other materials (the "User Content").
 
-            You retain all rights in, and are solely responsible for, the User Content you post to IKORO. You are also
+            You retain all rights in, and are solely responsible for, the User Content you post to iKORO. You are also
 
             solely responsible for your use of such interactive features, and use them at your own risk. By using any
 
-            interactive feature, you agree to comply with the IKORO Community Guidelines. We reserve the right to remove
+            interactive feature, you agree to comply with the iKORO Community Guidelines. We reserve the right to remove
 
             or modify User Content for any reason, including User Content that we believe violates these Terms or our
 
             policies.
 
-            When you post User Content to IKORO, you give IKORO and its affiliates a nonexclusive, royalty-free,
+            When you post User Content to iKORO, you give iKORO and its affiliates a nonexclusive, royalty-free,
 
             perpetual, irrevocable and fully sub-licensable right to use, reproduce, modify, adapt, publish, translate,
 
             create derivative works from, distribute, perform and display such User Content throughout the world in any
 
-            media. To the extent such content is attached to a profile on the IKORO platform, the foregoing license
+            media. To the extent such content is attached to a profile on the iKORO platform, the foregoing license
 
             includes a right to reproduce your profile, and any name, likeness or photograph contained in such profile.
 
@@ -472,7 +476,7 @@
 
         <h1 class="section-title">Indemnification</h1>
 
-        <p class="paragraph">You agree to defend, indemnify and hold harmless IKORO, its corporate affiliates,
+        <p class="paragraph">You agree to defend, indemnify and hold harmless iKORO, its corporate affiliates,
 
             independent HOSTS, service providers and consultants, and each of their respective directors, employees and
 
@@ -488,7 +492,7 @@
 
         <h1 class="section-title">Notices</h1>
 
-        <p class="paragraph">We shall send notices to you by email to the email address you provide to IKORO during the
+        <p class="paragraph">We shall send notices to you by email to the email address you provide to iKORO during the
 
             registration process. Notice shall be deemed given 24 hours after email is sent, unless the sending party is
 
@@ -526,11 +530,11 @@
 
         <h1 class="section-title">Termination</h1>
 
-        <p class="paragraph">Notwithstanding any of these Terms, IKORO reserves the right, without notice and in its
+        <p class="paragraph">Notwithstanding any of these Terms, iKORO reserves the right, without notice and in its
 
             sole discretion, to terminate your license to use the Services, and to block or prevent your access to and
 
-            use of the Services. IKORO reserves the right to refuse service to anyone for any reason at any time. In the
+            use of the Services. iKORO reserves the right to refuse service to anyone for any reason at any time. In the
 
             event of termination of access to the Services for any reason, you have no right to obtain a copy of any
 
@@ -538,7 +542,7 @@
 
         <h1 class="section-title">No third beneficiary rights</h1>
 
-        <p class="paragraph">These Terms constitute the entire agreement between you and IKORO with respect to the
+        <p class="paragraph">These Terms constitute the entire agreement between you and iKORO with respect to the
 
             subject matter of these Terms, and supersede and replace any prior version of the Terms. These Terms create
 
@@ -546,7 +550,7 @@
 
         <h1 class="section-title">Waiver, Severability, and Assignment </h1>
 
-        <p class="paragraph">IKORO's failure to enforce a provision of these Terms is not a waiver of its right to do so
+        <p class="paragraph">iKORO's failure to enforce a provision of these Terms is not a waiver of its right to do so
 
             later. If any provision of these Terms is found unenforceable, the remaining provisions of the Terms will
 
@@ -554,7 +558,7 @@
 
             as possible. You may not assign any of your rights under these Terms, and any attempt to do so will be void.
 
-            IKORO may assign its rights to any of its affiliates or subsidiaries, or to any successor in interest of any
+            iKORO may assign its rights to any of its affiliates or subsidiaries, or to any successor in interest of any
 
             business associated with the Services.</p>
 
@@ -562,7 +566,7 @@
 
         <p class="paragraph">If you have any question regarding the use of the Site, or comments about the Site or its
 
-            contents should be directed to <a href="mailto:support@ikoro.ng" style="color: white;">support@ikoro.ng</a>.
+            contents should be directed to <a href="mailto:mail@ikoro.co" style="color: white;">https://votivelaravel.in/ikoro/support</a>.
 
         </p>
 

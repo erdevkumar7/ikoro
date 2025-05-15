@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentDetail;
 use App\Models\Wallet;
 use App\Services\WalletService;
 use Illuminate\Support\Facades\Auth;
@@ -39,25 +40,24 @@ class PaymentController extends Controller
             "currency" => "ZAR",
             "callback_url" => route('callback'),
         );
-    
-        try{
+
+        try {
             return Paystack::getAuthorizationUrl($data)->redirectNow();
             // return Paystack::getAuthorizationUrl()->redirectNow();
-        }catch(\Exception $e) {
-            return Redirect::back()->withMessage(['msg'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
+        } catch (\Exception $e) {
+            return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
         }
     }
 
     public function bookingCheckOutPage()
     {
         $client = Auth::user()->id ?? "";
-      
-        if ($client == "") {          
+
+        if ($client == "") {
             return redirect()->back();
-        }else{           
+        } else {
             return view('user.payment.check-out');
         }
-
     }
 
     /**
@@ -69,7 +69,7 @@ class PaymentController extends Controller
         $paymentDetails = Paystack::getPaymentData();
 
         $wallet = Auth::user()->wallet;
-        if(!$wallet){
+        if (!$wallet) {
             $wallet = Wallet::create([
                 'user_id' => Auth::id(),
                 'amount' => 0,
@@ -80,9 +80,15 @@ class PaymentController extends Controller
 
         $this->walletService->credit($wallet, $amount, $trx, null, json_encode($paymentDetails['data']));
 
-        Session::flash('message', "topup with amount of ". $amount);
+        Session::flash('message', "topup with amount of " . $amount);
         Session::flash('alert-class', 'alert-success');
         return redirect()->route('user.wallet');
+    }
 
+    public function adminGetAllPayment()
+    {
+        $payments = PaymentDetail::with('booking','user', 'userDetails','gig')->get();
+        // dd($payments);
+        return view('admin.payment.index', compact('payments'));
     }
 }

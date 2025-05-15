@@ -28,4 +28,19 @@ class PaymentDetail extends Model
     {
         return $this->hasOne(Booking::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function userDetails()
+    {
+        return $this->belongsTo(Client::class, 'user_id', 'user_id');
+    }
+
+    public function gig()
+    {
+        return $this->belongsTo(Gig::class, 'gig_id');
+    }
 }

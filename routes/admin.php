@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
 
@@ -64,9 +65,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     // Route::post('host/delete', [LocationController::class, 'destroy'])->name('admin.host.delete');
 
 
-    Route::get('payments', function () {
-        return view('admin.payment.index');
-    })->name('admin.payment');
+    Route::get('payments', [PaymentController::class, 'adminGetAllPayment'])->name('admin.payment');
 
     Route::get('support', function () {
         return view('admin.support');
