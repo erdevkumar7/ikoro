@@ -48,7 +48,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('booking/payment/{booking_id}/', [BookingController::class, 'doingHostbookingPayment'])->name('admin.booking.payment');
     Route::get('booking-{booking_id}/details', [BookingController::class, 'adminBookingDetailByBookingId'])->name('admin.booking.byBookingId');
     Route::get('/booking/{booking_id}/invoice', [BookingController::class, 'adminDownloadInvoice'])->name('admin.booking.invoice.download');
-    
+
     Route::get('booking/report-problem', function () {
         return view('admin.booking.problem');
     })->name('admin.booking.problem');
@@ -66,6 +66,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
 
 
     Route::get('payments', [PaymentController::class, 'adminGetAllPayment'])->name('admin.payment');
+    Route::get('/payment/trans-{payment_id}/details', [PaymentController::class, 'adminGetPaymenByPaymentId'])->name('admin.payment.ByPayId');
 
     Route::get('support', function () {
         return view('admin.support');

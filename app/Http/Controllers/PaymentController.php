@@ -87,8 +87,17 @@ class PaymentController extends Controller
 
     public function adminGetAllPayment()
     {
-        $payments = PaymentDetail::with('booking','user', 'userDetails','gig')->get();
+        $payments = PaymentDetail::with('booking','user', 'userDetails','gig')
+                    ->where('status', 'succeeded')
+                    ->get();
         // dd($payments);
         return view('admin.payment.index', compact('payments'));
+    }
+
+    public function adminGetPaymenByPaymentId($payment_id)
+    {
+        $payment = PaymentDetail::with('booking', 'user', 'userDetails', 'gig')->where('status', 'succeeded')->findOrFail($payment_id);
+        // dd($payment);
+         return view('admin.payment.detail', compact('payment'));
     }
 }

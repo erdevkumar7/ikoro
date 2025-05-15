@@ -29,7 +29,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">SNo.</th>
-                                <th scope="col">User Id</th>
+                                <th scope="col">Booking Id</th>
                                 <th scope="col">Txn Amount </th>
                                 <th scope="col">Tnx Status </th>
                                 <th scope="col">Tnx Id </th>
@@ -41,7 +41,9 @@
                             @forelse($payments as $payment)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td scope="row">{{ $payment->client_id }}</td>
+                                    <td scope="row"><a
+                                            href="{{ route('admin.payment.ByPayId', $payment->id) }}">{{ $payment->booking->id }}</a>
+                                    </td>
                                     <td scope="row">{{ $payment->amount }}</td>
                                     <td scope="row">{{ $payment->status }}</td>
                                     <td scope="row">{{ $payment->payment_intent_id }}</td>
