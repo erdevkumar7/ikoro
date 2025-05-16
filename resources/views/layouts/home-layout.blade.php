@@ -243,6 +243,8 @@
                             }
                         }
                     @endphp
+
+                    <div class="mobile-add-destination">
                     <div class="destination-section">
                         <input type="text" name="location_name" id="citySearchByInput" class="search-destination"
                             data-url="{{ route('search.cities') }}" placeholder="Search destinations" required
@@ -256,6 +258,10 @@
                             data-url="{{ route('search.locations') }}" placeholder="Search destinations" required
                             autocomplete="off" /> --}}
                         <div id="cityDropdown" class="dropdown-menu"></div>
+
+                     <i class="fa fa-location-arrow container location-add" aria-hidden="true"></i>
+
+
                     </div>
 
                     <!-- Service Section -->
@@ -270,10 +276,12 @@
                                     {{ $task['title'] }}
                                 </option>
                             @endforeach
+
                         </select>
                     </div>
 
                     <!-- Tool Section -->
+                     <div class="tool-services-add">
                     <div class="tool-section">
                         {{-- <select name="equipment_id" id="equipment_id" class="choose-tool">
                             <option value=""
@@ -312,7 +320,10 @@
                             </option>
                         </select>
                     </div>
+                    </div>
 
+
+                  </div>
                     <!-- Search Button -->
                     <div class="search-button">
                         <button type="submit" aria-label="Search">

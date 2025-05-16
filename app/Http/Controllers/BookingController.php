@@ -43,7 +43,8 @@ class BookingController extends Controller
         //     ->join('cities', 'bookings.city_id', '=', 'cities.id')
         //     ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id');
 
-        $query = Booking::with(['client', 'clientDetails', 'host', 'gig', 'feature', 'payment']);
+        $query = Booking::with(['client', 'clientDetails', 'host', 'gig', 'feature', 'payment'])
+            ->orderBy('created_at', 'desc');
 
         // Apply status filter if provided and not 'all-booking'
         if ($status && $status !== 'all-booking') {
@@ -81,25 +82,10 @@ class BookingController extends Controller
 
     public function hostIndex()
     {
-        // $bookings = Booking::select(
-        //     'bookings.*',
-        //     'tasks.title AS title',
-        //     'countries.name AS country_name',
-        //     'states.name AS state_name',
-        //     'cities.name AS city_name',
-        //     'zipcodes.code AS zipcode'
-        // )
-        //     ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-        //     ->join('countries', 'bookings.country_id', '=', 'countries.id')
-        //     ->join('states', 'bookings.state_id', '=', 'states.id')
-        //     ->join('cities', 'bookings.city_id', '=', 'cities.id')
-        //     ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')            
-        //     ->where('bookings.host_id', Auth::user()->id)
-        //     ->paginate(config('app.pagination'));
-
-        $query = Booking::with(['client', 'clientDetails', 'host', 'hostDetails', 'gig', 'feature', 'payment']);
-        $query->where('host_id', Auth::user()->id);
-        $bookings = $query->get();
+        $bookings = Booking::with(['client', 'clientDetails', 'host', 'hostDetails', 'gig', 'feature', 'payment'])
+            ->where('host_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('host.contract.booking', compact('bookings'));
     }
@@ -312,7 +298,7 @@ class BookingController extends Controller
         $adminId = (Auth::check() && Auth::user()->role === 'admin') ? Auth::id() : '';
         $data['booking'] = Booking::with('clientDetails', 'hostDetails', 'payment')->where(['id' => $booking_id])->first();
         $data['commission'] = Commission::first();
-       
+
         return view('admin.booking.booking-detail', $data);
     }
 

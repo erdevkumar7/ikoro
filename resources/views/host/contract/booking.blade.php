@@ -11,13 +11,18 @@
     .accept-disable-cursr:hover {
         cursor: not-allowed !important;
     }
-
+    .table td,
     .table th {
         padding: .50rem !important;
     }
 
     .btn {
         line-height: 0.5 !important;
+    }
+
+    .mark-complete-btn {
+        padding: .200rem .150rem !important;
+        line-height: 1 !important;
     }
 </style>
 @section('title', 'My Tasks')
@@ -78,24 +83,15 @@
                                     </td>
 
                                     <td>
-                                        {{-- @if ($booking['is_accepted'] == 'accepted')
-                                <a class=" btn btn-outline-success"
-                                    href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_accepted">Accepted</a>
-                            @else
-                                <a class=" btn btn-outline-warning"
-                                    href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_not_accepted">Not-Accepted</a>
-                            @endif --}}
                                         @if ($booking['is_accepted'] === 'pending')
                                             <a class="btn btn-outline-success"
                                                 href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_accepted">Accept</a>
-                                            <a class="btn btn-outline-danger"
-                                                href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_rejected">Reject</a>
+                                            @if ($booking['host_status'] === 'pending')
+                                                <a class="btn btn-outline-danger"
+                                                    href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_rejected">Reject</a>
+                                            @endif
                                         @elseif ($booking['is_accepted'] === 'accepted')
                                             <span class="btn btn-outline-success accept-disable-cursr">Accepted</span>
-                                            {{-- <a class="btn btn-outline-success" style="color: #fff; background-color: #28a745; border-color: #28a745;"
-                                    href="javascript:void(0)">Accepted</a> --}}
-                                            <a class="btn btn-outline-danger"
-                                                href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_rejected">Reject</a>
                                         @elseif ($booking['is_accepted'] === 'rejected')
                                             <span class="btn btn-outline-danger disabled">Rejected</span>
                                         @endif
@@ -103,10 +99,15 @@
                                     </td>
                                     <td>
                                         @if ($booking['host_status'] == 'pending')
-                                            <a class=" btn btn-outline-success mark-complete-btn"
-                                                href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_done">Pending</a>
+                                            @if ($booking['is_accepted'] === 'accepted')
+                                                <a class=" btn btn-outline-success mark-complete-btn"
+                                                    href="{{ route('host.booking.action', [$booking['id'], $booking['host_id']]) }}?action=host_done">Mark
+                                                    Completed</a>
+                                            @else
+                                                <span class="btn btn-warning">Pending</span>
+                                            @endif
                                         @else
-                                            <span class="badge badge-success">Done</span>
+                                             <span class="btn btn-outline-success accept-disable-cursr">done</span>
                                         @endif
                                     </td>
                                     <th scope="row"><a class=" btn btn-outline-primary"
