@@ -31,7 +31,7 @@ class HostController extends Controller
 
     public function blocked()
     {
-        $data['hosts'] = Host::where('status', 2)->paginate(config('app.pagination'));
+        $data['hosts'] = Host::where('status', 2)->orderBy('created_at', 'desc')->get();
         return view('admin.hosts.blocked', $data);
     }
 

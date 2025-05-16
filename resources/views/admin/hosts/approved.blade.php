@@ -11,14 +11,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Approved Hosts
+                        <h1 class="m-0">Approved Host
                             <a class="btn btn-info" href="{{ route('admin.host.add') }}" class="nav-link">Create New</a>
                         </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Approved Hosts</li>
+                            <li class="breadcrumb-item active">Approved Host</li>
                         </ol>
                     </div>
                 </div>
