@@ -111,6 +111,45 @@
                                     </a>
                                 </div>
                             </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">Payment Amount</div>
+                                {{-- <div class="card-body">                                  
+                                    <p><strong>Total Amount:</strong>
+                                        ${{ $booking->payment->amount ? number_format($booking->payment->amount, 2) : 'N/A' }}
+                                    </p>
+                                    <p><strong>Commission</strong> {{$commission->percentage}} %</p>
+                                </div> --}}
+                                <div class="card-body">
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Total Amount:</strong>
+                                        <span>${{ $booking->payment->amount ? number_format($booking->payment->amount, 2) : 'N/A' }}</span>
+                                    </p>
+
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Commission:</strong>
+                                        <span>{{ $commission->percentage }}%</span>
+                                    </p>
+
+                                    @php
+                                        $total = $booking->payment->amount;
+                                        $percentage = $commission->percentage;
+                                        $commissionAmount = ($total * $percentage) / 100;
+                                        $userAmount = $total - $commissionAmount;
+                                    @endphp
+
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Host Payment:</strong>
+                                        <span>${{ number_format($userAmount, 2) }}</span>
+                                    </p>
+
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Admin Payment:</strong>
+                                        <span>${{ number_format($commissionAmount, 2) }}</span>
+                                    </p>
+                                </div>
+
+                            </div>
                         @else
                             <div class="alert alert-warning">No payment information available for this booking.</div>
                         @endif

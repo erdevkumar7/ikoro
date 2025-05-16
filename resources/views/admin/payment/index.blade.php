@@ -42,7 +42,7 @@
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td scope="row"><a
-                                            href="{{ route('admin.payment.ByPayId', $payment->id) }}">{{ $payment->booking->id }}</a>
+                                            href="{{ route('admin.booking.byBookingId', $payment->booking->id) }}">{{ $payment->booking->id }}</a>
                                     </td>
                                     <td scope="row">{{ $payment->amount }}</td>
                                     <td scope="row">{{ $payment->status }}</td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Commission;
 use App\Models\Gig;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -78,32 +79,29 @@ class BookingController extends Controller
         return response()->json(['new_bookings_cnt' => $cnt]);
     }
 
-    public function hostIndex($status = "pending")
+    public function hostIndex()
     {
-        $bookings = Booking::select(
-            'bookings.*',
-            'tasks.title AS title',
-            'countries.name AS country_name',
-            'states.name AS state_name',
-            'cities.name AS city_name',
-            'zipcodes.code AS zipcode'
-        )
-            ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
-            ->join('countries', 'bookings.country_id', '=', 'countries.id')
-            ->join('states', 'bookings.state_id', '=', 'states.id')
-            ->join('cities', 'bookings.city_id', '=', 'cities.id')
-            ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')
-            // ->whereIn('bookings.status', [$status, 'completed'])
-            ->where('bookings.host_id', Auth::user()->id)
-            ->paginate(config('app.pagination'));
+        // $bookings = Booking::select(
+        //     'bookings.*',
+        //     'tasks.title AS title',
+        //     'countries.name AS country_name',
+        //     'states.name AS state_name',
+        //     'cities.name AS city_name',
+        //     'zipcodes.code AS zipcode'
+        // )
+        //     ->join('tasks', 'bookings.task_id', '=', 'tasks.id')
+        //     ->join('countries', 'bookings.country_id', '=', 'countries.id')
+        //     ->join('states', 'bookings.state_id', '=', 'states.id')
+        //     ->join('cities', 'bookings.city_id', '=', 'cities.id')
+        //     ->join('zipcodes', 'bookings.zip_id', '=', 'zipcodes.id')            
+        //     ->where('bookings.host_id', Auth::user()->id)
+        //     ->paginate(config('app.pagination'));
 
-        return view(
-            'host.contract.booking',
-            compact(
-                'bookings',
-                'status',
-            )
-        );
+        $query = Booking::with(['client', 'clientDetails', 'host', 'hostDetails', 'gig', 'feature', 'payment']);
+        $query->where('host_id', Auth::user()->id);
+        $bookings = $query->get();
+
+        return view('host.contract.booking', compact('bookings'));
     }
 
     public function clientIndex($status = "new_order")
@@ -129,13 +127,7 @@ class BookingController extends Controller
         $query->where('client_id', Auth::user()->id);
         $bookings = $query->get();
 
-        return view(
-            'user.booking.index',
-            compact(
-                'bookings',
-                'status',
-            )
-        );
+        return view('user.booking.index', compact('bookings', 'status',));
     }
 
     public function match($booking_id)
@@ -318,7 +310,9 @@ class BookingController extends Controller
     public function adminBookingDetailByBookingId($booking_id)
     {
         $adminId = (Auth::check() && Auth::user()->role === 'admin') ? Auth::id() : '';
-        $data['booking'] = Booking::with('clientDetails','hostDetails','payment')->where(['id' => $booking_id])->first();
+        $data['booking'] = Booking::with('clientDetails', 'hostDetails', 'payment')->where(['id' => $booking_id])->first();
+        $data['commission'] = Commission::first();
+       
         return view('admin.booking.booking-detail', $data);
     }
 
