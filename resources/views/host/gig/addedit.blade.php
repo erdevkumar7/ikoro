@@ -127,11 +127,11 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">{{ isset($gig['id']) ? 'Edit Service' : 'Create Service' }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('host.dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">{{ isset($gig['id']) ? 'Edit Service' : 'Create Service' }}</li>
                         </ol>
                     </div>
@@ -139,24 +139,12 @@
             </div>
         </div>
 
-
-
-        <div class="container" style="margin-bottom: 10px;">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <!-- Heading on the left -->
-                    <div class="col-md">
-                        <h4>{{ isset($gig['id']) ? 'Edit Service' : 'Create Service' }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
         <form id="gigForm" method="POST" action="{{ route('host.gig.store') }}" enctype="multipart/form-data">
             @csrf
-            <div class="container">
+            <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" name="gig_id" value="{{ $gig['id'] ?? '' }}">

@@ -49,7 +49,7 @@
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
-        <div class="container">
+        <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
                     <table id="myTable" class="display table-responsive-md table-responsive-sm table-bordered">

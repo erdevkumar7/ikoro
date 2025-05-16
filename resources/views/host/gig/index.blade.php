@@ -12,85 +12,82 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">My Services
+                            <a class="btn btn-info" href="{{ url('/host/gig/addedit') }}" class="nav-link">Add New</a>
+                        </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">My Services </li>
+                            <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">My Services </li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-        <div class="container-fluid mb-3">
-            <div class="row align-items-center">
-                <!-- Heading on the left -->
-                <div class="col-md ">
-                    <h4>My Services
-                    <a class="btn btn-info" href="{{ url('/host/gig/addedit') }}" class="nav-link">Add New</a>
-                    </h4>
-                </div>
-            </div>
-        </div>
         @if (Session::has('gig_id'))
             <input id="has_gig_id" type="hidden" value="{{ Session::get('gig_id') }}">
         @endif
-        
+
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
-        <table class="table table-responsive-md table-bordered">
-            <thead>
-                <tr>
-                    {{-- <th scope="col">Name</th> --}}
-                    <th scope="col">Type</th>
-                    <th scope="col">Tool</th>
-                    <th scope="col">Locations</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($gigs as $gig)
-                    <tr>
-                        {{-- <th scope="row">{{ $gig['title']  }}</th> --}}
-                        <td>{{ $gig['task']['title'] }}</td>
-                        <td>{{ $gig['equipment_name'] }}</td>
-                        <td>{{ $gig['country']['name'] ?? '' }} - {{ $gig['state']['name'] ?? '' }} - {{ $gig['city']['name'] ?? '' }} -
-                            {{ $gig['zip']['code'] ?? '' }} </td>
-                        <td>{{ $gig['status'] ?? '' }}</td>
-                        <td>
-                            <a class="btn btn-info" href="{{ route('host.gig.addedit', $gig['id']) }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="javascript:;" class="btn btn-primary" data-toggle="modal"
-                                data-target="#gigFile{{ $gig['id'] }}">
-                                <i class="fa-solid fa-image"></i>
-                            </a>
-                            <a href="javascript:;" class="btn btn-secondary" data-toggle="modal"
-                                data-target="#gigView{{ $gig['id'] }}">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="9" class="text-center">No Data Available</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    {{ $gigs->links() }}
-                </li>
-            </ul>
-        </nav>
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-responsive-md table-bordered">
+                        <thead>
+                            <tr>
+                                {{-- <th scope="col">Name</th> --}}
+                                <th scope="col">Type</th>
+                                <th scope="col">Tool</th>
+                                <th scope="col">Locations</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($gigs as $gig)
+                                <tr>
+                                    {{-- <th scope="row">{{ $gig['title']  }}</th> --}}
+                                    <td>{{ $gig['task']['title'] }}</td>
+                                    <td>{{ $gig['equipment_name'] }}</td>
+                                    <td>{{ $gig['country']['name'] ?? '' }} - {{ $gig['state']['name'] ?? '' }} -
+                                        {{ $gig['city']['name'] ?? '' }} -
+                                        {{ $gig['zip']['code'] ?? '' }} </td>
+                                    <td>{{ $gig['status'] ?? '' }}</td>
+                                    <td>
+                                        <a class="btn btn-info" href="{{ route('host.gig.addedit', $gig['id']) }}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#gigFile{{ $gig['id'] }}">
+                                            <i class="fa-solid fa-image"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn btn-secondary" data-toggle="modal"
+                                            data-target="#gigView{{ $gig['id'] }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">No Data Available</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item">
+                                {{ $gigs->links() }}
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
 
 
         <!-- Modal -->
@@ -107,7 +104,8 @@
                         </div>
                         <div class="modal-body">
                             @if (Session::has('message'))
-                                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
+                                    {{ Session::get('message') }}</p>
                             @endif
                             @if (isset($gig['media']))
                                 <div class="row mb-4 mt-2">

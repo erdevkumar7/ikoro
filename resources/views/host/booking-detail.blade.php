@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                             <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('host/dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">Booking-detail</li>
                         </ol>
                     </div>
@@ -20,20 +20,50 @@
 
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-        @endif      
+        @endif
 
         @if ($booking)
-            <div class="container mt-4">
+            <div class="container-fluid mt-4">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card mb-4">
                             <div class="card-header bg-primary text-white">Booking Information</div>
                             <div class="card-body">
+                                <p><strong>Booking Id:</strong> {{ $booking->id }}</p>
                                 <p><strong>Booking Task:</strong> {{ $booking->gig->task->title ?? 'N/A' }}</p>
-                                <p><strong>User Name:</strong> {{ $booking->client->name ?? 'N/A' }}</p>
-                                <p><strong>Tool:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
+                                <p><strong>User Name:</strong> {{ $booking->client->name }}</p>
+                                <p><strong>User Name:</strong> {{ $booking->client->email }}</p>
+                                <p>
+                                    @if ($booking->clientDetails->feedback_tool == 'Skype')
+                                        <strong>User Skype: </strong> {{ $booking->clientDetails->skype }}
+                                    @elseif($booking->clientDetails->feedback_tool == 'WhatsApp')
+                                        <strong>User WhatsApp: </strong> {{ $booking->clientDetails->whatsapp }}
+                                    @endif
+                                </p>
+                                <p><strong>Booking Status:</strong>
+                                    @if ($booking['is_accepted'] == 'accepted')
+                                        <span class="badge badge-success">Accepted</span>
+                                    @elseif($booking['is_accepted'] == 'pending')
+                                        <span class="badge badge-warning">Pending</span>
+                                    @elseif($booking['is_accepted'] == 'rejected')
+                                        <span class="badge badge-danger">Rejected</span>
+                                    @endif
+                                </p>
+                                <p><strong>Tool Used:</strong> {{ $booking->equipment_name ?? 'N/A' }}</p>
+                                <p><strong>Location:</strong> {{ $booking->gig->state->name }} -
+                                    {{ $booking->gig->city->name }} -
+                                    {{ $booking->gig->zip->code }}</p>
                                 <p><strong>Duration:</strong> {{ $booking->duration }}</p>
                                 <p><strong>Operation Time:</strong> {{ $booking->operation_time }}</p>
+                                <p><strong>Payment Release: </strong>
+                                    @if ($booking['client_status'] == 'done' && $booking['host_status'] == 'done' && $booking['payment_status'] == 1)
+                                        <span class="badge badge-success"> Released </span>
+                                    @elseif ($booking['client_status'] == 'done' && $booking['host_status'] == 'done')
+                                        <span class="badge badge-success"> Ready to Release </span>
+                                    @elseif($booking['client_status'] == 'pending' || $booking['host_status'] == 'pending')
+                                        <span class="badge badge-warning"> Pending </span>
+                                    @endif
+                                </p>
                                 @if (!empty($booking->feedback_tool))
                                     <p><strong>Feedback Tool:</strong> {{ $booking->feedback_tool ?? 'N/A' }}</p>
                                 @endif
@@ -76,6 +106,34 @@
                                         class="btn btn-sm btn-outline-primary mt-3">
                                         <i class="fas fa-file-download"></i> Download Invoice
                                     </a>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">Payment Amount</div>
+                                <div class="card-body">
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Total Amount:</strong>
+                                        <span>${{ $booking->payment->amount ? number_format($booking->payment->amount, 2) : 'N/A' }}</span>
+                                    </p>
+
+                                    @php
+                                        $total = $booking->payment->amount;
+                                        $percentage = $commission->percentage;
+                                        $commissionAmount = ($total * $percentage) / 100;
+                                        $hostAmount = $total - $commissionAmount;
+                                    @endphp
+
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Booking Charge ({{ $commission->percentage }}%):</strong>
+                                        <span>${{ number_format($commissionAmount, 2) }}</span>
+                                    </p>
+                                    <p class="d-flex justify-content-between">
+                                        <strong>Host Payment:</strong>
+                                        <span>${{ number_format($hostAmount, 2) }}</span>
+                                    </p>
+
+
                                 </div>
                             </div>
                         @else

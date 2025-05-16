@@ -155,7 +155,7 @@
         @endif
         <form id="gigForm" method="POST" action="{{ route('host.save.bank') }}">
             @csrf
-            <div class="container">
+             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" name="bank_id" value="{{ $bank->bank->id ?? '' }}">

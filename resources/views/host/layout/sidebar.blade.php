@@ -41,53 +41,27 @@
                  </li>
 
                  <li class="nav-item">
-                     <a href="{{ url('/host/contract/booking') }}" class="nav-link">
-                         <i class="nav-icon fas fa-book"></i>
+                     <a href="{{ route('host.contract.booking') }}" class="nav-link">
+                         <i class="nav-icon fa fa-sitemap"></i>
                          <p>
                              My Bookings
                          </p>
                      </a>
                  </li>
 
-                 <li class="nav-item">
-                     <a href="#" class="nav-link">
-                         <i class="far fa-circle nav-icon"></i>
+                   <li class="nav-item">
+                     <a href="{{ route('host.gig.index') }}" class="nav-link">                    
+                        <i class="nav-icon fas fa-book"></i>                     
                          <p>
-                             Service Management
-                             <i class="right fas fa-angle-left"></i>
+                             My Services
                          </p>
                      </a>
-                     <ul class="nav nav-treeview">
-                         <li class="nav-item">
-                             <a href="{{ url('/host/gigs/index') }}" class="nav-link">
-                                 <i class="far fa-dot-circle nav-icon"></i>
-                                 <p>Services</p>
-                             </a>
-                         </li>
-                         <!--
-                  <li class="nav-item">
-                    <a href="{{ url('/host/gig/addedit') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Add New</p>
-                    </a>
-                  </li>
-                             
-                  
-
-                  <li class="nav-item">
-                    <a href="{{ url('/host/gig/addedit----') }}" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Offers</p>
-                    </a>
-                  </li>
-                -->
-                     </ul>
-                 </li>
+                 </li>                  
 
 
                  <li class="nav-item">
                      <a href="{{ url('/host/wallet') }}" class="nav-link">
-                         <i class="nav-icon fas fa-book"></i>
+                         <i class="nav-icon fa fa-wallet"></i>
                          <p>
                              My Earnings
                          </p>
@@ -95,13 +69,13 @@
                  </li>
 
                  <li class="nav-item">
-                  <a href="{{ url('/host/bank/add-edit') }}" class="nav-link">
-                    <i class="nav-icon fa fa-university"></i>
-                      <p>
-                          My Banking
-                      </p>
-                  </a>
-              </li>
+                     <a href="{{ url('/host/bank/add-edit') }}" class="nav-link">
+                         <i class="nav-icon fa fa-university"></i>
+                         <p>
+                             My Banking
+                         </p>
+                     </a>
+                 </li>
 
              </ul>
          </nav>
