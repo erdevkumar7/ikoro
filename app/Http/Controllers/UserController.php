@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = Client::paginate(config('app.pagination'));
+        $data['users'] = Client::orderBy('id', 'desc')->get();
         return view('admin.users.index', $data);
     }
 

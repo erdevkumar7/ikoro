@@ -19,13 +19,13 @@ class HostController extends Controller
 
     public function index()
     {
-        $data['hosts'] = Host::where('status', 0)->paginate(config('app.pagination'));
+        $data['hosts'] = Host::where('status', 0)->orderBy('created_at', 'desc')->get();
         return view('admin.hosts.index', $data);
     }
 
     public function approved()
     {
-        $data['hosts'] = Host::with(['user'])->where('status', 1)->paginate(config('app.pagination'));
+        $data['hosts'] = Host::with(['user'])->where('status', 1)->orderBy('created_at', 'desc')->get();
         return view('admin.hosts.approved', $data);
     }
 
