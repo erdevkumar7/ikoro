@@ -91,7 +91,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
             <script>
                 $(".clients-carousel").owlCarousel({
-                    loop: true,
+                    loop: false,
                     nav: true, // Enable navigation arrows
                     navText: [
                         '<i class="fa fa-chevron-left"></i>', // Left arrow icon

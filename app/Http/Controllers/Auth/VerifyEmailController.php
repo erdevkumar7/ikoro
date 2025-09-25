@@ -21,7 +21,7 @@ class VerifyEmailController extends Controller
 
         if ($request->user()->markEmailAsVerified()) {
             Host::where('user_id', $request->user()->id)->update([
-                'status' => 1
+                'status' => 0  // want approve add 1 at 0
             ]);
             event(new Verified($request->user()));
         }

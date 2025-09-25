@@ -51,16 +51,27 @@ class HomeController extends Controller
         $equipment_prices = EquipmentPrice::where('equipment_id', $equipment_id)->get();
 
         return response()->json($equipment_prices);
-    }
+    } 
 
     public function index(Request $request)
     {
         $data = $this->prepareData($request);
-        $data['hosts'] = Host::with('gigs')->where('recommended_sequence', '>', 0)->get();
-        $data['host_profile'] = Host::with('gigs')->where('recommended_sequence', '=', 2)->first();
+
+        $data['hosts'] = Host::with('gigs')
+            ->where('recommended_sequence', '>', 0)
+            ->where('status', 1)
+            ->orderBy('recommended_sequence', 'asc')
+            ->get();
+
+        $data['host_profile'] = Host::with('gigs')
+            ->where('recommended_sequence', '=', 2)
+            ->first();
+
         $data['tasks'] = Task::all();
+
         return view('home', $data);
     }
+
 
     public function searchLocations(Request $request)
     {
@@ -104,7 +115,8 @@ class HomeController extends Controller
         if ($request->filled('gender')) {
             $gender = $request->input('gender');
             $gigs->whereHas('host', function ($query) use ($gender) {
-                $query->where('gender', $gender);
+                $query->where('gender', $gender)->where('status', 1);
+                // $query->where('gender', $gender);
             });
         }
 
@@ -119,7 +131,7 @@ class HomeController extends Controller
     }
 
     public function filterHost(Request $request)
-    {   
+    {
         $data = $this->prepareData($request);
         $data['tasks'] = Task::all();
         $where = [];
@@ -147,17 +159,25 @@ class HomeController extends Controller
 
         if ($request->filled('task_id')) {
             $where['task_id'] = $request->input('task_id');
-        }     
+        }
 
         $gigs = Gig::where($where);
-        if ($request->filled('gender')) {
-            $gender = $request->input('gender');
-            $gigs->whereHas('host', function ($query) use ($gender) {
-                $query->where('gender', $gender);
-            });
-        }
-       
-        if($request->filled('is_open')){           
+
+        // if ($request->filled('gender')) {
+        //     $gender = $request->input('gender');
+        //     $gigs->whereHas('host', function ($query) use ($gender) {
+        //         $query->where('gender', $gender);
+        //     });
+        // }
+        $gigs->whereHas('host', function ($query) use ($request) {
+            $query->where('status', 1);
+
+            if ($request->filled('gender')) {
+                $query->where('gender', $request->input('gender'));
+            }
+        });
+
+        if ($request->filled('is_open')) {
             $is_open = strtolower(date('D')) . '_is_open' ? 1 : '';
             $gigs->whereHas('host', function ($query) use ($is_open) {
                 $today_is_open = strtolower(date('D')) . '_is_open';
@@ -196,11 +216,11 @@ class HomeController extends Controller
             $query->with(['features' => function ($q) {
                 $q->latest()->take(3);
             }]);
-        }])->findOrFail($host_id);  
+        }])->findOrFail($host_id);
         // dd($data['host_profile'] );
         return view('pages.host-profile', $data);
     }
-    
+
     public function demoBookingDetailByGigId($gig_id)
     {
         $clientId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
@@ -209,7 +229,7 @@ class HomeController extends Controller
         ];
 
         // Get the gig with all the required relationships
-        $gig = Gig::with(['host','task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
+        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
         $data['gig'] = $gig;
 
         // Get the selected gig features
@@ -229,14 +249,14 @@ class HomeController extends Controller
     }
 
     public function bookingDetailByGigId(Request $request, $gig_id)
-    {       
+    {
         $clientId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : ''; // cleaner way
         $data = [
             'loggedIn' => $clientId ?? '',
         ];
 
         // Get the gig with all the required relationships
-        $gig = Gig::with(['host','task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
+        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
         $data['gig'] = $gig;
 
         // Get the selected gig features
@@ -244,7 +264,7 @@ class HomeController extends Controller
         // $data['selectedGig'] = GigFeature::where('gig_id', $gig_id)
         //     ->pluck('gig_id')
         //     ->toArray();        
-        
+
         // $equipmentId = $gig->equipmentPrice->equipment_id ?? null;  
         // $data['selectedEquipmentPrices'] = $equipmentId
         //     ? EquipmentPrice::where('equipment_id', $equipmentId)->get()

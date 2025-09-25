@@ -560,15 +560,15 @@
                       </a>
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
-                              <a href="{{ url('/admin/hosts') }}" class="nav-link">
-                                  <i class="far fa-dot-circle nav-icon"></i>
-                                  <p>Pending</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
                               <a href="{{ url('/admin/hosts/approved') }}" class="nav-link">
                                   <i class="far fa-dot-circle nav-icon"></i>
                                   <p>Approved</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ url('/admin/hosts') }}" class="nav-link">
+                                  <i class="far fa-dot-circle nav-icon"></i>
+                                  <p>Pending</p>
                               </a>
                           </li>
                           <li class="nav-item">

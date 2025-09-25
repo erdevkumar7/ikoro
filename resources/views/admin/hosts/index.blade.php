@@ -55,9 +55,9 @@
                                     <td>{{ optional($host->country)->name }} - {{ optional($host->state)->name }} -
                                         {{ optional($host->city)->name }} - {{ optional($host->zip)->code }}</td>
                                     <td>
-                                        @if (!$host->email_verified_at)
+                                        {{-- @if (!$host->email_verified_at)
                                             Not Verified
-                                        @else
+                                        @else --}}
                                             <select class="form-select"
                                                 onchange="updateStatus(this, '{{ route('admin.host.status', ['host' => $host->id]) }}')"
                                                 data-id="{{ $host->id }}">
@@ -68,7 +68,7 @@
                                                 <option value="2" {{ $host->status == 2 ? 'selected' : '' }}>Blocked
                                                 </option>
                                             </select>
-                                        @endif
+                                        {{-- @endif --}}
                                     </td>
                                     <td class="action-td-width">
                                         <a href="{{ route('admin.host.edit', $host->id) }}">

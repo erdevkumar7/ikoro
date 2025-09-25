@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmationMail;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
@@ -54,25 +55,25 @@ class StripPaymentController extends Controller
         // $client = User::with('client')->findOrFail($userId);
         // $clientId = $client->client->id;
         // $gig_id =  $request->gig_id;
-      
+
         $userId = (Auth::check() && Auth::user()->role === 'user') ? Auth::id() : null;
 
         if (!$userId) {
             return redirect()->route('login')->withErrors(['error' => 'Unauthorized']);
         }
-    
+
         if (!session()->has('booking')) {
             return redirect()->back()->withErrors(['error' => 'Your session expired. Please select booking details again.']);
         }
-    
+
         $booking = session('booking');
-    
+
         $client = User::with('client')->findOrFail($userId);
         $clientId = $client->client->id;
         $gig_id = $booking['gig_id'];
         $price = $booking['price'];
 
-        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);  
+        $gig = Gig::with(['host', 'task', 'country', 'state', 'city', 'zip', 'equipmentPrice'])->findOrFail($gig_id);
 
         try {
             Stripe::setApiKey(config('services.stripe.secret'));
@@ -122,6 +123,15 @@ class StripPaymentController extends Controller
                     'payment_detail_id' => $paymentDetail->id,
                 ]);
             }
+            // ✅ Send email to user (client)
+            Mail::to($client->email)->send(new BookingConfirmationMail($booking, $gig));
+
+            // ✅ Send email to host
+            Mail::to($gig->host->user->email)->send(new BookingNotificationMail($booking, $gig));
+
+            // ✅ Send email to admin (replace with your real admin email)
+            Mail::to('admin@ikoro.co')->send(new BookingNotificationMail($booking, $gig));
+
             Session::flash('payment_success', 'Payment successfuly completed!');
             // clear booking session
             session()->forget('booking');

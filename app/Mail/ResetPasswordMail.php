@@ -22,7 +22,7 @@ class ResetPasswordMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Password Reset Reques')
+        return $this->subject('Password Reset Request')
         ->view('auth.password_reset')
         ->with([
             'resetUrl' => $this->resetUrl,
