@@ -51,14 +51,16 @@ class ProfileController extends Controller
         if ($request->hasFile('image')) {
             $host = Host::where("user_id", Auth::id())->first();            
             if ($host->image) {
-                $oldImagePath = public_path() . '/' . $host->image;               
+                  // $oldImagePath = '/' . $host->image;  
+                  $oldImagePath = 'public' . '/' . $host->image;               
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }        
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $imagePath = $image->move(public_path('uploads/host'), $imageName);
+            $imagePath = $image->move('public/uploads/host', $imageName);
+            // $imagePath = $image->move(public_path('uploads/host'), $imageName);
             $imagePath = 'uploads/host/' . $imageName;
         }
 

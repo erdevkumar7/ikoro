@@ -89,7 +89,7 @@ class GigController extends Controller
 
                         // Generate unique filename
                         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-                        $destinationPath = public_path('uploads/offer_images');
+                        $destinationPath = 'public/uploads/offer_images';
 
                         // Move the file to the uploads directory
                         $file->move($destinationPath, $filename);
@@ -209,7 +209,7 @@ class GigController extends Controller
                     $filename = basename($feature->value);
     
                     // Build the full image path
-                    $imagePath = public_path('uploads/offer_images/' . $filename);
+                    $imagePath = 'public/uploads/offer_images/' . $filename;
     
                     if (File::exists($imagePath)) {
                         File::delete($imagePath);
