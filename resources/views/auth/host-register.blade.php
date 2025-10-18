@@ -9,7 +9,6 @@
                 position: relative;
                 margin-bottom: 1rem;
             }
-
             .toggle-switch input[type="radio"] {
                 display: none;
                 /* Hide the default radio buttons */
@@ -29,7 +28,6 @@
                 padding-top: 5px;
             }
 
-
             .toggle-inner {
                 display: flex;
                 justify-content: space-between;
@@ -41,7 +39,6 @@
                 right: 0;
                 padding: 0 5px;
             }
-
             .label-email {
                 color: white;
                 font-size: 17px;
@@ -52,69 +49,56 @@
                 font-size: 17px;
                 transition: opacity 0.3s;
             }
-
             /* Initially show email label */
             .label-phone {
                 opacity: 0;
                 /* Hide phone label initially */
             }
-
             input[type="radio"]:checked+input[type="radio"]+.toggle {
                 background-color: rgb(169, 240, 5);
                 /* Green when checked */
             }
-
             input[type="radio"]:checked+input[type="radio"]+.toggle .toggle-inner .label-phone {
                 opacity: 1;
                 /* Show phone label */
             }
-
             input[type="radio"]:checked+input[type="radio"]+.toggle .toggle-inner .label-email {
                 opacity: 0;
                 /* Hide email label */
             }
-
             .toggle-inner {
                 width: 100%;
                 height: 100%;
                 position: relative;
                 transition: background-color 0.3s;
             }
+            .card.login-card.signup-for-host {
+                margin: auto;
+                margin-bottom: 20px;
+            }
+            .container-fluid.mt-2.mb-5.signup-form {
+                background-color: #f7f7f7;
+                padding: 65px;
+                margin: 0px !important;
+            }
 
-        .card.login-card.signup-for-host {
-            margin: auto;
-            margin-bottom: 20px;
-        }
-.container-fluid.mt-2.mb-5.signup-form {
-    background-color: #f7f7f7;
-    padding: 65px;
-    margin: 0px !important;
-}
+            @media (min-width:768px) and (max-width:1024px) {
+                .card.login-card.signup-for-host {
+                    margin: auto;
+                    margin-bottom: 0;
+                }
 
-@media (min-width:768px) and (max-width:1024px){
+            }
 
-.card.login-card.signup-for-host {
-    margin: auto;
-    margin-bottom: 0;
-}
-
-
-
-}
-
-@media screen and (max-width:767px) {
-
-.card.login-card.signup-for-host {
-    margin: auto;
-    margin-bottom: 0;
-}
-.toggle {
-    width: 26%;
-}
-
-}
-
-
+            @media screen and (max-width:767px) {
+                .card.login-card.signup-for-host {
+                    margin: auto;
+                    margin-bottom: 0;
+                }
+                .toggle {
+                    width: 26%;
+                }
+            }
         </style>
     @endpush
     <div class="container-fluid mt-2 mb-5 signup-form">
@@ -135,7 +119,7 @@
                                 <div class="form-group col-md-12">
                                     <x-input-label for="name" :value="__('Name')" />
                                     <x-text-input type="text" class="search-from" id="name" name="name"
-                                        :value="old('name')" required Placeholder="Enter Name" />
+                                        :value="old('name')" Placeholder="Enter Name" required/>
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                 </div>
                             </div>
@@ -158,16 +142,18 @@
 
                                     @if (old('contact_method') === 'phone')
                                         <div id="contact-input">
-                                            <x-text-input type="phone" class="search-from" id="phone" name="phone"
-                                                value="{{ old('phone') }}" required placeholder="Enter phone" />
+                                            <x-text-input type="phone" class="search-from" id="phone"
+                                                name="phone" value="{{ old('phone') }}" required
+                                                placeholder="Enter phone" />
                                             @error('phone')
                                                 <span class="mt-2 text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     @else
                                         <div id="contact-input">
-                                            <x-text-input type="email" class="search-from" id="email" name="email"
-                                                value="{{ old('email') }}" required placeholder="Enter Email" />
+                                            <x-text-input type="email" class="search-from" id="email"
+                                                name="email" value="{{ old('email') }}" required
+                                                placeholder="Enter Email" />
                                             @error('email')
                                                 <span class="mt-2 text-danger">{{ $message }}</span>
                                             @enderror
@@ -184,7 +170,7 @@
                                     <x-input-label for="password" :value="__('Password')" />
 
                                     <x-text-input id="password" class="search-from" type="password" name="password"
-                                        required autocomplete="new-password" Placeholder="Enter Password" />
+                                         autocomplete="new-password" Placeholder="Enter Password" />
 
                                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                 </div>
@@ -196,7 +182,7 @@
                                     <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
                                     <x-text-input id="password_confirmation" class="search-from" type="password"
-                                        name="password_confirmation" required autocomplete="new-password"
+                                        name="password_confirmation"  autocomplete="new-password"
                                         Placeholder="Enter Confirm Password" />
 
                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
@@ -207,8 +193,7 @@
 
                             <!-- Submit Button -->
                             <x-primary-button class="ms-3" style="border: 0px;">{{ __('Signup') }}</x-primary-button>
-                            <a class="login-a"
-                                href="{{ route('login') }}">
+                            <a class="login-a" href="{{ route('login') }}">
                                 {{ __('Already registered?') }}
                             </a>
                         </form>

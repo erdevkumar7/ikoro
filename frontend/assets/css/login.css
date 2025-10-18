@@ -292,6 +292,7 @@ footer {
 .btn:hover {
   background-color: rgb(139, 208, 0);
 }
+
 .already-account {
     padding-top: 15px;
     text-align: center;
@@ -356,8 +357,7 @@ i {
 }
 
 .login-button{
-  background: rgb(169 240 5);
-  color: black;
+  background: #2a7d76;
 }
 
 .login-a {

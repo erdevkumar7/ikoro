@@ -44,20 +44,17 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
         $role = $request->role ?? 'user';
 
         if ($role === 'host') {
-            $otp = rand(00000, 9999);
             $userData = [];
             if ($request->email) {
                 $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
                     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
                 ]);
+
                 $userData =
                     [
                         'email' => $request->email,
@@ -70,19 +67,22 @@ class RegisteredUserController extends Controller
                     'name' => $user->name,
                     'user_id' => $user->id,
                 ]);
-                
+
                 $subject = "Welcome to Ikoro";
                 $message = "Hello " . $user->name . ",\n\nThank you for registering with us. Your account is now active.\n\nBest regards,\nIkoro Team";
                 $headers = "From: support@ikoro.ng";
-    
+
                 // mail($user->email, $subject, $message, $headers);
                 $user->sendEmailVerificationNotification();
             }
 
             if ($request->phone) {
+                $otp = rand(00000, 9999);
                 $request->validate([
-                    // 'phone' => ['required', 'regex:/^\+?[1-9]\d{1,14}$/'],
+                    'name' => ['required', 'string', 'max:255'],
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
                     'phone' => ['required', 'regex:/^\+?[1-9]\d{0,14}(\s\d{1,14})*$/'],
+                    // 'phone' => ['required', 'regex:/^\+?[1-9]\d{1,14}$/'],
                 ]);
                 try {
                     $userData =
@@ -109,19 +109,32 @@ class RegisteredUserController extends Controller
             }
         } else {
             $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                'google_meet_id' => [
+                    'nullable',
+                    'url',
+                    'min:5',
+                    'max:75'
+                ],
+                'whatsapp' => [
+                    'nullable',
+                    'regex:/^\+?[0-9]{10,15}$/'
+                ]
             ]);
-            if ($request->feedback_tool == 'Both' || $request->feedback_tool == 'WhatsApp') {
-                $request->validate([
-                    'whatsapp' => ['required'],
-                ]);
-            }
-    
-            if ($request->feedback_tool == 'Both' || $request->feedback_tool == 'Skype') {
-                $request->validate([
-                    'skype' => ['required'],
-                ]);
-            }
+
+            // if ($request->feedback_tool == 'Both' || $request->feedback_tool == 'WhatsApp') {
+            //     $request->validate([
+            //         'whatsapp' => ['required'],
+            //     ]);
+            // }
+
+            // if ($request->feedback_tool == 'Both' || $request->feedback_tool == 'Skype') {
+            //     $request->validate([
+            //         'skype' => ['required'],
+            //     ]);
+            // }
             $userData =
                 [
                     'email' => $request->email,
@@ -135,13 +148,14 @@ class RegisteredUserController extends Controller
                 'user_id' => $user->id,
                 'feedback_tool' => $request->feedback_tool,
                 'whatsapp' => $request->whatsapp,
-                'skype' => $request->skype
+                'google_meet_id' => $request->google_meet_id
+                // 'skype' => $request->skype
             ]);
 
             $subject = "Welcome to Ikoro";
             $message = "Hello " . $user->name . ",\n\nThank you for registering with us. Your account is now active.\n\nBest regards,\nIkoro Team";
             $headers = "From: support@ikoro.ng";
-    
+
             // mail($user->email, $subject, $message, $headers);
             $user->sendEmailVerificationNotification();
         }

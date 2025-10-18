@@ -314,8 +314,10 @@ padding: 0 !important;
 
 select#feedback_tool {
     height: 40px;
+    background: #fff;
+    border-radius: 50px;
+    color: #000;
 }
-
 
 @media (min-width:768px) and (max-width:1024px){
   .card.login-card.sign-up-card {
