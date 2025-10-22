@@ -3,6 +3,7 @@
     <div>
         @if ($gigs->isNotEmpty())
             <div class="filter-host-user show-content-filter-add">
+                 <h1 class="text-center mb-4">Meet Our Top Hosts</h1>
                 {{-- <div class="row select-host-click" data-id="{{ $gig->host->id }}" data-url="{{ route('get.selectedhost') }}"> --}}
 
                 <div class="row partial-host-list">
@@ -22,7 +23,7 @@
                                         </div>
                                         <div class="col-8 mt-4 host-by-name">
                                             <p><i class="fa fa-user" aria-hidden="true"></i> {{ $gig->host->name }}</p>
-                                            
+
                                             <p> <i class="fa fa-map-marker" aria-hidden="true"></i>
                                                 {{ $gig->city->name ?? 'no-city' }},
                                                 {{ $gig->state->name ?? 'no-state' }}</p>
@@ -75,7 +76,7 @@
             </div>
         @else
             <div class="emptyhost-page">
-                <span class="text-white"><b>No host found for the selected fields!</b></span>
+                <span class="text-white" style="background: #2a7d76"><b>No host found for the selected fields!</b></span>
             </div>
         @endif
     </div>
