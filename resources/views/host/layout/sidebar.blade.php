@@ -49,14 +49,14 @@
                      </a>
                  </li>
 
-                   <li class="nav-item">
-                     <a href="{{ route('host.gig.index') }}" class="nav-link">                    
-                        <i class="nav-icon fas fa-book"></i>                     
+                 <li class="nav-item">
+                     <a href="{{ route('host.gig.index') }}" class="nav-link">
+                         <i class="nav-icon fas fa-book"></i>
                          <p>
                              My Services
                          </p>
                      </a>
-                 </li>                  
+                 </li>
 
 
                  <li class="nav-item">
@@ -73,6 +73,16 @@
                          <i class="nav-icon fa fa-university"></i>
                          <p>
                              My Banking
+                         </p>
+                     </a>
+                 </li>
+
+
+                 <li class="nav-item">
+                     <a href="{{ route('host.profile') }}" class="nav-link">
+                         <i class="nav-icon fa fa-address-card"></i>
+                         <p>
+                             Profile
                          </p>
                      </a>
                  </li>

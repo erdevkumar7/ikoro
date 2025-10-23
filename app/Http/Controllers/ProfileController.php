@@ -33,7 +33,7 @@ class ProfileController extends Controller
             'enrolement_datetime' => ['nullable', 'date'],
             // 'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'image' => ['nullable', 'max:2048'],
-            'biography' => ['nullable', 'max:255'],
+            'biography' => ['nullable','min:50', 'max:255'],
         ]);
 
         $data = [
